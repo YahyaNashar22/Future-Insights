@@ -3,6 +3,8 @@ import slugify from "slugify";
 
 const { Schema, model } = mongoose;
 
+// TODO: Maybe add a subscription system
+
 
 const classSchema = new Schema(
     {
