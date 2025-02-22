@@ -4,7 +4,7 @@ import slugify from "slugify";
 const { Schema, model } = mongoose;
 
 
-const courseSchema = new Schema(
+const classSchema = new Schema(
     {
         title: {
             type: String,
@@ -24,7 +24,7 @@ const courseSchema = new Schema(
             min: 0,
         },
         duration: {
-            type: Number,
+            type: String,
             required: true,
         },
         discount: {
@@ -32,10 +32,6 @@ const courseSchema = new Schema(
             required: true,
             min: 0,
         },
-        content: [{
-            type: String,
-            required: true,
-        }],
         teacher: {
             type: Schema.Types.ObjectId,
             ref: "User",
@@ -55,12 +51,12 @@ const courseSchema = new Schema(
 );
 
 // Middleware to generate slug before saving
-courseSchema.pre("save", function (next) {
+classSchema.pre("save", function (next) {
     if (this.isModified("title")) {
         this.slug = slugify(this.title, { lower: true, strict: true });
     }
     next();
 });
 
-const Course = model("Course", courseSchema);
-export default Course;
+const Class = model("Class", classSchema);
+export default Class;
