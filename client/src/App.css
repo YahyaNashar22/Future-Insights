@@ -4,3 +4,17 @@
   box-sizing: border-box;
   scroll-behavior: smooth;
 }
+
+:root {
+  --primary-blue: #252161;
+  --secondary-blue: #354f93;
+  --subtitle-blue: #7e88a7;
+
+  --primary-beige: #c49a6c;
+  --secondary-beige: #ece2d8;
+
+  --bg-white: #f2f4f8;
+  --white: #ffffff;
+
+  --grey-accent: #3e3e3e;
+}
