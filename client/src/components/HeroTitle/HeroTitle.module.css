@@ -1,7 +1,30 @@
 .wrapper {
-    position: relative;
-    display: flex;
-    flex-direction: column;
-    align-items: flex-start;
-    justify-content: center;
+  position: relative;
+  display: flex;
+  align-items: flex-start;
+  justify-content: flex-start;
+  column-gap: 20px;
+}
+
+.title {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  line-height: 80px;
+  text-transform: uppercase;
+}
+
+.beige {
+  color: var(--primary-beige);
+  font-style: italic;
+  font-weight: 500;
+  font-size: 4rem;
+  line-height: 50px;
+}
+
+.blue {
+  color: var(--primary-blue);
+  font-weight: bold;
+  font-size: 6rem;
 }

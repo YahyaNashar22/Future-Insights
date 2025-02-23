@@ -13,7 +13,8 @@ const HeroTitle = () => {
       />
       <h1 className={styles.title}>
         <span className={styles.beige}>Grow Your</span>
-        <span className={styles.blue}>Business With us</span>
+        <span className={styles.blue}>Business</span>
+        <span className={styles.blue}>With us</span>
       </h1>
     </div>
   );
