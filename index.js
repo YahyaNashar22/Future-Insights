@@ -5,6 +5,7 @@ import cookieParser from "cookie-parser";
 import bodyParser from 'body-parser';
 
 import databaseConnection from "./db/databaseConnection.js";
+import categoryRouter from './routes/categoryRoutes.js';
 
 
 // Declaration
@@ -26,7 +27,7 @@ app.use(bodyParser.urlencoded({ extended: true }));
 app.use(express.static("uploads"));
 
 // Routes / APIs
-
+app.use("/category", categoryRouter);
 
 // Connect to server
 app.listen(process.env.PORT, (error) => {
