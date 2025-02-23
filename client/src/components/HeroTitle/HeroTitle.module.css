@@ -1,4 +1,4 @@
-.wrapper {
+.container {
   position: relative;
   display: flex;
   align-items: flex-start;
@@ -29,9 +29,33 @@
   font-size: 6rem;
 }
 
+.buttons {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-weight: bold;
+  column-gap: 20px;
+  padding: 20px;
+}
+
+.student,
+.teacher {
+  padding: 10px 20px;
+}
+
+.teacher {
+  background-color: var(--secondary-beige);
+  color: var(--primary-blue);
+}
+
+.student {
+  background-color: var(--primary-beige);
+  color: var(--white);
+}
+
 /* Responsive adjustments */
 @media (max-width: 1100px) {
-  .wrapper {
+  .container {
     text-align: center;
   }
 
@@ -49,10 +73,9 @@
 }
 
 @media (max-width: 768px) {
-  .wrapper {
+  .container {
     padding: 15px;
   }
-
 
   .beige {
     font-size: 2.5rem;
