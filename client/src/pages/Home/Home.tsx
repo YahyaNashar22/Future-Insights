@@ -1,6 +1,7 @@
 import About from "../../components/About/About";
 import HomeHero from "../../components/HomeHero/HomeHero";
 import Partner from "../../components/Partner/Partner";
+import Team from "../../components/Team/Team";
 import styles from "./Home.module.css";
 
 const Home = () => {
@@ -9,6 +10,7 @@ const Home = () => {
       <HomeHero />
       <About />
       <Partner />
+      <Team />
     </main>
   );
 };
