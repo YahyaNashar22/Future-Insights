@@ -44,6 +44,11 @@ const courseSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "User",
         }],
+        category:{
+            type: Schema.Types.ObjectId,
+            ref: "Category",
+            required: true,
+        },
         slug: {
             type: String,
             unique: true,
