@@ -6,13 +6,16 @@ import MainLayout from "./MainLayout.tsx";
 import DashboardLayout from "./DashboardLayout.tsx";
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound.tsx"));
+const Home = lazy(() => import("../pages/Home/Home.tsx"));
 
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Loading />}>
       <Routes>
         {/* Main Layout Routes */}
-        <Route path="/" element={<MainLayout />}></Route>
+        <Route path="/" element={<MainLayout />}>
+          <Route path="/" element={<Home />} />
+        </Route>
 
         {/* protected routes */}
         <Route path="/dashboard" element={<DashboardLayout />}></Route>
