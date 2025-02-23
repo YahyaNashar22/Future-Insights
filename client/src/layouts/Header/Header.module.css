@@ -1,0 +1,49 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  color: var(--primary-blue);
+  padding: 50px;
+  font-weight: bold;
+  text-transform: uppercase;
+}
+
+.wrapper > img {
+  margin-right: 100px;
+}
+
+.navLinks {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  list-style: none;
+  column-gap: 20px;
+}
+
+.link {
+  color: var(--primary-blue);
+  text-decoration: none;
+}
+
+.link:visited {
+  color: var(--primary-blue);
+}
+
+.signContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  color: var(--primary-blue);
+}
+
+.signin {
+  color: var(--primary-blue);
+  font-size: 1.3rem;
+  line-height: 10px;
+}
+
+.signup {
+  color: var(--subtitle-blue);
+  font-weight: 0.9rem;
+}
