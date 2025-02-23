@@ -28,3 +28,47 @@
   font-weight: bold;
   font-size: 6rem;
 }
+
+/* Responsive adjustments */
+@media (max-width: 1100px) {
+  .wrapper {
+    text-align: center;
+  }
+
+  .title {
+    max-width: 90%;
+  }
+
+  .beige {
+    font-size: 3rem;
+  }
+
+  .blue {
+    font-size: 5rem;
+  }
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 15px;
+  }
+
+
+  .beige {
+    font-size: 2.5rem;
+  }
+
+  .blue {
+    font-size: 4rem;
+  }
+}
+
+@media (max-width: 480px) {
+  .beige {
+    font-size: 2rem;
+  }
+
+  .blue {
+    font-size: 3.5rem;
+  }
+}
