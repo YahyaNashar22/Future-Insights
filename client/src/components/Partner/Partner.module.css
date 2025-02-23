@@ -1,0 +1,36 @@
+.wrapper {
+  background: url("../../assets/images/partner_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding: 40px;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  column-gap: 20px;
+  width: 60%;
+  margin: auto;
+}
+
+.text {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--white);
+  text-align: justify;
+  hyphens: auto;
+}
+
+.beige {
+  color: var(--primary-beige);
+}
+
+@media (max-width: 480px) {
+    .content {
+        flex-direction: column;
+        width: 100%;
+        row-gap: 10px;
+    }
+}
