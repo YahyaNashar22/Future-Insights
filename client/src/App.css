@@ -19,12 +19,17 @@
   --white: #ffffff;
 
   --grey-accent: #3e3e3e;
+  --footer-grey: #8f8da0;
 }
 
 body {
   font-family: Poppins, sans-serif;
   background-color: var(--bg-white);
   overflow-x: hidden;
+}
+
+ul {
+  list-style: none;
 }
 
 a {
