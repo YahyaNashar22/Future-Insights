@@ -1,0 +1,25 @@
+.wrapper {
+  position: relative;
+}
+
+.man {
+  z-index: 2;
+  position: relative;
+}
+
+.graffiti {
+  position: absolute;
+  right: 100px;
+  top: 40px;
+  z-index: 1;
+}
+
+.bubbleText {
+  position: absolute;
+  z-index: 3;
+  color: var(--white);
+  font-weight: bold;
+  top: 180px;
+  left: 180px;
+  text-align: center;
+}
