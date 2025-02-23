@@ -1,0 +1,73 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  row-gap: 20px;
+  padding: 20px;
+  position: relative;
+  width: 100%; /* Make it responsive */
+  max-width: 600px; /* Prevent it from becoming too large */
+}
+
+/* Small Blue Border Above */
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 50px;
+  height: 4px;
+  background: var(--primary-blue);
+}
+
+/* Responsive Title */
+.title {
+  font-size: 2.5rem; /* Default */
+  text-align: left;
+  color: var(--primary-blue);
+}
+
+/* Responsive Content */
+.content {
+  text-align: justify;
+  text-justify: inter-word;
+  font-size: 1.2rem;
+  line-height: 1.6; /* Improve readability */
+}
+
+/* 🔹 Mobile & Tablet Responsive Design */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 15px; /* Reduce padding */
+    max-width: 90%; /* Allow more flexibility */
+  }
+
+  .title {
+    font-size: 2rem; /* Reduce title size */
+  }
+
+  .content {
+    font-size: 1rem; /* Smaller text */
+  }
+}
+
+/* 🔹 Extra Small Screens (Phones) */
+@media (max-width: 480px) {
+  .wrapper {
+    padding: 10px; /* Reduce padding even more */
+    row-gap: 15px; /* Reduce spacing */
+  }
+
+  .title {
+    font-size: 1.8rem; /* Smaller heading */
+  }
+
+  .content {
+    font-size: 0.95rem; /* Smaller content */
+  }
+
+  .wrapper::before {
+    width: 40px; /* Shorter blue bar */
+  }
+}

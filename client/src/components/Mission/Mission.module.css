@@ -1,0 +1,108 @@
+.wrapper {
+  width: 100%; /* Make it adapt to different screen sizes */
+  max-width: 699px; /* Maintain a max size */
+  height: auto;
+  aspect-ratio: 699 / 535; /* Maintain aspect ratio */
+  position: relative;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: url("../../assets/images/mission.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  background-position: center;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: #252161cc;
+  z-index: 1;
+}
+
+.wrapper img {
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  top: 0;
+}
+
+.content {
+  width: 90%; /* Adjust width for better scaling */
+  max-width: 600px;
+  display: flex;
+  position: relative;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  padding: 20px;
+  z-index: 10;
+  row-gap: 15px;
+}
+
+.header {
+  color: var(--primary-beige);
+  font-weight: bold;
+  border-left: 4px solid var(--primary-beige);
+  padding-left: 10px;
+  font-size: 1.2rem;
+}
+
+.title {
+  color: var(--white);
+  font-size: 2.5rem;
+  text-align: left;
+}
+
+.description {
+  color: var(--white);
+  width: 100%;
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: justify;
+  text-justify: inter-word;
+}
+
+/* ✅ Responsive Adjustments */
+@media (max-width: 768px) {
+  .content {
+    padding: 15px;
+    align-items: flex-start;
+    text-align: left;
+  }
+
+  .header {
+    font-size: 1rem;
+    padding-left: 8px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    width: 90%;
+  }
+}
+
+@media (max-width: 480px) {
+  .wrapper {
+    height: auto;
+    aspect-ratio: 699 / 535;
+  }
+
+  .title {
+    font-size: 1.8rem;
+  }
+
+  .description {
+    font-size: 1rem;
+    width: 100%;
+  }
+}

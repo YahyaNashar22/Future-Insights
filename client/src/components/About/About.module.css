@@ -1,0 +1,15 @@
+.wrapper {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  column-gap: 60px;
+  padding: 30px 40px;
+  margin: auto;
+  row-gap: 20px;
+}
+
+@media (max-width: 1100px) {
+  .wrapper {
+    flex-direction: column;
+  }
+}
