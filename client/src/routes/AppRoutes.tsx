@@ -11,6 +11,9 @@ const Home = lazy(() => import("../pages/Home/Home.tsx"));
 const CourseCatalogue = lazy(
   () => import("../pages/CourseCatalogue/CourseCatalogue.tsx")
 );
+const CategoryDisplay = lazy(
+  () => import("../pages/CategoryDisplay/CategoryDisplay.tsx")
+);
 
 const AppRoutes = () => {
   return (
@@ -24,6 +27,7 @@ const AppRoutes = () => {
         {/* Course Catalogue Layout Routes */}
         <Route path="/course-catalogue" element={<CourseCatalogueLayout />}>
           <Route index element={<CourseCatalogue />} />
+          <Route path="/course-catalogue/category/:slug" element={<CategoryDisplay />} />
         </Route>
 
         {/* protected routes */}

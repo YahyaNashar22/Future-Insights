@@ -31,9 +31,14 @@ const CategoryCard: FC<{ selectedCategory: ICategory | null }> = ({
           ? selectedCategory?.description
           : "Please select a category to read more about it and discover the courses within it"}
       </p>
-      <Link to="" className={styles.readMore}>
-        Discover Courses
-      </Link>
+      {selectedCategory && (
+        <Link
+          to={`/course-catalogue/category/${selectedCategory.slug}`}
+          className={styles.readMore}
+        >
+          Discover Courses
+        </Link>
+      )}
       <img
         src={bottomLeft}
         alt="category design"

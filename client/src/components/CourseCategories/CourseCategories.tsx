@@ -18,10 +18,10 @@ const CourseCategories: FC<{
         className={styles.category}
       />
       <ul className={styles.categoryContainer}>
-        {categories?.map((category) => {
+        {categories?.map((category, index) => {
           return (
             <li
-              key={category.id}
+              key={category.id || index}
               className={styles.categoryTitle}
               onClick={() => setSelectedCategory(category)}
             >
