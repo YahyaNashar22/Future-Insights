@@ -46,9 +46,10 @@ export const createCourse = async (req, res) => {
         });
 
         await newCourse.save();
-        res.status(201).json({ message: "Course created successfully", course: newCourse });
+        res.status(201).json({ message: "Course created successfully", payload: newCourse });
 
     } catch (error) {
+        console.log(error);
         res.status(500).json({ message: "something went wrong" })
     }
 }

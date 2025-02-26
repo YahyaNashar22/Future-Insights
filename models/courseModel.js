@@ -37,13 +37,16 @@ const courseSchema = new Schema(
             min: 0,
             default: 0,
         },
-        content: [{
-            type: String,
-            required: true,
-        }],
+        content: [
+            {
+                title: { type: String, required: true },
+                url: { type: String, required: true },
+            }
+        ],
         teacher: {
             type: Schema.Types.ObjectId,
             ref: "User",
+            required: false, // TODO: Remove when you add user model
         },
         enrolledUsers: [{
             type: Schema.Types.ObjectId,

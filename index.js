@@ -6,6 +6,7 @@ import bodyParser from 'body-parser';
 
 import databaseConnection from "./db/databaseConnection.js";
 import categoryRouter from './routes/categoryRoutes.js';
+import courseRouter from './routes/courseRoutes.js';
 
 
 // Declaration
@@ -28,6 +29,8 @@ app.use(express.static("uploads"));
 
 // Routes / APIs
 app.use("/category", categoryRouter);
+app.use("/course", courseRouter);
+
 
 // Connect to server
 app.listen(process.env.PORT, (error) => {
