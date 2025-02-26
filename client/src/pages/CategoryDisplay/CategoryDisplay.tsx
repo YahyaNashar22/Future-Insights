@@ -6,6 +6,7 @@ import styles from "./CategoryDisplay.module.css";
 import ICategory from "../../interfaces/ICategory";
 import Loading from "../../components/Loading/Loading";
 import CategoryCard from "../../components/CategoryCard/CategoryCard";
+import CourseGrid from "../../components/CourseGrid/CourseGrid";
 
 const CategoryDisplay = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -35,7 +36,10 @@ const CategoryDisplay = () => {
       {isLoading ? (
         <Loading />
       ) : (
-        <CategoryCard selectedCategory={category} showButton={false} />
+        <div className={styles.content}>
+          <CategoryCard selectedCategory={category} showButton={false} />
+          <CourseGrid categoryId={category?._id} />
+        </div>
       )}
     </main>
   );

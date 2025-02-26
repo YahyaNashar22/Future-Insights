@@ -21,7 +21,7 @@ const CourseCategories: FC<{
         {categories?.map((category, index) => {
           return (
             <li
-              key={category.id || index}
+              key={category._id || index}
               className={styles.categoryTitle}
               onClick={() => setSelectedCategory(category)}
             >
