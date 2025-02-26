@@ -2,7 +2,7 @@
   width: 95%;
   height: 400px;
   display: flex;
-  justify-content: space-between;
+  justify-content: space-around;
   align-items: center;
   gap: 40px;
   text-align: center;
@@ -38,7 +38,7 @@
 
 .description {
   font-size: 1.2rem;
-  width: 80%;
+  width: 40%;
 }
 
 .bottomLeft {
@@ -57,6 +57,7 @@
   text-align: center;
   padding: 10px 20px;
   transition: 0.3s ease-in-out;
+  z-index: 1;
 }
 
 .readMore:hover {
