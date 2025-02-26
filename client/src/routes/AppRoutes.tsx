@@ -22,12 +22,15 @@ const AppRoutes = () => {
         {/* Main Layout Routes */}
         <Route path="/" element={<MainLayout />}>
           <Route index element={<Home />} />
+          <Route
+            path="/course-catalogue/category/:slug"
+            element={<CategoryDisplay />}
+          />
         </Route>
 
         {/* Course Catalogue Layout Routes */}
         <Route path="/course-catalogue" element={<CourseCatalogueLayout />}>
           <Route index element={<CourseCatalogue />} />
-          <Route path="/course-catalogue/category/:slug" element={<CategoryDisplay />} />
         </Route>
 
         {/* protected routes */}
