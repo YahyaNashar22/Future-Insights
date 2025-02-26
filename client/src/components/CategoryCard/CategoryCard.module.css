@@ -1,0 +1,75 @@
+.wrapper {
+  width: 95%;
+  height: 400px;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 40px;
+  text-align: center;
+  padding: 20px;
+  background-size: cover; /* Ensure the background image covers the div */
+  background-position: center;
+  background-repeat: no-repeat;
+  color: var(--white); /* Ensure text is readable */
+  position: relative;
+  margin: 20px auto;
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: rgba(37, 33, 97, 0.7); /* Primary blue with 70% opacity */
+}
+
+.cardTitle,
+.description {
+  position: relative; /* Bring text above overlay */
+  z-index: 1;
+}
+
+.cardTitle {
+  font-size: 3rem;
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 10px;
+}
+
+.description {
+  font-size: 1.2rem;
+  width: 80%;
+}
+
+.bottomLeft {
+  position: absolute;
+  bottom: 0px;
+  left: 0px;
+}
+
+.readMore {
+  position: absolute;
+  bottom: 15px;
+  right: 20px;
+  background-color: var(--primary-beige);
+  color: var(--white);
+  font-weight: bold;
+  text-align: center;
+  padding: 10px 20px;
+  transition: 0.3s ease-in-out;
+}
+
+.readMore:hover {
+  background-color: var(--secondary-blue);
+}
+
+@media (max-width: 900px) {
+  .wrapper {
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+  }
+  .description {
+    display: none;
+  }
+}

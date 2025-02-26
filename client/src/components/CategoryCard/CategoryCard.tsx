@@ -1,0 +1,47 @@
+import { FC } from "react";
+import styles from "./CategoryCard.module.css";
+import ICategory from "../../interfaces/ICategory";
+
+import bottomLeft from "../../assets/icons/category_design.png";
+import categoryTitleLeading from "../../assets/icons/category_title_leading.png";
+import { Link } from "react-router-dom";
+
+const CategoryCard: FC<{ selectedCategory: ICategory | null }> = ({
+  selectedCategory,
+}) => {
+  const backend = import.meta.env.VITE_BACKEND;
+  return (
+    <div
+      className={styles.wrapper}
+      style={{
+        backgroundImage: selectedCategory?.image
+          ? `url(${backend}/${selectedCategory.image})`
+          : "none",
+        backgroundColor: selectedCategory?.image ? "" : "var(--primary-blue)",
+      }}
+    >
+      <h2 className={styles.cardTitle}>
+        <span className={styles.leading}>
+          <img src={categoryTitleLeading} alt="leading" loading="lazy" />
+        </span>
+        {selectedCategory?.title ? selectedCategory.title : "Select a Category"}
+      </h2>
+      <p className={styles.description}>
+        {selectedCategory?.description
+          ? selectedCategory?.description
+          : "Please select a category to read more about it and discover the courses within it"}
+      </p>
+      <Link to="" className={styles.readMore}>
+        Discover Courses
+      </Link>
+      <img
+        src={bottomLeft}
+        alt="category design"
+        loading="lazy"
+        className={styles.bottomLeft}
+      />
+    </div>
+  );
+};
+
+export default CategoryCard;

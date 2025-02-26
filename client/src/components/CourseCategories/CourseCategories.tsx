@@ -5,9 +5,10 @@ import styles from "./CourseCategories.module.css";
 import category from "../../assets/icons/category.png";
 import ICategory from "../../interfaces/ICategory";
 
-const CourseCategories: FC<{ categories: ICategory[] | null }> = ({
-  categories,
-}) => {
+const CourseCategories: FC<{
+  categories: ICategory[] | null;
+  setSelectedCategory: (category: ICategory) => void;
+}> = ({ categories, setSelectedCategory }) => {
   return (
     <section className={styles.wrapper}>
       <img
@@ -18,7 +19,15 @@ const CourseCategories: FC<{ categories: ICategory[] | null }> = ({
       />
       <ul className={styles.categoryContainer}>
         {categories?.map((category) => {
-          return <li key={category.id} className={styles.categoryTitle}>{category.title}</li>;
+          return (
+            <li
+              key={category.id}
+              className={styles.categoryTitle}
+              onClick={() => setSelectedCategory(category)}
+            >
+              {category.title}
+            </li>
+          );
         })}
       </ul>
     </section>
