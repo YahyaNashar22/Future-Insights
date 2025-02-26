@@ -36,7 +36,7 @@ const MobileHeader = () => {
           </li>
           <li>
             <Link to="/teacher-signup" className={styles.link} onClick={() => setMenuOpen(false)}>
-              Become a Teacher
+              Become an Instructor
             </Link>
           </li>
           <li>

@@ -21,7 +21,7 @@ const HeroTitle = () => {
       </div>
       <div className={styles.buttons}>
         <Link to="/signup-student" className={styles.teacher}>
-          I'm a Teacher
+          I'm an Instructor
         </Link>
         <Link to="/signup-teacher" className={styles.student}>
           I Need Help

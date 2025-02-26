@@ -6,6 +6,6 @@ const categoryRouter = express.Router();
 
 categoryRouter.post("/create", upload.single("image"), createCategory);
 categoryRouter.get("/get-all", getAllCategories);
-categoryRouter.get("/get/:id", getSingleCategory);
+categoryRouter.get("/get/:slug", getSingleCategory);
 
 export default categoryRouter;

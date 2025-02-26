@@ -21,7 +21,7 @@ const CourseCatalogueHeader = () => {
         </li>
         <li>
           <Link to="/teacher-signup" className={styles.link}>
-            Become a Teacher
+            Become an Instructor
           </Link>
         </li>
         <li>

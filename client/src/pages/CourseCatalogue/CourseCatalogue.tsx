@@ -49,7 +49,7 @@ const CourseCatalogue = () => {
         />
       )}
 
-      <CategoryCard selectedCategory={selectedCategory} />
+      <CategoryCard selectedCategory={selectedCategory} showButton={true} />
     </main>
   );
 };

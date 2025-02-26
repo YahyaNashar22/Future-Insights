@@ -1,13 +1,13 @@
 import { FC } from "react";
 import styles from "./CategoryCard.module.css";
-import ICategory from "../../interfaces/ICategory";
 
 import bottomLeft from "../../assets/icons/category_design.png";
 import categoryTitleLeading from "../../assets/icons/category_title_leading.png";
 import { Link } from "react-router-dom";
+import ICategoryCard from "../../interfaces/ICategoryCard";
 
-const CategoryCard: FC<{ selectedCategory: ICategory | null }> = ({
-  selectedCategory,
+const CategoryCard: FC<ICategoryCard> = ({
+  selectedCategory, showButton
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
   return (
@@ -31,7 +31,7 @@ const CategoryCard: FC<{ selectedCategory: ICategory | null }> = ({
           ? selectedCategory?.description
           : "Please select a category to read more about it and discover the courses within it"}
       </p>
-      {selectedCategory && (
+      {selectedCategory && showButton && (
         <Link
           to={`/course-catalogue/category/${selectedCategory.slug}`}
           className={styles.readMore}
