@@ -16,6 +16,10 @@ const classSchema = new Schema(
             type: String,
             required: true,
         },
+        thumbnail: {
+            type: String,
+            required: true,
+        },
         demo: {
             type: String,
             required: false,
@@ -33,6 +37,7 @@ const classSchema = new Schema(
             type: Number,
             required: true,
             min: 0,
+            default: 0,
         },
         teacher: {
             type: Schema.Types.ObjectId,

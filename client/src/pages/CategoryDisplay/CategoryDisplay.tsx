@@ -32,9 +32,11 @@ const CategoryDisplay = () => {
 
   return (
     <main className={styles.wrapper}>
-      {
-        isLoading ? <Loading /> : <CategoryCard selectedCategory={category} showButton={false} />
-      }
+      {isLoading ? (
+        <Loading />
+      ) : (
+        <CategoryCard selectedCategory={category} showButton={false} />
+      )}
     </main>
   );
 };

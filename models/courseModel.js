@@ -14,6 +14,10 @@ const courseSchema = new Schema(
             type: String,
             required: true,
         },
+        thumbnail: {
+            type: String,
+            required: true,
+        },
         demo: {
             type: String,
             required: false,
@@ -24,13 +28,14 @@ const courseSchema = new Schema(
             min: 0,
         },
         duration: {
-            type: Number,
-            required: true,
+            type: String,
+            required: false,
         },
         discount: {
             type: Number,
             required: true,
             min: 0,
+            default: 0,
         },
         content: [{
             type: String,
@@ -44,7 +49,7 @@ const courseSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "User",
         }],
-        category:{
+        category: {
             type: Schema.Types.ObjectId,
             ref: "Category",
             required: true,

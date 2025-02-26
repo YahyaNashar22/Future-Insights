@@ -48,3 +48,19 @@ export const getSingleCategory = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+export const getSingleCategoryById = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const category = await Category.findById(id);
+
+
+        return res.status(200).json({
+            message: "category found!",
+            payload: category
+        })
+    } catch (error) {
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
