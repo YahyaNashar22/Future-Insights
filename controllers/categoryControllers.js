@@ -1,4 +1,5 @@
 import Category from "../models/categoryModel.js";
+import removeFile from "../utils/removeFile.js";
 
 export const createCategory = async (req, res) => {
     try {
@@ -32,6 +33,61 @@ export const getAllCategories = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+export const updateCategory = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const {
+            title, description
+        } = req.body;
+
+        const image = req.file?.filename;
+
+        const prevCategory = await Category.findById(id);
+
+        if (prevCategory && prevCategory.image && image) {
+            removeFile(prevCategory.image);
+        }
+
+        const category = await Category.findByIdAndUpdate(
+            id,
+            {
+                $set: {
+                    title,
+                    description,
+                    image: image ? image : prevCategory.image
+                }
+            },
+            {
+                new: true
+            }
+        );
+
+        return res.status(200).json({
+            message: "categories updated!",
+            payload: category
+        })
+    } catch (error) {
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+export const deleteCategory = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const category = await Category.findByIdAndDelete(id);
+
+
+        return res.status(200).json({
+            message: "category deleted!",
+            payload: category
+        })
+    } catch (error) {
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
 
 export const getSingleCategory = async (req, res) => {
     try {
