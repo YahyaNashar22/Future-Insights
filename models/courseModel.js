@@ -51,6 +51,7 @@ const courseSchema = new Schema(
         enrolledUsers: [{
             type: Schema.Types.ObjectId,
             ref: "User",
+            unlockedVideos: [Number], // Add unlockedVideos as an array of video indices
         }],
         category: {
             type: Schema.Types.ObjectId,

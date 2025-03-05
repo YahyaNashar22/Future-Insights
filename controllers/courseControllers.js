@@ -89,3 +89,31 @@ export const getCourseBySlug = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+
+export const unlockVideo = async (req, res) => {
+    try {
+        const { courseId, userId, videoIndex } = req.body;
+
+        const course = await Course.findById(courseId);
+        const user = await User.findById(userId); // TODO: FIX WHEN ADDING USER MODEL
+
+        // Check if the user is enrolled in the course
+        if (!course.enrolledUsers.includes(userId)) {
+            return res.status(403).json({ message: "User is not enrolled in this course." });
+        }
+
+        // Update the user's unlocked videos
+        const updatedUser = await User.findByIdAndUpdate(
+            userId,
+            {
+                $addToSet: { unlockedVideos: videoIndex }, // Add video index to unlockedVideos (avoids duplicates)
+            },
+            { new: true }
+        );
+
+        return res.status(200).json(updatedUser);
+    } catch (error) {
+        return res.status(500).json({ message: error.message });
+    }
+}

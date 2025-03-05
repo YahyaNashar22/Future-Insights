@@ -16,9 +16,21 @@ const CourseDisplay = () => {
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
-  const handleSelectVideo = (video: IVideo) => {
-    setSelectedVideo(video);
+  const [unlockedVideos, setUnlockedVideos] = useState<number[]>([0]); // First video unlocked by default
+  const [videoProgress, setVideoProgress] = useState<Record<number, number>>(
+    {}
+  );
+
+  // Handles video selection
+  const handleSelectVideo = (video: IVideo, index: number) => {
+    if (unlockedVideos.includes(index)) {
+      setSelectedVideo(video);
+    }
   };
+
+  //   const handleSelectVideo = (video: IVideo) => {
+  //     setSelectedVideo(video);
+  //   };
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -41,6 +53,58 @@ const CourseDisplay = () => {
 
     fetchCourse();
   }, [backend, slug]);
+
+  // Handle video progress tracking
+  const handleTimeUpdate = (event: React.SyntheticEvent<HTMLVideoElement>) => {
+    const videoElement = event.currentTarget;
+    setVideoProgress((prevProgress) => ({
+      ...prevProgress,
+      [selectedVideo?.url || ""]: videoElement.currentTime,
+    }));
+  };
+
+  // Unlock next video when current one ends
+  const handleVideoEnd = async () => {
+    const currentIndex = course?.content.findIndex(
+      (video) => video.url === selectedVideo?.url
+    );
+    if (
+      currentIndex !== undefined &&
+      currentIndex + 1 < (course?.content?.length || 0)
+    ) {
+      //   setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
+      try {
+        await axios.post(`${backend}/unlock-video`, {
+          courseId: course?._id,
+          userId: userId, // TODO: GET IT FROM THE STORE
+          videoIndex: currentIndex + 1, // the index of the next video to unlock
+        });
+
+        // Update the state to reflect the new unlocked video
+        setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
+      } catch (error) {
+        console.error("Failed to unlock video:", error);
+      }
+    }
+  };
+
+  // TODO: WE NEED THE USER MODEL !!
+  const fetchUnlockedVideos = async () => {
+    try {
+      const res = await axios.get(`${backend}/user/get-unlocked-videos`, {
+        params: { userId: userId, courseId: course?._id },
+      });
+      setUnlockedVideos(res.data.unlockedVideos);
+    } catch (error) {
+      console.error("Failed to fetch unlocked videos:", error);
+    }
+  };
+  
+  useEffect(() => {
+    if (course && userId) {
+      fetchUnlockedVideos();
+    }
+  }, [course, userId]);
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
@@ -76,6 +140,8 @@ const CourseDisplay = () => {
                   poster={course?.thumbnail}
                   controlsList="nodownload"
                   disablePictureInPicture
+                  onTimeUpdate={handleTimeUpdate}
+                  onEnded={handleVideoEnd}
                 >
                   {selectedVideo?.url && (
                     <source
@@ -104,7 +170,14 @@ const CourseDisplay = () => {
                     <li
                       key={index}
                       className={styles.playlistElement}
-                      onClick={() => handleSelectVideo(c)}
+                      //   onClick={() => handleSelectVideo(c)}
+                      onClick={() => handleSelectVideo(c, index)}
+                      style={{
+                        cursor: unlockedVideos.includes(index)
+                          ? "pointer"
+                          : "not-allowed",
+                        opacity: unlockedVideos.includes(index) ? 1 : 0.5,
+                      }}
                     >
                       <span className={styles.playlistIc}>
                         <img
