@@ -14,6 +14,9 @@ const CourseCatalogue = lazy(
 const CategoryDisplay = lazy(
   () => import("../pages/CategoryDisplay/CategoryDisplay.tsx")
 );
+const CourseDisplay = lazy(
+  () => import("../pages/CourseDisplay/CourseDisplay.tsx")
+);
 
 const AppRoutes = () => {
   return (
@@ -26,6 +29,8 @@ const AppRoutes = () => {
             path="/course-catalogue/category/:slug"
             element={<CategoryDisplay />}
           />
+
+          <Route path="/course-catalogue/course/:slug" element={<CourseDisplay />} />
         </Route>
 
         {/* Course Catalogue Layout Routes */}

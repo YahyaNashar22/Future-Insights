@@ -53,3 +53,39 @@ export const createCourse = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+
+export const getCoursesByCategory = async (req, res) => {
+    try {
+        const { categoryId } = req.body;
+
+        const courses = await Course.find({ category: categoryId });
+
+        res.status(200).json({
+            message: "fetched successfully",
+            payload: courses
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+
+export const getCourseBySlug = async (req, res) => {
+    try {
+        const slug = req.params.slug;
+
+        const course = await Course.findOne({ slug });
+
+        res.status(200).json({
+            message: "fetched successfully",
+            payload: course
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}

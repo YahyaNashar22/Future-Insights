@@ -1,0 +1,244 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+  padding: 20px;
+}
+
+/* Ensure courseContainer takes full width */
+.courseContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  width: 100%;
+}
+
+.titleBanner {
+  background-color: var(--primary-beige);
+  width: 100%;
+  height: 150px;
+  display: flex;
+  align-items: center;
+  justify-content: flex-start;
+  padding: 0 20px;
+}
+
+.courseLeading {
+  padding-right: 10px;
+}
+
+.title {
+  color: var(--white);
+  font-size: 3rem;
+  text-align: left;
+  max-width: 100%;
+}
+
+/* Layout for larger screens */
+.lower {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  width: 100%;
+  gap: 80px; /* Reduced gap for better responsiveness */
+  padding: 20px;
+}
+
+/* Course Content */
+.course {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  width: 100%;
+  max-width: 900px;
+}
+
+.videoTitle {
+  color: var(--primary-blue);
+}
+
+/* Video Section */
+.videoContainer {
+  width: 100%;
+  max-width: 900px;
+  aspect-ratio: 16 / 9;
+  margin: 20px auto;
+  border-radius: 12px;
+  overflow: hidden;
+  background: black;
+  box-shadow: 0 6px 15px rgba(0, 0, 0, 0.15);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.videoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+/* Course Description */
+.courseDescriptionContainer {
+  background: var(--white);
+  padding: 20px;
+  border-radius: 12px;
+  margin-top: 20px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  width: 100%;
+  max-width: 900px;
+}
+
+.descriptionTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+}
+
+.courseDescription {
+  font-size: 1rem;
+  line-height: 1.6;
+  color: var(--subtitle-blue);
+  text-align: justify;
+}
+
+/* Playlist */
+.playlist {
+  margin-top: 20px;
+  width: 100%;
+  max-width: 350px;
+  background: var(--white);
+  padding: 20px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+  overflow-y: auto;
+  max-height: 500px;
+  transition: transform 0.3s ease-in-out;
+}
+
+.playlistTitle {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 15px;
+  text-align: left;
+  border-bottom: 2px solid var(--primary-blue);
+  padding-bottom: 10px;
+}
+
+/* Playlist List */
+.playlistList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.playlistElement {
+  padding: 12px 15px;
+  border-radius: 8px;
+  color: var(--primary-blue);
+  font-size: 1rem;
+  font-weight: 500;
+  margin-bottom: 8px;
+  cursor: pointer;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  transition: 0.3s ease-in-out, transform 0.2s;
+}
+
+.playlistElement:hover {
+  background: var(--primary-beige);
+  transform: scale(1.02);
+  color: var(--white);
+}
+
+.playlistElement:active {
+  background: var(--secondary-blue);
+  color: var(--white);
+  transform: scale(0.98);
+}
+
+.playlistElement.active {
+  background: var(--primary-blue);
+  color: var(--white);
+  font-weight: bold;
+}
+
+/* Rounded Playlist Icons */
+.playlistIc {
+  background-color: var(--primary-beige);
+  border-radius: 50%;
+  height: 40px;
+  width: 40px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-shrink: 0;
+  aspect-ratio: 1 / 1;
+}
+
+/* Responsive Design */
+@media (max-width: 1024px) {
+  .lower {
+    flex-direction: column;
+    align-items: center;
+    gap: 40px;
+  }
+
+  .playlist {
+    max-width: 100%;
+    max-height: 400px;
+  }
+}
+
+@media (max-width: 768px) {
+  .title {
+    font-size: 2.5rem;
+    margin-left: 0;
+  }
+
+  .lower {
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+  }
+
+  .videoContainer {
+    max-width: 100%;
+  }
+
+  .playlist {
+    max-height: 300px;
+  }
+
+  .playlistElement {
+    font-size: 0.9rem;
+    padding: 10px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 2rem;
+  }
+
+  .videoContainer {
+    max-width: 100%;
+    height: auto;
+  }
+
+  .playlist {
+    max-height: 250px;
+  }
+
+  .playlistElement {
+    font-size: 0.85rem;
+  }
+}
