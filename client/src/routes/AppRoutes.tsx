@@ -21,6 +21,10 @@ const CourseDisplay = lazy(
 const Support = lazy(
   () => import("../pages/Support/Support.tsx")
 );
+const PrivacyPolicy = lazy(
+  () => import("../pages/PrivacyPolicy/PrivacyPolicy.tsx")
+);
+
 
 const AppRoutes = () => {
   return (
@@ -36,6 +40,8 @@ const AppRoutes = () => {
 
           <Route path="/course-catalogue/course/:slug" element={<CourseDisplay />} />
           <Route path="/support" element={<Support />} />
+          <Route path="/privacy-policy" element={<PrivacyPolicy />} />
+
 
         </Route>
 

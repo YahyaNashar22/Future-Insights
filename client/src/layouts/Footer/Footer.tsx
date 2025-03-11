@@ -96,17 +96,17 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/terms" className={styles.link}>
+                <Link to="/terms-of-use" className={styles.link}>
                   Terms of use
                 </Link>
               </li>
               <li>
-                <Link to="/privacy" className={styles.link}>
+                <Link to="/privacy-policy" className={styles.link}>
                   Privacy policy
                 </Link>
               </li>
               <li>
-                <Link to="/help" className={styles.link}>
+                <Link to="/refund-policies" className={styles.link}>
                   Refund policy
                 </Link>
               </li>
