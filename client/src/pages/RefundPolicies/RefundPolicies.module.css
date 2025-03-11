@@ -1,0 +1,90 @@
+/* RefundPolicies.module.css */
+
+/* Main Wrapper */
+.wrapper {
+    background-color: var(--bg-white);
+    padding: 50px;
+    min-height: 100vh;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  /* Refund Policy Container */
+  .policyContainer {
+    background-color: var(--white);
+    padding: 30px;
+    border-radius: 12px;
+    box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+    max-width: 700px;
+    width: 100%;
+  }
+  
+  /* Title */
+  .policyTitle {
+    color: var(--primary-blue);
+    font-size: 28px;
+    font-weight: 700;
+    margin-bottom: 20px;
+    text-align: center;
+  }
+  
+  /* Effective Date */
+  .effectiveDate {
+    font-size: 18px;
+    color: var(--subtitle-blue);
+    margin-top: 10px;
+  }
+  
+  .strong {
+    font-weight: 600;
+  }
+  
+  /* Subtitle */
+  .policySubtitle {
+    color: var(--secondary-blue);
+    font-size: 22px;
+    font-weight: 600;
+    margin-top: 20px;
+    margin-bottom: 10px;
+  }
+  
+  /* Sub-Subtitle */
+  .policySubSubtitle {
+    color: var(--subtitle-blue);
+    font-size: 18px;
+    font-weight: 500;
+    margin-top: 15px;
+    margin-bottom: 10px;
+  }
+  
+  /* Policy Sections */
+  .policySection {
+    margin-bottom: 20px;
+  }
+  
+  /* Policy Text */
+  .policyText {
+    font-size: 16px;
+    color: var(--grey-accent);
+    line-height: 1.6;
+    margin-bottom: 10px;
+  }
+  
+  /* Policy Lists */
+  .policyList {
+    list-style-type: none;
+    padding-left: 0;
+  }
+  
+  .policyItem {
+    color: var(--grey-accent);
+    font-size: 16px;
+    line-height: 1.6;
+    margin-bottom: 8px;
+  }
+  
+  .policyItem .strong {
+    color: var(--primary-beige);
+  }
+  

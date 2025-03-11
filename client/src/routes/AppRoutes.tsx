@@ -18,13 +18,16 @@ const CourseDisplay = lazy(
   () => import("../pages/CourseDisplay/CourseDisplay.tsx")
 );
 
-const Support = lazy(
-  () => import("../pages/Support/Support.tsx")
-);
+const Support = lazy(() => import("../pages/Support/Support.tsx"));
 const PrivacyPolicy = lazy(
   () => import("../pages/PrivacyPolicy/PrivacyPolicy.tsx")
 );
 
+const TermsOfUse = lazy(() => import("../pages/TermsOfUse/TermsOfUse.tsx"));
+
+const RefundPolicies = lazy(
+  () => import("../pages/RefundPolicies/RefundPolicies.tsx")
+);
 
 const AppRoutes = () => {
   return (
@@ -38,11 +41,14 @@ const AppRoutes = () => {
             element={<CategoryDisplay />}
           />
 
-          <Route path="/course-catalogue/course/:slug" element={<CourseDisplay />} />
+          <Route
+            path="/course-catalogue/course/:slug"
+            element={<CourseDisplay />}
+          />
           <Route path="/support" element={<Support />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
-
-
+          <Route path="/terms-of-use" element={<TermsOfUse />} />
+          <Route path="/refund-policies" element={<RefundPolicies />} />
         </Route>
 
         {/* Course Catalogue Layout Routes */}
