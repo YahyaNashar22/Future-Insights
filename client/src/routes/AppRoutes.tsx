@@ -18,6 +18,10 @@ const CourseDisplay = lazy(
   () => import("../pages/CourseDisplay/CourseDisplay.tsx")
 );
 
+const Support = lazy(
+  () => import("../pages/Support/Support.tsx")
+);
+
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Loading />}>
@@ -31,6 +35,8 @@ const AppRoutes = () => {
           />
 
           <Route path="/course-catalogue/course/:slug" element={<CourseDisplay />} />
+          <Route path="/support" element={<Support />} />
+
         </Route>
 
         {/* Course Catalogue Layout Routes */}

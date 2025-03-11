@@ -11,6 +11,7 @@ import videoIc from "../../assets/icons/video.png";
 const CourseDisplay = () => {
   const { slug } = useParams();
   const backend = import.meta.env.VITE_BACKEND;
+  const userId = "";
 
   const [course, setCourse] = useState<ICourse | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
@@ -72,7 +73,7 @@ const CourseDisplay = () => {
       currentIndex !== undefined &&
       currentIndex + 1 < (course?.content?.length || 0)
     ) {
-      //   setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
+      // setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
       try {
         await axios.post(`${backend}/unlock-video`, {
           courseId: course?._id,
@@ -99,7 +100,7 @@ const CourseDisplay = () => {
       console.error("Failed to fetch unlocked videos:", error);
     }
   };
-  
+
   useEffect(() => {
     if (course && userId) {
       fetchUnlockedVideos();

@@ -241,4 +241,7 @@
   .playlistElement {
     font-size: 0.85rem;
   }
+  .wrapper {
+    padding-top: 100px;
+  }
 }

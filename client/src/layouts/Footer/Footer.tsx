@@ -107,7 +107,7 @@ const Footer = () => {
               </li>
               <li>
                 <Link to="/help" className={styles.link}>
-                  Help
+                  Refund policy
                 </Link>
               </li>
             </ul>
