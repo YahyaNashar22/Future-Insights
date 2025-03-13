@@ -4,6 +4,7 @@ import ICourse from "../../interfaces/ICourse";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
+import NoCurrentCourses from "../NoCurrentCourses/NoCurrentCourses";
 
 const CourseCard: FC<{ course: ICourse }> = ({ course }) => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -72,11 +73,17 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <ul className={styles.courseGrid}>
-            {courses.map((course) => {
-              return <CourseCard key={course._id} course={course} />;
-            })}
-          </ul>
+          <>
+            {courses.length > 0 ? (
+              <ul className={styles.courseGrid}>
+                {courses.map((course) => {
+                  return <CourseCard key={course._id} course={course} />;
+                })}
+              </ul>
+            ) : (
+              <NoCurrentCourses />
+            )}
+          </>
         )}
       </section>
     </Suspense>
