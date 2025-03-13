@@ -29,11 +29,6 @@ const Header = () => {
             My Courses
           </Link>
         </li>
-        <li>
-          <Link to="/consultation" className={styles.link}>
-            Consultation
-          </Link>
-        </li>
       </ul>
       <div className={styles.signContainer}>
         <Link to="/signin" className={styles.signin}>

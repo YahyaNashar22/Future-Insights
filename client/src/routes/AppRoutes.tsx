@@ -29,6 +29,10 @@ const RefundPolicies = lazy(
   () => import("../pages/RefundPolicies/RefundPolicies.tsx")
 );
 
+const MyCourses = lazy(
+  () => import("../pages/MyCourses/MyCourses.tsx")
+);
+
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Loading />}>
@@ -49,6 +53,8 @@ const AppRoutes = () => {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/refund-policies" element={<RefundPolicies />} />
+          <Route path="/my-courses" element={<MyCourses />} />
+
         </Route>
 
         {/* Course Catalogue Layout Routes */}

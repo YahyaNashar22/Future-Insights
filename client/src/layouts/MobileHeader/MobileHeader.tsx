@@ -1,4 +1,4 @@
-import  { useState } from "react";
+import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./MobileHeader.module.css";
 import logo from "../../assets/icons/logo.png";
@@ -9,7 +9,12 @@ const MobileHeader = () => {
   return (
     <header className={styles.mobileHeader}>
       {/* Logo */}
-      <img src={logo} alt="Logo" className={styles.logo} onClick={() => setMenuOpen(false)} />
+      <img
+        src={logo}
+        alt="Logo"
+        className={styles.logo}
+        onClick={() => setMenuOpen(false)}
+      />
 
       {/* Burger Menu Icon */}
       <div className={styles.burgerIcon} onClick={() => setMenuOpen(!menuOpen)}>
@@ -19,43 +24,69 @@ const MobileHeader = () => {
       </div>
 
       {/* Mobile Menu */}
-      <nav className={`${styles.mobileMenu} ${menuOpen ? styles.showMenu : ""}`}>
+      <nav
+        className={`${styles.mobileMenu} ${menuOpen ? styles.showMenu : ""}`}
+      >
         {/* Close Button */}
-        <button className={styles.closeButton} onClick={() => setMenuOpen(false)}>&times;</button>
+        <button
+          className={styles.closeButton}
+          onClick={() => setMenuOpen(false)}
+        >
+          &times;
+        </button>
 
         <ul>
           <li>
-            <Link to="/" className={styles.link} onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/"
+              className={styles.link}
+              onClick={() => setMenuOpen(false)}
+            >
               Home
             </Link>
           </li>
           <li>
-            <Link to="/course-catalogue" className={styles.link} onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/course-catalogue"
+              className={styles.link}
+              onClick={() => setMenuOpen(false)}
+            >
               Course Catalogue
             </Link>
           </li>
           <li>
-            <Link to="/teacher-signup" className={styles.link} onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/teacher-signup"
+              className={styles.link}
+              onClick={() => setMenuOpen(false)}
+            >
               Become an Instructor
             </Link>
           </li>
           <li>
-            <Link to="/my-courses" className={styles.link} onClick={() => setMenuOpen(false)}>
+            <Link
+              to="/my-courses"
+              className={styles.link}
+              onClick={() => setMenuOpen(false)}
+            >
               My Courses
-            </Link>
-          </li>
-          <li>
-            <Link to="/consultation" className={styles.link} onClick={() => setMenuOpen(false)}>
-              Consultation
             </Link>
           </li>
         </ul>
 
         <div className={styles.authButtons}>
-          <Link to="/signin" className={styles.signin} onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/signin"
+            className={styles.signin}
+            onClick={() => setMenuOpen(false)}
+          >
             Login
           </Link>
-          <Link to="/signup" className={styles.signup} onClick={() => setMenuOpen(false)}>
+          <Link
+            to="/signup"
+            className={styles.signup}
+            onClick={() => setMenuOpen(false)}
+          >
             Sign up
           </Link>
         </div>
