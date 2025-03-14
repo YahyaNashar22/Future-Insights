@@ -7,6 +7,7 @@ import bodyParser from 'body-parser';
 import databaseConnection from "./db/databaseConnection.js";
 import categoryRouter from './routes/categoryRoutes.js';
 import courseRouter from './routes/courseRoutes.js';
+import userRouter from './routes/userRoutes.js';
 
 
 // Declaration
@@ -30,6 +31,7 @@ app.use(express.static("uploads"));
 // Routes / APIs
 app.use("/category", categoryRouter);
 app.use("/course", courseRouter);
+app.use("/user", userRouter);
 
 
 // Connect to server

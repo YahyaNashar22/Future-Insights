@@ -82,11 +82,6 @@ const Footer = () => {
                   My Courses
                 </Link>
               </li>
-              <li>
-                <Link to="/consultation" className={styles.link}>
-                  Consultation
-                </Link>
-              </li>
             </ul>
 
             <ul className={styles.second}>

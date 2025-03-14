@@ -29,8 +29,14 @@ const RefundPolicies = lazy(
   () => import("../pages/RefundPolicies/RefundPolicies.tsx")
 );
 
-const MyCourses = lazy(
-  () => import("../pages/MyCourses/MyCourses.tsx")
+const MyCourses = lazy(() => import("../pages/MyCourses/MyCourses.tsx"));
+
+const Signin = lazy(() => import("../pages/Signin/Signin.tsx"));
+
+const Signup = lazy(() => import("../pages/Signup/Signup.tsx"));
+
+const TeacherSignup = lazy(
+  () => import("../pages/TeacherSignup/TeacherSignup.tsx")
 );
 
 const AppRoutes = () => {
@@ -55,6 +61,9 @@ const AppRoutes = () => {
           <Route path="/refund-policies" element={<RefundPolicies />} />
           <Route path="/my-courses" element={<MyCourses />} />
 
+          <Route path="/signin" element={<Signin />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/teacher-signup" element={<TeacherSignup />} />
         </Route>
 
         {/* Course Catalogue Layout Routes */}
