@@ -20,10 +20,10 @@ const HeroTitle = () => {
         </h1>
       </div>
       <div className={styles.buttons}>
-        <Link to="/signup-student" className={styles.teacher}>
+        <Link to="/signup" className={styles.teacher}>
           I'm an Instructor
         </Link>
-        <Link to="/signup-teacher" className={styles.student}>
+        <Link to="/teacher-signup" className={styles.student}>
           I Need Help
         </Link>
       </div>

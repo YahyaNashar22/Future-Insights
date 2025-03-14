@@ -68,24 +68,27 @@ const MobileHeader = () => {
               Course Catalogue
             </Link>
           </li>
-          <li>
-            <Link
-              to="/teacher-signup"
-              className={styles.link}
-              onClick={() => setMenuOpen(false)}
-            >
-              Become an Instructor
-            </Link>
-          </li>
-          <li>
-            <Link
-              to="/my-courses"
-              className={styles.link}
-              onClick={() => setMenuOpen(false)}
-            >
-              My Courses
-            </Link>
-          </li>
+          {user && (
+            <li>
+              <Link to="/my-courses" className={styles.link}>
+                My Courses
+              </Link>
+            </li>
+          )}
+          {user && (user.role === "teacher" || user.role === "admin") && (
+            <li>
+              <Link to="/dashboard" className={styles.link}>
+                Dashboard
+              </Link>
+            </li>
+          )}
+          {!user && (
+            <li>
+              <Link to="/teacher-signup" className={styles.link}>
+                Become an Instructor
+              </Link>
+            </li>
+          )}
         </ul>
 
         {user ? (
