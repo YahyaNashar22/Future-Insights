@@ -7,10 +7,12 @@ import { Link } from "react-router-dom";
 import NoCurrentCourses from "../NoCurrentCourses/NoCurrentCourses";
 import { useUserStore } from "../../store";
 
+// TODO: HANDLE COURSE PROTECTION AND ENROLLMENT
+
 const CourseCard: FC<{ course: ICourse }> = ({ course }) => {
   const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
-
+console.log(user)
   const enrollInCourse = async () => {
     try {
       const response = await axios.post(

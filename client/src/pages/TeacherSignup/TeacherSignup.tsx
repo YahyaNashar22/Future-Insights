@@ -35,7 +35,7 @@ const TeacherSignup = () => {
     try {
       setLoading(true);
 
-      const res = await axios.post(`${backend}/user/signup`, formData, {
+      const res = await axios.post(`${backend}/user/teacher-signup`, formData, {
         headers: {
           "Content-Type": "application/json",
         },
