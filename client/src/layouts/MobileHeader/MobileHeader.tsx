@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./MobileHeader.module.css";
 import logo from "../../assets/icons/logo.png";
 import { useUserStore } from "../../store";
@@ -7,6 +7,7 @@ import SignoutModal from "../../components/SignoutModal/SignoutModal";
 
 const MobileHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+  const navigate = useNavigate();
 
   const { user } = useUserStore();
 
@@ -27,7 +28,7 @@ const MobileHeader = () => {
         src={logo}
         alt="Logo"
         className={styles.logo}
-        onClick={() => setMenuOpen(false)}
+        onClick={() => navigate("/")}
       />
 
       {/* Burger Menu Icon */}
