@@ -85,3 +85,7 @@
 .signupLink a:hover {
   text-decoration: underline;
 }
+
+.errorMessage {
+  color: var(--primary-beige);
+}

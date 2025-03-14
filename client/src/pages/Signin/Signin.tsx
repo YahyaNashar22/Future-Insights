@@ -1,8 +1,18 @@
 import React, { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signin.module.css";
+import { useUserStore } from "../../store";
+import axios from "axios";
 
 const Signin = () => {
+  const backend = import.meta.env.VITE_BACKEND;
+  const navigate = useNavigate();
+
+  const { setUser } = useUserStore();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState("");
+
   const [formData, setFormData] = useState({
     email: "",
     password: "",
@@ -12,10 +22,33 @@ const Signin = () => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    console.log("Form submitted", formData);
-    //TODO:  Handle signin logic here
+    setLoading(true);
+    try {
+      const response = await axios.post(`${backend}/user/signin`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+
+      const token = response.data.payload;
+      localStorage.setItem("token", token);
+
+      const userResponse = await axios.get(`${backend}/user/get-user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+      setUser(userResponse.data.payload);
+
+      navigate("/");
+    } catch (error) {
+      console.error(error);
+      setError("Invalid email or password");
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -45,7 +78,12 @@ const Signin = () => {
               required
             />
           </div>
-          <button type="submit" className={styles.signinButton}>
+          {error && <p className={styles.errorMessage}>{error}</p>}
+          <button
+            disabled={loading}
+            type="submit"
+            className={styles.signinButton}
+          >
             Sign In
           </button>
         </form>
