@@ -4,7 +4,6 @@ import { Routes, Route } from "react-router-dom";
 import Loading from "../components/Loading/Loading.tsx";
 import MainLayout from "./MainLayout.tsx";
 import CourseCatalogueLayout from "./CourseCatalogueLayout.tsx";
-import DashboardLayout from "./DashboardLayout.tsx";
 
 const NotFound = lazy(() => import("../pages/NotFound/NotFound.tsx"));
 const Home = lazy(() => import("../pages/Home/Home.tsx"));
@@ -39,6 +38,8 @@ const TeacherSignup = lazy(
   () => import("../pages/TeacherSignup/TeacherSignup.tsx")
 );
 
+const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard.tsx"));
+
 const AppRoutes = () => {
   return (
     <Suspense fallback={<Loading />}>
@@ -72,7 +73,9 @@ const AppRoutes = () => {
         </Route>
 
         {/* protected routes */}
-        <Route path="/dashboard" element={<DashboardLayout />}></Route>
+        <Route path="/dashboard" element={<MainLayout />}>
+          <Route index element={<Dashboard />} />
+        </Route>
 
         {/* Not Found Route */}
         <Route path="*" element={<NotFound />} />
