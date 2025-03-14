@@ -1,29 +1,68 @@
 import { useState } from "react";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signup.module.css";
+import axios, { AxiosError } from "axios";
+import { useUserStore } from "../../store";
 
 const Signup = () => {
+  const backend = import.meta.env.VITE_BACKEND;
+  const navigate = useNavigate();
+
+  const { setUser } = useUserStore();
+
+  const [loading, setLoading] = useState<boolean>(false);
+  const [error, setError] = useState("");
+
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
     confirmPassword: "",
   });
-  const [error, setError] = useState("");
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
     setFormData({ ...formData, [e.target.name]: e.target.value });
+    setError("");
   };
 
-  const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
+  const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     if (formData.password !== formData.confirmPassword) {
       setError("Passwords do not match");
       return;
     }
     setError("");
-    console.log("Form submitted", formData);
-    //TODO:  Handle signup logic here
+
+    try {
+      setLoading(true);
+
+      const res = await axios.post(`${backend}/user/signup`, formData, {
+        headers: {
+          "Content-Type": "application/json",
+        },
+      });
+      const token = res.data.payload;
+      localStorage.setItem("token", token);
+
+      const userResponse = await axios.get(`${backend}/user/get-user`, {
+        headers: {
+          Authorization: `Bearer ${token}`,
+        },
+      });
+
+      setUser(userResponse.data.payload);
+
+      navigate("/");
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.message);
+      } else {
+        setError("Something went wrong, please try again later");
+      }
+    } finally {
+      setLoading(false);
+    }
   };
 
   return (
@@ -32,12 +71,12 @@ const Signup = () => {
         <h1 className={styles.title}>Ready To Start Learning?</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="fullname">Full Name</label>
             <input
               type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
+              id="fullname"
+              name="fullname"
+              value={formData.fullname}
               onChange={handleChange}
               required
             />
@@ -76,7 +115,11 @@ const Signup = () => {
             />
           </div>
           {error && <p className={styles.errorMessage}>{error}</p>}
-          <button type="submit" className={styles.signupButton}>
+          <button
+            disabled={loading}
+            type="submit"
+            className={styles.signupButton}
+          >
             Sign Up
           </button>
         </form>

@@ -56,8 +56,8 @@ const userSchema = new Schema(
 
 // Middleware to generate slug before saving
 userSchema.pre("save", function (next) {
-    if (this.isModified("fullName")) {
-        this.slug = slugify(this.fullName, { lower: true, strict: true });
+    if (this.isModified("fullname")) {
+        this.slug = slugify(this.fullname, { lower: true, strict: true });
     }
     next();
 });

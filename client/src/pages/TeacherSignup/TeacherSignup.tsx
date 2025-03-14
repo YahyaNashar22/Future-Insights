@@ -4,7 +4,7 @@ import styles from "./TeacherSignup.module.css";
 
 const TeacherSignup = () => {
   const [formData, setFormData] = useState({
-    fullName: "",
+    fullname: "",
     email: "",
     password: "",
     confirmPassword: "",
@@ -32,12 +32,12 @@ const TeacherSignup = () => {
         <h1 className={styles.title}>Welcome To Our Team</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
-            <label htmlFor="fullName">Full Name</label>
+            <label htmlFor="fullname">Full Name</label>
             <input
               type="text"
-              id="fullName"
-              name="fullName"
-              value={formData.fullName}
+              id="fullname"
+              name="fullname"
+              value={formData.fullname}
               onChange={handleChange}
               required
             />

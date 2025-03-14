@@ -44,3 +44,6 @@ a:active {
   text-decoration: none;
 }
 
+button:disabled {
+  opacity: 0.8;
+}
