@@ -48,3 +48,16 @@
   color: var(--subtitle-blue);
   font-weight: 0.9rem;
 }
+
+.userInitials {
+  background-color: var(--primary-beige);
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+}

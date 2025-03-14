@@ -2,9 +2,21 @@ import styles from "./Header.module.css";
 
 import logo from "../../assets/icons/logo.png";
 import { Link, useNavigate } from "react-router-dom";
+import { useUserStore } from "../../store";
 
 const Header = () => {
   const navigate = useNavigate();
+
+  const { user } = useUserStore();
+
+  const getInitials = (name: string) => {
+    const nameParts = name.split(" ");
+    const initials = nameParts
+      .map((part) => part.charAt(0).toUpperCase())
+      .join("");
+    return initials;
+  };
+
   return (
     <header className={styles.wrapper}>
       <img src={logo} alt="logo" loading="lazy" onClick={() => navigate("/")} />
@@ -30,14 +42,18 @@ const Header = () => {
           </Link>
         </li>
       </ul>
-      <div className={styles.signContainer}>
-        <Link to="/signin" className={styles.signin}>
-          Login
-        </Link>
-        <Link to="/signup" className={styles.signup}>
-          Sign up
-        </Link>
-      </div>
+      {user ? (
+        <div className={styles.userInitials}>{getInitials(user.fullname)}</div>
+      ) : (
+        <div className={styles.signContainer}>
+          <Link to="/signin" className={styles.signin}>
+            Login
+          </Link>
+          <Link to="/signup" className={styles.signup}>
+            Sign up
+          </Link>
+        </div>
+      )}
     </header>
   );
 };

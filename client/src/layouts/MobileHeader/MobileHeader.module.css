@@ -139,3 +139,16 @@
   background-color: var(--secondary-beige);
   color: var(--grey-accent);
 }
+
+.userInitials {
+  background-color: var(--primary-beige);
+  height: 45px;
+  width: 45px;
+  border-radius: 50%;
+  text-align: center;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  color: var(--white);
+  cursor: pointer;
+}

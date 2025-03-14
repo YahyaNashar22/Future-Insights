@@ -2,9 +2,20 @@ import { useState } from "react";
 import { Link } from "react-router-dom";
 import styles from "./MobileHeader.module.css";
 import logo from "../../assets/icons/logo.png";
+import { useUserStore } from "../../store";
 
 const MobileHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
+
+  const { user } = useUserStore();
+
+  const getInitials = (name: string) => {
+    const nameParts = name.split(" ");
+    const initials = nameParts
+      .map((part) => part.charAt(0).toUpperCase())
+      .join("");
+    return initials;
+  };
 
   return (
     <header className={styles.mobileHeader}>
@@ -74,22 +85,28 @@ const MobileHeader = () => {
           </li>
         </ul>
 
-        <div className={styles.authButtons}>
-          <Link
-            to="/signin"
-            className={styles.signin}
-            onClick={() => setMenuOpen(false)}
-          >
-            Login
-          </Link>
-          <Link
-            to="/signup"
-            className={styles.signup}
-            onClick={() => setMenuOpen(false)}
-          >
-            Sign up
-          </Link>
-        </div>
+        {user ? (
+          <div className={styles.userInitials}>
+            {getInitials(user.fullname)}
+          </div>
+        ) : (
+          <div className={styles.authButtons}>
+            <Link
+              to="/signin"
+              className={styles.signin}
+              onClick={() => setMenuOpen(false)}
+            >
+              Login
+            </Link>
+            <Link
+              to="/signup"
+              className={styles.signup}
+              onClick={() => setMenuOpen(false)}
+            >
+              Sign up
+            </Link>
+          </div>
+        )}
       </nav>
     </header>
   );
