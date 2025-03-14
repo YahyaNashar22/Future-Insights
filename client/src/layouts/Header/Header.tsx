@@ -3,11 +3,15 @@ import styles from "./Header.module.css";
 import logo from "../../assets/icons/logo.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
+import { useState } from "react";
+import SignoutModal from "../../components/SignoutModal/SignoutModal";
 
 const Header = () => {
   const navigate = useNavigate();
 
   const { user } = useUserStore();
+
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const getInitials = (name: string) => {
     const nameParts = name.split(" ");
@@ -43,7 +47,9 @@ const Header = () => {
         </li>
       </ul>
       {user ? (
-        <div className={styles.userInitials}>{getInitials(user.fullname)}</div>
+        <div className={styles.userInitials} onClick={() => setShowModal(true)}>
+          {getInitials(user.fullname)}
+        </div>
       ) : (
         <div className={styles.signContainer}>
           <Link to="/signin" className={styles.signin}>
@@ -54,6 +60,8 @@ const Header = () => {
           </Link>
         </div>
       )}
+
+      {showModal && <SignoutModal setShowModal={setShowModal} />}
     </header>
   );
 };

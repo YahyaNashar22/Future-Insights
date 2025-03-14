@@ -47,3 +47,8 @@ a:active {
 button:disabled {
   opacity: 0.8;
 }
+
+button {
+  transition: 0.3s ease-in-out;
+  border: none;
+}

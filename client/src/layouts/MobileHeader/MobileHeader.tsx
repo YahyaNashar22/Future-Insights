@@ -3,11 +3,14 @@ import { Link } from "react-router-dom";
 import styles from "./MobileHeader.module.css";
 import logo from "../../assets/icons/logo.png";
 import { useUserStore } from "../../store";
+import SignoutModal from "../../components/SignoutModal/SignoutModal";
 
 const MobileHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
 
   const { user } = useUserStore();
+
+  const [showModal, setShowModal] = useState<boolean>(false);
 
   const getInitials = (name: string) => {
     const nameParts = name.split(" ");
@@ -86,7 +89,10 @@ const MobileHeader = () => {
         </ul>
 
         {user ? (
-          <div className={styles.userInitials}>
+          <div
+            className={styles.userInitials}
+            onClick={() => setShowModal(true)}
+          >
             {getInitials(user.fullname)}
           </div>
         ) : (
@@ -108,6 +114,7 @@ const MobileHeader = () => {
           </div>
         )}
       </nav>
+      {showModal && <SignoutModal setShowModal={setShowModal} />}
     </header>
   );
 };
