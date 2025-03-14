@@ -28,9 +28,6 @@ const CourseDisplay = () => {
     }
   };
 
-  //   const handleSelectVideo = (video: IVideo) => {
-  //     setSelectedVideo(video);
-  //   };
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -72,7 +69,6 @@ const CourseDisplay = () => {
       currentIndex !== undefined &&
       currentIndex + 1 < (course?.content?.length || 0)
     ) {
-      // setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
       try {
         await axios.post(`${backend}/user/unlock-video`, {
           courseId: course?._id,
@@ -109,6 +105,10 @@ const CourseDisplay = () => {
       fetchUnlockedVideos();
     }
   }, [course, user, backend]);
+
+  const removeFileExtension = (filename: string | undefined) => {
+    return filename?.split('.').slice(0, -1).join('.') || filename;
+  }
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
@@ -134,7 +134,10 @@ const CourseDisplay = () => {
           <div className={styles.lower}>
             {/* Course Information */}
             <div className={styles.course}>
-              <h2 className={styles.videoTitle}>{selectedVideo?.title}</h2>
+              <h2 className={styles.videoTitle}>
+                
+                {removeFileExtension(selectedVideo?.title)}
+                </h2>
 
               <div className={styles.videoContainer}>
                 <video
@@ -174,7 +177,6 @@ const CourseDisplay = () => {
                     <li
                       key={index}
                       className={styles.playlistElement}
-                      //   onClick={() => handleSelectVideo(c)}
                       onClick={() => handleSelectVideo(c, index)}
                       style={{
                         cursor: unlockedVideos.includes(index)
@@ -193,7 +195,7 @@ const CourseDisplay = () => {
                           height={16}
                         />
                       </span>
-                      {c.title}
+                      {removeFileExtension(c.title)}
                     </li>
                   );
                 })}
