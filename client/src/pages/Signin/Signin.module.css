@@ -1,0 +1,87 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 80vh;
+  background-color: var(--bg-white);
+}
+
+.signinContainer {
+  width: 100%;
+  max-width: 400px;
+  padding: 2rem;
+  background: var(--white);
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  border-radius: 10px;
+  text-align: center;
+}
+
+.title {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+}
+
+.form {
+  display: flex;
+  flex-direction: column;
+}
+
+.inputGroup {
+  display: flex;
+  flex-direction: column;
+  text-align: left;
+  margin-bottom: 1rem;
+}
+
+.inputGroup label {
+  font-size: 0.9rem;
+  color: var(--grey-accent);
+  margin-bottom: 0.3rem;
+}
+
+.inputGroup input {
+  padding: 0.8rem;
+  border: 1px solid var(--grey-accent);
+  border-radius: 5px;
+  font-size: 1rem;
+  outline: none;
+  transition: 0.3s;
+}
+
+.inputGroup input:focus {
+  border-color: var(--primary-blue);
+}
+
+.signinButton {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  padding: 0.8rem;
+  font-size: 1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: 0.3s;
+}
+
+.signinButton:hover {
+  background-color: var(--secondary-blue);
+}
+
+.signupLink {
+  margin-top: 1rem;
+  font-size: 0.9rem;
+  color: var(--grey-accent);
+}
+
+.signupLink a {
+  color: var(--primary-blue);
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.signupLink a:hover {
+  text-decoration: underline;
+}
