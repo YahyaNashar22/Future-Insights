@@ -44,6 +44,23 @@ const userSchema = new Schema(
                 }
             }
         ],
+
+        unlockedVideos: [
+            {
+                courseId: {
+                    type: Schema.Types.ObjectId,
+                    ref: "Course", // Reference to the Course model
+                    required: true
+                },
+                videos: [
+                    {
+                        type: Number, // The index of the unlocked video
+                        required: true
+                    }
+                ]
+            }
+        ],
+
         slug: {
             type: String,
             unique: true,
@@ -57,7 +74,7 @@ const userSchema = new Schema(
 // Middleware to generate slug before saving
 userSchema.pre("save", function (next) {
     if (this.isModified("fullname")) {
-        this.slug = slugify(this.fullname, { lower: true, strict: true });
+        this.slug = slugify(this.fullname + this._id, { lower: true, strict: true });
     }
     next();
 });

@@ -7,20 +7,19 @@ import Loading from "../../components/Loading/Loading";
 import IVideo from "../../interfaces/IVideo";
 import icon from "../../assets/icons/course_title.png";
 import videoIc from "../../assets/icons/video.png";
+import { useUserStore } from "../../store";
 
 const CourseDisplay = () => {
   const { slug } = useParams();
   const backend = import.meta.env.VITE_BACKEND;
-  const userId = "";
+  const { user } = useUserStore();
 
   const [course, setCourse] = useState<ICourse | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
   const [unlockedVideos, setUnlockedVideos] = useState<number[]>([0]); // First video unlocked by default
-  const [videoProgress, setVideoProgress] = useState<Record<number, number>>(
-    {}
-  );
+  const [, setVideoProgress] = useState<Record<number, number>>({});
 
   // Handles video selection
   const handleSelectVideo = (video: IVideo, index: number) => {
@@ -75,11 +74,17 @@ const CourseDisplay = () => {
     ) {
       // setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
       try {
-        await axios.post(`${backend}/unlock-video`, {
+        await axios.post(`${backend}/user/unlock-video`, {
           courseId: course?._id,
-          userId: userId, // TODO: GET IT FROM THE STORE
+          userId: user?._id,
           videoIndex: currentIndex + 1, // the index of the next video to unlock
-        });
+        },
+        {
+          headers: {
+            "Content-Type": "application/json"
+          }
+        }
+      );
 
         // Update the state to reflect the new unlocked video
         setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
@@ -89,23 +94,21 @@ const CourseDisplay = () => {
     }
   };
 
-  // TODO: WE NEED THE USER MODEL !!
-  const fetchUnlockedVideos = async () => {
-    try {
-      const res = await axios.get(`${backend}/user/get-unlocked-videos`, {
-        params: { userId: userId, courseId: course?._id },
-      });
-      setUnlockedVideos(res.data.unlockedVideos);
-    } catch (error) {
-      console.error("Failed to fetch unlocked videos:", error);
-    }
-  };
-
   useEffect(() => {
-    if (course && userId) {
+    if (course && user?._id) {
+      const fetchUnlockedVideos = async () => {
+        try {
+          const res = await axios.get(`${backend}/user/get-unlocked-videos`, {
+            params: { userId: user?._id, courseId: course?._id },
+          });
+          setUnlockedVideos(res.data.unlockedVideos);
+        } catch (error) {
+          console.error("Failed to fetch unlocked videos:", error);
+        }
+      };
       fetchUnlockedVideos();
     }
-  }, [course, userId]);
+  }, [course, user, backend]);
   return (
     <main className={styles.wrapper}>
       {isLoading ? (

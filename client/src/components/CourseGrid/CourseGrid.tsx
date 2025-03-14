@@ -5,14 +5,41 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 import { Link } from "react-router-dom";
 import NoCurrentCourses from "../NoCurrentCourses/NoCurrentCourses";
+import { useUserStore } from "../../store";
 
 const CourseCard: FC<{ course: ICourse }> = ({ course }) => {
+  const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
+
+  const enrollInCourse = async () => {
+    try {
+      const response = await axios.post(
+        `${backend}/user/enroll-course`,
+        {
+          userId: user?._id,
+          courseId: course._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+
+      if (response.data.message === "Enrolled successfully") {
+        // Handle successful enrollment, e.g., redirect the user or show a message
+        console.log("Successfully enrolled in the course!");
+      }
+    } catch (error) {
+      console.error("Error enrolling in the course:", error);
+    }
+  };
 
   return (
     <li className={styles.courseCard}>
       <div className={styles.thumbnailWrapper}>
         <img
+          onClick={enrollInCourse} // TODO: REMOVE THIS AFTER TESTING
           src={`${backend}/${course.thumbnail}`}
           alt={course.title}
           loading="lazy"
