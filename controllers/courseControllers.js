@@ -90,30 +90,20 @@ export const getCourseBySlug = async (req, res) => {
     }
 }
 
-
-export const unlockVideo = async (req, res) => {
+export const deleteCourse = async (req, res) => {
+    // TODO: MAKE SURE TO DELETE FILES WHEN DELETING
     try {
-        const { courseId, userId, videoIndex } = req.body;
+        const id = req.params.id;
 
-        const course = await Course.findById(courseId);
-        const user = await User.findById(userId); // TODO: FIX WHEN ADDING USER MODEL
+        await Course.findByIdAndDelete(id);
 
-        // Check if the user is enrolled in the course
-        if (!course.enrolledUsers.includes(userId)) {
-            return res.status(403).json({ message: "User is not enrolled in this course." });
-        }
-
-        // Update the user's unlocked videos
-        const updatedUser = await User.findByIdAndUpdate(
-            userId,
+        res.status(200).json(
             {
-                $addToSet: { unlockedVideos: videoIndex }, // Add video index to unlockedVideos (avoids duplicates)
-            },
-            { new: true }
-        );
-
-        return res.status(200).json(updatedUser);
+                message: "Course deleted successfully",
+            }
+        )
     } catch (error) {
-        return res.status(500).json({ message: error.message });
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
     }
 }
