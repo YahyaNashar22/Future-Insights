@@ -68,7 +68,9 @@ const TermsOfUse = () => {
                 onClick={() => navigate("/refund-policies")}
               >
                 refund policy
-              </span>
+              </span>{" "}
+              and are subject to review based on the service usage and delivery
+              status.
             </li>
           </ul>
         </div>

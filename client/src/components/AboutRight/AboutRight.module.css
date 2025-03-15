@@ -65,6 +65,7 @@
 
   .content {
     font-size: 0.95rem; /* Smaller content */
+    text-align: left;
   }
 
   .wrapper::before {
