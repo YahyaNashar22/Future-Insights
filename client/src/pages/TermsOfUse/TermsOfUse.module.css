@@ -49,3 +49,8 @@
   line-height: 1.6;
   margin-bottom: 8px;
 }
+
+.refundPolicyLink {
+  color: var(--secondary-blue);
+  cursor: pointer;
+}

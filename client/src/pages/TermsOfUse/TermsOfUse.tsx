@@ -1,6 +1,8 @@
+import { useNavigate } from "react-router-dom";
 import styles from "./TermsOfUse.module.css";
 
 const TermsOfUse = () => {
+  const navigate = useNavigate();
   return (
     <main className={styles.wrapper}>
       <section className={styles.termsContainer}>
@@ -60,8 +62,13 @@ const TermsOfUse = () => {
               is granted.
             </li>
             <li className={styles.termsItem}>
-              Refund requests must be made within [15] days of purchase and are
-              subject to review based on the service usage and delivery status.
+              Refund will be conducted according to the{" "}
+              <span
+                className={styles.refundPolicyLink}
+                onClick={() => navigate("/refund-policies")}
+              >
+                refund policy
+              </span>
             </li>
           </ul>
         </div>

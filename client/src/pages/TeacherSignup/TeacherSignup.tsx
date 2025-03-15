@@ -41,7 +41,7 @@ const TeacherSignup = () => {
         },
       });
       const token = res.data.payload;
-      localStorage.setItem("token", token);
+      localStorage.setItem("future-insights-token", token);
 
       const userResponse = await axios.get(`${backend}/user/get-user`, {
         headers: {

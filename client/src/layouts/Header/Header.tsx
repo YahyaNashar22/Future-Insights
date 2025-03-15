@@ -14,9 +14,9 @@ const Header = () => {
   const [showModal, setShowModal] = useState<boolean>(false);
 
   const getInitials = (name: string) => {
-    const nameParts = name.split(" ");
+    const nameParts = name?.split(" ");
     const initials = nameParts
-      .map((part) => part.charAt(0).toUpperCase())
+      ?.map((part) => part.charAt(0).toUpperCase())
       .join("");
     return initials;
   };
@@ -59,7 +59,7 @@ const Header = () => {
       </ul>
       {user ? (
         <div className={styles.userInitials} onClick={() => setShowModal(true)}>
-          {getInitials(user.fullname)}
+          {getInitials(user?.fullname)}
         </div>
       ) : (
         <div className={styles.signContainer}>

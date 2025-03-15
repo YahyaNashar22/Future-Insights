@@ -6,31 +6,31 @@ import axios from "axios";
 const backend = import.meta.env.VITE_BACKEND;
 
 const getUserFromLocalStorage = (): IUser | null => {
-  const storedUser = localStorage.getItem("user");
+  const storedUser = localStorage.getItem("future-insights-user");
   return storedUser ? JSON.parse(storedUser) : null;
 };
 
 export const useUserStore = create<IUserStore>((set) => ({
   user: getUserFromLocalStorage(),
-  token: localStorage.getItem("token") || null,
+  token: localStorage.getItem("future-insights-token") || null,
   setUser: (user) => {
-    localStorage.setItem("user", JSON.stringify(user));
+    localStorage.setItem("future-insights-user", JSON.stringify(user));
     set({ user });
   },
   setToken: (token) => {
-    localStorage.setItem("token", token);
+    localStorage.setItem("future-insights-token", token);
     set({ token });
   },
   clearUser: () => {
-    localStorage.removeItem("token");
-    localStorage.removeItem("user");
+    localStorage.removeItem("future-insights-token");
+    localStorage.removeItem("future-insights-user");
     set({ user: null, token: null });
   },
 }));
 
 // Check if the token is valid when the app is initialized
 export const checkUserFromCookie = async () => {
-  const token = localStorage.getItem("token");
+  const token = localStorage.getItem("future-insights-token");
   if (!token) {
     useUserStore.getState().clearUser();
     return;
