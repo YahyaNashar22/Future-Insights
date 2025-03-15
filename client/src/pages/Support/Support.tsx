@@ -11,9 +11,9 @@ const Support = () => {
           <p className={styles.text}>
             • For technical issues, account inquiries, or billing support,
             contact us at
-            <a href="mailto:support@futureinsights.sa" className={styles.link}>
+            <a href="mailto:info@futureinsights.ae" className={styles.link}>
               {" "}
-              support@futureinsights.sa
+              info@futureinsights.ae
             </a>
             .
           </p>
