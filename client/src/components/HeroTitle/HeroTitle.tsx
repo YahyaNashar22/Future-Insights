@@ -23,11 +23,11 @@ const HeroTitle = () => {
       </div>
       {!user && (
         <div className={styles.buttons}>
-          <Link to="/teacher-signup" className={styles.teacher}>
+          <Link to="/instructor-request" className={styles.teacher}>
             I'm an Instructor
           </Link>
-          <Link to="/signup" className={styles.student}>
-            I Need Help
+          <Link to="/iam-learner" className={styles.student}>
+            I am Learner
           </Link>
         </div>
       )}

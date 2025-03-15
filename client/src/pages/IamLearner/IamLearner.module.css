@@ -1,0 +1,101 @@
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  min-height: 80dvh;
+  padding: 20px;
+}
+
+.title {
+  font-size: 3rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  text-align: center;
+}
+
+.cardsContainer {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 50px;
+  flex-wrap: wrap;
+  padding: 20px;
+}
+
+.cardTitle {
+  color: var(--white);
+  font-size: 1.5rem;
+}
+
+.singinCard,
+.discoverCoursesCard {
+  height: 300px;
+  width: 300px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  text-align: center;
+  padding: 50px;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+  border-radius: 10px;
+}
+
+.singinCard:hover,
+.discoverCoursesCard:hover {
+  transform: translateY(-10px);
+}
+
+.singinCard {
+  background: linear-gradient(
+    135deg,
+    var(--primary-blue),
+    var(--subtitle-blue)
+  );
+}
+
+.discoverCoursesCard {
+  background: linear-gradient(
+    135deg,
+    var(--primary-beige),
+    var(--secondary-beige)
+  );
+}
+
+/* Responsive Design */
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+    gap: 30px;
+    padding: 100px 50px;
+  }
+
+  .title {
+    font-size: 2.5rem;
+  }
+
+  .singinCard,
+  .discoverCoursesCard {
+    width: 90%;
+    height: auto;
+    padding: 30px;
+  }
+}
+
+@media (max-width: 480px) {
+  .cardTitle {
+    font-size: 1.2rem;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+
+  .singinCard,
+  .discoverCoursesCard {
+    padding: 20px;
+  }
+}

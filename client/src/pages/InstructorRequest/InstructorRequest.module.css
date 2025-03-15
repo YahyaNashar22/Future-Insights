@@ -1,0 +1,177 @@
+/* General Layout */
+.wrapper {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  min-height: 90dvh;
+  padding: 20px;
+}
+
+.title {
+  font-size: 2.5rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  text-align: center;
+  margin-bottom: 30px;
+}
+
+/* Form Container */
+.fromContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 500px;
+  width: 100%;
+  padding: 30px;
+  background-color: #ffffff;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+/* Input & Textarea Styles */
+.formLabel {
+  display: flex;
+  flex-direction: column;
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.Inp,
+.textareaInp {
+  padding: 10px;
+  margin-top: 8px;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  font-size: 1rem;
+  width: 100%;
+  box-sizing: border-box;
+}
+
+.Inp:focus,
+.textareaInp:focus {
+  border-color: var(--primary-blue);
+  outline: none;
+}
+
+/* Textarea Specific Styling */
+.textareaInp {
+  resize: none;
+  min-height: 150px;
+}
+
+/* Buttons Container */
+.formBtns {
+  display: flex;
+  justify-content: space-between;
+  gap: 10px;
+}
+
+.submit {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: var(--primary-blue);
+  color: white;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+
+.submit:disabled {
+  background-color: #ddd;
+  cursor: not-allowed;
+}
+
+.submit:hover:enabled {
+  background-color: var(--secondary-blue);
+}
+
+/* Home Button */
+.homeBtn {
+  padding: 10px 20px;
+  font-size: 1rem;
+  background-color: #ece2d8;
+  color: var(--primary-blue);
+  text-decoration: none;
+  border-radius: 5px;
+  transition: background-color 0.3s ease;
+}
+
+.homeBtn:hover {
+  background-color: var(--primary-blue);
+  color: white;
+}
+
+.submittedCard {
+  color: var(--white);
+  border-radius: 15px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 30px;
+  max-width: 400px;
+  margin: 20px auto;
+  text-align: center;
+  transition: opacity 0.3s ease-in-out, transform 0.3s ease-in-out;
+}
+
+.submittedCard.show {
+  opacity: 1;
+  transform: translateY(0);
+}
+
+.thanksTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  margin-bottom: 10px;
+  color: var(--primary-blue);
+}
+
+
+
+.thanksText {
+  font-size: 1.2rem;
+  margin-bottom: 20px;
+  color: var(--primary-beige);
+  font-weight: bold;
+}
+
+.submittedCard a {
+  text-decoration: none;
+  color: var(--white);
+  font-weight: 500;
+  padding: 10px 20px;
+  background-color: var(--secondary-blue);
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.submittedCard a:hover {
+  background-color: var(--primary-beige);
+}
+
+/* Responsive Styles */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 100px 20px;
+  }
+  .title {
+    font-size: 2rem;
+  }
+
+  .fromContainer {
+    padding: 20px;
+    max-width: 400px;
+  }
+}
+
+@media (max-width: 480px) {
+  .title {
+    font-size: 1.5rem;
+  }
+
+  .submit,
+  .homeBtn {
+    font-size: 0.9rem;
+    padding: 8px 16px;
+  }
+}

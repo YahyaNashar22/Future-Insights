@@ -35,9 +35,15 @@ const Signin = lazy(() => import("../pages/Signin/Signin.tsx"));
 
 const Signup = lazy(() => import("../pages/Signup/Signup.tsx"));
 
-const TeacherSignup = lazy(
-  () => import("../pages/TeacherSignup/TeacherSignup.tsx")
+const IamLearner = lazy(() => import("../pages/IamLearner/IamLearner.tsx"));
+
+const InstructorRequest = lazy(
+  () => import("../pages/InstructorRequest/InstructorRequest.tsx")
 );
+
+// const TeacherSignup = lazy(
+//   () => import("../pages/TeacherSignup/TeacherSignup.tsx")
+// );
 
 const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard.tsx"));
 
@@ -64,9 +70,19 @@ const AppRoutes = () => {
           <Route path="/refund-policies" element={<RefundPolicies />} />
           <Route path="/my-courses" element={<MyCourses />} />
 
-          <Route path="/signin" element={<Signin />} />
-          <Route path="/signup" element={<Signup />} />
-          <Route path="/teacher-signup" element={<TeacherSignup />} />
+          {!user && (
+            <>
+              <Route path="/signin" element={<Signin />} />
+              <Route path="/signup" element={<Signup />} />
+              <Route path="/iam-learner" element={<IamLearner />} />
+              <Route
+                path="/instructor-request"
+                element={<InstructorRequest />}
+              />
+            </>
+          )}
+
+          {/* <Route path="/teacher-signup" element={<TeacherSignup />} /> */}
         </Route>
 
         {/* Course Catalogue Layout Routes */}
