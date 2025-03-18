@@ -85,7 +85,7 @@ const MobileHeader = () => {
           )}
           {!user && (
             <li>
-              <Link to="/teacher-signup" className={styles.link}>
+              <Link to="/instructor-request" className={styles.link}>
                 Become an Instructor
               </Link>
             </li>
