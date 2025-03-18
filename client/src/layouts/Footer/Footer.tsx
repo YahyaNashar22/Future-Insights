@@ -32,7 +32,7 @@ const Footer = () => {
         <div className={styles.left}>
           {/* upper left side */}
           <div className={styles.logoContainer}>
-            <img src={logo} alt="logo" loading="lazy" className={styles.logo} />
+            <img src={logo} alt="logo" loading="lazy" width={150} className={styles.logo} />
             <p className={styles.logoText}>
               Welcome to our consultancy agency.
             </p>

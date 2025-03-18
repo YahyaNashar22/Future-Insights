@@ -1,6 +1,6 @@
 import styles from "./CourseCatalogueHeader.module.css";
 
-import logo from "../../assets/icons/logo_white.png";
+import logo from "../../assets/icons/logo_mix.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";
@@ -22,7 +22,13 @@ const CourseCatalogueHeader = () => {
   };
   return (
     <header className={styles.wrapper}>
-      <img src={logo} alt="logo" loading="lazy" onClick={() => navigate("/")} />
+      <img
+        src={logo}
+        alt="logo"
+        loading="lazy"
+        width={150}
+        onClick={() => navigate("/")}
+      />
       <ul className={styles.navLinks}>
         <li>
           <Link to="/" className={styles.link}>

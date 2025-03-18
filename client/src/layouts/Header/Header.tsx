@@ -23,7 +23,7 @@ const Header = () => {
 
   return (
     <header className={styles.wrapper}>
-      <img src={logo} alt="logo" loading="lazy" onClick={() => navigate("/")} />
+      <img src={logo} alt="logo" loading="lazy" width={150} onClick={() => navigate("/")} />
       <ul className={styles.navLinks}>
         <li>
           <Link to="/" className={styles.link}>
