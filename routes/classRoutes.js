@@ -1,5 +1,6 @@
 import express from "express";
 import { createClass, deleteClass, getClassBySlug, getClassesByCategory } from "../controllers/classControllers.js";
+import { upload } from "../middlewares/multer.js";
 
 
 const classRouter = new express.Router();

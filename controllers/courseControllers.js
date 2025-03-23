@@ -1,3 +1,4 @@
+import Class from "../models/classModel.js";
 import Course from "../models/courseModel.js";
 import removeFile from "../utils/removeFile.js";
 

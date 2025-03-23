@@ -7,10 +7,11 @@ import { Link } from "react-router-dom";
 import NoCurrentCourses from "../NoCurrentCourses/NoCurrentCourses";
 import { useUserStore } from "../../store";
 
-const CourseCard: FC<{ course: ICourse; fetchCourses: () => void }> = ({
-  course,
-  fetchCourses,
-}) => {
+const CourseCard: FC<{
+  course: ICourse;
+  fetchCourses: () => void;
+  fetchClasses: () => void;
+}> = ({ course, fetchCourses, fetchClasses }) => {
   const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -37,6 +38,7 @@ const CourseCard: FC<{ course: ICourse; fetchCourses: () => void }> = ({
       if (response.data.message === "Enrolled successfully") {
         setPurchaseModal(false);
         fetchCourses();
+        fetchClasses();
       }
     } catch (error) {
       console.error("Error enrolling in the course:", error);
@@ -126,7 +128,30 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
   const [courses, setCourses] = useState<ICourse[]>([]);
+  const [classes, setClasses] = useState<ICourse[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+
+  const fetchClasses = async () => {
+    try {
+      setIsLoading(true);
+      const res = await axios.post(
+        `${backend}/class/get-classes-by-category`,
+        {
+          categoryId,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      setClasses(res.data.payload);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setIsLoading(false);
+    }
+  };
 
   const fetchCourses = async () => {
     try {
@@ -153,6 +178,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
 
   useEffect(() => {
     fetchCourses();
+    fetchClasses();
   }, [categoryId, backend]);
 
   return (
@@ -161,23 +187,43 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
         {isLoading ? (
           <Loading />
         ) : (
-          <>
-            {courses.length > 0 ? (
+          <div className={styles.coursesAndClasses}>
+            <div className={styles.container}>
+              {courses.length > 0 ? (
+                <ul className={styles.courseGrid}>
+                  {courses.map((course) => {
+                    return (
+                      <CourseCard
+                        key={course._id}
+                        course={course}
+                        fetchCourses={fetchCourses}
+                        fetchClasses={fetchClasses}
+                      />
+                    );
+                  })}
+                </ul>
+              ) : (
+                <NoCurrentCourses course={true} />
+              )}
+            </div>
+
+            {classes.length > 0 ? (
               <ul className={styles.courseGrid}>
-                {courses.map((course) => {
+                {classes.map((cls) => {
                   return (
                     <CourseCard
-                      key={course._id}
-                      course={course}
+                      key={cls._id}
+                      course={cls}
                       fetchCourses={fetchCourses}
+                      fetchClasses={fetchClasses}
                     />
                   );
                 })}
               </ul>
             ) : (
-              <NoCurrentCourses />
+              <NoCurrentCourses course={false} />
             )}
-          </>
+          </div>
         )}
       </section>
     </Suspense>
