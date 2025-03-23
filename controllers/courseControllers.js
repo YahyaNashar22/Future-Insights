@@ -1,4 +1,5 @@
 import Course from "../models/courseModel.js";
+import removeFile from "../utils/removeFile.js";
 
 
 export const createCourse = async (req, res) => {
@@ -91,9 +92,20 @@ export const getCourseBySlug = async (req, res) => {
 }
 
 export const deleteCourse = async (req, res) => {
-    // TODO: MAKE SURE TO DELETE FILES WHEN DELETING
     try {
         const id = req.params.id;
+
+        const course = await Course.findById(id);
+
+        if (course && course.thumbnail) {
+            removeFile(course.thumbnail);
+        }
+
+        if (course && course.content.length > 0) {
+            course.content.forEach(vid => {
+                removeFile(vid.url)
+            });
+        }
 
         await Course.findByIdAndDelete(id);
 
