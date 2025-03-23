@@ -41,9 +41,9 @@ const InstructorRequest = lazy(
   () => import("../pages/InstructorRequest/InstructorRequest.tsx")
 );
 
-const CourseCheckout = lazy(
-  () => import("../pages/CourseCheckout/CourseCheckout.tsx")
-);
+// const CourseCheckout = lazy(
+//   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
+// );
 
 // const TeacherSignup = lazy(
 //   () => import("../pages/TeacherSignup/TeacherSignup.tsx")
@@ -66,10 +66,8 @@ const AppRoutes = () => {
 
           <Route
             path="/course-catalogue/course/:slug"
-            element={<CourseCheckout />}
+            element={<CourseDisplay />}
           />
-
-          <Route path="/checkout/:slug" element={<CourseDisplay />} />
 
           <Route path="/support" element={<Support />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

@@ -1,6 +1,6 @@
 import styles from "./CourseCheckout.module.css";
 
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import { useUserStore } from "../../store";
 import { useEffect, useState } from "react";
 import ICourse from "../../interfaces/ICourse";
@@ -14,6 +14,7 @@ const CourseCheckout = () => {
 
   const [course, setCourse] = useState<ICourse | null>(null);
   const [loading, setIsLoading] = useState<boolean>(false);
+  const [error, setError] = useState<string | null>(null);
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -52,6 +53,9 @@ const CourseCheckout = () => {
       }
     } catch (error) {
       console.error("Error enrolling in the course:", error);
+      if (error instanceof AxiosError) {
+        setError(error.response?.data.message);
+      }
     }
   };
   return (
@@ -60,7 +64,25 @@ const CourseCheckout = () => {
         <Loading />
       ) : (
         <section className={styles.courseCheckout}>
-          <button onClick={enrollInCourse}>Enroll</button>
+          <div className={styles.left}>
+            <h1>{course?.title}</h1>
+            <img
+              src={`${backend}/${course?.thumbnail}`}
+              alt={course?.title}
+              loading="lazy"
+              className={styles.thumbnail}
+            />
+          </div>
+          <div className={styles.right}>
+            <button
+              type="button"
+              className={styles.enroll}
+              onClick={enrollInCourse}
+            >
+              Enroll
+            </button>
+            {error && <p className={styles.error}>{error}</p>}
+          </div>
         </section>
       )}
     </main>

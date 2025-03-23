@@ -10,6 +10,7 @@ const CategoryCard: FC<ICategoryCard> = ({ selectedCategory, showButton }) => {
   const backend = import.meta.env.VITE_BACKEND;
   return (
     <div
+      id="cat-card"
       className={styles.wrapper}
       style={{
         backgroundImage: selectedCategory?.image

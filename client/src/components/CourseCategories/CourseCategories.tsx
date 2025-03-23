@@ -23,7 +23,13 @@ const CourseCategories: FC<{
             <li
               key={category._id || index}
               className={styles.categoryTitle}
-              onClick={() => setSelectedCategory(category)}
+              onClick={() => {
+                setSelectedCategory(category);
+
+                document
+                  .getElementById("cat-card")
+                  ?.scrollIntoView({ behavior: "smooth", block: "start" });
+              }}
             >
               {category.title}
             </li>
