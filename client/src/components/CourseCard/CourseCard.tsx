@@ -24,7 +24,9 @@ const CourseCard: FC<{
     try {
       setLoading(true);
       const response = await axios.post(
-        `${backend}/user/enroll-course`,
+        isCourse
+          ? `${backend}/user/enroll-course`
+          : `${backend}/user/enroll-class`,
         {
           userId: user?._id,
           courseId: course?._id,
@@ -42,7 +44,7 @@ const CourseCard: FC<{
         fetchClasses();
       }
     } catch (error) {
-      console.error("Error enrolling in the course:", error);
+      console.error("Error enrolling in the class:", error);
       if (error instanceof AxiosError) {
         setError(error.response?.data.message);
       }
@@ -89,7 +91,11 @@ const CourseCard: FC<{
           {/* user signed in and enrolled */}
           {user && course.enrolledUsers.includes(user._id) && (
             <Link
-              to={`/course-catalogue/course/${course.slug}`}
+              to={
+                isCourse
+                  ? `/course-catalogue/course/${course.slug}`
+                  : `/course-catalogue/class/${course.slug}`
+              }
               className={styles.viewCourse}
             >
               {isCourse ? "View Course" : "View Class"}

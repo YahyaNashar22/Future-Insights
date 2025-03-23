@@ -2,6 +2,8 @@ import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
 import { createToken, verifyToken } from "../utils/token.js";
 import Course from "../models/courseModel.js";
+import Class from "../models/classModel.js";
+
 
 export const signup = async (req, res) => {
     try {
@@ -249,6 +251,45 @@ export const enrollCourse = async (req, res) => {
         await user.save();
 
         return res.status(200).json({ message: "Enrolled successfully", course });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+};
+
+
+
+export const enrollClass = async (req, res) => {
+    const { userId, courseId } = req.body;
+
+    try {
+        // Find the course by its ID
+        const cls = await Class.findById(courseId);
+        if (!cls) {
+            return res.status(404).json({ message: "Class not found" });
+        }
+
+        // Check if the user is already enrolled in the class
+        const user = await User.findById(userId);
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Check if the user is already enrolled
+        const alreadyEnrolled = cls.enrolledUsers.some(
+            (user) => user.toString() === userId
+        );
+        if (alreadyEnrolled) {
+            return res.status(400).json({ message: "User already enrolled" });
+        }
+
+        // Add the user to the course's enrolledUsers array
+        cls.enrolledUsers.push(userId);
+        await cls.save();
+
+        await user.save();
+
+        return res.status(200).json({ message: "Enrolled successfully", cls });
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Internal server error" });
