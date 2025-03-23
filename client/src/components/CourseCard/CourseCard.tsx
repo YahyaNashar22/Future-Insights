@@ -17,6 +17,7 @@ const CourseCard: FC<{
 
   const [error, setError] = useState<string | null>(null);
   const [purchaseModal, setPurchaseModal] = useState<boolean>(false);
+  const [demoModal, setDemoModal] = useState<boolean>(false);
   const [loading, setLoading] = useState<boolean>(false);
 
   const enrollInCourse = async () => {
@@ -65,7 +66,9 @@ const CourseCard: FC<{
         <p className={styles.courseDescription}>{course.description}</p>
         <div className={styles.courseFooter}>
           <span className={styles.coursePrice}>${course.price}</span>
-          <span className={styles.demo}>Demo</span>
+          <span className={styles.demo} onClick={() => setDemoModal(true)}>
+            Demo
+          </span>
 
           {/* user not signed in */}
           {!user && (
@@ -121,6 +124,53 @@ const CourseCard: FC<{
                 disabled={loading}
               >
                 {loading ? "Enrolling..." : "Confirm"}
+              </button>
+            </div>
+          </div>
+        </div>
+      )}
+
+      {/* Modal for watching demo  */}
+
+      {demoModal && (
+        <div className={styles.purchaseModalWrapper}>
+          <div className={styles.purchaseModal}>
+            <h3 className={styles.modalTitle}>{course.title} Demo</h3>
+
+            {course.demo ? (
+              <video
+                key={course._id} // Force re-render when the video changes
+                className={styles.videoPlayer}
+                controls
+                poster={course?.thumbnail}
+                controlsList="nodownload"
+                disablePictureInPicture
+              >
+                {course.demo && (
+                  <source src={`${backend}/${course.demo}`} type="video/mp4" />
+                )}
+                Your browser does not support the video tag.
+              </video>
+            ) : (
+              <h3 className={styles.noDemo}>
+                unfortunately, no demo is available at the moment
+              </h3>
+            )}
+
+            <div className={styles.modalActions}>
+              <button
+                className={styles.cancelButton}
+                onClick={() => setDemoModal(false)}
+                disabled={loading}
+              >
+                Cancel
+              </button>
+              <button
+                className={styles.confirmButton}
+                onClick={enrollInCourse}
+                disabled={loading}
+              >
+                {loading ? "Enrolling..." : "Enroll"}
               </button>
             </div>
           </div>

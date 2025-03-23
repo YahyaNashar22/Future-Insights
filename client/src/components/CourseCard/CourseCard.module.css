@@ -175,3 +175,19 @@
 .purchaseModalWrapper {
   pointer-events: all;
 }
+
+.videoPlayer {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  border-radius: 12px;
+  display: block;
+}
+
+.noDemo {
+  color: var(--primary-beige);
+  font-size: 1.2rem;
+  font-weight: bold;
+  text-align: center;
+  margin: 50px 0px;
+}
