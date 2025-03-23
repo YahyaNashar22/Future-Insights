@@ -10,6 +10,7 @@ import databaseConnection from "./db/databaseConnection.js";
 import categoryRouter from './routes/categoryRoutes.js';
 import courseRouter from './routes/courseRoutes.js';
 import userRouter from './routes/userRoutes.js';
+import classRouter from './routes/classRoutes.js';
 
 
 
@@ -41,6 +42,8 @@ app.use(express.static("uploads"));
 app.use("/category", categoryRouter);
 app.use("/course", courseRouter);
 app.use("/user", userRouter);
+app.use("/class", classRouter);
+
 
 
 // Serve static files from the React app

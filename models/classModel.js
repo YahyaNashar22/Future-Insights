@@ -42,6 +42,7 @@ const classSchema = new Schema(
         teacher: {
             type: Schema.Types.ObjectId,
             ref: "User",
+            required: true
         },
         enrolledUsers: [{
             type: Schema.Types.ObjectId,
