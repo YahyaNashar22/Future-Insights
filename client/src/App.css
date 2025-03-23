@@ -22,6 +22,31 @@
   --footer-grey: #8f8da0;
 }
 
+/* Scrollbar Styles */
+::-webkit-scrollbar {
+  width: 2px;
+  height: 2px;
+}
+
+::-webkit-scrollbar-track {
+  background: var(--bg-white);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb {
+  background: var(--primary-blue);
+  border-radius: 10px;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: var(--secondary-blue);
+}
+
+::selection {
+  background-color: var(--primary-beige);
+  color: var(--white);
+}
+
 body {
   font-family: Poppins, sans-serif;
   background-color: var(--bg-white);
