@@ -12,36 +12,11 @@ import { useUserStore } from "../../store";
 const CourseCard: FC<{ course: ICourse }> = ({ course }) => {
   const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
-console.log(user)
-  const enrollInCourse = async () => {
-    try {
-      const response = await axios.post(
-        `${backend}/user/enroll-course`,
-        {
-          userId: user?._id,
-          courseId: course._id,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
-
-      if (response.data.message === "Enrolled successfully") {
-        // Handle successful enrollment, e.g., redirect the user or show a message
-        console.log("Successfully enrolled in the course!");
-      }
-    } catch (error) {
-      console.error("Error enrolling in the course:", error);
-    }
-  };
 
   return (
     <li className={styles.courseCard}>
       <div className={styles.thumbnailWrapper}>
         <img
-          onClick={enrollInCourse} // TODO: REMOVE THIS AFTER TESTING
           src={`${backend}/${course.thumbnail}`}
           alt={course.title}
           loading="lazy"
@@ -53,12 +28,27 @@ console.log(user)
         <p className={styles.courseDescription}>{course.description}</p>
         <div className={styles.courseFooter}>
           <span className={styles.coursePrice}>${course.price}</span>
-          <Link
-            to={`/course-catalogue/course/${course.slug}`}
-            className={styles.viewCourse}
-          >
-            View Course
-          </Link>
+          {/* user not signed in */}
+          {!user && (
+            <Link to={`/signin`} className={styles.viewCourse}>
+              View Course
+            </Link>
+          )}
+          {/* user signed in and not enrolled */}
+          {user && !course.enrolledUsers.includes(user._id) && (
+            <Link to="/checkout/:slug" className={styles.viewCourse}>
+              Enroll
+            </Link>
+          )}
+          {/* user signed in and enrolled */}
+          {user && course.enrolledUsers.includes(user._id) && (
+            <Link
+              to={`/course-catalogue/course/${course.slug}`}
+              className={styles.viewCourse}
+            >
+              View Course
+            </Link>
+          )}
         </div>
       </div>
     </li>
@@ -71,7 +61,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   useEffect(() => {
-    const fetchCategory = async () => {
+    const fetchCourses = async () => {
       try {
         setIsLoading(true);
         const res = await axios.post(
@@ -93,7 +83,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
         setIsLoading(false);
       }
     };
-    fetchCategory();
+    fetchCourses();
   }, [categoryId, backend]);
 
   return (

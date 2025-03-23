@@ -28,7 +28,6 @@ const CourseDisplay = () => {
     }
   };
 
-
   useEffect(() => {
     const fetchCourse = async () => {
       setIsLoading(true);
@@ -70,17 +69,19 @@ const CourseDisplay = () => {
       currentIndex + 1 < (course?.content?.length || 0)
     ) {
       try {
-        await axios.post(`${backend}/user/unlock-video`, {
-          courseId: course?._id,
-          userId: user?._id,
-          videoIndex: currentIndex + 1, // the index of the next video to unlock
-        },
-        {
-          headers: {
-            "Content-Type": "application/json"
+        await axios.post(
+          `${backend}/user/unlock-video`,
+          {
+            courseId: course?._id,
+            userId: user?._id,
+            videoIndex: currentIndex + 1, // the index of the next video to unlock
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
           }
-        }
-      );
+        );
 
         // Update the state to reflect the new unlocked video
         setUnlockedVideos((prev) => [...prev, currentIndex + 1]);
@@ -107,8 +108,8 @@ const CourseDisplay = () => {
   }, [course, user, backend]);
 
   const removeFileExtension = (filename: string | undefined) => {
-    return filename?.split('.').slice(0, -1).join('.') || filename;
-  }
+    return filename?.split(".").slice(0, -1).join(".") || filename;
+  };
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
@@ -135,9 +136,8 @@ const CourseDisplay = () => {
             {/* Course Information */}
             <div className={styles.course}>
               <h2 className={styles.videoTitle}>
-                
                 {removeFileExtension(selectedVideo?.title)}
-                </h2>
+              </h2>
 
               <div className={styles.videoContainer}>
                 <video
