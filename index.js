@@ -12,6 +12,8 @@ import courseRouter from './routes/courseRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import classRouter from './routes/classRoutes.js';
 import sessionRouter from './routes/sessionRoutes.js';
+import transporter from './utils/nodemailerTransporter.js';
+import assessmentRouter from './routes/assessmentRoutes.js';
 
 
 
@@ -45,6 +47,25 @@ app.use("/course", courseRouter);
 app.use("/user", userRouter);
 app.use("/class", classRouter);
 app.use("/session", sessionRouter);
+app.use("/assessment", assessmentRouter);
+
+// test nodemailer
+app.post("/send-test-email", async (req, res) => {
+    try {
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: "2silentninja2@gmail.com",
+            subject: "Test Email",
+            text: "This is a test email from your Nodemailer setup!",
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: "Email sent!", info });
+    } catch (error) {
+        console.error("Email error:", error);
+        res.status(500).json({ error: "Failed to send email" });
+    }
+});
 
 
 
