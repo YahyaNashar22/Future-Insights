@@ -3,7 +3,7 @@ import styles from "./AssessmentPage.module.css";
 import { useEffect, useState } from "react";
 import { useUserStore } from "../../store";
 import IAssessment from "../../interfaces/IAssessment";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Loading from "../../components/Loading/Loading";
 
 const AssessmentPage = () => {
@@ -92,7 +92,9 @@ const AssessmentPage = () => {
       console.log(res.data);
     } catch (error) {
       console.error(error);
-      alert("Error uploading answer");
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      } else alert("Error uploading answer");
     } finally {
       setUploading(false);
     }
