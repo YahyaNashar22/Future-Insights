@@ -13,6 +13,8 @@ const AssessmentPage = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [assessment, setAssessment] = useState<IAssessment | null>(null);
+  const [file, setFile] = useState<File | null>(null);
+  const [uploading, setUploading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchAssessment = async () => {
@@ -56,8 +58,44 @@ const AssessmentPage = () => {
     }
   };
 
+  const handleFileChange = (e: React.ChangeEvent<HTMLInputElement>) => {
+    if (e.target.files) {
+      setFile(e.target.files[0]);
+    }
+  };
+
   const handleUpload = async () => {
-    alert(user?._id);
+    if (!file) {
+      alert("Please select a file to upload");
+      return;
+    }
+
+    if (!user?._id || !assessment?._id) return;
+
+    const formData = new FormData();
+    formData.append("answer", file);
+    formData.append("userId", user._id);
+    formData.append("assessmentId", assessment._id);
+
+    try {
+      setUploading(true);
+      const res = await axios.post(
+        `${backend}/answer/upload-answer`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "multipart/form-data",
+          },
+        }
+      );
+      alert("Answer uploaded successfully!");
+      console.log(res.data);
+    } catch (error) {
+      console.error(error);
+      alert("Error uploading answer");
+    } finally {
+      setUploading(false);
+    }
   };
 
   return (
@@ -79,6 +117,23 @@ const AssessmentPage = () => {
               View Scope
             </p>
           )}
+          {/* File input */}
+          <input
+            type="file"
+            id="file-input"
+            className={styles.fileInput}
+            onChange={handleFileChange}
+          />
+
+          {/* Label styled as a button */}
+          <label htmlFor="file-input" className={styles.fileInputLabel}>
+            Choose File
+          </label>
+
+          {/* Show selected file */}
+          {file && (
+            <p className={styles.uploadedFile}>Selected file: {file.name}</p>
+          )}
           <div className={styles.btns}>
             <Link
               to={`/course-catalogue/class/${assessment?.classId.slug}`}
@@ -86,12 +141,14 @@ const AssessmentPage = () => {
             >
               Back to class
             </Link>
+
             <button
               type="button"
               className={styles.upload}
               onClick={handleUpload}
+              disabled={uploading}
             >
-              upload answer
+              {uploading ? "Uploading..." : "Upload Answer"}
             </button>
           </div>
         </div>

@@ -98,6 +98,37 @@
   color: var(--secondary-blue);
 }
 
+.fileInput {
+  display: none; /* Hide the default file input */
+}
+
+.fileInputLabel {
+  display: inline-block;
+  padding: 10px 20px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 16px;
+  text-align: center;
+  margin-bottom: 10px;
+  transition: background-color 0.3s ease-in-out;
+}
+
+.fileInputLabel:hover {
+  background-color: var(--secondary-blue);
+}
+
+.fileInputLabel:active {
+  background-color: var(--primary-blue);
+}
+
+.uploadedFile {
+  margin-top: 10px;
+  color: var(--grey-accent);
+  font-size: 14px;
+}
+
 @media (max-width: 768px) {
   .wrapper {
     margin-top: 100px;
