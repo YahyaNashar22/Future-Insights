@@ -7,16 +7,19 @@ export const uploadAnswer = async (req, res) => {
             assessmentId
         } = req.body;
 
-        const answer = new Answer({
+        const answer = req.file ? req.file.filename : null;
+
+        const uploadedAnswer = new Answer({
             userId,
-            assessmentId
+            assessmentId,
+            answer
         });
 
-        await answer.save();
+        await uploadedAnswer.save();
 
         return res.status(201).json({
             message: "answer uploaded successfully",
-            payload: answer
+            payload: uploadedAnswer
         })
     } catch (error) {
         console.log(error);

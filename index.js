@@ -14,6 +14,7 @@ import classRouter from './routes/classRoutes.js';
 import sessionRouter from './routes/sessionRoutes.js';
 import transporter from './utils/nodemailerTransporter.js';
 import assessmentRouter from './routes/assessmentRoutes.js';
+import answerRouter from './routes/answerRoutes.js';
 
 
 
@@ -48,6 +49,8 @@ app.use("/user", userRouter);
 app.use("/class", classRouter);
 app.use("/session", sessionRouter);
 app.use("/assessment", assessmentRouter);
+app.use("/answer", answerRouter);
+
 
 // test nodemailer
 app.post("/send-test-email", async (req, res) => {
