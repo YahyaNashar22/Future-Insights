@@ -72,3 +72,18 @@ export const getAssignmentsByClassId = async (req, res) => {
 }
 
 
+export const getAssessmentBySlug = async (req, res) => {
+    try {
+        const slug = req.params.slug;
+
+        const assessment = await Assessment.findOne({ slug }).populate("classId");
+
+        return res.status(200).json({
+            message: "fetched successfully",
+            payload: assessment
+        })
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}

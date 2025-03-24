@@ -2,7 +2,9 @@ interface IAssessment {
   _id: string;
   title: string;
   description: string;
-  classId: string;
+  classId: {
+    title: string;
+  };
   type: "assessment" | "assignment";
   slug: string;
 }
