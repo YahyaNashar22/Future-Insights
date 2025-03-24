@@ -1,4 +1,4 @@
-import { useParams } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
 import styles from "./AssessmentPage.module.css";
 import { useEffect, useState } from "react";
 import { useUserStore } from "../../store";
@@ -79,13 +79,21 @@ const AssessmentPage = () => {
               View Scope
             </p>
           )}
-          <button
-            type="button"
-            className={styles.upload}
-            onClick={handleUpload}
-          >
-            upload answer
-          </button>
+          <div className={styles.btns}>
+            <Link
+              to={`/course-catalogue/class/${assessment?.classId.slug}`}
+              className={styles.back}
+            >
+              Back to class
+            </Link>
+            <button
+              type="button"
+              className={styles.upload}
+              onClick={handleUpload}
+            >
+              upload answer
+            </button>
+          </div>
         </div>
       )}
     </main>

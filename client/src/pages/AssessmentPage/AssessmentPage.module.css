@@ -46,17 +46,25 @@
 }
 
 .scope {
-  color: var(--primary-blue);
+  color: var(--primary-beige);
   background-color: var(--white);
   margin: 12px 0px;
   font-size: 16px;
   font-weight: bold;
   cursor: pointer;
   transition: 0.3s ease-in-out;
+  text-align: right;
 }
 
 .scope:hover {
   color: var(--secondary-blue);
+}
+
+.btns {
+  display: flex;
+  align-items: center;
+  justify-content: space-around;
+  margin-top: 50px;
 }
 
 .upload {
@@ -75,6 +83,19 @@
   background: var(--secondary-beige);
   color: var(--grey-accent);
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.15);
+}
+
+.back {
+  color: var(--primary-blue);
+  background-color: var(--white);
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.back:hover {
+  color: var(--secondary-blue);
 }
 
 @media (max-width: 768px) {

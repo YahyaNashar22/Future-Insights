@@ -3,6 +3,7 @@ interface IAssessment {
   title: string;
   description: string;
   classId: {
+    slug: string;
     title: string;
   };
   type: "assessment" | "assignment";
