@@ -30,6 +30,32 @@ const AssessmentPage = () => {
     fetchAssessment();
   }, [backend, slug]);
 
+  const handleScope = () => {
+    if (!assessment?.scope) return;
+
+    const fileUrl = `${backend}/${assessment.scope}`;
+
+    const extension = assessment.scope.split(".").pop()?.toLowerCase();
+    const previewableExtensions = ["jpg", "jpeg", "png", "gif", "pdf", "txt"];
+
+    // Check if extension is undefined
+    if (!extension) {
+      console.error("File extension could not be determined.");
+      return;
+    }
+
+    if (previewableExtensions.includes(extension)) {
+      window.open(fileUrl, "_blank", "noopener,noreferrer");
+    } else {
+      const link = document.createElement("a");
+      link.href = fileUrl;
+      link.download = assessment.scope.split("/").pop() || "download";
+      document.body.appendChild(link);
+      link.click();
+      document.body.removeChild(link);
+    }
+  };
+
   const handleUpload = async () => {
     alert(user?._id);
   };
@@ -48,6 +74,11 @@ const AssessmentPage = () => {
             Class: {assessment?.classId.title}
           </h2>
           <p className={styles.description}>{assessment?.description}</p>
+          {assessment?.scope && (
+            <p className={styles.scope} onClick={handleScope}>
+              View Scope
+            </p>
+          )}
           <button
             type="button"
             className={styles.upload}

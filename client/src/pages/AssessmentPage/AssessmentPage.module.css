@@ -26,7 +26,7 @@
 }
 
 .type {
-    color: var(--primary-beige);
+  color: var(--primary-beige);
 }
 
 .classTitle {
@@ -43,6 +43,20 @@
   line-height: 1.6;
   margin-bottom: 20px;
   text-align: left;
+}
+
+.scope {
+  color: var(--primary-blue);
+  background-color: var(--white);
+  margin: 12px 0px;
+  font-size: 16px;
+  font-weight: bold;
+  cursor: pointer;
+  transition: 0.3s ease-in-out;
+}
+
+.scope:hover {
+  color: var(--secondary-blue);
 }
 
 .upload {

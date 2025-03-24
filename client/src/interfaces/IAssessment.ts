@@ -6,6 +6,7 @@ interface IAssessment {
     title: string;
   };
   type: "assessment" | "assignment";
+  scope?: string;
   slug: string;
 }
 

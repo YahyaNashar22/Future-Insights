@@ -11,11 +11,14 @@ export const createAssessment = async (req, res) => {
             type,
         } = req.body;
 
+        const scope = req.file ? req.file.filename : null;
+
         const assessment = new Assessment({
             title,
             description,
             classId,
             type,
+            scope
         });
 
         await assessment.save();

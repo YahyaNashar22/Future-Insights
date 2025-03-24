@@ -25,6 +25,10 @@ const assessmentSchema = new Schema(
             default: "assessment",
             required: true,
         },
+        scope: {
+            type: String,
+            required: false,
+        },
         slug: {
             type: String,
             unique: true,

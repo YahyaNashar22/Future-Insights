@@ -5,14 +5,18 @@ const { Schema, model } = mongoose;
 
 const answerSchema = new Schema(
     {
-        user: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
-        assessment: {
+        assessmentId: {
             type: Schema.Types.ObjectId,
             ref: "Assessment",
+            required: true,
+        },
+        answer: {
+            type: String,
             required: true,
         },
         grade: {
