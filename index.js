@@ -11,6 +11,7 @@ import categoryRouter from './routes/categoryRoutes.js';
 import courseRouter from './routes/courseRoutes.js';
 import userRouter from './routes/userRoutes.js';
 import classRouter from './routes/classRoutes.js';
+import sessionRouter from './routes/sessionRoutes.js';
 
 
 
@@ -43,6 +44,8 @@ app.use("/category", categoryRouter);
 app.use("/course", courseRouter);
 app.use("/user", userRouter);
 app.use("/class", classRouter);
+app.use("/session", sessionRouter);
+
 
 
 

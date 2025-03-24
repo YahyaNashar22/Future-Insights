@@ -7,13 +7,15 @@ const sessionSchema = new Schema(
     {
         link: {
             type: String,
-            required: true,
+            required: false,
         },
-        class: {
+        classId: {
             type: Schema.Types.ObjectId,
             ref: "Class",
             required: true,
         },
+
+        // recording will be added after class is done
         recording: {
             type: String,
             required: false,
