@@ -45,6 +45,10 @@ const ClassDisplay = lazy(
   () => import("../pages/ClassDisplay/ClassDisplay.tsx")
 );
 
+const AssessmentPage = lazy(
+  () => import("../pages/AssessmentPage/AssessmentPage.tsx")
+);
+
 // const CourseCheckout = lazy(
 //   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
 // );
@@ -77,6 +81,9 @@ const AppRoutes = () => {
             path="/course-catalogue/class/:slug"
             element={<ClassDisplay />}
           />
+
+          <Route path="/assessment/:slug" element={<AssessmentPage />} />
+          <Route path="/assignment/:slug" element={<AssessmentPage />} />
 
           <Route path="/support" element={<Support />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />

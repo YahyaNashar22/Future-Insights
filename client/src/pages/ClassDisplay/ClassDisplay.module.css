@@ -45,7 +45,8 @@
 
 .duration {
   font-size: 14px;
-  color: var(--secondary-beige);
+  color: var(--footer-grey);
+  text-align: end;
 }
 
 .right {
