@@ -6,6 +6,8 @@ import MainLayout from "./MainLayout.tsx";
 import CourseCatalogueLayout from "./CourseCatalogueLayout.tsx";
 import { useUserStore } from "../store.ts";
 
+// TODO: REDIRECT TO HOME PAGE AFTER SIGN OUT
+
 const NotFound = lazy(() => import("../pages/NotFound/NotFound.tsx"));
 const Home = lazy(() => import("../pages/Home/Home.tsx"));
 const CourseCatalogue = lazy(

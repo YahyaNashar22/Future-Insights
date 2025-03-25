@@ -176,7 +176,11 @@ const CourseCard: FC<{
                 onClick={enrollInCourse}
                 disabled={loading}
               >
-                {loading ? "Enrolling..." : "Enroll"}
+                {user && !course.enrolledUsers.includes(user._id) && loading
+                  ? "Enrolling..."
+                  : user && !course.enrolledUsers.includes(user._id) && !loading
+                  ? "Enroll"
+                  : "Continue"}
               </button>
             </div>
           </div>
