@@ -295,3 +295,44 @@ export const enrollClass = async (req, res) => {
         return res.status(500).json({ message: "Internal server error" });
     }
 };
+
+
+export const getEnrolledClasses = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const classes = await Class.find({
+            enrolledUsers: userId
+        }).populate("teacher category");
+
+        return res.status(200).json({ message: "fetched successfully", payload: classes });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+
+export const getEnrolledCourses = async (req, res) => {
+    try {
+        const { userId } = req.body;
+
+        if (!userId) {
+            return res.status(400).json({ message: "User ID is required" });
+        }
+
+        const courses = await Course.find({
+            enrolledUsers: userId
+        }).populate("teacher category");
+
+        return res.status(200).json({ message: "fetched successfully", payload: courses });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}

@@ -171,17 +171,34 @@ const CourseCard: FC<{
               >
                 Cancel
               </button>
-              <button
-                className={styles.confirmButton}
-                onClick={enrollInCourse}
-                disabled={loading}
-              >
-                {user && !course.enrolledUsers.includes(user._id) && loading
-                  ? "Enrolling..."
-                  : user && !course.enrolledUsers.includes(user._id) && !loading
-                  ? "Enroll"
-                  : "Continue"}
-              </button>
+              {user && !course.enrolledUsers.includes(user._id) && (
+                <button
+                  className={styles.confirmButton}
+                  onClick={enrollInCourse}
+                  disabled={loading}
+                >
+                  {user && !course.enrolledUsers.includes(user._id) && loading
+                    ? "Enrolling..."
+                    : user &&
+                      !course.enrolledUsers.includes(user._id) &&
+                      !loading
+                    ? "Enroll"
+                    : "Continue"}
+                </button>
+              )}
+
+              {user && course.enrolledUsers.includes(user._id) && (
+                <Link
+                  to={
+                    isCourse
+                      ? `/course-catalogue/course/${course.slug}`
+                      : `/course-catalogue/class/${course.slug}`
+                  }
+                  className={styles.viewCourse}
+                >
+                  Continue
+                </Link>
+              )}
             </div>
           </div>
         </div>
