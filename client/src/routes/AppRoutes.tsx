@@ -5,6 +5,7 @@ import Loading from "../components/Loading/Loading.tsx";
 import MainLayout from "./MainLayout.tsx";
 import CourseCatalogueLayout from "./CourseCatalogueLayout.tsx";
 import { useUserStore } from "../store.ts";
+import ProtectedRoute from "./ProtectedRoute.tsx";
 
 // TODO: REDIRECT TO HOME PAGE AFTER SIGN OUT
 
@@ -74,24 +75,25 @@ const AppRoutes = () => {
             element={<CategoryDisplay />}
           />
 
-          <Route
-            path="/course-catalogue/course/:slug"
-            element={<CourseDisplay />}
-          />
-
-          <Route
-            path="/course-catalogue/class/:slug"
-            element={<ClassDisplay />}
-          />
-
-          <Route path="/assessment/:slug" element={<AssessmentPage />} />
-          <Route path="/assignment/:slug" element={<AssessmentPage />} />
+          {/* Redirect if user is not signed in  */}
+          <Route element={<ProtectedRoute userId={user?._id} />}>
+            <Route
+              path="/course-catalogue/course/:slug"
+              element={<CourseDisplay />}
+            />
+            <Route
+              path="/course-catalogue/class/:slug"
+              element={<ClassDisplay />}
+            />
+            <Route path="/assessment/:slug" element={<AssessmentPage />} />
+            <Route path="/assignment/:slug" element={<AssessmentPage />} />
+            <Route path="/my-courses" element={<MyCourses />} />
+          </Route>
 
           <Route path="/support" element={<Support />} />
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/refund-policies" element={<RefundPolicies />} />
-          <Route path="/my-courses" element={<MyCourses />} />
 
           {!user && (
             <>
