@@ -1,0 +1,111 @@
+.wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  min-height: 100vh;
+  background-color: var(--bg-white);
+  padding: 20px;
+}
+
+.container {
+  width: 100%;
+  max-width: 800px;
+  background: var(--white);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  padding: 20px;
+  text-align: center;
+}
+
+.header {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  padding: 15px;
+  font-size: 2rem;
+  font-weight: bold;
+}
+
+.details {
+  padding: 20px;
+  text-align: left;
+}
+
+.details p {
+  margin: 10px 0;
+  font-size: 16px;
+  color: var(--grey-accent);
+}
+
+.courseInfo {
+  padding: 15px;
+  margin-top: 20px;
+  display: flex;
+  flex-direction: column;
+}
+
+.courseInfo h3 {
+  color: var(--primary-blue);
+  margin-bottom: 20px;
+  font-size: 1.8rem;
+}
+
+.courseInfo p {
+  text-align: center;
+}
+
+.teacher {
+  font-size: 14px;
+  color: var(--grey-accent);
+  margin-top: 20px;
+  align-self: flex-end;
+}
+
+.certificateButton {
+  display: inline-block;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  padding: 10px 15px;
+  font-size: 16px;
+  border-radius: 5px;
+  text-decoration: none;
+  margin-top: 20px;
+  font-weight: bold;
+}
+
+.certificateButton:hover {
+  background-color: var(--primary-beige);
+}
+
+.certificationText {
+  font-family: "Cairo", sans-serif; /* For body text */
+  line-height: 1.8; /* Spacing between lines */
+  font-size: 1.5rem;
+  color: var(--grey-accent); /* Apply grey accent color */
+  text-align: center;
+  margin: 20px;
+}
+
+.awardText {
+  font-size: 1.5rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+}
+
+.brandName {
+  font-family: "Poppins", sans-serif;
+  font-weight: bold;
+  font-size: 1.5rem;
+  color: var(--primary-beige);
+}
+
+.studentName {
+  font-family: "Poppins", sans-serif;
+  font-size: 1.5rem;
+  color: var(--primary-beige);
+}
+
+.recognitionText {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--grey-accent);
+  margin-top: 10px;
+}

@@ -1,9 +1,24 @@
 interface ICertification {
   _id: string;
-  userId: string;
-  courseId?: string;
-  classId?: string;
+  userId: {
+    fullname: string;
+  };
+  courseId?: {
+    title: string;
+    description: string;
+    teacher: {
+      fullname: string;
+    };
+  };
+  classId?: {
+    title: string;
+    description: string;
+    teacher: {
+      fullname: string;
+    };
+  };
   slug: string;
+  createdAt: string;
 }
 
 export default ICertification;

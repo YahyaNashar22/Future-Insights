@@ -83,7 +83,13 @@ export const getCertificationBySlug = async (req, res) => {
     try {
         const { slug } = req.params;
 
-        const certification = await Certification.findOne({ slug }).populate("courseId classId");
+        const certification = await Certification.findOne({ slug }).populate({
+            path: "courseId",
+            populate: { path: "teacher" }
+        }).populate({
+            path: "classId",
+            populate: { path: "teacher" }
+        }).populate("userId");
 
         return res.status(200).json({
             message: "fetched successfully",
