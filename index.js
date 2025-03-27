@@ -51,7 +51,7 @@ app.use("/class", classRouter);
 app.use("/session", sessionRouter);
 app.use("/assessment", assessmentRouter);
 app.use("/answer", answerRouter);
-app.use("/certificate", certificateRouter);
+app.use("/certification", certificateRouter);
 
 
 

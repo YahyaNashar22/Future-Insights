@@ -17,6 +17,8 @@ const CourseDisplay = () => {
   const [course, setCourse] = useState<ICourse | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [certificationLoader, setCertificationLoader] =
+    useState<boolean>(false);
 
   const [unlockedVideos, setUnlockedVideos] = useState<number[]>([0]); // First video unlocked by default
   const [, setVideoProgress] = useState<Record<number, number>>({});
@@ -118,6 +120,29 @@ const CourseDisplay = () => {
   const removeFileExtension = (filename: string | undefined) => {
     return filename?.split(".").slice(0, -1).join(".") || filename;
   };
+
+  const createCertification = async () => {
+    try {
+      setCertificationLoader(true);
+      const res = await axios.post(
+        "/certification/create",
+        {
+          userId: user?._id,
+          courseId: course?._id,
+        },
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      console.log(res);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setCertificationLoader(false);
+    }
+  };
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
@@ -139,7 +164,11 @@ const CourseDisplay = () => {
             </h1>
           </div>
           {courseCompleted && (
-            <button className={styles.certificationBtn}>
+            <button
+              disabled={certificationLoader}
+              className={styles.certificationBtn}
+              onClick={createCertification}
+            >
               Get Certification
             </button>
           )}
