@@ -6,7 +6,7 @@ const certificateRouter = new express.Router();
 
 certificateRouter.post("/create", createCertification);
 certificateRouter.post("/get-user-certifications", getAllCertificationsByUserId);
-certificateRouter.post("/get/:slug", getCertificationBySlug);
+certificateRouter.get("/get/:slug", getCertificationBySlug);
 certificateRouter.post("/get-course-certification", getCourseCertification);
 certificateRouter.post("/get-class-certification", getClassCertification);
 
