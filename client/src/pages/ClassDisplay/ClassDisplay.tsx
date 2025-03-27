@@ -1,4 +1,4 @@
-import { Link, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./ClassDisplay.module.css";
 import { useEffect, useState } from "react";
 import IClass from "../../interfaces/IClass";
@@ -10,6 +10,7 @@ import IAssessment from "../../interfaces/IAssessment";
 const ClassDisplay = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();
+  const navigate = useNavigate();
 
   const [cls, setCls] = useState<IClass | null>(null);
   const [sessions, setSessions] = useState<ISession[]>([]);
@@ -23,6 +24,7 @@ const ClassDisplay = () => {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
         setCls(res.data.payload);
+        if (!cls) navigate("*");
       } catch (error) {
         console.log(error);
       } finally {
@@ -31,7 +33,7 @@ const ClassDisplay = () => {
     };
 
     fetchClass();
-  }, [backend, slug]);
+  }, [backend, slug, navigate, cls]);
 
   useEffect(() => {
     if (!cls?._id) return;

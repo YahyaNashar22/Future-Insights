@@ -1,28 +1,33 @@
-import { useParams } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import styles from "./CourseDisplay.module.css";
 import { useEffect, useState } from "react";
 import ICourse from "../../interfaces/ICourse";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import Loading from "../../components/Loading/Loading";
 import IVideo from "../../interfaces/IVideo";
 import icon from "../../assets/icons/course_title.png";
 import videoIc from "../../assets/icons/video.png";
 import { useUserStore } from "../../store";
+import ICertification from "../../interfaces/ICertification";
 
 const CourseDisplay = () => {
   const { slug } = useParams();
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
+  const navigate = useNavigate();
 
   const [course, setCourse] = useState<ICourse | null>(null);
   const [selectedVideo, setSelectedVideo] = useState<IVideo | null>(null);
   const [isLoading, setIsLoading] = useState<boolean>(false);
   const [certificationLoader, setCertificationLoader] =
     useState<boolean>(false);
+  const [certification, setCertification] = useState<ICertification | null>(
+    null
+  );
 
   const [unlockedVideos, setUnlockedVideos] = useState<number[]>([0]); // First video unlocked by default
   const [, setVideoProgress] = useState<Record<number, number>>({});
-  const [courseCompleted, setCourseCompleted] = useState<boolean>(true);
+  const [courseCompleted, setCourseCompleted] = useState<boolean>(false);
 
   // Handles video selection
   const handleSelectVideo = (video: IVideo, index: number) => {
@@ -38,6 +43,8 @@ const CourseDisplay = () => {
         const res = await axios.get(`${backend}/course/get-course/${slug}`);
 
         setCourse(res.data.payload);
+
+        if (!course) navigate("*");
 
         // Set the first video as the default selected one
         if (res.data.payload?.content?.length > 0) {
@@ -125,7 +132,7 @@ const CourseDisplay = () => {
     try {
       setCertificationLoader(true);
       const res = await axios.post(
-        "/certification/create",
+        `${backend}/certification/create`,
         {
           userId: user?._id,
           courseId: course?._id,
@@ -136,13 +143,42 @@ const CourseDisplay = () => {
           },
         }
       );
-      console.log(res);
+      navigate(`/certification/${res.data.payload.slug}`);
     } catch (error) {
       console.log(error);
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      }
     } finally {
       setCertificationLoader(false);
     }
   };
+
+  useEffect(() => {
+    if (!user?._id || !course?._id || !courseCompleted) return;
+    const getCertification = async () => {
+      try {
+        const res = await axios.post(
+          `${backend}/certification/get-course-certification`,
+          {
+            userId: user?._id,
+            courseId: course?._id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+        setCertification(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    getCertification();
+  }, [backend, user, course, courseCompleted, navigate, certification]);
+
+  console.log(certification);
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
@@ -163,7 +199,7 @@ const CourseDisplay = () => {
               {course?.title}
             </h1>
           </div>
-          {courseCompleted && (
+          {courseCompleted && !certification && (
             <button
               disabled={certificationLoader}
               className={styles.certificationBtn}
@@ -171,6 +207,14 @@ const CourseDisplay = () => {
             >
               Get Certification
             </button>
+          )}
+          {courseCompleted && certification && (
+            <p
+              onClick={() => navigate(`/certification/${certification.slug}`)}
+              className={styles.certificationBtn}
+            >
+              Certification Acquired
+            </p>
           )}
           {/* Course Information and right panel Container  */}
           <div className={styles.lower}>

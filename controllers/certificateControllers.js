@@ -94,3 +94,23 @@ export const getCertificationBySlug = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+
+export const getCourseCertification = async (req, res) => {
+    try {
+        const { userId, courseId } = req.body;
+
+        const certification = await Certification.find({
+            userId,
+            courseId
+        });
+
+        if (!certification) return res.status(404).json({ message: "certification not yet unlocked" })
+
+        return res.status(200).json({ payload: certification })
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}

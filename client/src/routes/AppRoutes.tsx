@@ -52,6 +52,10 @@ const AssessmentPage = lazy(
   () => import("../pages/AssessmentPage/AssessmentPage.tsx")
 );
 
+const CertificationPage = lazy(
+  () => import("../pages/CertificationPage/CertificationPage.tsx")
+);
+
 // const CourseCheckout = lazy(
 //   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
 // );
@@ -88,6 +92,10 @@ const AppRoutes = () => {
             <Route path="/assessment/:slug" element={<AssessmentPage />} />
             <Route path="/assignment/:slug" element={<AssessmentPage />} />
             <Route path="/my-courses" element={<MyCourses />} />
+            <Route
+              path="/certification/:slug"
+              element={<CertificationPage />}
+            />
           </Route>
 
           <Route path="/support" element={<Support />} />
