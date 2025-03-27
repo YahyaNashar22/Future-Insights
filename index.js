@@ -15,6 +15,7 @@ import sessionRouter from './routes/sessionRoutes.js';
 import transporter from './utils/nodemailerTransporter.js';
 import assessmentRouter from './routes/assessmentRoutes.js';
 import answerRouter from './routes/answerRoutes.js';
+import certificateRouter from './routes/certificateRoutes.js';
 
 
 
@@ -50,6 +51,8 @@ app.use("/class", classRouter);
 app.use("/session", sessionRouter);
 app.use("/assessment", assessmentRouter);
 app.use("/answer", answerRouter);
+app.use("/certificate", certificateRouter);
+
 
 
 // test nodemailer

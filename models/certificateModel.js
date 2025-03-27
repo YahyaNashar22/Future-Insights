@@ -5,17 +5,17 @@ const { Schema, model } = mongoose;
 
 const certificateSchema = new Schema(
     {
-        user: {
+        userId: {
             type: Schema.Types.ObjectId,
             ref: "User",
             required: true,
         },
-        class: {
+        classId: {
             type: Schema.Types.ObjectId,
             ref: "Class",
             required: false,
         },
-        course: {
+        courseId: {
             type: Schema.Types.ObjectId,
             ref: "Course",
             required: false,
@@ -41,5 +41,5 @@ certificateSchema.pre("save", function (next) {
 
 
 
-const Certificate = model("Certificate", certificateSchema);
-export default Certificate;
+const Certification = model("Certification", certificateSchema);
+export default Certification;

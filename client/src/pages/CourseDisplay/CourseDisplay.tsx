@@ -20,6 +20,7 @@ const CourseDisplay = () => {
 
   const [unlockedVideos, setUnlockedVideos] = useState<number[]>([0]); // First video unlocked by default
   const [, setVideoProgress] = useState<Record<number, number>>({});
+  const [courseCompleted, setCourseCompleted] = useState<boolean>(true);
 
   // Handles video selection
   const handleSelectVideo = (video: IVideo, index: number) => {
@@ -91,6 +92,13 @@ const CourseDisplay = () => {
     }
   };
 
+  // Unlock certificate if all content are completed
+  useEffect(() => {
+    if (course && unlockedVideos.length === course.content.length) {
+      setCourseCompleted(true);
+    }
+  }, [course, unlockedVideos]);
+
   useEffect(() => {
     if (course && user?._id) {
       const fetchUnlockedVideos = async () => {
@@ -130,7 +138,11 @@ const CourseDisplay = () => {
               {course?.title}
             </h1>
           </div>
-
+          {courseCompleted && (
+            <button className={styles.certificationBtn}>
+              Get Certification
+            </button>
+          )}
           {/* Course Information and right panel Container  */}
           <div className={styles.lower}>
             {/* Course Information */}
