@@ -100,7 +100,7 @@ export const getCourseCertification = async (req, res) => {
     try {
         const { userId, courseId } = req.body;
 
-        const certification = await Certification.find({
+        const certification = await Certification.findOne({
             userId,
             courseId
         });

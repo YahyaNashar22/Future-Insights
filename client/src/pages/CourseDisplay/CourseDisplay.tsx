@@ -143,7 +143,7 @@ const CourseDisplay = () => {
           },
         }
       );
-      navigate(`/certification/${res.data.payload.slug}`);
+      if (res.data.payload) navigate(`/certification/${res.data.payload.slug}`);
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {
@@ -178,7 +178,6 @@ const CourseDisplay = () => {
     getCertification();
   }, [backend, user, course, courseCompleted, navigate, certification]);
 
-  console.log(certification);
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
