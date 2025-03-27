@@ -23,8 +23,10 @@ const ClassDisplay = () => {
       try {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
+
+        if (!res.data.payload) navigate("*");
+
         setCls(res.data.payload);
-        if (!cls) navigate("*");
       } catch (error) {
         console.log(error);
       } finally {
@@ -33,7 +35,7 @@ const ClassDisplay = () => {
     };
 
     fetchClass();
-  }, [backend, slug, navigate, cls]);
+  }, [backend, slug, navigate]);
 
   useEffect(() => {
     if (!cls?._id) return;

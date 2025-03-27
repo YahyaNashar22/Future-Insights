@@ -42,9 +42,9 @@ const CourseDisplay = () => {
       try {
         const res = await axios.get(`${backend}/course/get-course/${slug}`);
 
-        setCourse(res.data.payload);
+        if (!res.data.payload) navigate("*");
 
-        if (!course) navigate("*");
+        setCourse(res.data.payload);
 
         // Set the first video as the default selected one
         if (res.data.payload?.content?.length > 0) {
@@ -58,7 +58,7 @@ const CourseDisplay = () => {
     };
 
     fetchCourse();
-  }, [backend, slug]);
+  }, [backend, slug, navigate]);
 
   // Handle video progress tracking
   const handleTimeUpdate = (event: React.SyntheticEvent<HTMLVideoElement>) => {
