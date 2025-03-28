@@ -1,0 +1,91 @@
+.wrapper {
+  display: flex;
+  padding: 20px;
+}
+
+.sidebar {
+  width: 250px;
+  background-color: var(--bg-white);
+  padding: 20px;
+  border-right: 1px solid var(--bg-white);
+  transition: transform 0.3s ease-in-out;
+}
+
+.sidebar ul {
+  list-style-type: none;
+  padding: 0;
+}
+
+.sidebar li {
+  margin: 15px 0;
+}
+
+.sidebarButton {
+  background-color: transparent;
+  border: none;
+  text-align: left;
+  font-size: 1rem;
+  color: var(--primary-blue);
+  cursor: pointer;
+  padding: 10px;
+  width: 100%;
+  text-decoration: none;
+  font-weight: bold;
+}
+
+.sidebarButton:hover {
+  background-color: var(--bg-white);
+  color: var(--primary-beige);
+}
+
+.mainContent {
+  flex: 1;
+  padding: 20px;
+}
+
+/* Responsive styles */
+@media (max-width: 768px) {
+  .wrapper {
+    flex-direction: column;
+  }
+
+  .sidebar {
+    position: fixed;
+    top: 0;
+    left: -250px; /* Initially hidden */
+    height: 100%;
+    width: 250px;
+    background-color: var(--bg-white);
+    padding: 20px;
+    border-right: 1px solid var(--bg-white);
+    transition: transform 0.3s ease-in-out;
+  }
+
+  .sidebar.open {
+    left: 0; /* Sidebar is shown when this class is added */
+  }
+
+  .mainContent {
+    padding-left: 0;
+  }
+
+  /* Hamburger button */
+  .hamburger-btn {
+    display: block;
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    font-size: 30px;
+    background-color: transparent;
+    border: none;
+    color: var(--primary-blue);
+    cursor: pointer;
+  }
+}
+
+/* On larger screens, hide the hamburger button */
+@media (min-width: 769px) {
+  .hamburger-btn {
+    display: none;
+  }
+}

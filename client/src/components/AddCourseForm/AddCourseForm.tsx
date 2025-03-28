@@ -100,7 +100,7 @@ const AddCourseForm = () => {
   };
 
   return (
-    <main className={styles.wrapper}>
+    <div className={styles.wrapper}>
       <form className={styles.formContainer} onSubmit={handleSubmit}>
         <h1 className={styles.formTitle}>Add Course</h1>
         <label className={styles.formLabel}>
@@ -118,7 +118,7 @@ const AddCourseForm = () => {
         <label className={styles.formLabel}>
           Description
           <textarea
-            className={styles.formInput}
+            className={`${styles.formInput} ${styles.textarea}`}
             name="description"
             placeholder="Course Description"
             onChange={handleChange}
@@ -140,7 +140,12 @@ const AddCourseForm = () => {
 
         <label className={styles.formLabel}>
           Category
-          <select name="category" onChange={handleChange} required>
+          <select
+            name="category"
+            onChange={handleChange}
+            required
+            className={`${styles.formInput} ${styles.select}`}
+          >
             <option value="">Select a category</option>
             {categories.map((category) => (
               <option
@@ -196,7 +201,7 @@ const AddCourseForm = () => {
           {loading ? "Submitting..." : "Create Course"}
         </button>
       </form>
-    </main>
+    </div>
   );
 };
 

@@ -1,10 +1,12 @@
 import { lazy, Suspense } from "react";
 import { Routes, Route } from "react-router-dom";
 
+import { useUserStore } from "../store.ts";
+
 import Loading from "../components/Loading/Loading.tsx";
 import MainLayout from "./MainLayout.tsx";
 import CourseCatalogueLayout from "./CourseCatalogueLayout.tsx";
-import { useUserStore } from "../store.ts";
+
 import ProtectedRoute from "./ProtectedRoute.tsx";
 
 // TODO: REDIRECT TO HOME PAGE AFTER SIGN OUT
@@ -54,6 +56,16 @@ const AssessmentPage = lazy(
 
 const CertificationPage = lazy(
   () => import("../pages/CertificationPage/CertificationPage.tsx")
+);
+
+const CourseInfo = lazy(() => import("../pages/CourseInfo/CourseInfo.tsx"));
+
+const AddCourseForm = lazy(
+  () => import("../components/AddCourseForm/AddCourseForm.tsx")
+);
+
+const TeacherCourseDisplay = lazy(
+  () => import("../components/TeacherCourseDisplay/TeacherCourseDisplay.tsx")
 );
 
 // const CourseCheckout = lazy(
@@ -124,6 +136,15 @@ const AppRoutes = () => {
         {user && (user.role === "admin" || user.role === "teacher") && (
           <Route path="/dashboard" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
+            <Route path="/dashboard/add-course" element={<AddCourseForm />} />
+            <Route
+              path="/dashboard/my-courses"
+              element={<TeacherCourseDisplay />}
+            />
+            <Route
+              path="/dashboard/course-info/:slug"
+              element={<CourseInfo />}
+            />
           </Route>
         )}
 

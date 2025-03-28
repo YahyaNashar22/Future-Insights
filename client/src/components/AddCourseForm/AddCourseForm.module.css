@@ -1,48 +1,97 @@
+/* AddCourseForm.module.css */
+
+/* General Styles */
 .wrapper {
-  max-width: 600px;
-  margin: 2rem auto;
-  padding: 2rem;
-  background: var(--bg-white);
+  background-color: var(--bg-white);
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
   border-radius: 8px;
-  box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
 }
 
-.title {
-  text-align: center;
-  font-size: 1.5rem;
-  color: var(--primary-blue);
-  margin-bottom: 1.5rem;
-}
-
-.form {
+.formContainer {
   display: flex;
   flex-direction: column;
-  gap: 1rem;
+  gap: 20px;
 }
 
-input,
-textarea,
-button {
-  width: 100%;
-  padding: 0.8rem;
-  border: 1px solid var(--grey-accent);
-  border-radius: 4px;
-  font-size: 1rem;
-}
-
-textarea {
-  resize: vertical;
-  min-height: 100px;
-}
-
-button {
-  background: var(--primary-blue);
-  color: var(--white);
+.formTitle {
+  font-size: 2rem;
   font-weight: bold;
-  cursor: pointer;
-  border: none;
+  color: var(--primary-blue);
+  margin-bottom: 20px;
 }
 
-button:hover {
-  background: var(--secondary-blue);
+.formLabel {
+  font-size: 1rem;
+  color: var(--grey-accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  padding: 10px;
+  border: 1px solid var(--secondary-blue);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--white);
+  color: var(--grey-accent);
+  outline: none;
+}
+
+.formInput:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 5px rgba(37, 33, 97, 0.5);
+}
+
+.selectOption {
+  background-color: var(--bg-white);
+  color: var(--grey-accent);
+}
+
+.submitButton {
+  padding: 12px 20px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: var(--secondary-blue);
+}
+
+.submitButton:disabled {
+  background-color: var(--secondary-beige);
+  cursor: not-allowed;
+}
+
+.formInput[type="file"] {
+  padding: 8px;
+  background-color: var(--secondary-beige);
+  border: 1px solid var(--secondary-blue);
+  color: var(--grey-accent);
+}
+
+.formInput[type="file"]:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 5px rgba(37, 33, 97, 0.5);
+}
+
+/* Additional Styles */
+.textarea {
+  resize: vertical;
+  height: 250px;
+  resize: none;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 100px;
+  }
 }

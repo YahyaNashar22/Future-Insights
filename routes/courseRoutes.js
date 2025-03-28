@@ -15,7 +15,7 @@ courseRouter.post("/create", upload.fields([
 courseRouter.post('/get-courses-by-category', getCoursesByCategory);
 courseRouter.get('/get-course/:slug', getCourseBySlug);
 courseRouter.delete('/delete/:id', deleteCourse);
-courseRouter.get('/get-by-teacher', getCoursesByTeacher);
+courseRouter.post('/get-by-teacher', getCoursesByTeacher);
 
 
 

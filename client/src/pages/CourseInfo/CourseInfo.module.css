@@ -1,0 +1,162 @@
+/* Wrapper for the entire component */
+.wrapper {
+  padding: 20px;
+  background-color: var(--bg-white);
+  border-radius: 8px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+}
+
+/* Container for the course information */
+.courseContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+}
+
+/* Thumbnail styling */
+.courseThumbnail {
+  margin-bottom: 20px;
+}
+
+.thumbnailImage {
+  width: 100%;
+  max-width: 600px;
+  height: auto;
+  border-radius: 8px;
+}
+
+/* Course info section */
+.courseInfo {
+  text-align: center;
+  padding: 20px;
+}
+
+.courseTitle {
+  font-size: 32px;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 15px;
+}
+
+.courseDescription {
+  font-size: 18px;
+  color: var(--grey-accent);
+  margin-bottom: 20px;
+}
+
+.courseDetails {
+  display: flex;
+  justify-content: center;
+  gap: 15px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.coursePrice {
+  color: var(--primary-beige);
+  font-weight: bold;
+}
+
+.courseDiscount {
+  color: var(--secondary-blue);
+}
+
+.courseDuration {
+  color: var(--primary-blue);
+}
+
+.courseContent {
+  text-align: left;
+  margin-bottom: 30px;
+}
+
+.contentTitle {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  color: var(--primary-blue);
+  margin-bottom: 15px;
+}
+
+.courseDemo {
+  margin-top: 20px;
+  font-size: 16px;
+}
+
+.courseDemo a {
+  color: var(--primary-blue);
+  text-decoration: underline;
+}
+
+.noCourse {
+  text-align: center;
+  font-size: 18px;
+  color: var(--grey-accent);
+  margin-top: 40px;
+}
+
+.enrolledTitle {
+  font-size: 1.5rem;
+  margin-top: 20px;
+  color: var(--primary-blue);
+  text-align: left;
+}
+
+.enrolledList {
+  list-style: none;
+  padding: 0;
+  margin-top: 10px;
+}
+
+.enrolledStudent {
+  display: flex;
+  justify-content: space-between;
+  margin-bottom: 10px;
+  padding: 10px;
+  background-color: var(--secondary-beige);
+  border-radius: 5px;
+}
+
+.studentName {
+  font-weight: bold;
+}
+
+.studentEmail {
+  color: var(--grey-accent);
+  font-weight: bold;
+  text-align: center;
+  margin: auto;
+}
+
+.videoPlayer {
+  margin-top: 20px;
+  border: 1px solid #ccc;
+  border-radius: 8px;
+  padding: 10px;
+  background-color: #f9f9f9;
+}
+
+.video {
+  max-width: 100%;
+  border-radius: 8px;
+}
+
+.contentItem {
+  padding: 8px;
+  margin: 5px;
+  background-color: #f0f0f0;
+  border: none;
+  cursor: pointer;
+  width: 100%;
+  text-align: left;
+}
+
+.contentItem:hover {
+  background-color: #e0e0e0;
+}
+
+
+@media (max-width: 768px) {
+    .wrapper {
+        margin-top: 100px;
+    }
+}

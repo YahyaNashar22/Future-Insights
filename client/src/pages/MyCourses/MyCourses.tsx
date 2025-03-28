@@ -93,6 +93,11 @@ const MyCourses = () => {
     fetchCertifications();
   }, [backend]);
 
+  // TODO: MAKE A NAVIGATION PANEL TO CHOOSE WHAT TO SHOW
+  // TODO: CHANGE PROFILE INFO
+  // TODO: https://certifier.io/ -- CHECK HOW TO LINK IT || OR TEMPLATE
+  // TODO: ADD MATERIAL LOGIC TO CLASSES MODULES
+
   return (
     <Suspense fallback={<Loading />}>
       <section className={styles.wrapper}>
