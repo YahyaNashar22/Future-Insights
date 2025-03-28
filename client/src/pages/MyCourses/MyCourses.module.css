@@ -28,6 +28,35 @@
   text-align: center;
 }
 
+.certificationCard {
+  background: var(--white);
+  border-radius: 12px;
+  padding: 16px;
+  box-shadow: 0 4px 10px rgba(0, 0, 0, 0.1);
+  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  text-align: center;
+  max-width: 300px;
+  margin: 10px auto;
+}
+
+.certificationCard:hover {
+  transform: translateY(-5px);
+  box-shadow: 0 8px 15px rgba(0, 0, 0, 0.15);
+}
+
+.certificationLink {
+  text-decoration: none;
+  color: var(--primary-blue);
+  font-weight: bold;
+  display: block;
+}
+
+.certificationTitle {
+  font-size: 18px;
+  font-weight: 600;
+  color: var(--grey-accent);
+}
+
 /* Ensure even spacing on medium screens */
 @media (max-width: 1024px) {
   .courseGrid {

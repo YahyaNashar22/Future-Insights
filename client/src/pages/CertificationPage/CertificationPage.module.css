@@ -109,3 +109,9 @@
   color: var(--grey-accent);
   margin-top: 10px;
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 100px;
+  }
+}
