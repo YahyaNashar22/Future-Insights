@@ -1,10 +1,10 @@
-import UnderDevelopment from "../UnderDevelopment/NotFound/UnderDevelopment";
+import AddCourseForm from "../../components/AddCourseForm/AddCourseForm";
 import styles from "./Dashboard.module.css";
 
 const Dashboard = () => {
   return (
     <main className={styles.wrapper}>
-      <UnderDevelopment />
+      <AddCourseForm />
     </main>
   );
 };

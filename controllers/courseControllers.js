@@ -1,4 +1,3 @@
-import Class from "../models/classModel.js";
 import Course from "../models/courseModel.js";
 import removeFile from "../utils/removeFile.js";
 
@@ -19,6 +18,8 @@ export const createCourse = async (req, res) => {
         if (existingCourse) {
             return res.status(400).json({ message: "A course with this title already exists" });
         }
+
+        console.log("req files: ", req.files)
 
         // Handle file uploads (thumbnail)
         const thumbnail = req.files?.thumbnail ? req.files.thumbnail[0].filename : null;
@@ -122,6 +123,20 @@ export const deleteCourse = async (req, res) => {
                 message: "Course deleted successfully",
             }
         )
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+
+export const getCoursesByTeacher = async (req, res) => {
+    try {
+        const { teacherId } = req.body;
+
+        const courses = await Course.find({ teacher: teacherId }).sort({ createdAt: -1 });
+
+        return res.status(200).json({ payload: courses })
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })
