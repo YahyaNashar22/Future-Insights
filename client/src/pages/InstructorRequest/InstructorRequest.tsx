@@ -24,11 +24,11 @@ const InstructorRequest = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
+    // TODO: HANDLE PROPER FORM SUBMIT
     e.preventDefault();
     setLoading(true);
 
     try {
-      console.log("Form Data:", formData);
       setFormData({
         name: "",
         email: "",

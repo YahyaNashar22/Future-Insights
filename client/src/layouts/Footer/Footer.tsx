@@ -32,7 +32,13 @@ const Footer = () => {
         <div className={styles.left}>
           {/* upper left side */}
           <div className={styles.logoContainer}>
-            <img src={logo} alt="logo" loading="lazy" width={150} className={styles.logo} />
+            <img
+              src={logo}
+              alt="logo"
+              loading="lazy"
+              width={150}
+              className={styles.logo}
+            />
             <p className={styles.logoText}>
               Welcome to our consultancy agency.
             </p>
@@ -73,7 +79,7 @@ const Footer = () => {
                 </Link>
               </li>
               <li>
-                <Link to="/teacher-signup" className={styles.link}>
+                <Link to="/instructor-request" className={styles.link}>
                   Become an Instructor
                 </Link>
               </li>

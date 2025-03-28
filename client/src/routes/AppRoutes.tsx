@@ -102,16 +102,13 @@ const AppRoutes = () => {
           <Route path="/privacy-policy" element={<PrivacyPolicy />} />
           <Route path="/terms-of-use" element={<TermsOfUse />} />
           <Route path="/refund-policies" element={<RefundPolicies />} />
+          <Route path="/instructor-request" element={<InstructorRequest />} />
 
           {!user && (
             <>
               <Route path="/signin" element={<Signin />} />
               <Route path="/signup" element={<Signup />} />
               <Route path="/iam-learner" element={<IamLearner />} />
-              <Route
-                path="/instructor-request"
-                element={<InstructorRequest />}
-              />
             </>
           )}
 
