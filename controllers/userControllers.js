@@ -3,6 +3,8 @@ import bcrypt from "bcryptjs";
 import { createToken, verifyToken } from "../utils/token.js";
 import Course from "../models/courseModel.js";
 import Class from "../models/classModel.js";
+import generateOTP from "../utils/generateOTP.js";
+import transporter from "../utils/nodemailerTransporter.js";
 
 
 export const signup = async (req, res) => {
@@ -376,7 +378,7 @@ export const sendForgotPasswordOTP = async (req, res) => {
         res.status(200).json({ message: "Email sent!", info });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "Something went wrong, please try again later" });
     }
 }
 
@@ -416,6 +418,6 @@ export const resetPassword = async (req, res) => {
 
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Internal server error" });
+        return res.status(500).json({ message: "Something went wrong, please try again later" });
     }
 }

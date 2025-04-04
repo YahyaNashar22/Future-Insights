@@ -14,7 +14,52 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  const [phase, setPhase] = useState<1 | 2>(1);
+  const [phase, setPhase] = useState<1 | 2>(2);
+
+  const [otpArray, setOtpArray] = useState<string[]>(Array(6).fill(""));
+
+  const handleOTPChange = (e: ChangeEvent<HTMLInputElement>, index: number) => {
+    const value = e.target.value.replace(/\D/, ""); // Only allow digits
+    if (!value) return;
+
+    const newOtp = [...otpArray];
+    newOtp[index] = value;
+    setOtpArray(newOtp);
+
+    // Move to next input
+    if (index < 5 && value) {
+      const nextInput = document.getElementById(`otp-${index + 1}`);
+      (nextInput as HTMLInputElement)?.focus();
+    }
+
+    setOtp(newOtp.join("")); // Update full OTP value
+  };
+
+  const handleOTPKeyDown = (
+    e: React.KeyboardEvent<HTMLInputElement>,
+    index: number
+  ) => {
+    if (e.key === "Backspace") {
+      const newOtp = [...otpArray];
+
+      if (otpArray[index]) {
+        // If current input is not empty, clear it
+        newOtp[index] = "";
+        setOtpArray(newOtp);
+        setOtp(newOtp.join(""));
+      } else if (index > 0) {
+        // If already empty, move to previous and clear it
+        const prevInput = document.getElementById(`otp-${index - 1}`);
+        (prevInput as HTMLInputElement)?.focus();
+
+        newOtp[index - 1] = "";
+        setOtpArray(newOtp);
+        setOtp(newOtp.join(""));
+      }
+
+      e.preventDefault(); // prevent default behavior
+    }
+  };
 
   const handleSendOTP = async (e: FormEvent) => {
     e.preventDefault();
@@ -72,7 +117,7 @@ const ForgotPassword = () => {
         }
       );
       if (res.status == 200) {
-        navigate("/");
+        navigate("/signin");
       }
     } catch (error) {
       console.log(error);
@@ -155,15 +200,21 @@ const ForgotPassword = () => {
 
             <label className={styles.formLabel}>
               OTP
-              <input
-                type="text"
-                className={styles.formInput}
-                value={otp}
-                onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setOtp(e.target.value)
-                }
-                required
-              />
+              <div className={styles.otpContainer}>
+                {otpArray.map((digit, index) => (
+                  <input
+                    key={index}
+                    id={`otp-${index}`}
+                    type="text"
+                    inputMode="numeric"
+                    maxLength={1}
+                    className={styles.otpInput}
+                    value={digit}
+                    onChange={(e) => handleOTPChange(e, index)}
+                    onKeyDown={(e) => handleOTPKeyDown(e, index)}
+                  />
+                ))}
+              </div>
             </label>
 
             <div className={styles.btnContainer}>
