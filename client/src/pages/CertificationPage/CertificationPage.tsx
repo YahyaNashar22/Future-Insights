@@ -16,9 +16,7 @@ const CertificationPage = () => {
   const navigate = useNavigate();
 
   const certificateRef = useRef<HTMLDivElement>(null);
-  const [certification, setCertification] = useState<ICertification | null>(
-    null
-  );
+  const [certification, setCertification] = useState<ICertification | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -41,14 +39,13 @@ const CertificationPage = () => {
   const downloadPDF = async () => {
     if (!certificateRef.current) return;
 
-    // Increase resolution with scale: 3 (higher value = better quality)
     const canvas = await html2canvas(certificateRef.current, {
-      scale: 3, // 3x the resolution for better quality
-      useCORS: true, // Ensure external images load correctly
+      scale: 3,
+      useCORS: true,
     });
 
     const imgData = canvas.toDataURL("image/png");
-    const imgWidth = canvas.width / 3; // Adjust for the scale factor
+    const imgWidth = canvas.width / 3;
     const imgHeight = canvas.height / 3;
 
     const pdf = new jsPDF("landscape", "px", [imgWidth, imgHeight]);
@@ -56,6 +53,7 @@ const CertificationPage = () => {
     pdf.addImage(imgData, "PNG", 0, 0, imgWidth, imgHeight);
     pdf.save(`Certificate-${certification?.userId.fullname}.pdf`);
   };
+
   return (
     <main className={styles.wrapper}>
       {loading ? (
@@ -65,10 +63,13 @@ const CertificationPage = () => {
           {certification && (
             <div ref={certificateRef}>
               <div className={styles.header}>
-                Certification for {certification.userId.fullname}
+                Certificate of Completion
               </div>
 
               <div className={styles.details}>
+                <p>
+                  <strong>Issued to:</strong> {certification.userId.fullname}
+                </p>
                 <p>
                   <strong>Issued on:</strong>{" "}
                   {new Date(certification.createdAt).toLocaleDateString()}
@@ -80,29 +81,15 @@ const CertificationPage = () => {
 
               {certification.courseId && (
                 <div className={styles.courseInfo}>
-                  <h3>{certification.courseId.title} Completion</h3>
+                  <h3>Completion of Course</h3>
                   <p className={styles.certificationText}>
-                    <span className={styles.awardText}>
-                      This certificate is proudly awarded by{" "}
-                      <strong className={styles.brandName}>
-                        Future Insights
-                      </strong>{" "}
-                      to{" "}
-                      <strong className={styles.studentName}>
-                        {certification.userId.fullname}
-                      </strong>
-                    </span>
-                    <span className={styles.recognitionText}>
-                      <br />
-                      in recognition of successfully completing all course
-                      materials.
-                      <br />
-                      We wish you continued success and growth in your future
-                      learning endeavors!
-                    </span>
+                    This is to certify that{" "}
+                    <strong>{certification.userId.fullname}</strong> has
+                    successfully completed all the requirements for the course{" "}
+                    <strong>{certification.courseId.title}</strong>.
                   </p>
                   <p className={styles.teacher}>
-                    Taught by:{" "}
+                    Instructor:{" "}
                     <strong>{certification.courseId.teacher.fullname}</strong>
                   </p>
                 </div>

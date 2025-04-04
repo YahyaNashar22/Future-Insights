@@ -3,25 +3,26 @@
   justify-content: center;
   align-items: center;
   min-height: 100vh;
-  background-color: var(--bg-white);
+  background-color: #f4f4f4; /* Soft light grey background */
   padding: 20px;
 }
 
 .container {
   width: 100%;
   max-width: 800px;
-  background: var(--white);
+  background: white;
   box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
-  padding: 20px;
+  padding: 30px;
   text-align: center;
+  border-radius: 10px;
 }
 
 .header {
-  background-color: var(--primary-blue);
-  color: var(--white);
+  color: #333;
   padding: 15px;
   font-size: 2rem;
   font-weight: bold;
+  border-radius: 5px;
 }
 
 .details {
@@ -32,7 +33,7 @@
 .details p {
   margin: 10px 0;
   font-size: 16px;
-  color: var(--grey-accent);
+  color: #555; /* Soft grey for text */
 }
 
 .courseInfo {
@@ -40,74 +41,51 @@
   margin-top: 20px;
   display: flex;
   flex-direction: column;
+  text-align: left;
 }
 
 .courseInfo h3 {
-  color: var(--primary-blue);
+  color: #333; /* Dark gray for headings */
   margin-bottom: 20px;
   font-size: 1.8rem;
 }
 
 .courseInfo p {
-  text-align: center;
+  font-size: 1rem;
+  line-height: 1.6;
 }
 
 .teacher {
   font-size: 14px;
-  color: var(--grey-accent);
+  color: #777; /* Light grey for teacher name */
   margin-top: 20px;
-  align-self: flex-end;
+  align-self: flex-start;
 }
 
 .certificateButton {
   display: inline-block;
-  background-color: var(--primary-blue);
-  color: var(--white);
+  background-color: #333; /* Dark gray button */
+  color: white;
   padding: 10px 15px;
   font-size: 16px;
   border-radius: 5px;
   text-decoration: none;
   margin-top: 20px;
   font-weight: bold;
+  border: none;
+  cursor: pointer;
 }
 
 .certificateButton:hover {
-  background-color: var(--primary-beige);
+  background-color: #555; /* Darker gray when hovered */
 }
 
 .certificationText {
-  font-family: "Cairo", sans-serif; /* For body text */
-  line-height: 1.8; /* Spacing between lines */
-  font-size: 1.5rem;
-  color: var(--grey-accent); /* Apply grey accent color */
-  text-align: center;
-  margin: 20px;
-}
-
-.awardText {
-  font-size: 1.5rem;
-  font-weight: bold;
-  color: var(--primary-blue);
-}
-
-.brandName {
-  font-family: "Poppins", sans-serif;
-  font-weight: bold;
-  font-size: 1.5rem;
-  color: var(--primary-beige);
-}
-
-.studentName {
-  font-family: "Poppins", sans-serif;
-  font-size: 1.5rem;
-  color: var(--primary-beige);
-}
-
-.recognitionText {
+  font-family: "Cairo", sans-serif;
+  line-height: 1.8;
   font-size: 1.2rem;
-  font-weight: bold;
-  color: var(--grey-accent);
-  margin-top: 10px;
+  color: #555;
+  margin: 20px;
 }
 
 @media (max-width: 768px) {
