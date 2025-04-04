@@ -9,7 +9,6 @@ export const signup = async (req, res) => {
     try {
         const { fullname, email, password } = req.body;
 
-        console.log(req.body)
 
         if (!fullname || !email || !password) {
             return res.status(400).json({ message: "All fields are required" })
@@ -330,6 +329,90 @@ export const getEnrolledCourses = async (req, res) => {
         }).populate("teacher category");
 
         return res.status(200).json({ message: "fetched successfully", payload: courses });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+
+export const sendForgotPasswordOTP = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        const otp = generateOTP();
+        const expiresAt = new Date(Date.now() + 5 * 60 * 1000); // 5 minutes from now
+
+        await User.findOneAndUpdate(
+            { email },
+            { passwordResetOTP: otp, passwordResetExpires: expiresAt },
+            { new: true, upsert: true }
+        );
+
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: "Reset Your Password - OTP Verification",
+            html: `
+        <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; border: 1px solid #ddd; border-radius: 10px;">
+            <h2 style="color: #333;">Password Reset Request</h2>
+            <p style="font-size: 16px; color: #555;">
+                Hello, <br><br>
+                You recently requested to reset your password. Use the OTP below to proceed with the reset:
+            </p>
+            <div style="background: #f8f8f8; padding: 15px; text-align: center; font-size: 24px; font-weight: bold; color: #222; border-radius: 5px;">
+                ${otp} 
+            </div>
+            <p style="font-size: 14px; color: #777; margin-top: 20px;">
+                This OTP is valid for only 5 minutes. If you did not request a password reset, please ignore this email.
+            </p>
+            <p style="font-size: 14px; color: #777;">Regards, <br>Future Insights</p>
+        </div>
+    `,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+        res.status(200).json({ message: "Email sent!", info });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Internal server error" });
+    }
+}
+
+
+
+export const resetPassword = async (req, res) => {
+    try {
+
+        const { email, password, otp } = req.body;
+
+        const user = await User.findOne({ email });
+
+        if (!user || !user.passwordResetOTP || !user.passwordResetExpires) {
+            res.status(403).json({ message: "OTP not found or expired" });
+        }
+
+        if (user.passwordResetExpires < new Date()) {
+            res.status(403).json({ message: "OTP has expired" });
+        }
+
+        if (user.passwordResetOTP !== otp) {
+            res.status(403).json({ message: "Invalid OTP" });
+        }
+
+        // Hash the password
+        const salt = await bcrypt.genSalt(10);
+        const hashedPassword = await bcrypt.hash(password, salt);
+
+        user.password = hashedPassword;
+
+        // Clear OTP fields
+        user.passwordResetOTP = undefined;
+        user.passwordResetExpires = undefined;
+        await user.save();
+
+        return res.status(200).json({ message: "Password reset successful!" });
 
     } catch (error) {
         console.error(error);

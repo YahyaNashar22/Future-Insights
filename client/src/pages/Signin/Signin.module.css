@@ -90,3 +90,13 @@
 .errorMessage {
   color: var(--primary-beige);
 }
+
+.forgotPassword {
+  color: var(--grey-accent);
+  line-height: 50px;
+  transition: 0.3s ease-in-out;
+}
+
+.forgotPassword:hover {
+  text-decoration: underline;
+}

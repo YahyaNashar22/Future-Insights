@@ -87,6 +87,9 @@ const Signin = () => {
             Sign In
           </button>
         </form>
+        <Link to="/forgot-password" className={styles.forgotPassword}>
+          Forgot Password?{" "}
+        </Link>
         <p className={styles.signupLink}>
           Don't have an account? <Link to="/signup">Sign up</Link>
         </p>

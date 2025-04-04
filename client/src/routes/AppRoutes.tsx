@@ -78,6 +78,10 @@ const TeacherCourseDisplay = lazy(
 
 const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard.tsx"));
 
+const ForgotPassword = lazy(
+  () => import("../pages/ForgotPassword/ForgotPassword.tsx")
+);
+
 const AppRoutes = () => {
   const { user } = useUserStore();
   return (
@@ -125,6 +129,10 @@ const AppRoutes = () => {
           )}
 
           {/* <Route path="/teacher-signup" element={<TeacherSignup />} /> */}
+
+          {!user && (
+            <Route path="/forgot-password" element={<ForgotPassword />} />
+          )}
         </Route>
 
         {/* Course Catalogue Layout Routes */}

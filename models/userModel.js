@@ -61,6 +61,17 @@ const userSchema = new Schema(
             }
         ],
 
+        passwordResetOTP: {
+            type: String,
+            required: false
+        },
+
+        passwordResetExpires: {
+            type: Date,
+            required: false,
+            expires: 300 // 300 seconds = 5 minutes
+        },
+
         slug: {
             type: String,
             unique: true,
