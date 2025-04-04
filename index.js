@@ -60,8 +60,8 @@ app.post("/send-test-email", async (req, res) => {
     try {
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
-            to: "2silentninja2@gmail.com",
-            subject: "Test Email",
+            to: "yahyanashar22@gmail.com",
+            subject: "How are you today?",
             text: "This is a test email from your Nodemailer setup!",
         };
 

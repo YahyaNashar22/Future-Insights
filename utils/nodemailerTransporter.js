@@ -3,10 +3,9 @@ import nodemailer from "nodemailer";
 
 dotenv.config();
 
-// TODO: Add the correct nodeMailer credentials
 
 const transporter = nodemailer.createTransport({
-    host: "smtp.gmail.com",
+    host: "aiden.h2m.me",
     port: 465,
     secure: true,
     auth: {
