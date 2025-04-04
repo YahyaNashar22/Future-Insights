@@ -2,9 +2,11 @@ import styles from "./VerifyEmail.module.css";
 import { useEffect, useState } from "react";
 import { useParams, Link } from "react-router-dom";
 import axios, { AxiosError } from "axios";
+import { useUserStore } from "../../store";
 
 const VerifyEmail = () => {
   const { token } = useParams();
+  const { user } = useUserStore();
   const [message, setMessage] = useState("Verifying...");
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -33,9 +35,15 @@ const VerifyEmail = () => {
         <h1 className={styles.title}>Email Verification</h1>
         <p className={styles.message}>{message}</p>
 
-        <Link to="/signin" className={styles.signinLink}>
-          Go to Sign In
-        </Link>
+        {user ? (
+          <Link to="/" className={styles.signinLink}>
+            Go Home
+          </Link>
+        ) : (
+          <Link to="/signin" className={styles.signinLink}>
+            Go to Sign In
+          </Link>
+        )}
       </div>
     </main>
   );

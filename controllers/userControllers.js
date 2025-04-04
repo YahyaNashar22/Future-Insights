@@ -7,6 +7,7 @@ import Course from "../models/courseModel.js";
 import Class from "../models/classModel.js";
 import generateOTP from "../utils/generateOTP.js";
 import transporter from "../utils/nodemailerTransporter.js";
+import sendVerificationEmailHelper from "../utils/sendVerificationHelper.js";
 
 
 export const signup = async (req, res) => {
@@ -38,6 +39,17 @@ export const signup = async (req, res) => {
 
         // Generate JWT token
         const token = createToken(user);
+
+        // create a token for email verification
+        const verificationToken = jwt.sign({ id: user._id }, process.env.SECRET_TOKEN, {
+            expiresIn: "1d",
+        });
+
+        const verificationLink = `${process.env.CLIENT_URL}/verify-email/${verificationToken}`;
+
+        //  Send verification email
+        await sendVerificationEmailHelper(user, verificationLink);
+
 
         res.status(201).json({
             message: "user created successfully",
