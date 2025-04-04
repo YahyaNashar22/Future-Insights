@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  const [phase, setPhase] = useState<1 | 2>(1);
+  const [phase, setPhase] = useState<1 | 2>(2);
 
   const [otpArray, setOtpArray] = useState<string[]>(Array(6).fill(""));
 
@@ -171,6 +171,9 @@ const ForgotPassword = () => {
       {phase === 2 && (
         <div className={styles.phase1}>
           <h1 className={styles.title}>Reset Password</h1>
+          <p className={styles.subTitle}>
+          We've sent an email with the otp!<br/> If you don't see it in your inbox, please check your spam folder.
+          </p>
           <form className={styles.emailForm}>
             <label className={styles.formLabel}>
               New Password
