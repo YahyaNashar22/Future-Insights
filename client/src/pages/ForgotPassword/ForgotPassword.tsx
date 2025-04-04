@@ -14,7 +14,7 @@ const ForgotPassword = () => {
   const [otp, setOtp] = useState<string>("");
   const [error, setError] = useState<string | null>(null);
 
-  const [phase, setPhase] = useState<1 | 2>(2);
+  const [phase, setPhase] = useState<1 | 2>(1);
 
   const [otpArray, setOtpArray] = useState<string[]>(Array(6).fill(""));
 

@@ -1,5 +1,7 @@
 import User from "../models/userModel.js";
 import bcrypt from "bcryptjs";
+import jwt from "jsonwebtoken";
+
 import { createToken, verifyToken } from "../utils/token.js";
 import Course from "../models/courseModel.js";
 import Class from "../models/classModel.js";
@@ -57,6 +59,16 @@ export const signin = async (req, res) => {
         const user = await User.findOne({ email });
         if (!user) {
             return res.status(400).json({ message: "Email does not exist" });
+        }
+
+        // Check if account is not verified and older than 3 days
+        const accountAgeInMs = Date.now() - new Date(user.createdAt).getTime();
+        const threeDaysInMs = 3 * 24 * 60 * 60 * 1000;
+
+        if (!user.verified && accountAgeInMs > threeDaysInMs) {
+            return res.status(403).json({
+                message: "Account verify your account before you continue",
+            });
         }
 
         // Compare the entered password with the hashed password
@@ -421,3 +433,86 @@ export const resetPassword = async (req, res) => {
         return res.status(500).json({ message: "Something went wrong, please try again later" });
     }
 }
+
+
+export const sendVerification = async (req, res) => {
+    try {
+        const { email } = req.body;
+
+        // 1. Find the user
+        const user = await User.findOne({ email });
+        if (!user) return res.status(404).json({ message: "User not found" });
+
+        // 2. Generate verification token
+        const token = jwt.sign({ id: user._id }, process.env.SECRET_TOKEN, {
+            expiresIn: "1d", // Link valid for 1 day
+        });
+
+        // 3. Create verification link
+        const verificationLink = `${process.env.CLIENT_URL}/verify-email/${token}`;
+
+
+        // 4. Email content
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: email,
+            subject: "Verify your email",
+            html: `
+          <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 500px; margin: auto; border: 1px solid #ddd; border-radius: 10px;">
+            <h2 style="color: #333;">Verify Your Email</h2>
+            <p style="font-size: 16px; color: #555;">
+              Hello ${user.fullname},<br><br>
+              Please click the button below to verify your email:
+            </p>
+            <a href="${verificationLink}" style="display: inline-block; padding: 10px 20px; margin: 20px 0; background-color: #252161; color: white; text-decoration: none; border-radius: 5px;">
+              Verify Email
+            </a>
+            <p style="font-size: 14px; color: #777;">If you didn't request this, you can ignore this email.</p>
+            <p style="font-size: 14px; color: #777;">Regards,<br>Future Insights</p>
+          </div>
+        `,
+        };
+
+        const info = await transporter.sendMail(mailOptions);
+
+        // 5. Send email
+        await transporter.sendMail(mailOptions);
+
+        return res.status(200).json({ message: "Verification email sent" });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Something went wrong, please try again later" });
+    }
+}
+
+
+
+export const verifyEmail = async (req, res) => {
+    try {
+        const { token } = req.params;
+
+        // 1. Verify the token
+        const decoded = jwt.verify(token, process.env.SECRET_TOKEN);
+
+        // 2. Find the user by ID
+        const user = await User.findById(decoded.id);
+        if (!user) {
+            return res.status(404).json({ message: "Invalid verification link" });
+        }
+
+        // 3. Check if already verified
+        if (user.verified) {
+            return res.status(400).json({ message: "Account already verified" });
+        }
+
+        // 4. Update user to verified
+        user.verified = true;
+        await user.save();
+
+        return res.status(200).json({ message: "Email verified successfully" });
+    } catch (error) {
+        console.error("Email verification error:", error);
+        return res.status(400).json({ message: "Invalid or expired verification link" });
+    }
+};

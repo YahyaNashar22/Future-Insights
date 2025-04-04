@@ -1,0 +1,48 @@
+.wrapper {
+  min-height: 100vh;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--bg-white);
+  font-family: "Cairo", sans-serif;
+  padding: 2rem;
+}
+
+.container {
+  background: var(--white);
+  border-radius: 16px;
+  padding: 3rem;
+  max-width: 500px;
+  text-align: center;
+  box-shadow: 0 6px 20px rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--bg-white);
+}
+
+.title {
+  font-size: 2rem;
+  color: var(--primary-blue);
+  margin-bottom: 1rem;
+}
+
+.message {
+  font-size: 1.2rem;
+  color: var(--grey-accent);
+  margin-bottom: 10px;
+  font-weight: bold;
+}
+
+.signinLink {
+  display: inline-block;
+  margin-top: 1rem;
+  padding: 0.75rem 1.5rem;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  text-decoration: none;
+  font-weight: bold;
+  border-radius: 8px;
+  transition: 0.3s ease;
+}
+
+.signinLink:hover {
+  background-color: var(--primary-beige);
+}

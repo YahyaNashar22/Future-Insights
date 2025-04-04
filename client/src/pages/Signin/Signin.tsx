@@ -2,7 +2,7 @@ import React, { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signin.module.css";
 import { useUserStore } from "../../store";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 
 const Signin = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -12,6 +12,8 @@ const Signin = () => {
 
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState("");
+  const [showResend, setShowResend] = useState(false);
+  const [resendSuccess, setResendSuccess] = useState("");
 
   const [formData, setFormData] = useState({
     email: "",
@@ -46,6 +48,34 @@ const Signin = () => {
     } catch (error) {
       console.error(error);
       setError("Invalid email or password");
+      if (error instanceof AxiosError) {
+        if (error.status === 403) {
+          setError(error.response?.data.message);
+          setShowResend(true);
+        }
+      }
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleResendVerification = async () => {
+    try {
+      setLoading(true);
+      setError("");
+      setResendSuccess("");
+
+      await axios.post(`${backend}/user/send-verification`, {
+        email: formData.email,
+      });
+
+      setResendSuccess(
+        "Verification email resent. Please check your inbox or spam folder."
+      );
+      setShowResend(false);
+    } catch (error) {
+      console.error(error);
+      setError("Failed to resend verification email.");
     } finally {
       setLoading(false);
     }
@@ -79,6 +109,19 @@ const Signin = () => {
             />
           </div>
           {error && <p className={styles.errorMessage}>{error}</p>}
+          {showResend && (
+            <button
+              type="button"
+              className={styles.resendButton}
+              onClick={handleResendVerification}
+              disabled={loading}
+            >
+              Resend Verification Email
+            </button>
+          )}
+          {resendSuccess && (
+            <p className={styles.successMessage}>{resendSuccess}</p>
+          )}
           <button
             disabled={loading}
             type="submit"
@@ -87,6 +130,7 @@ const Signin = () => {
             Sign In
           </button>
         </form>
+
         <Link to="/forgot-password" className={styles.forgotPassword}>
           Forgot Password?{" "}
         </Link>

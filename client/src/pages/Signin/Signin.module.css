@@ -89,6 +89,7 @@
 
 .errorMessage {
   color: var(--primary-beige);
+  margin-bottom: 10px;
 }
 
 .forgotPassword {
@@ -99,4 +100,30 @@
 
 .forgotPassword:hover {
   text-decoration: underline;
+}
+
+/* Add to Signin.module.css */
+.resendButton {
+  margin-top: 10px;
+  background-color: transparent;
+  color: var(--primary-beige);
+  text-decoration: underline;
+  padding: 0.5rem 1rem;
+  font-weight: bold;
+  border: none;
+  cursor: pointer;
+  transition: 0.2s ease;
+  display: block;
+  margin: 10px auto;
+}
+
+.resendButton:disabled {
+  cursor: not-allowed;
+  color: var(--secondary-beige);
+}
+
+.successMessage {
+  color: var(--primary-blue);
+  margin: 10px 0px;
+  font-size: 0.9rem;
 }

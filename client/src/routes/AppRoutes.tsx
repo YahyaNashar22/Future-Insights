@@ -82,6 +82,8 @@ const ForgotPassword = lazy(
   () => import("../pages/ForgotPassword/ForgotPassword.tsx")
 );
 
+const VerifyEmail = lazy(() => import("../pages/VerifyEmail/VerifyEmail.tsx"));
+
 const AppRoutes = () => {
   const { user } = useUserStore();
   return (
@@ -158,6 +160,7 @@ const AppRoutes = () => {
 
         {/* Not Found Route */}
         <Route path="*" element={<NotFound />} />
+        <Route path="/verify-email/:token" element={<VerifyEmail />} />
       </Routes>
     </Suspense>
   );
