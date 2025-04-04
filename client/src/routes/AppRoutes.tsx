@@ -9,8 +9,6 @@ import CourseCatalogueLayout from "./CourseCatalogueLayout.tsx";
 
 import ProtectedRoute from "./ProtectedRoute.tsx";
 
-// TODO: REDIRECT TO HOME PAGE AFTER SIGN OUT
-
 const NotFound = lazy(() => import("../pages/NotFound/NotFound.tsx"));
 const Home = lazy(() => import("../pages/Home/Home.tsx"));
 const CourseCatalogue = lazy(
@@ -86,6 +84,7 @@ const VerifyEmail = lazy(() => import("../pages/VerifyEmail/VerifyEmail.tsx"));
 
 const AppRoutes = () => {
   const { user } = useUserStore();
+
   return (
     <Suspense fallback={<Loading />}>
       <Routes>

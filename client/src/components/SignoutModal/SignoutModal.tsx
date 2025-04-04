@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import styles from "./SignoutModal.module.css";
 
@@ -7,9 +8,11 @@ const SignoutModal = ({
   setShowModal: (bool: boolean) => void;
 }) => {
   const { clearUser } = useUserStore();
+  const navigate = useNavigate();
 
   const onConfirm = () => {
     clearUser();
+    navigate("/");
     setShowModal(false);
   };
   return (
