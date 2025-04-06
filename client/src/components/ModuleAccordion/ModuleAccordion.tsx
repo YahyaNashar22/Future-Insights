@@ -4,6 +4,7 @@ import styles from "./ModuleAccordion.module.css";
 import ILiveLink from "../../interfaces/ILiveLink";
 import axios from "axios";
 import IRecording from "../../interfaces/IRecording";
+import IMaterial from "../../interfaces/IMaterial";
 
 const ModuleAccordion = ({
   module,
@@ -21,6 +22,7 @@ const ModuleAccordion = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [liveLink, setLiveLink] = useState<ILiveLink | null>(null);
   const [recordings, setRecordings] = useState<IRecording[]>([]);
+  const [materials, setMaterials] = useState<IMaterial[]>([]);
 
   useEffect(() => {
     // fetch live link section
@@ -71,8 +73,33 @@ const ModuleAccordion = ({
       }
     };
 
+    // fetch materials section
+    const fetchMaterials = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.post(
+          `${backend}/material/get-module-materials`,
+          {
+            moduleId: module._id,
+          },
+          {
+            headers: {
+              "Content-Type": "application/json",
+            },
+          }
+        );
+
+        setMaterials(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
     fetchLiveLink();
     fetchRecordings();
+    fetchMaterials();
   }, [module, backend]);
   return (
     <li key={module._id} className={styles.moduleAccordion}>
@@ -117,6 +144,21 @@ const ModuleAccordion = ({
                           className={styles.accordionContentItem}
                         >
                           {recording.name}
+                        </li>
+                      );
+                    })
+                }
+
+                {
+                  // materials section
+                  materials.length > 0 &&
+                    materials.map((material) => {
+                      return (
+                        <li
+                          key={material._id}
+                          className={styles.accordionContentItem}
+                        >
+                          {material.name}
                         </li>
                       );
                     })
