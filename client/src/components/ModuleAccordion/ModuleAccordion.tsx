@@ -5,6 +5,7 @@ import ILiveLink from "../../interfaces/ILiveLink";
 import axios from "axios";
 import IRecording from "../../interfaces/IRecording";
 import IMaterial from "../../interfaces/IMaterial";
+import IAssessment from "../../interfaces/IAssessment";
 
 const ModuleAccordion = ({
   module,
@@ -23,6 +24,8 @@ const ModuleAccordion = ({
   const [liveLink, setLiveLink] = useState<ILiveLink | null>(null);
   const [recordings, setRecordings] = useState<IRecording[]>([]);
   const [materials, setMaterials] = useState<IMaterial[]>([]);
+  const [assessments, setAssessments] = useState<IAssessment[]>([]);
+  const [assignments, setAssignments] = useState<IAssessment[]>([]);
 
   useEffect(() => {
     // fetch live link section
@@ -97,6 +100,33 @@ const ModuleAccordion = ({
       }
     };
 
+    // fetch assessments section
+    const fetchAssessments = async () => {
+      try {
+        const res = await axios.get(
+          `${backend}/assessment/${module._id}/assessments`
+        );
+        setAssessments(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    // fetch assignments section
+    const fetchAssignments = async () => {
+      try {
+        const res = await axios.get(
+          `${backend}/assessment/${module._id}/assignments`
+        );
+        setAssignments(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+
+    fetchAssessments();
+    fetchAssignments();
+
     fetchLiveLink();
     fetchRecordings();
     fetchMaterials();
@@ -159,6 +189,36 @@ const ModuleAccordion = ({
                           className={styles.accordionContentItem}
                         >
                           {material.name}
+                        </li>
+                      );
+                    })
+                }
+
+                {
+                  // assessments section
+                  assessments.length > 0 &&
+                    assessments.map((assessment) => {
+                      return (
+                        <li
+                          key={assessment._id}
+                          className={styles.accordionContentItem}
+                        >
+                          {assessment.title}
+                        </li>
+                      );
+                    })
+                }
+
+                {
+                  // assignments section
+                  assignments.length > 0 &&
+                    assignments.map((assignment) => {
+                      return (
+                        <li
+                          key={assignment._id}
+                          className={styles.accordionContentItem}
+                        >
+                          {assignment.title}
                         </li>
                       );
                     })
