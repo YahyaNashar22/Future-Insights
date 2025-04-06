@@ -116,6 +116,10 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
       </a>
       <div className={styles.preview}>{renderPreview()}</div>
 
+      <p className={styles.submitText}>
+        Submit Your Answer
+      </p>
+
       <div className={styles.btns}>
         {/* File input */}
         <input
@@ -130,14 +134,16 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
           Choose File
         </label>
 
-       { file && <button
-          type="button"
-          className={styles.upload}
-          onClick={handleUpload}
-          disabled={uploading}
-        >
-          {uploading ? "Uploading..." : "Upload Answer"}
-        </button>}
+        {file && (
+          <button
+            type="button"
+            className={styles.upload}
+            onClick={handleUpload}
+            disabled={uploading}
+          >
+            {uploading ? "Submitting..." : "Submit"}
+          </button>
+        )}
       </div>
 
       {/* Show selected file */}
