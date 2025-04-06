@@ -42,44 +42,46 @@ const ModulePanel = ({
     fetchClassModules();
   }, [backend, cls]);
   return (
-    <div
-      className={`${styles.wrapper} ${isOpen ? styles.open : styles.closed}`}
-    >
+    <>
       <span
         className={`${styles.toggleBtn} ${isOpen && styles.toggleBtnOpen}`}
         onClick={togglePanel}
       >
         {isOpen ? "<" : ">"}
       </span>
-      <>
-        {loading ? (
-          <Loading />
-        ) : (
-          <>
-            {isOpen && (
-              <div className={styles.sidePanelContent}>
-                {/* class title  */}
-                <h1 className={styles.title}>{cls?.title}</h1>
+      <div
+        className={`${styles.wrapper} ${isOpen ? styles.open : styles.closed}`}
+      >
+        <>
+          {loading ? (
+            <Loading />
+          ) : (
+            <>
+              {isOpen && (
+                <div className={styles.sidePanelContent}>
+                  {/* class title  */}
+                  <h1 className={styles.title}>{cls?.title}</h1>
 
-                {/* modules list  */}
-                <ol className={styles.modulesList}>
-                  {classModules.map((module, index) => {
-                    return (
-                      <ModuleAccordion
-                        module={module}
-                        index={index}
-                        openModuleIndex={openModuleIndex}
-                        toggleModule={toggleModule}
-                      />
-                    );
-                  })}
-                </ol>
-              </div>
-            )}
-          </>
-        )}
-      </>
-    </div>
+                  {/* modules list  */}
+                  <ol className={styles.modulesList}>
+                    {classModules.map((module, index) => {
+                      return (
+                        <ModuleAccordion
+                          module={module}
+                          index={index}
+                          openModuleIndex={openModuleIndex}
+                          toggleModule={toggleModule}
+                        />
+                      );
+                    })}
+                  </ol>
+                </div>
+              )}
+            </>
+          )}
+        </>
+      </div>
+    </>
   );
 };
 

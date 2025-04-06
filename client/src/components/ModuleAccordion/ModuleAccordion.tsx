@@ -26,6 +26,11 @@ const ModuleAccordion = ({
   const [materials, setMaterials] = useState<IMaterial[]>([]);
   const [assessments, setAssessments] = useState<IAssessment[]>([]);
   const [assignments, setAssignments] = useState<IAssessment[]>([]);
+  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
+
+  const handleSelect = (id: string) => {
+    setSelectedItemId((prev) => (prev === id ? null : id));
+  };
 
   useEffect(() => {
     // fetch live link section
@@ -159,7 +164,12 @@ const ModuleAccordion = ({
                   // live link section
 
                   liveLink && (
-                    <li className={styles.accordionContentItem}>
+                    <li
+                      className={`${styles.accordionContentItem} ${
+                        selectedItemId === liveLink._id ? styles.selected : ""
+                      }`}
+                      onClick={() => handleSelect(liveLink._id)}
+                    >
                       {liveLink.name}
                     </li>
                   )
@@ -171,7 +181,12 @@ const ModuleAccordion = ({
                       return (
                         <li
                           key={recording._id}
-                          className={styles.accordionContentItem}
+                          className={`${styles.accordionContentItem} ${
+                            selectedItemId === recording._id
+                              ? styles.selected
+                              : ""
+                          }`}
+                          onClick={() => handleSelect(recording._id)}
                         >
                           {recording.name}
                         </li>
@@ -186,7 +201,12 @@ const ModuleAccordion = ({
                       return (
                         <li
                           key={material._id}
-                          className={styles.accordionContentItem}
+                          className={`${styles.accordionContentItem} ${
+                            selectedItemId === material._id
+                              ? styles.selected
+                              : ""
+                          }`}
+                          onClick={() => handleSelect(material._id)}
                         >
                           {material.name}
                         </li>
@@ -201,7 +221,12 @@ const ModuleAccordion = ({
                       return (
                         <li
                           key={assessment._id}
-                          className={styles.accordionContentItem}
+                          className={`${styles.accordionContentItem} ${
+                            selectedItemId === assessment._id
+                              ? styles.selected
+                              : ""
+                          }`}
+                          onClick={() => handleSelect(assessment._id)}
                         >
                           {assessment.title}
                         </li>
@@ -216,7 +241,12 @@ const ModuleAccordion = ({
                       return (
                         <li
                           key={assignment._id}
-                          className={styles.accordionContentItem}
+                          className={`${styles.accordionContentItem} ${
+                            selectedItemId === assignment._id
+                              ? styles.selected
+                              : ""
+                          }`}
+                          onClick={() => handleSelect(assignment._id)}
                         >
                           {assignment.title}
                         </li>
