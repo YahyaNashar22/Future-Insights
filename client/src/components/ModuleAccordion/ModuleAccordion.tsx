@@ -12,11 +12,17 @@ const ModuleAccordion = ({
   index,
   toggleModule,
   openModuleIndex,
+  setSelectedItem,
+  selectedItem,
 }: {
   module: IModule;
   index: number;
   openModuleIndex: number | null;
+  selectedItem: ILiveLink | IRecording | IMaterial | IAssessment | null;
   toggleModule: (ind: number) => void;
+  setSelectedItem: (
+    item: ILiveLink | IRecording | IMaterial | IAssessment | null
+  ) => void;
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -26,11 +32,6 @@ const ModuleAccordion = ({
   const [materials, setMaterials] = useState<IMaterial[]>([]);
   const [assessments, setAssessments] = useState<IAssessment[]>([]);
   const [assignments, setAssignments] = useState<IAssessment[]>([]);
-  const [selectedItemId, setSelectedItemId] = useState<string | null>(null);
-
-  const handleSelect = (id: string) => {
-    setSelectedItemId((prev) => (prev === id ? null : id));
-  };
 
   useEffect(() => {
     // fetch live link section
@@ -166,9 +167,9 @@ const ModuleAccordion = ({
                   liveLink && (
                     <li
                       className={`${styles.accordionContentItem} ${
-                        selectedItemId === liveLink._id ? styles.selected : ""
+                        selectedItem === liveLink ? styles.selected : ""
                       }`}
-                      onClick={() => handleSelect(liveLink._id)}
+                      onClick={() => setSelectedItem(liveLink)}
                     >
                       {liveLink.name}
                     </li>
@@ -182,11 +183,9 @@ const ModuleAccordion = ({
                         <li
                           key={recording._id}
                           className={`${styles.accordionContentItem} ${
-                            selectedItemId === recording._id
-                              ? styles.selected
-                              : ""
+                            selectedItem === recording ? styles.selected : ""
                           }`}
-                          onClick={() => handleSelect(recording._id)}
+                          onClick={() => setSelectedItem(recording)}
                         >
                           {recording.name}
                         </li>
@@ -202,11 +201,9 @@ const ModuleAccordion = ({
                         <li
                           key={material._id}
                           className={`${styles.accordionContentItem} ${
-                            selectedItemId === material._id
-                              ? styles.selected
-                              : ""
+                            selectedItem === material ? styles.selected : ""
                           }`}
-                          onClick={() => handleSelect(material._id)}
+                          onClick={() => setSelectedItem(material)}
                         >
                           {material.name}
                         </li>
@@ -222,11 +219,9 @@ const ModuleAccordion = ({
                         <li
                           key={assessment._id}
                           className={`${styles.accordionContentItem} ${
-                            selectedItemId === assessment._id
-                              ? styles.selected
-                              : ""
+                            selectedItem === assessment ? styles.selected : ""
                           }`}
-                          onClick={() => handleSelect(assessment._id)}
+                          onClick={() => setSelectedItem(assessment)}
                         >
                           {assessment.title}
                         </li>
@@ -242,11 +237,9 @@ const ModuleAccordion = ({
                         <li
                           key={assignment._id}
                           className={`${styles.accordionContentItem} ${
-                            selectedItemId === assignment._id
-                              ? styles.selected
-                              : ""
+                            selectedItem === assignment ? styles.selected : ""
                           }`}
-                          onClick={() => handleSelect(assignment._id)}
+                          onClick={() => setSelectedItem(assignment)}
                         >
                           {assignment.title}
                         </li>

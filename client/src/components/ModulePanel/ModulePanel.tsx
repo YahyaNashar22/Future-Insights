@@ -6,15 +6,25 @@ import IModule from "../../interfaces/IModule";
 import axios from "axios";
 import Loading from "../Loading/Loading";
 import ModuleAccordion from "../ModuleAccordion/ModuleAccordion";
+import ILiveLink from "../../interfaces/ILiveLink";
+import IRecording from "../../interfaces/IRecording";
+import IMaterial from "../../interfaces/IMaterial";
+import IAssessment from "../../interfaces/IAssessment";
 
 const ModulePanel = ({
   isOpen,
   togglePanel,
   cls,
+  setSelectedItem,
+  selectedItem,
 }: {
   isOpen: boolean;
   cls: IClass | null;
+  selectedItem: ILiveLink | IRecording | IMaterial | IAssessment | null;
   togglePanel: () => void;
+  setSelectedItem: (
+    item: ILiveLink | IRecording | IMaterial | IAssessment | null
+  ) => void;
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -71,6 +81,8 @@ const ModulePanel = ({
                           index={index}
                           openModuleIndex={openModuleIndex}
                           toggleModule={toggleModule}
+                          setSelectedItem={setSelectedItem}
+                          selectedItem={selectedItem}
                         />
                       );
                     })}

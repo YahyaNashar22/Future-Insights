@@ -6,6 +6,10 @@ import { useNavigate, useParams } from "react-router-dom";
 import IClass from "../../interfaces/IClass";
 import axios from "axios";
 import Loading from "../../components/Loading/Loading";
+import ILiveLink from "../../interfaces/ILiveLink";
+import IRecording from "../../interfaces/IRecording";
+import IMaterial from "../../interfaces/IMaterial";
+import IAssessment from "../../interfaces/IAssessment";
 
 const ClassDisplay = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -14,8 +18,9 @@ const ClassDisplay = () => {
 
   const [cls, setCls] = useState<IClass | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-
   const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const [selectedItem, setSelectedItem] = useState<ILiveLink | IRecording | IMaterial | IAssessment | null>(null);
 
   const togglePanel = () => {
     setIsOpen((prev) => !prev);
@@ -45,7 +50,13 @@ const ClassDisplay = () => {
         <Loading />
       ) : (
         <main className={styles.wrapper}>
-          <ModulePanel isOpen={isOpen} togglePanel={togglePanel} cls={cls} />
+          <ModulePanel
+            isOpen={isOpen}
+            togglePanel={togglePanel}
+            cls={cls}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+          />
           <ClassContent />
         </main>
       )}
