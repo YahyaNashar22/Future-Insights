@@ -10,10 +10,12 @@ import ILiveLink from "../../interfaces/ILiveLink";
 import IRecording from "../../interfaces/IRecording";
 import IMaterial from "../../interfaces/IMaterial";
 import IAssessment from "../../interfaces/IAssessment";
+import { useUserStore } from "../../store";
 
 const ClassDisplay = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();
+  const { user } = useUserStore();
   const navigate = useNavigate();
 
   const [cls, setCls] = useState<IClass | null>(null);
@@ -34,9 +36,15 @@ const ClassDisplay = () => {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
 
-        if (!res.data.payload) navigate("*");
+        if (
+          !res.data.payload ||
+          !res.data.payload.enrolledUsers.includes(user?._id)
+        )
+          navigate("*");
 
         setCls(res.data.payload);
+
+        if (cls && !cls?.enrolledUsers.includes(user!._id)) navigate("*");
       } catch (error) {
         console.log(error);
       } finally {
@@ -45,7 +53,7 @@ const ClassDisplay = () => {
     };
 
     fetchClass();
-  }, [backend, slug, navigate]);
+  }, [backend, slug, navigate, user]);
   return (
     <>
       {loading ? (

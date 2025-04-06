@@ -42,7 +42,12 @@ const CourseDisplay = () => {
       try {
         const res = await axios.get(`${backend}/course/get-course/${slug}`);
 
-        if (!res.data.payload) navigate("*");
+        if (
+          !res.data.payload ||
+          // eslint-disable-next-line @typescript-eslint/no-explicit-any
+          !res.data.payload.enrolledUsers.some((u: any) => u._id === user?._id)
+        )
+          navigate("*");
 
         setCourse(res.data.payload);
 
@@ -58,7 +63,7 @@ const CourseDisplay = () => {
     };
 
     fetchCourse();
-  }, [backend, slug, navigate]);
+  }, [backend, slug, navigate, user]);
 
   // Handle video progress tracking
   const handleTimeUpdate = (event: React.SyntheticEvent<HTMLVideoElement>) => {
