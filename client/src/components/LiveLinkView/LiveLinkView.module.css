@@ -1,0 +1,123 @@
+/* Wrapper for the live link content */
+.wrapper {
+  padding: 20px;
+  background-color: var(--bg-white);
+  border-radius: 8px;
+  max-width: 800px;
+  margin: 0 auto;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+  color: var(--primary-blue);
+}
+
+/* Heading style */
+.title {
+  font-size: 3rem;
+  color: var(--primary-blue);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+/* Text style for the live session name */
+.name {
+  font-size: 1.2rem;
+  color: var(--secondary-blue);
+  margin-bottom: 24px;
+  text-align: center;
+}
+
+.info {
+  font-size: 1rem;
+  color: var(--secondary-blue);
+  margin-bottom: 24px;
+  font-weight: bold;
+  text-align: center;
+}
+
+/* Button styling for joining the session */
+.joinButton {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  padding: 12px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  font-size: 1rem;
+  font-weight: bold;
+}
+
+.joinButton:hover {
+  background-color: var(--secondary-blue);
+}
+
+/* Session status text style */
+.sessionNotStarted {
+  color: var(--primary-beige);
+  font-weight: bold;
+  font-size: 1.1rem;
+  text-align: center;
+}
+
+/* Additional text styling */
+strong {
+  color: var(--primary-blue);
+  font-weight: bold;
+}
+
+.dateCard {
+  display: flex;
+  border: 1px solid var(--primary-blue);
+  border-radius: 6px;
+  overflow: hidden;
+  margin: 20px auto;
+  max-width: 300px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+}
+
+.dateLeft {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  text-align: center;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.day {
+  font-size: 1.8rem;
+  font-weight: bold;
+}
+
+.monthYear {
+  font-size: 0.9rem;
+  text-transform: uppercase;
+}
+
+.dateRight {
+  flex: 1;
+  padding: 10px 15px;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.timeRange {
+  font-size: 1.2rem;
+  font-weight: bold;
+  color: var(--grey-accent);
+}
+
+.timezone {
+  font-size: 0.9rem;
+  color: var(--footer-grey);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 350px;
+  }
+
+  .title {
+    font-size: 2rem;
+  }
+}

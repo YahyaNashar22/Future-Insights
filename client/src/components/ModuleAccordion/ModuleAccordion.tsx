@@ -33,11 +33,16 @@ const ModuleAccordion = ({
   const [assessments, setAssessments] = useState<IAssessment[]>([]);
   const [assignments, setAssignments] = useState<IAssessment[]>([]);
 
+  // Check if the data is already fetched
+  const [dataFetched, setDataFetched] = useState(false);
+
   useEffect(() => {
+    if (dataFetched) return; // Don't fetch data if it's already fetched
+    setLoading(true);
+
     // fetch live link section
     const fetchLiveLink = async () => {
       try {
-        setLoading(true);
         const res = await axios.post(
           `${backend}/live-link/get-module-link`,
           {
@@ -61,7 +66,6 @@ const ModuleAccordion = ({
     // fetch recordings section
     const fetchRecordings = async () => {
       try {
-        setLoading(true);
         const res = await axios.post(
           `${backend}/recording/get-module-recordings`,
           {
@@ -85,7 +89,6 @@ const ModuleAccordion = ({
     // fetch materials section
     const fetchMaterials = async () => {
       try {
-        setLoading(true);
         const res = await axios.post(
           `${backend}/material/get-module-materials`,
           {
@@ -130,13 +133,20 @@ const ModuleAccordion = ({
       }
     };
 
-    fetchAssessments();
-    fetchAssignments();
-
-    fetchLiveLink();
-    fetchRecordings();
-    fetchMaterials();
-  }, [module, backend]);
+    // Fetch data once
+    Promise.all([
+      fetchLiveLink(),
+      fetchRecordings(),
+      fetchMaterials(),
+      fetchAssessments(),
+      fetchAssignments(),
+    ])
+      .then(() => setDataFetched(true))
+      .catch(() => {
+        setLoading(false); // Ensure loading is set to false even if there's an error
+      }) // Once all fetch operations are completed, mark data as fetched
+      .finally(() => setLoading(false)); // Ensure loading is set to false even if there's an error
+  }, [module, backend, dataFetched]);
   return (
     <li key={module._id} className={styles.moduleAccordion}>
       <div

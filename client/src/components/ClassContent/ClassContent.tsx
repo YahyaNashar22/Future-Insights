@@ -5,6 +5,7 @@ import ILiveLink from "../../interfaces/ILiveLink";
 import IMaterial from "../../interfaces/IMaterial";
 import IRecording from "../../interfaces/IRecording";
 import DefaultClassView from "../DefaultClassView/DefaultClassView";
+import LiveLinkView from "../LiveLinkView/LiveLinkView";
 import styles from "./ClassContent.module.css";
 
 const ClassContent = ({
@@ -36,15 +37,7 @@ const ClassContent = ({
 
   return (
     <div className={styles.wrapper}>
-      {isLiveLink(selectedItem) && (
-        <>
-          <h2>🔴 Live Link</h2>
-          <p>{selectedItem.name}</p>
-          <a href={selectedItem.link} target="_blank" rel="noopener noreferrer">
-            Join Live Session
-          </a>
-        </>
-      )}
+      {isLiveLink(selectedItem) && <LiveLinkView selectedItem={selectedItem} />}
 
       {isRecording(selectedItem) && (
         <>

@@ -1,7 +1,7 @@
 import styles from "./ModulePanel.module.css";
 
 import IClass from "../../interfaces/IClass";
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import IModule from "../../interfaces/IModule";
 import axios from "axios";
 import Loading from "../Loading/Loading";
@@ -32,24 +32,29 @@ const ModulePanel = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [openModuleIndex, setOpenModuleIndex] = useState<number | null>(null);
 
+  const hasFetchedModules = useRef(false);
+
   const toggleModule = (index: number | null) => {
     setOpenModuleIndex((prev) => (prev === index ? null : index));
   };
 
   useEffect(() => {
-    const fetchClassModules = async () => {
-      try {
-        setLoading(true);
-        const res = await axios.get(`${backend}/module/${cls!._id}`);
-        setClassModules(res.data.payload);
-      } catch (error) {
-        console.log(error);
-      } finally {
-        setLoading(false);
-      }
-    };
+    if (cls && !hasFetchedModules.current) {
+      const fetchClassModules = async () => {
+        try {
+          setLoading(true);
+          const res = await axios.get(`${backend}/module/${cls!._id}`);
+          setClassModules(res.data.payload);
+          hasFetchedModules.current = true; // Mark that modules have been fetched
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
 
-    fetchClassModules();
+      fetchClassModules();
+    }
   }, [backend, cls]);
   return (
     <>
