@@ -1,6 +1,5 @@
 import styles from "./ModulePanel.module.css";
 
-import logo from "../../assets/icons/logo.png";
 import IClass from "../../interfaces/IClass";
 import { useEffect, useState } from "react";
 import IModule from "../../interfaces/IModule";
@@ -46,9 +45,9 @@ const ModulePanel = ({
     <div
       className={`${styles.wrapper} ${isOpen ? styles.open : styles.closed}`}
     >
-      <button className={styles.toggleBtn} onClick={togglePanel}>
-        {isOpen ? "Close" : "Open"}
-      </button>
+      <span className={`${styles.toggleBtn} ${ isOpen  && styles.toggleBtnOpen}`} onClick={togglePanel}>
+        {isOpen ? "<" : ">"}
+      </span>
       <>
         {loading ? (
           <Loading />
@@ -56,21 +55,18 @@ const ModulePanel = ({
           <>
             {isOpen && (
               <div className={styles.sidePanelContent}>
-                <img
-                  src={logo}
-                  className={styles.logo}
-                  width={100}
-                  alt="future insights"
-                  loading="lazy"
-                />
+                {/* class title  */}
+                <h1 className={styles.title}>{cls?.title}</h1>
+
+                {/* modules list  */}
                 <ol className={styles.modulesList}>
                   {classModules.map((module, index) => {
                     return (
                       <ModuleAccordion
-                      module={module}
-                      index={index}
-                      openModuleIndex={openModuleIndex}
-                      toggleModule={toggleModule}
+                        module={module}
+                        index={index}
+                        openModuleIndex={openModuleIndex}
+                        toggleModule={toggleModule}
                       />
                     );
                   })}
