@@ -30,7 +30,7 @@ const ModulePanel = ({
     const fetchClassModules = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${backend}/module/${cls?._id}`);
+        const res = await axios.get(`${backend}/module/${cls!._id}`);
         setClassModules(res.data.payload);
       } catch (error) {
         console.log(error);
@@ -45,7 +45,10 @@ const ModulePanel = ({
     <div
       className={`${styles.wrapper} ${isOpen ? styles.open : styles.closed}`}
     >
-      <span className={`${styles.toggleBtn} ${ isOpen  && styles.toggleBtnOpen}`} onClick={togglePanel}>
+      <span
+        className={`${styles.toggleBtn} ${isOpen && styles.toggleBtnOpen}`}
+        onClick={togglePanel}
+      >
         {isOpen ? "<" : ">"}
       </span>
       <>

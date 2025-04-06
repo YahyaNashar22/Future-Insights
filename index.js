@@ -17,6 +17,7 @@ import assessmentRouter from './routes/assessmentRoutes.js';
 import answerRouter from './routes/answerRoutes.js';
 import certificateRouter from './routes/certificateRoutes.js';
 import moduleRouter from './routes/moduleRoutes.js';
+import liveLinkRouter from './routes/LiveLinkRoutes.js';
 
 
 
@@ -54,6 +55,8 @@ app.use("/assessment", assessmentRouter);
 app.use("/answer", answerRouter);
 app.use("/certification", certificateRouter);
 app.use("/module", moduleRouter);
+app.use("/live-link", liveLinkRouter);
+
 
 
 
