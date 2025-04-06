@@ -19,6 +19,7 @@ import certificateRouter from './routes/certificateRoutes.js';
 import moduleRouter from './routes/moduleRoutes.js';
 import liveLinkRouter from './routes/LiveLinkRoutes.js';
 import recordingRouter from './routes/recordingRoutes.js';
+import materialRouter from './routes/materialRoutes.js';
 
 
 
@@ -58,8 +59,7 @@ app.use("/certification", certificateRouter);
 app.use("/module", moduleRouter);
 app.use("/live-link", liveLinkRouter);
 app.use("/recording", recordingRouter);
-
-
+app.use("/material", materialRouter);
 
 
 
