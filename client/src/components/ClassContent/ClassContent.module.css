@@ -1,6 +1,12 @@
 .wrapper {
   margin: 0px auto;
-  max-width: 800px; /* Or any other width that works for your design */
+  max-width: 800px;
   flex-shrink: 0; /* Prevent it from shrinking */
   width: 100%; /* Allow it to use available space up to the max-width */
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    max-width: 350px;
+  }
 }

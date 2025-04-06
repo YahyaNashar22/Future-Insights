@@ -1,11 +1,12 @@
 .wrapper {
-    
+    padding: 12px 24px;
 }
 
 .classTitle {
-  font-size: 24px;
+  font-size: 3rem;
   font-weight: bold;
   margin-bottom: 10px;
+  color: var(--primary-blue);
 }
 
 .thumbnail {
@@ -16,12 +17,15 @@
 }
 
 .description {
-  font-size: 16px;
+  font-size: 1.1rem;
   margin-bottom: 10px;
+  color: var(--primary-blue);
+  font-weight: bold;
 }
 
 .duration {
-  font-size: 14px;
-  color: var(--footer-grey);
+  font-size: 1rem;
+  color: var(--accent-grey);
+  font-weight: bold;
   text-align: end;
 }
