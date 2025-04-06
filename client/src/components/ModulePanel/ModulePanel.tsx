@@ -77,6 +77,7 @@ const ModulePanel = ({
                     {classModules.map((module, index) => {
                       return (
                         <ModuleAccordion
+                          key={module._id}
                           module={module}
                           index={index}
                           openModuleIndex={openModuleIndex}

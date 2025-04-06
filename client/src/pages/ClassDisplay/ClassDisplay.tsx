@@ -20,7 +20,9 @@ const ClassDisplay = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [isOpen, setIsOpen] = useState<boolean>(true);
 
-  const [selectedItem, setSelectedItem] = useState<ILiveLink | IRecording | IMaterial | IAssessment | null>(null);
+  const [selectedItem, setSelectedItem] = useState<
+    ILiveLink | IRecording | IMaterial | IAssessment | null
+  >(null);
 
   const togglePanel = () => {
     setIsOpen((prev) => !prev);
@@ -57,7 +59,7 @@ const ClassDisplay = () => {
             setSelectedItem={setSelectedItem}
             selectedItem={selectedItem}
           />
-          <ClassContent />
+          <ClassContent selectedItem={selectedItem} cls={cls} />
         </main>
       )}
     </>
