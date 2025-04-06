@@ -3,3 +3,9 @@
   position: relative;
   min-height: 70dvh;
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 100px;
+  }
+}

@@ -4,6 +4,7 @@ import IClass from "../../interfaces/IClass";
 import ILiveLink from "../../interfaces/ILiveLink";
 import IMaterial from "../../interfaces/IMaterial";
 import IRecording from "../../interfaces/IRecording";
+import DefaultClassView from "../DefaultClassView/DefaultClassView";
 import styles from "./ClassContent.module.css";
 
 const ClassContent = ({
@@ -19,12 +20,7 @@ const ClassContent = ({
   if (!selectedItem) {
     return (
       <div className={styles.wrapper}>
-        <h2>No content selected</h2>
-        {cls && (
-          <p>
-            Class ID: <code>{cls._id}</code>
-          </p>
-        )}
+        <DefaultClassView cls={cls} />
       </div>
     );
   }

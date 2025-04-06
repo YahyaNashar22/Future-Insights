@@ -1,0 +1,27 @@
+.wrapper {
+    
+}
+
+.classTitle {
+  font-size: 24px;
+  font-weight: bold;
+  margin-bottom: 10px;
+}
+
+.thumbnail {
+  width: 100%;
+  height: auto;
+  border-radius: 8px;
+  margin-bottom: 15px;
+}
+
+.description {
+  font-size: 16px;
+  margin-bottom: 10px;
+}
+
+.duration {
+  font-size: 14px;
+  color: var(--footer-grey);
+  text-align: end;
+}
