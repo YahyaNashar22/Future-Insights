@@ -100,10 +100,10 @@ const CourseInfo = () => {
               <h2 className={styles.enrolledTitle}>Enrolled Students</h2>
               <ul className={styles.enrolledList}>
                 {course && course?.enrolledUsers.length > 0 ? (
-                  course.enrolledUsers.map((student) => (
-                    <li key={student.email} className={styles.enrolledStudent}>
+                  course.enrolledUsers.map((student, index) => (
+                    <li key={index} className={styles.enrolledStudent}>
                       <span className={styles.studentEmail}>
-                        {student.email}
+                        {typeof student !== "string" && student.email}
                       </span>
                     </li>
                   ))

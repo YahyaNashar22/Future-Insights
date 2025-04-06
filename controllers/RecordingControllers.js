@@ -3,7 +3,9 @@ import Recording from "../models/recordingModel.js";
 
 export const createRecording = async (req, res) => {
     try {
-        const { name, link, moduleId } = req.body;
+        const { name, moduleId } = req.body;
+
+        const link = req.file?.filename;
 
         const recording = new Recording({
             name, link, moduleId

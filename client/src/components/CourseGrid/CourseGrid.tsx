@@ -49,7 +49,6 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
           },
         }
       );
-      console.log(res);
       setCourses(res.data.payload);
     } catch (error) {
       console.log(error);

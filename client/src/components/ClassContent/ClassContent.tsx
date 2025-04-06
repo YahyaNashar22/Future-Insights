@@ -6,6 +6,7 @@ import IMaterial from "../../interfaces/IMaterial";
 import IRecording from "../../interfaces/IRecording";
 import DefaultClassView from "../DefaultClassView/DefaultClassView";
 import LiveLinkView from "../LiveLinkView/LiveLinkView";
+import RecordingView from "../RecordingView/RecordingView";
 import styles from "./ClassContent.module.css";
 
 const ClassContent = ({
@@ -15,8 +16,6 @@ const ClassContent = ({
   selectedItem: ILiveLink | IRecording | IMaterial | IAssessment | null;
   cls: IClass | null;
 }) => {
-  const backend = import.meta.env.VITE_BACKEND;
-
   // IN CASE NTG IS YET SELECTED --> SHOW CLASS INFO
   if (!selectedItem) {
     return (
@@ -40,15 +39,7 @@ const ClassContent = ({
       {isLiveLink(selectedItem) && <LiveLinkView selectedItem={selectedItem} />}
 
       {isRecording(selectedItem) && (
-        <>
-          <h2>🎥 Recording</h2>
-          <p>{selectedItem.name}</p>
-          <video
-            width="100%"
-            controls
-            src={`${backend}/${selectedItem.link}`}
-          />
-        </>
+        <RecordingView selectedItem={selectedItem} />
       )}
 
       {isMaterial(selectedItem) && (

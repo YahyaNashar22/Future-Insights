@@ -7,19 +7,12 @@ interface ICourse {
   price: number;
   duration: string;
   discount: number;
-  content: [
-    {
-      title: string;
-      url: string;
-    }
-  ];
+  content: {
+    title: string;
+    url: string;
+  }[];
   teacher: string;
-  enrolledUsers: [
-    {
-      fullname: string;
-      email: string;
-    }
-  ];
+  enrolledUsers: ({ _id: string; fullname: string; email: string } | string)[];
   category: string;
   slug: string;
 }

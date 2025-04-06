@@ -1,0 +1,29 @@
+.wrapper {
+  padding: 20px;
+  background-color: var(--bg-white);
+  border-radius: 12px;
+  max-width: 800px;
+  margin: 0 auto;
+  color: var(--primary-blue);
+}
+
+.title {
+  font-size: 1.6rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+}
+
+.name {
+  font-size: 1.1rem;
+  color: var(--secondary-blue);
+  margin-bottom: 16px;
+  font-weight: bold;
+}
+
+.vid {
+  border-radius: 8px;
+  border: 2px solid var(--secondary-beige);
+  max-height: 500px;
+  object-fit: cover;
+}
