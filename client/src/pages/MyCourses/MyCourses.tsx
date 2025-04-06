@@ -93,10 +93,10 @@ const MyCourses = () => {
     fetchCertifications();
   }, [backend]);
 
-  // TODO: MAKE A NAVIGATION PANEL TO CHOOSE WHAT TO SHOW
-  // TODO: CHANGE PROFILE INFO
+  // TODO: MAKE A NAVIGATION PANEL TO CHOOSE WHAT TO SHOW ( CLASSES - COURSES - CERTIFICATIONS ) - Filters
+  // TODO: ADD ABILITY TO CHANGE PROFILE INFO
   // TODO: https://certifier.io/ -- CHECK HOW TO LINK IT || OR TEMPLATE
-  // TODO: ADD MATERIAL LOGIC TO CLASSES MODULES
+  // TODO: ADD MATERIAL LOGIC TO CLASSES MODULES - live session - recording - material
 
   return (
     <Suspense fallback={<Loading />}>

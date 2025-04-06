@@ -16,6 +16,7 @@ import transporter from './utils/nodemailerTransporter.js';
 import assessmentRouter from './routes/assessmentRoutes.js';
 import answerRouter from './routes/answerRoutes.js';
 import certificateRouter from './routes/certificateRoutes.js';
+import moduleRouter from './routes/moduleRoutes.js';
 
 
 
@@ -52,6 +53,7 @@ app.use("/session", sessionRouter);
 app.use("/assessment", assessmentRouter);
 app.use("/answer", answerRouter);
 app.use("/certification", certificateRouter);
+app.use("/module", moduleRouter);
 
 
 

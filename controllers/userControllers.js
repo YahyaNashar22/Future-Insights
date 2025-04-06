@@ -515,7 +515,7 @@ export const verifyEmail = async (req, res) => {
 
         // 3. Check if already verified
         if (user.verified) {
-            return res.status(400).json({ message: "Account already verified" });
+            return res.status(400).json({ message: "Account verified successfully" });
         }
 
         // 4. Update user to verified
