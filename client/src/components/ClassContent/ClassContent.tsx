@@ -6,6 +6,7 @@ import IMaterial from "../../interfaces/IMaterial";
 import IRecording from "../../interfaces/IRecording";
 import DefaultClassView from "../DefaultClassView/DefaultClassView";
 import LiveLinkView from "../LiveLinkView/LiveLinkView";
+import MaterialView from "../MaterialView/MaterialView";
 import RecordingView from "../RecordingView/RecordingView";
 import styles from "./ClassContent.module.css";
 
@@ -43,13 +44,7 @@ const ClassContent = ({
       )}
 
       {isMaterial(selectedItem) && (
-        <>
-          <h2>📘 Material</h2>
-          <p>{selectedItem.name}</p>
-          <a href={selectedItem.content} download>
-            Download File
-          </a>
-        </>
+   <MaterialView selectedItem={selectedItem} />
       )}
 
       {isAssessment(selectedItem) && (
