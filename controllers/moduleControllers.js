@@ -16,3 +16,19 @@ export const createModule = async (req, res) => {
         return res.status(500).json({ message: "Something went wrong, please try again later" });
     }
 }
+
+
+export const getModulesByClassId = async (req, res) => {
+    try {
+        const { classId } = req.params;
+
+        const classModules = await Module.find({ classId });
+
+        return res.status(200).json({
+            payload: classModules
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Something went wrong, please try again later" });
+    }
+}

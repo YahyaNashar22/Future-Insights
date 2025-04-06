@@ -1,0 +1,46 @@
+.moduleAccordion {
+  margin-bottom: 10px;
+  border: 1px solid var(--bg-white);
+  border-radius: 6px;
+  overflow: hidden;
+  background-color: var(--white);
+  box-shadow: 0 1px 5px rgba(0, 0, 0, 0.05);
+}
+
+.accordionHeader {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 12px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  background-color: var(--white);
+  transition: 0.3s ease-in-out;
+}
+
+.accordionHeader:hover {
+  background-color: var(--primary-beige);
+  color: var(--white);
+}
+
+.icon {
+  font-size: 18px;
+  line-height: 1;
+  font-weight: bold;
+}
+
+.accordionContentWrapper {
+  max-height: 0;
+  overflow: hidden;
+  transition: 0.4s ease-in-out;
+}
+
+.expanded {
+  max-height: 1000px; /* adjust depending on expected content height */
+}
+
+.accordionContent {
+  padding: 10px 15px;
+  background-color: var(--bg-white);
+  border-top: 1px solid var(--primary-blue);
+}

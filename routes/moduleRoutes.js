@@ -1,10 +1,11 @@
 import express from "express";
-import { createModule } from "../controllers/moduleControllers.js";
+import { createModule, getModulesByClassId } from "../controllers/moduleControllers.js";
 
 const moduleRouter = new express.Router();
 
 
-moduleRouter.post("/create", createModule)
+moduleRouter.post("/create", createModule);
+moduleRouter.get("/:classId", getModulesByClassId);
 
 
 export default moduleRouter;
