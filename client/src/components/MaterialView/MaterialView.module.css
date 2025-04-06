@@ -55,6 +55,7 @@
 }
 
 .noPreview {
-  color: gray;
+  color: var(--grey-accent);
   font-style: italic;
+  font-weight: bold;
 }
