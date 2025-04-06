@@ -18,6 +18,7 @@ import answerRouter from './routes/answerRoutes.js';
 import certificateRouter from './routes/certificateRoutes.js';
 import moduleRouter from './routes/moduleRoutes.js';
 import liveLinkRouter from './routes/LiveLinkRoutes.js';
+import recordingRouter from './routes/recordingRoutes.js';
 
 
 
@@ -56,6 +57,8 @@ app.use("/answer", answerRouter);
 app.use("/certification", certificateRouter);
 app.use("/module", moduleRouter);
 app.use("/live-link", liveLinkRouter);
+app.use("/recording", recordingRouter);
+
 
 
 
