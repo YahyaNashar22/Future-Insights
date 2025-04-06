@@ -4,6 +4,7 @@ import IClass from "../../interfaces/IClass";
 import ILiveLink from "../../interfaces/ILiveLink";
 import IMaterial from "../../interfaces/IMaterial";
 import IRecording from "../../interfaces/IRecording";
+import AssessmentView from "../AssessmentView/AssessmentView";
 import DefaultClassView from "../DefaultClassView/DefaultClassView";
 import LiveLinkView from "../LiveLinkView/LiveLinkView";
 import MaterialView from "../MaterialView/MaterialView";
@@ -43,18 +44,10 @@ const ClassContent = ({
         <RecordingView selectedItem={selectedItem} />
       )}
 
-      {isMaterial(selectedItem) && (
-   <MaterialView selectedItem={selectedItem} />
-      )}
+      {isMaterial(selectedItem) && <MaterialView selectedItem={selectedItem} />}
 
       {isAssessment(selectedItem) && (
-        <>
-          <h2>📝 Assessment</h2>
-          <p>
-            <strong>{selectedItem.title}</strong>
-          </p>
-          <p>{selectedItem.description}</p>
-        </>
+        <AssessmentView selectedItem={selectedItem} />
       )}
     </div>
   );

@@ -6,6 +6,8 @@ import IAssessment from "../../interfaces/IAssessment";
 import axios, { AxiosError } from "axios";
 import Loading from "../../components/Loading/Loading";
 
+// ! PAGE DEPRECATED
+
 const AssessmentPage = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();

@@ -31,6 +31,7 @@ const MaterialView = ({ selectedItem }: { selectedItem: IMaterial }) => {
       );
     }
 
+    // TODO: CHECK IF THIS WORKS ON HTTPS
     // if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(ext)) {
     //   return (
     //     <iframe
