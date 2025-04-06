@@ -14,9 +14,9 @@ const assessmentSchema = new Schema(
             type: String,
             required: true,
         },
-        classId: {
+        moduleId: {
             type: Schema.Types.ObjectId,
-            ref: "Class",
+            ref: "Module",
             required: true,
         },
         type: {

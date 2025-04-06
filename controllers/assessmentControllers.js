@@ -7,7 +7,7 @@ export const createAssessment = async (req, res) => {
         const {
             title,
             description,
-            classId,
+            moduleId,
             type,
         } = req.body;
 
@@ -16,7 +16,7 @@ export const createAssessment = async (req, res) => {
         const assessment = new Assessment({
             title,
             description,
-            classId,
+            moduleId,
             type,
             scope
         });
@@ -33,12 +33,12 @@ export const createAssessment = async (req, res) => {
     }
 }
 
-export const getAssessmentsByClassId = async (req, res) => {
+export const getAssessmentsByModuleId = async (req, res) => {
     try {
-        const classId = req.params.classId;
+        const moduleId = req.params.moduleId;
 
         const assessments = await Assessment.find({
-            classId,
+            moduleId,
             type: "assessment"
         });
 
@@ -54,12 +54,12 @@ export const getAssessmentsByClassId = async (req, res) => {
 }
 
 
-export const getAssignmentsByClassId = async (req, res) => {
+export const getAssignmentsByModuleId = async (req, res) => {
     try {
-        const classId = req.params.classId;
+        const moduleId = req.params.moduleId;
 
         const assignments = await Assessment.find({
-            classId,
+            moduleId,
             type: "assignment"
         });
 
@@ -79,7 +79,7 @@ export const getAssessmentBySlug = async (req, res) => {
     try {
         const slug = req.params.slug;
 
-        const assessment = await Assessment.findOne({ slug }).populate("classId");
+        const assessment = await Assessment.findOne({ slug }).populate("moduleId");
 
         return res.status(200).json({
             message: "fetched successfully",
