@@ -79,28 +79,32 @@ const CourseCard: FC<{
             </Link>
           )}
           {/* user signed in and not enrolled */}
-          {user && !course.enrolledUsers.includes(user._id) && (
-            <button
-              type="button"
-              onClick={() => setPurchaseModal(true)}
-              className={styles.viewCourse}
-            >
-              Enroll
-            </button>
-          )}
+          {user &&
+            !course.enrolledUsers.includes(user._id) &&
+            user._id !== course.teacher && (
+              <button
+                type="button"
+                onClick={() => setPurchaseModal(true)}
+                className={styles.viewCourse}
+              >
+                Enroll
+              </button>
+            )}
           {/* user signed in and enrolled */}
-          {user && course.enrolledUsers.includes(user._id) && (
-            <Link
-              to={
-                isCourse
-                  ? `/course-catalogue/course/${course.slug}`
-                  : `/course-catalogue/class/${course.slug}`
-              }
-              className={styles.viewCourse}
-            >
-              {isCourse ? "View Course" : "View Class"}
-            </Link>
-          )}
+          {user &&
+            (course.enrolledUsers.includes(user._id) ||
+              user._id === course.teacher) && (
+              <Link
+                to={
+                  isCourse
+                    ? `/course-catalogue/course/${course.slug}`
+                    : `/course-catalogue/class/${course.slug}`
+                }
+                className={styles.viewCourse}
+              >
+                {isCourse ? "View Course" : "View Class"}
+              </Link>
+            )}
         </div>
       </div>
 
@@ -171,34 +175,40 @@ const CourseCard: FC<{
               >
                 Cancel
               </button>
-              {user && !course.enrolledUsers.includes(user._id) && (
-                <button
-                  className={styles.confirmButton}
-                  onClick={enrollInCourse}
-                  disabled={loading}
-                >
-                  {user && !course.enrolledUsers.includes(user._id) && loading
-                    ? "Enrolling..."
-                    : user &&
+              {user &&
+                !course.enrolledUsers.includes(user._id) &&
+                user._id !== course.teacher && (
+                  <button
+                    className={styles.confirmButton}
+                    onClick={enrollInCourse}
+                    disabled={loading}
+                  >
+                    {user &&
                       !course.enrolledUsers.includes(user._id) &&
-                      !loading
-                    ? "Enroll"
-                    : "Continue"}
-                </button>
-              )}
+                      loading &&
+                      "Enrolling..."}
+                    {user &&
+                      !course.enrolledUsers.includes(user._id) &&
+                      user._id !== course.teacher &&
+                      !loading &&
+                      "Enroll"}
+                  </button>
+                )}
 
-              {user && course.enrolledUsers.includes(user._id) && (
-                <Link
-                  to={
-                    isCourse
-                      ? `/course-catalogue/course/${course.slug}`
-                      : `/course-catalogue/class/${course.slug}`
-                  }
-                  className={styles.viewCourse}
-                >
-                  Continue
-                </Link>
-              )}
+              {user &&
+                (course.enrolledUsers.includes(user._id) ||
+                  user._id === course.teacher) && (
+                  <Link
+                    to={
+                      isCourse
+                        ? `/course-catalogue/course/${course.slug}`
+                        : `/course-catalogue/class/${course.slug}`
+                    }
+                    className={styles.viewCourse}
+                  >
+                    Continue
+                  </Link>
+                )}
             </div>
           </div>
         </div>
