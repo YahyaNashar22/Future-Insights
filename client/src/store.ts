@@ -19,11 +19,13 @@ export const useUserStore = create<IUserStore>((set) => ({
   },
   setToken: (token) => {
     localStorage.setItem("future-insights-token", token);
+    localStorage.setItem("future-insights-login-time", Date.now().toString());
     set({ token });
   },
   clearUser: () => {
     localStorage.removeItem("future-insights-token");
     localStorage.removeItem("future-insights-user");
+    localStorage.removeItem("future-insights-login-time");
     set({ user: null, token: null });
   },
 }));
@@ -31,7 +33,16 @@ export const useUserStore = create<IUserStore>((set) => ({
 // Check if the token is valid when the app is initialized
 export const checkUserFromCookie = async () => {
   const token = localStorage.getItem("future-insights-token");
-  if (!token) {
+  const loginTime = localStorage.getItem("future-insights-login-time");
+
+  const EXPIRATION_LIMIT = 1000 * 60 * 60 * 24; // 24 hours
+
+  if (
+    !token ||
+    !loginTime ||
+    Date.now() - parseInt(loginTime) > EXPIRATION_LIMIT
+  ) {
+    console.log("Session expired");
     useUserStore.getState().clearUser();
     return;
   }
