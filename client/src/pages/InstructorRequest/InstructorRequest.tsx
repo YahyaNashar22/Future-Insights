@@ -1,8 +1,10 @@
 import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./InstructorRequest.module.css";
 import { Link } from "react-router-dom";
+import axios from "axios";
 
 const InstructorRequest = () => {
+  const backend = import.meta.env.VITE_BACKEND;
   const [loading, setLoading] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
   const [formData, setFormData] = useState<{ [key: string]: string }>({
@@ -24,21 +26,31 @@ const InstructorRequest = () => {
   };
 
   const handleSubmit = async (e: FormEvent<HTMLFormElement>) => {
-    // TODO: HANDLE PROPER FORM SUBMIT
     e.preventDefault();
     setLoading(true);
 
     try {
-      setFormData({
-        name: "",
-        email: "",
-        phone: "",
-        message: "",
-      });
+      const res = await axios.post(
+        `${backend}/user/new-instructor-request`,
+        formData,
+        {
+          headers: {
+            "Content-Type": "application/json",
+          },
+        }
+      );
+      if (res.status === 200) {
+        setFormData({
+          name: "",
+          email: "",
+          phone: "",
+          message: "",
+        });
 
-      setSubmitted(true);
+        setSubmitted(true);
 
-      window.scrollTo(0, 0);
+        window.scrollTo(0, 0);
+      }
     } catch (error) {
       console.log(error);
     } finally {
