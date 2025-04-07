@@ -27,6 +27,7 @@ export const createCourse = async (req, res) => {
         // Handle file uploads (demo)
         const demo = req.files?.demo ? req.files.demo[0].filename : null;
 
+        // ! BELOW CODE IS DEPRECATED BUT LEFT IN CASE OF EMERGENCY :P
         // Handle file uploads (videos)
         // const content = req.files?.videos
         //     ? req.files.videos.map(file => ({

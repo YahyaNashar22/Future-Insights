@@ -47,6 +47,10 @@ const CourseInfo = () => {
         <Loading />
       ) : (
         <div className={styles.courseContainer}>
+          <button className={styles.backButton} onClick={() => navigate(-1)}>
+            ← Back
+          </button>
+
           <div className={styles.courseContainer}>
             <div className={styles.courseThumbnail}>
               <img

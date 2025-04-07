@@ -48,19 +48,30 @@ const TeacherCourseDisplay = () => {
         <Loading />
       ) : courses.length > 0 ? (
         <ul className={styles.courseGrid}>
-          {courses.map((course) => {
-            return (
-              <li
-                key={course._id}
-                className={styles.courseCard}
-                onClick={() =>
-                  navigate(`/dashboard/course-info/${course.slug}`)
-                }
-              >
-                {course.title}
-              </li>
-            );
-          })}
+          {courses.map((course) => (
+            <li
+              key={course._id}
+              className={styles.courseCard}
+              onClick={() => navigate(`/dashboard/course-info/${course.slug}`)}
+            >
+              <div className={styles.thumbnailWrapper}>
+                <img
+                  src={`${backend}/${course.thumbnail}`}
+                  alt={course.title}
+                  className={styles.thumbnail}
+                />
+              </div>
+              <div className={styles.courseInfo}>
+                <h2 className={styles.courseTitle}>{course.title}</h2>
+                <p className={styles.courseMeta}>
+                  Price: <strong>${course.price}</strong>
+                </p>
+                <p className={styles.courseMeta}>
+                  Duration: {course.duration || "N/A"}
+                </p>
+              </div>
+            </li>
+          ))}
         </ul>
       ) : (
         <p className={styles.noCourses}>You haven't added any courses yet!</p>
