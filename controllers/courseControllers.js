@@ -28,12 +28,20 @@ export const createCourse = async (req, res) => {
         const demo = req.files?.demo ? req.files.demo[0].filename : null;
 
         // Handle file uploads (videos)
-        const content = req.files?.videos
-            ? req.files.videos.map(file => ({
-                title: file.originalname,
-                url: file.filename,
-            }))
-            : [];
+        // const content = req.files?.videos
+        //     ? req.files.videos.map(file => ({
+        //         title: file.originalname,
+        //         url: file.filename,
+        //     }))
+        //     : [];
+
+        const videoTitles = req.body.videoTitles;
+        const videoTitleArray = Array.isArray(videoTitles) ? videoTitles : [videoTitles];
+
+        const content = req.files?.videos?.map((file, i) => ({
+            title: videoTitleArray[i] || file.originalname,
+            url: file.filename,
+        })) || [];
 
         // Create course instance
         const newCourse = new Course({

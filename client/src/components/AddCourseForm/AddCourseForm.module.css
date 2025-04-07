@@ -90,6 +90,33 @@
   resize: none;
 }
 
+.videoInputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.removeBtn {
+  background-color: var(--primary-beige);
+  color: var(--white);
+  padding: 12px;
+  border: none;
+  margin-top: 5px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.addMoreBtn {
+  background-color: var(--secondary-blue);
+  color: var(--white);
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 200px;
+  align-self: flex-end;
+}
+
 @media (max-width: 768px) {
   .wrapper {
     margin-top: 100px;

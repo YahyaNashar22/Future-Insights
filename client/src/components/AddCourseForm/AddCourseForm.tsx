@@ -20,7 +20,7 @@ const AddCourseForm = () => {
     category: "",
     thumbnail: "",
     demo: "",
-    videos: [],
+    videos: [{ title: "", file: null }],
   });
 
   useEffect(() => {
@@ -62,6 +62,37 @@ const AddCourseForm = () => {
     }));
   };
 
+  const handleVideoChange = (
+    index: number,
+    field: "title" | "file",
+    value: string | File | null
+  ) => {
+    const updatedVideos = [...formData.videos];
+    updatedVideos[index] = {
+      ...updatedVideos[index],
+      [field]: value,
+    };
+    setFormData((prev) => ({
+      ...prev,
+      videos: updatedVideos,
+    }));
+  };
+
+  const addVideoField = () => {
+    setFormData((prev) => ({
+      ...prev,
+      videos: [...prev.videos, { title: "", file: null }],
+    }));
+  };
+
+  const removeVideoField = (index: number) => {
+    const updatedVideos = formData.videos.filter((_, i) => i !== index);
+    setFormData((prev) => ({
+      ...prev,
+      videos: updatedVideos,
+    }));
+  };
+
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     try {
@@ -83,15 +114,32 @@ const AddCourseForm = () => {
       }
 
       // Append multiple videos (content)
-      formData.videos.forEach((file) => formDataToSend.append("videos", file));
+      formData.videos.forEach((video) => {
+        if (video.file) {
+          formDataToSend.append("videos", video.file);
+          formDataToSend.append(`videoTitles`, video.title); // Sending titles in a separate array
+        }
+      });
 
       const res = await axios.post(`${backend}/course/create`, formDataToSend, {
         headers: {
           "Content-Type": "multipart/form-data",
         },
       });
-      console.log("submitting: ", formData);
-      console.log("response: ", res);
+      if (res.status == 200) {
+        alert("Course added successfully!");
+        setFormData({
+          title: "",
+          description: "",
+          duration: "",
+          price: 0,
+          teacher: user?._id,
+          category: "",
+          thumbnail: "",
+          demo: "",
+          videos: [{ title: "", file: null }],
+        });
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -183,16 +231,48 @@ const AddCourseForm = () => {
         </label>
 
         <label className={styles.formLabel}>
-          Videos
-          <input
-            className={styles.formInput}
-            type="file"
-            name="videos"
-            accept="video/*"
-            multiple
-            onChange={handleFileChange}
-          />
+          Course Videos
+          {formData.videos.map((video, index) => (
+            <div key={index} className={styles.videoInputGroup}>
+              <input
+                type="text"
+                placeholder="Video Title"
+                value={video.title}
+                onChange={(e) =>
+                  handleVideoChange(index, "title", e.target.value)
+                }
+                className={styles.formInput}
+                required
+              />
+              <input
+                type="file"
+                accept="video/*"
+                onChange={(e) =>
+                  handleVideoChange(index, "file", e.target.files?.[0] || null)
+                }
+                className={styles.formInput}
+                required
+              />
+              {formData.videos.length > 1 && (
+                <button
+                  type="button"
+                  className={styles.removeBtn}
+                  onClick={() => removeVideoField(index)}
+                >
+                  Remove
+                </button>
+              )}
+            </div>
+          ))}
+          <button
+            type="button"
+            className={styles.addMoreBtn}
+            onClick={addVideoField}
+          >
+            Add More Videos
+          </button>
         </label>
+
         <button
           type="submit"
           className={styles.submitButton}
