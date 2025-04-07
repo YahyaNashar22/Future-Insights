@@ -22,7 +22,7 @@ const CourseInfo = () => {
         setLoading(true);
         const res = await axios.get(`${backend}/course/get-course/${slug}`);
 
-        if (!res.data.payload) {
+        if (!res.data.payload || res.data.payload.teacher !== user?._id) {
           navigate("*");
         }
 
