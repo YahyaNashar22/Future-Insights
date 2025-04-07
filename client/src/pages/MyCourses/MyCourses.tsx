@@ -9,6 +9,7 @@ import NoCurrentCourses from "../../components/NoCurrentCourses/NoCurrentCourses
 import { useUserStore } from "../../store";
 import ICertification from "../../interfaces/ICertification";
 import { Link } from "react-router-dom";
+import EditProfile from "../../components/EditProfile/EditProfile";
 
 const MyCourses = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -18,7 +19,7 @@ const MyCourses = () => {
   const [classes, setClasses] = useState<ICourse[]>([]);
   const [certifications, setCertifications] = useState<ICertification[]>([]);
   const [activeTab, setActiveTab] = useState<
-    "courses" | "classes" | "certifications"
+    "courses" | "classes" | "certifications" | "edit profile"
   >("courses");
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
@@ -96,8 +97,6 @@ const MyCourses = () => {
     fetchCertifications();
   }, [backend]);
 
-  // TODO: ADD ABILITY TO CHANGE PROFILE INFO
-
   return (
     <Suspense fallback={<Loading />}>
       <section className={styles.wrapper}>
@@ -130,6 +129,15 @@ const MyCourses = () => {
                 onClick={() => setActiveTab("certifications")}
               >
                 Certifications
+              </button>
+
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "edit profile" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("edit profile")}
+              >
+                Edit Profile
               </button>
             </div>
 
@@ -203,6 +211,8 @@ const MyCourses = () => {
                   )}
                 </>
               )}
+
+              {activeTab === "edit profile" && <EditProfile />}
             </div>
           </div>
         )}

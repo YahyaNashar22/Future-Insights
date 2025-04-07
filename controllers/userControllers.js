@@ -579,3 +579,30 @@ export const instructorRegisterRequestEmail = async (req, res) => {
         return res.status(400).json({ message: "Couldn't send email, please try again later" });
     }
 }
+
+
+export const updateProfile = async (req, res) => {
+    const { userId, fullname, currentPassword, newPassword } = req.body;
+
+    try {
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ success: false, message: "User not found." });
+
+        // If changing password, verify current password
+        if (newPassword) {
+            const isMatch = await bcrypt.compare(currentPassword, user.password);
+            if (!isMatch) {
+                return res.status(400).json({ success: false, message: "Incorrect current password." });
+            }
+            user.password = await bcrypt.hash(newPassword, 10);
+        }
+
+        user.fullname = fullname;
+        await user.save();
+
+        res.json({ success: true, updatedUser: user });
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ message: "Couldn't update profile, please try again later" });
+    }
+}

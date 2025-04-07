@@ -1,5 +1,5 @@
 import express from "express";
-import { enrollClass, enrollCourse, getEnrolledClasses, getEnrolledCourses, getUnlockedVideos, getUserById, instructorRegisterRequestEmail, resetPassword, sendForgotPasswordOTP, sendVerification, signin, signup, teacherSignup, unlockVideo, verifyEmail } from "../controllers/userControllers.js";
+import { enrollClass, enrollCourse, getEnrolledClasses, getEnrolledCourses, getUnlockedVideos, getUserById, instructorRegisterRequestEmail, resetPassword, sendForgotPasswordOTP, sendVerification, signin, signup, teacherSignup, unlockVideo, updateProfile, verifyEmail } from "../controllers/userControllers.js";
 
 const userRouter = new express.Router();
 
@@ -24,6 +24,9 @@ userRouter.post("/send-verification", sendVerification);
 userRouter.get("/verify-email/:token", verifyEmail);
 
 userRouter.post("/new-instructor-request", instructorRegisterRequestEmail)
+
+userRouter.put("/update-profile", updateProfile)
+
 
 
 
