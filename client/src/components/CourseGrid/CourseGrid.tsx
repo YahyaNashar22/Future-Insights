@@ -12,6 +12,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [classes, setClasses] = useState<ICourse[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
+  const [activeTab, setActiveTab] = useState<"courses" | "classes">("courses");
 
   const fetchClasses = async () => {
     try {
@@ -69,45 +70,71 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
           <Loading />
         ) : (
           <div className={styles.coursesAndClasses}>
-            <div className={styles.container}>
-              <h2 className={styles.containerTitle}>Courses</h2>
-              {courses.length > 0 ? (
-                <ul className={styles.courseGrid}>
-                  {courses.map((course) => {
-                    return (
-                      <CourseCard
-                        key={course._id}
-                        course={course}
-                        isCourse={true}
-                        fetchCourses={fetchCourses}
-                        fetchClasses={fetchClasses}
-                      />
-                    );
-                  })}
-                </ul>
-              ) : (
-                <NoCurrentCourses course={true} />
-              )}
+            {/* navbar filters  */}
+            <div className={styles.navbar}>
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "courses" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("courses")}
+              >
+                Courses
+              </button>
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "classes" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("classes")}
+              >
+                Classes
+              </button>
             </div>
 
             <div className={styles.container}>
-              <h2 className={styles.containerTitle}>Classes</h2>
-              {classes.length > 0 ? (
-                <ul className={styles.courseGrid}>
-                  {classes.map((cls) => {
-                    return (
-                      <CourseCard
-                        key={cls._id}
-                        course={cls}
-                        isCourse={false}
-                        fetchCourses={fetchCourses}
-                        fetchClasses={fetchClasses}
-                      />
-                    );
-                  })}
-                </ul>
-              ) : (
-                <NoCurrentCourses course={false} />
+              {activeTab === "courses" && (
+                <>
+                  <h2 className={styles.containerTitle}>Courses</h2>
+                  {courses.length > 0 ? (
+                    <ul className={styles.courseGrid}>
+                      {courses.map((course) => {
+                        return (
+                          <CourseCard
+                            key={course._id}
+                            course={course}
+                            isCourse={true}
+                            fetchCourses={fetchCourses}
+                            fetchClasses={fetchClasses}
+                          />
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <NoCurrentCourses course={true} />
+                  )}
+                </>
+              )}
+
+              {activeTab === "classes" && (
+                <>
+                  <h2 className={styles.containerTitle}>Classes</h2>
+                  {classes.length > 0 ? (
+                    <ul className={styles.courseGrid}>
+                      {classes.map((cls) => {
+                        return (
+                          <CourseCard
+                            key={cls._id}
+                            course={cls}
+                            isCourse={false}
+                            fetchCourses={fetchCourses}
+                            fetchClasses={fetchClasses}
+                          />
+                        );
+                      })}
+                    </ul>
+                  ) : (
+                    <NoCurrentCourses course={false} />
+                  )}
+                </>
               )}
             </div>
           </div>

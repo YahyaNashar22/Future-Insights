@@ -28,6 +28,33 @@
   text-align: center;
 }
 
+.navbar {
+  display: flex;
+  justify-content: center;
+  gap: 1rem;
+  margin-bottom: 20px;
+}
+
+.navButton {
+  background: var(--primary-blue);
+  padding: 8px 16px;
+  cursor: pointer;
+  font-weight: bold;
+  border-radius: 5px;
+  color: var(--white);
+  transition: 0.3s ease;
+}
+
+.navButton:hover {
+  background: var(--primary-beige);
+}
+
+.active {
+  background: var(--primary-beige);
+  color: var(--white);
+  border-color: var(--primary-beige);
+}
+
 /* Ensure even spacing on medium screens */
 @media (max-width: 1024px) {
   .courseGrid {

@@ -17,6 +17,9 @@ const MyCourses = () => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [classes, setClasses] = useState<ICourse[]>([]);
   const [certifications, setCertifications] = useState<ICertification[]>([]);
+  const [activeTab, setActiveTab] = useState<
+    "courses" | "classes" | "certifications"
+  >("courses");
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -93,10 +96,7 @@ const MyCourses = () => {
     fetchCertifications();
   }, [backend]);
 
-  // TODO: MAKE A NAVIGATION PANEL TO CHOOSE WHAT TO SHOW ( CLASSES - COURSES - CERTIFICATIONS ) - Filters
   // TODO: ADD ABILITY TO CHANGE PROFILE INFO
-  // TODO: https://certifier.io/ -- CHECK HOW TO LINK IT || OR TEMPLATE
-  // TODO: ADD MATERIAL LOGIC TO CLASSES MODULES - live session - recording - material
 
   return (
     <Suspense fallback={<Loading />}>
@@ -105,72 +105,103 @@ const MyCourses = () => {
           <Loading />
         ) : (
           <div className={styles.coursesAndClasses}>
-            <div className={styles.container}>
-              <h2 className={styles.containerTitle}>Courses</h2>
-              {courses.length > 0 ? (
-                <ul className={styles.courseGrid}>
-                  {courses.map((course) => {
-                    return (
-                      <CourseCard
-                        key={course._id}
-                        course={course}
-                        isCourse={true}
-                        fetchCourses={fetchCourses}
-                        fetchClasses={fetchClasses}
-                      />
-                    );
-                  })}
-                </ul>
-              ) : (
-                <NoCurrentCourses course={true} />
-              )}
+            {/* navbar filters  */}
+            <div className={styles.navbar}>
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "courses" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("courses")}
+              >
+                Courses
+              </button>
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "classes" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("classes")}
+              >
+                Classes
+              </button>
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "certifications" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("certifications")}
+              >
+                Certifications
+              </button>
             </div>
 
             <div className={styles.container}>
-              <h2 className={styles.containerTitle}>Classes</h2>
-              {classes.length > 0 ? (
-                <ul className={styles.courseGrid}>
-                  {classes.map((cls) => {
-                    return (
-                      <CourseCard
-                        key={cls._id}
-                        course={cls}
-                        isCourse={false}
-                        fetchCourses={fetchCourses}
-                        fetchClasses={fetchClasses}
-                      />
-                    );
-                  })}
-                </ul>
-              ) : (
-                <NoCurrentCourses course={false} />
+              {activeTab === "courses" && (
+                <>
+                  <h2 className={styles.containerTitle}>Courses</h2>
+                  {courses.length > 0 ? (
+                    <ul className={styles.courseGrid}>
+                      {courses.map((course) => (
+                        <CourseCard
+                          key={course._id}
+                          course={course}
+                          isCourse={true}
+                          fetchCourses={fetchCourses}
+                          fetchClasses={fetchClasses}
+                        />
+                      ))}
+                    </ul>
+                  ) : (
+                    <NoCurrentCourses course={true} />
+                  )}
+                </>
               )}
-            </div>
 
-            <div className={styles.container}>
-              <h2 className={styles.containerTitle}>Certifications</h2>
-              {certifications.length > 0 ? (
-                <ul className={styles.courseGrid}>
-                  {certifications.map((certification) => {
-                    return (
-                      <li
-                        key={certification._id}
-                        className={styles.certificationCard}
-                      >
-                        <Link
-                          to={`/certification/${certification.slug}`}
-                          className={styles.certificationLink}
+              {activeTab === "classes" && (
+                <>
+                  <h2 className={styles.containerTitle}>Classes</h2>
+                  {classes.length > 0 ? (
+                    <ul className={styles.courseGrid}>
+                      {classes.map((cls) => (
+                        <CourseCard
+                          key={cls._id}
+                          course={cls}
+                          isCourse={false}
+                          fetchCourses={fetchCourses}
+                          fetchClasses={fetchClasses}
+                        />
+                      ))}
+                    </ul>
+                  ) : (
+                    <NoCurrentCourses course={false} />
+                  )}
+                </>
+              )}
+
+              {activeTab === "certifications" && (
+                <>
+                  <h2 className={styles.containerTitle}>Certifications</h2>
+                  {certifications.length > 0 ? (
+                    <ul className={styles.courseGrid}>
+                      {certifications.map((certification) => (
+                        <li
+                          key={certification._id}
+                          className={styles.certificationCard}
                         >
-                          <h3 className={styles.certificationTitle}>
-                            {certification.courseId?.title || "Untitled Course"}
-                          </h3>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
-              ) : (
-                <NoCurrentCourses course={false} />
+                          <Link
+                            to={`/certification/${certification.slug}`}
+                            className={styles.certificationLink}
+                          >
+                            <h3 className={styles.certificationTitle}>
+                              {certification.courseId?.title ||
+                                "Untitled Course"}
+                            </h3>
+                          </Link>
+                        </li>
+                      ))}
+                    </ul>
+                  ) : (
+                    <NoCurrentCourses course={false} />
+                  )}
+                </>
               )}
             </div>
           </div>
