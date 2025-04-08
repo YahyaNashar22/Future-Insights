@@ -5,7 +5,7 @@ import styles from "./Dashboard.module.css"; // Make sure your styles are correc
 import TeacherClassDisplay from "../../components/TeacherClassDisplay/TeacherClassDisplay";
 import AddClassForm from "../../components/AddClassForm/AddClassForm";
 import { DashboardSections } from "../../enums/dashboardSections";
-import AddModuleForm from "../../components/AddModuleForm/AddModuleForm";
+import AddContentForm from "../../components/AddModuleForm/AddContent";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState<DashboardSections>(
@@ -78,20 +78,20 @@ const Dashboard = () => {
           </button>
         </li>
 
-        {/* <li
+        <li
           className={
-            activeComponent === DashboardSections.AddModule
+            activeComponent === DashboardSections.AddContent
               ? styles.active
               : undefined
           }
         >
           <button
-            onClick={() => handleSidebarClick(DashboardSections.AddModule)}
+            onClick={() => handleSidebarClick(DashboardSections.AddContent)}
             className={styles.sidebarButton}
           >
-            Add Module
+            Add Content
           </button>
-        </li> */}
+        </li>
       </ul>
 
       {/* Main Content */}
@@ -104,8 +104,8 @@ const Dashboard = () => {
         {activeComponent === "addClass" && (
           <AddClassForm setActiveComponent={setActiveComponent} />
         )}
+        {activeComponent === "addContent" && <AddContentForm />}
       </div>
-      {activeComponent === "addModule" && <AddModuleForm />}
     </main>
   );
 };

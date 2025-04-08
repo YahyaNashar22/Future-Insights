@@ -3,5 +3,5 @@ export enum DashboardSections {
   AddCourse = "addCourse",
   MyClasses = "myClasses",
   AddClass = "addClass",
-  AddModule = "addModule",
+  AddContent = "addContent",
 }
