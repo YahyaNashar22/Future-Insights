@@ -30,7 +30,6 @@ const TeacherCourseDisplay = () => {
           }
         );
         setCourses(res.data.payload);
-        console.log(res.data.payload);
       } catch (error) {
         console.log(error);
       } finally {
@@ -64,10 +63,10 @@ const TeacherCourseDisplay = () => {
               <div className={styles.courseInfo}>
                 <h2 className={styles.courseTitle}>{course.title}</h2>
                 <p className={styles.courseMeta}>
-                  Price: <strong>${course.price}</strong>
+                  Price: <strong>${course.price?.toFixed(2)}</strong>
                 </p>
                 <p className={styles.courseMeta}>
-                 Final Price: <strong>${course.finalPrice?.toFixed(2)}</strong>
+                  Final Price: <strong>${course.finalPrice?.toFixed(2)}</strong>
                 </p>
                 <p className={styles.courseMeta}>
                   Duration: {course.duration || "N/A"}

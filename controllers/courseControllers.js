@@ -8,6 +8,7 @@ export const createCourse = async (req, res) => {
             title,
             description,
             price,
+            discount,
             duration,
             teacher,
             category,
@@ -52,6 +53,7 @@ export const createCourse = async (req, res) => {
             demo,
             duration,
             price,
+            discount,
             content, // Array of video objects
             teacher,
             category,
@@ -163,7 +165,7 @@ export const updateCourse = async (req, res) => {
             return res.status(404).json({ success: false, message: "Course not found" });
         }
 
-        const { title, description, price, discount } = req.body;
+        const { title, description, duration, price, discount } = req.body;
 
 
 
@@ -196,6 +198,7 @@ export const updateCourse = async (req, res) => {
         // Update fields
         course.title = title ?? course.title;
         course.description = description ?? course.description;
+        course.duration = duration ?? course.duration;
         course.price = price ?? course.price;
         course.discount = discount ?? course.discount;
 

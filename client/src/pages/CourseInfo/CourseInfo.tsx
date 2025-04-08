@@ -43,8 +43,6 @@ const CourseInfo = () => {
     setVideoUrl(url); // Set the selected video's URL
   };
 
-  console.log(course);
-
   return (
     <main className={styles.wrapper}>
       {loading ? (
@@ -73,7 +71,9 @@ const CourseInfo = () => {
                   {course?.description}
                 </p>
                 <div className={styles.courseDetails}>
-                  <span className={styles.coursePrice}>${course?.price}</span>
+                  <span className={styles.coursePrice}>
+                    ${course?.price?.toFixed(2)}
+                  </span>
                   {course && course.discount > 0 && (
                     <span className={styles.courseDiscount}>
                       {course?.discount}% off

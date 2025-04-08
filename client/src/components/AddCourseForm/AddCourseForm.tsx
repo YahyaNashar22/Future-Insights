@@ -16,6 +16,7 @@ const AddCourseForm = () => {
     description: "",
     duration: "",
     price: 0,
+    discount: 0,
     teacher: user?._id,
     category: "",
     thumbnail: "",
@@ -133,6 +134,7 @@ const AddCourseForm = () => {
           description: "",
           duration: "",
           price: 0,
+          discount: 0,
           teacher: user?._id,
           category: "",
           thumbnail: "",
@@ -180,6 +182,18 @@ const AddCourseForm = () => {
             className={styles.formInput}
             type="number"
             name="price"
+            placeholder="Course Price"
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label className={styles.formLabel}>
+          Discount
+          <input
+            className={styles.formInput}
+            type="number"
+            name="discount"
             placeholder="Course Price"
             onChange={handleChange}
             required

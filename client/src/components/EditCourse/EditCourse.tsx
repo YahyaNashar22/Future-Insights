@@ -49,6 +49,8 @@ const EditCourse = () => {
     const description = (
       form.elements.namedItem("description") as HTMLTextAreaElement
     ).value;
+    const duration = (form.elements.namedItem("duration") as HTMLInputElement)
+      .value;
     const price = (form.elements.namedItem("price") as HTMLInputElement).value;
     const discount = (form.elements.namedItem("discount") as HTMLInputElement)
       .value;
@@ -56,6 +58,7 @@ const EditCourse = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("duration", duration);
     formData.append("price", price);
     formData.append("discount", discount);
 
@@ -152,6 +155,17 @@ const EditCourse = () => {
                 className={styles.textarea}
                 name="description"
                 defaultValue={course?.description || ""}
+                required
+              />
+            </label>
+
+            <label className={styles.labelForm}>
+              Duration:
+              <input
+                className={styles.inputForm}
+                type="text"
+                name="duration"
+                defaultValue={course?.duration || ""}
                 required
               />
             </label>
