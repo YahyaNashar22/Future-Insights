@@ -2,13 +2,20 @@ import { useState } from "react";
 import AddCourseForm from "../../components/AddCourseForm/AddCourseForm";
 import TeacherCourseDisplay from "../../components/TeacherCourseDisplay/TeacherCourseDisplay";
 import styles from "./Dashboard.module.css"; // Make sure your styles are correct
+import TeacherClassDisplay from "../../components/TeacherClassDisplay/TeacherClassDisplay";
+
+enum DashboardSections {
+  MyCourses = "myCourses",
+  AddCourse = "addCourse",
+  MyClasses = "myClasses",
+}
 
 const Dashboard = () => {
-  const [activeComponent, setActiveComponent] = useState<
-    "myCourses" | "addCourse"
-  >("myCourses");
+  const [activeComponent, setActiveComponent] = useState<DashboardSections>(
+    DashboardSections.MyCourses
+  );
 
-  const handleSidebarClick = (component: "myCourses" | "addCourse") => {
+  const handleSidebarClick = (component: DashboardSections) => {
     setActiveComponent(component);
   };
 
@@ -18,7 +25,7 @@ const Dashboard = () => {
       <ul className={styles.sidebar}>
         <li>
           <button
-            onClick={() => handleSidebarClick("myCourses")}
+            onClick={() => handleSidebarClick(DashboardSections.MyCourses)}
             className={styles.sidebarButton}
           >
             My Courses
@@ -26,10 +33,19 @@ const Dashboard = () => {
         </li>
         <li>
           <button
-            onClick={() => handleSidebarClick("addCourse")}
+            onClick={() => handleSidebarClick(DashboardSections.AddCourse)}
             className={styles.sidebarButton}
           >
             Add Course
+          </button>
+        </li>
+
+        <li>
+          <button
+            onClick={() => handleSidebarClick(DashboardSections.MyClasses)}
+            className={styles.sidebarButton}
+          >
+            My Classes
           </button>
         </li>
       </ul>
@@ -38,6 +54,7 @@ const Dashboard = () => {
       <div className={styles.mainContent}>
         {activeComponent === "addCourse" && <AddCourseForm />}
         {activeComponent === "myCourses" && <TeacherCourseDisplay />}
+        {activeComponent === "myClasses" && <TeacherClassDisplay />}
       </div>
     </main>
   );

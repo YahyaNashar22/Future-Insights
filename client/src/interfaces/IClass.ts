@@ -9,7 +9,7 @@ interface IClass {
   duration: string;
   discount: number;
   teacher: string;
-  enrolledUsers: string[];
+  enrolledUsers: ({ _id: string; fullname: string; email: string } | string)[];
   category: string;
   slug: string;
 }

@@ -1,0 +1,215 @@
+.wrapper {
+  padding: 40px 20px;
+  background-color: var(--bg-white);
+  max-width: 1100px;
+  margin: 40px auto;
+  border-radius: 16px;
+  box-shadow: 0 8px 30px rgba(0, 0, 0, 0.06);
+}
+
+/* Main container */
+.courseContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
+}
+
+/* Thumbnail */
+.courseThumbnail {
+  width: 100%;
+  overflow: hidden;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+}
+
+.thumbnailImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  border-radius: 12px;
+}
+
+/* Course Info */
+.courseInfo {
+  padding: 20px;
+  background-color: #ffffff;
+  border-radius: 12px;
+  box-shadow: 0 4px 16px rgba(0, 0, 0, 0.04);
+}
+
+.courseTitle {
+  font-size: 2.5rem;
+  font-weight: 700;
+  color: var(--primary-blue);
+  margin-bottom: 10px;
+  text-align: center;
+}
+
+.courseDescription {
+  font-size: 18px;
+  color: var(--grey-accent);
+  margin-bottom: 20px;
+  text-align: center;
+}
+
+/* Course details */
+.courseDetails {
+  display: flex;
+  justify-content: center;
+  flex-wrap: wrap;
+  gap: 20px;
+  font-size: 16px;
+  margin-bottom: 20px;
+}
+
+.coursePrice {
+  color: var(--primary-beige);
+  font-weight: 700;
+}
+
+.courseDiscount {
+  color: var(--secondary-blue);
+  font-weight: 600;
+}
+
+.courseDuration {
+  color: var(--primary-blue);
+  font-style: italic;
+}
+
+/* Course content */
+.courseContent {
+  margin: 30px 0;
+}
+
+.contentTitle {
+  font-size: 1.8rem;
+  margin-bottom: 15px;
+  color: var(--primary-blue);
+}
+
+.contentItem {
+  background-color: var(--secondary-beige);
+  padding: 12px 16px;
+  margin: 8px 0;
+  border: none;
+  border-radius: 6px;
+  width: 100%;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: left;
+  transition: background 0.2s ease;
+}
+
+.contentItem:hover {
+  background-color: #e7e7e7;
+}
+
+/* Demo section */
+.courseDemo {
+  margin-top: 20px;
+}
+
+/* Enrolled students */
+.enrolledTitle {
+  font-size: 1.8rem;
+  color: var(--primary-blue);
+  margin: 30px 0 10px;
+}
+
+.enrolledList {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
+  gap: 16px;
+}
+
+.enrolledStudent {
+  background-color: var(--secondary-beige);
+  padding: 12px 16px;
+  border-radius: 8px;
+  text-align: center;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
+}
+
+.studentEmail {
+  font-size: 14px;
+  color: var(--grey-accent);
+  font-weight: 600;
+}
+
+/* Video Player */
+.videoPlayer {
+  margin-top: 30px;
+  background-color: #fafafa;
+  padding: 16px;
+  border-radius: 12px;
+  box-shadow: 0 2px 10px rgba(0, 0, 0, 0.05);
+}
+
+.video {
+  width: 100%;
+  max-height: 500px;
+  border-radius: 8px;
+}
+
+.backButton {
+  background-color: var(--primary-blue);
+  border: none;
+  color: var(--white);
+  font-size: 1rem;
+  font-weight: bold;
+  cursor: pointer;
+  margin-bottom: 20px;
+  align-self: flex-start;
+  padding: 12px 24px;
+  border-radius: 6px;
+  transition: 0.3s ease-in-out;
+}
+
+.backButton:hover {
+  background-color: var(--primary-beige);
+}
+
+.editButton {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+}
+
+.editButton:hover {
+  background-color: var(--secondary-blue);
+}
+
+/* Mobile responsiveness */
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 20px;
+    margin-top: 100px;
+  }
+
+  .courseTitle {
+    font-size: 2rem;
+  }
+
+  .courseDescription {
+    font-size: 16px;
+  }
+
+  .courseDetails {
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+  }
+
+  .contentItem {
+    font-size: 14px;
+  }
+}

@@ -29,6 +29,11 @@ const classSchema = new Schema(
             required: true,
             min: 0,
         },
+        finalPrice: {
+            type: Number,
+            required: true,
+            min: 0,
+        },
         duration: {
             type: String,
             required: true,
@@ -68,6 +73,9 @@ classSchema.pre("save", function (next) {
     if (this.isModified("title")) {
         this.slug = slugify(this.title, { lower: true, strict: true });
     }
+
+    // Recalculate final price
+    this.finalPrice = this.price - (this.price * this.discount) / 100;
     next();
 });
 

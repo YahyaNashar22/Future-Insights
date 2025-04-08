@@ -1,5 +1,5 @@
 import express from "express";
-import { createClass, deleteClass, getClassBySlug, getClassesByCategory } from "../controllers/classControllers.js";
+import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher } from "../controllers/classControllers.js";
 import { upload } from "../middlewares/multer.js";
 
 
@@ -13,6 +13,8 @@ classRouter.post("/create", upload.fields([
 classRouter.post('/get-classes-by-category', getClassesByCategory);
 classRouter.get('/get-class/:slug', getClassBySlug);
 classRouter.delete('/delete/:id', deleteClass);
+
+classRouter.post('/get-by-teacher', getClassesByTeacher);
 
 
 export default classRouter;

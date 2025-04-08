@@ -72,7 +72,7 @@ export const getClassBySlug = async (req, res) => {
     try {
         const slug = req.params.slug;
 
-        const fetchedClass = await Class.findOne({ slug });
+        const fetchedClass = await Class.findOne({ slug }).populate("enrolledUsers");
 
         res.status(200).json({
             message: "fetched successfully",
@@ -110,6 +110,20 @@ export const deleteClass = async (req, res) => {
                 message: "Class deleted successfully",
             }
         )
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+
+export const getClassesByTeacher = async (req, res) => {
+    try {
+        const { teacherId } = req.body;
+
+        const classes = await Class.find({ teacher: teacherId }).sort({ createdAt: -1 });
+
+        return res.status(200).json({ payload: classes })
     } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })

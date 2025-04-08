@@ -66,6 +66,8 @@ const TeacherCourseDisplay = lazy(
   () => import("../components/TeacherCourseDisplay/TeacherCourseDisplay.tsx")
 );
 
+const ClassInfo = lazy(() => import("../pages/ClassInfo/ClassInfo.tsx"));
+
 // const CourseCheckout = lazy(
 //   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
 // );
@@ -154,6 +156,7 @@ const AppRoutes = () => {
               path="/dashboard/course-info/:slug"
               element={<CourseInfo />}
             />
+            <Route path="/dashboard/class-info/:slug" element={<ClassInfo />} />
           </Route>
         )}
 
