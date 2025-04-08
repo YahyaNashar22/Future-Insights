@@ -177,6 +177,18 @@ const AddCourseForm = () => {
         </label>
 
         <label className={styles.formLabel}>
+          Duration
+          <input
+            className={styles.formInput}
+            type="text"
+            name="duration"
+            placeholder="Course Duration"
+            onChange={handleChange}
+            required
+          />
+        </label>
+
+        <label className={styles.formLabel}>
           Price
           <input
             className={styles.formInput}
@@ -194,7 +206,7 @@ const AddCourseForm = () => {
             className={styles.formInput}
             type="number"
             name="discount"
-            placeholder="Course Price"
+            placeholder="Course Discount"
             onChange={handleChange}
             required
           />
