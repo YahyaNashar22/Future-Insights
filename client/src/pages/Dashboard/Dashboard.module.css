@@ -43,6 +43,10 @@
   padding: 20px;
 }
 
+.active .sidebarButton {
+  color: var(--primary-beige);
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .wrapper {

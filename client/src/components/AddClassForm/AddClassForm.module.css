@@ -1,0 +1,118 @@
+/* AddCourseForm.module.css */
+
+/* General Styles */
+.wrapper {
+  background-color: var(--bg-white);
+  padding: 40px;
+  max-width: 800px;
+  margin: 0 auto;
+  border-radius: 8px;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.formContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.formTitle {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--primary-blue);
+  margin-bottom: 20px;
+}
+
+.formLabel {
+  font-size: 1rem;
+  color: var(--grey-accent);
+  display: flex;
+  flex-direction: column;
+}
+
+.formInput {
+  padding: 10px;
+  border: 1px solid var(--secondary-blue);
+  border-radius: 6px;
+  font-size: 1rem;
+  background-color: var(--white);
+  color: var(--grey-accent);
+  outline: none;
+}
+
+.formInput:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 5px rgba(37, 33, 97, 0.5);
+}
+
+.selectOption {
+  background-color: var(--bg-white);
+  color: var(--grey-accent);
+}
+
+.submitButton {
+  padding: 12px 20px;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  font-size: 1.1rem;
+  font-weight: bold;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  transition: background-color 0.3s;
+}
+
+.submitButton:hover {
+  background-color: var(--secondary-blue);
+}
+
+.submitButton:disabled {
+  background-color: var(--secondary-beige);
+  cursor: not-allowed;
+}
+
+.formInput[type="file"] {
+  padding: 8px;
+  background-color: var(--secondary-beige);
+  border: 1px solid var(--secondary-blue);
+  color: var(--grey-accent);
+}
+
+.formInput[type="file"]:focus {
+  border-color: var(--primary-blue);
+  box-shadow: 0 0 5px rgba(37, 33, 97, 0.5);
+}
+
+/* Additional Styles */
+.textarea {
+  resize: vertical;
+  height: 250px;
+  resize: none;
+}
+
+.videoInputGroup {
+  display: flex;
+  flex-direction: column;
+  margin-bottom: 1rem;
+}
+
+.removeBtn {
+  background-color: var(--primary-beige);
+  color: var(--white);
+  padding: 12px;
+  border: none;
+  margin-top: 5px;
+  cursor: pointer;
+  width: 200px;
+}
+
+.addMoreBtn {
+  background-color: var(--secondary-blue);
+  color: var(--white);
+  padding: 12px;
+  border: none;
+  cursor: pointer;
+  margin-top: 10px;
+  width: 200px;
+  align-self: flex-end;
+}

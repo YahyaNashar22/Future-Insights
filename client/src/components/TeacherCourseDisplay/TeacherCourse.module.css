@@ -84,4 +84,8 @@
   .title {
     font-size: 2rem;
   }
+
+  .courseGrid{
+    gap: 48px;
+  }
 }

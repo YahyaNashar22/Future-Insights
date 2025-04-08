@@ -1,5 +1,5 @@
 import express from "express";
-import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher } from "../controllers/classControllers.js";
+import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher, updateClass } from "../controllers/classControllers.js";
 import { upload } from "../middlewares/multer.js";
 
 
@@ -15,6 +15,8 @@ classRouter.get('/get-class/:slug', getClassBySlug);
 classRouter.delete('/delete/:id', deleteClass);
 
 classRouter.post('/get-by-teacher', getClassesByTeacher);
+
+classRouter.put("/update-class/:slug", upload.any(), updateClass)
 
 
 export default classRouter;

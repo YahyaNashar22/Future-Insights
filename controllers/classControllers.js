@@ -129,3 +129,41 @@ export const getClassesByTeacher = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+
+export const updateClass = async (req, res) => {
+    try {
+        const slug = req.params.slug;
+
+        const course = await Class.findOne({ slug });
+
+        if (!course) {
+            return res.status(404).json({ success: false, message: "Class not found" });
+        }
+
+        const { title, description, duration, price, discount } = req.body;
+
+
+        // Look for thumbnail file
+        const thumbnailFile = req.files.find(f => f.fieldname === "thumbnail");
+        if (thumbnailFile) {
+            course.thumbnail = thumbnailFile.filename;
+        }
+
+
+        // Update fields
+        course.title = title ?? course.title;
+        course.description = description ?? course.description;
+        course.duration = duration ?? course.duration;
+        course.price = price ?? course.price;
+        course.discount = discount ?? course.discount;
+
+        await course.save();
+
+        return res.status(200).json({ success: true, payload: course });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}

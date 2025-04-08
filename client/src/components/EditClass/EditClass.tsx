@@ -69,7 +69,7 @@ const EditClass = () => {
     try {
       setLoading(true);
       const res = await axios.put(
-        `${backend}/course/update-course/${slug}`,
+        `${backend}/class/update-class/${slug}`,
         formData,
         {
           headers: {
@@ -94,7 +94,7 @@ const EditClass = () => {
         <div>Loading...</div>
       ) : (
         <div className={styles.formContainer}>
-          <h1 className={styles.title}>Edit Course</h1>
+          <h1 className={styles.title}>Edit Class</h1>
           <form onSubmit={handleSubmit}>
             <label className={styles.labelForm}>
               Title:

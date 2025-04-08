@@ -33,6 +33,7 @@ const classSchema = new Schema(
             type: Number,
             required: true,
             min: 0,
+            default: 0,
         },
         duration: {
             type: String,

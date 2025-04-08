@@ -3,8 +3,13 @@ import styles from "./AddCourseForm.module.css";
 import { useUserStore } from "../../store";
 import ICategory from "../../interfaces/ICategory";
 import axios from "axios";
+import { DashboardSections } from "../../pages/Dashboard/Dashboard";
 
-const AddCourseForm = () => {
+const AddCourseForm = ({
+  setActiveComponent,
+}: {
+  setActiveComponent: (e: DashboardSections) => void;
+}) => {
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
 
@@ -127,20 +132,8 @@ const AddCourseForm = () => {
           "Content-Type": "multipart/form-data",
         },
       });
-      if (res.status == 200) {
-        alert("Course added successfully!");
-        setFormData({
-          title: "",
-          description: "",
-          duration: "",
-          price: 0,
-          discount: 0,
-          teacher: user?._id,
-          category: "",
-          thumbnail: "",
-          demo: "",
-          videos: [{ title: "", file: null }],
-        });
+      if (res.status == 201) {
+        setActiveComponent(DashboardSections.MyCourses);
       }
     } catch (error) {
       console.log(error);

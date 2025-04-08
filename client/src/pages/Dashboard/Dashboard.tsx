@@ -3,11 +3,13 @@ import AddCourseForm from "../../components/AddCourseForm/AddCourseForm";
 import TeacherCourseDisplay from "../../components/TeacherCourseDisplay/TeacherCourseDisplay";
 import styles from "./Dashboard.module.css"; // Make sure your styles are correct
 import TeacherClassDisplay from "../../components/TeacherClassDisplay/TeacherClassDisplay";
+import AddClassForm from "../../components/AddClassForm/AddClassForm";
 
-enum DashboardSections {
+export enum DashboardSections {
   MyCourses = "myCourses",
   AddCourse = "addCourse",
   MyClasses = "myClasses",
+  AddClass = "addClass",
 }
 
 const Dashboard = () => {
@@ -23,7 +25,13 @@ const Dashboard = () => {
     <main className={styles.wrapper}>
       {/* Sidebar */}
       <ul className={styles.sidebar}>
-        <li>
+        <li
+          className={
+            activeComponent === DashboardSections.MyCourses
+              ? styles.active
+              : undefined
+          }
+        >
           <button
             onClick={() => handleSidebarClick(DashboardSections.MyCourses)}
             className={styles.sidebarButton}
@@ -31,7 +39,13 @@ const Dashboard = () => {
             My Courses
           </button>
         </li>
-        <li>
+        <li
+          className={
+            activeComponent === DashboardSections.AddCourse
+              ? styles.active
+              : undefined
+          }
+        >
           <button
             onClick={() => handleSidebarClick(DashboardSections.AddCourse)}
             className={styles.sidebarButton}
@@ -40,7 +54,13 @@ const Dashboard = () => {
           </button>
         </li>
 
-        <li>
+        <li
+          className={
+            activeComponent === DashboardSections.MyClasses
+              ? styles.active
+              : undefined
+          }
+        >
           <button
             onClick={() => handleSidebarClick(DashboardSections.MyClasses)}
             className={styles.sidebarButton}
@@ -48,13 +68,28 @@ const Dashboard = () => {
             My Classes
           </button>
         </li>
+        <li
+          className={
+            activeComponent === DashboardSections.AddClass
+              ? styles.active
+              : undefined
+          }
+        >
+          <button
+            onClick={() => handleSidebarClick(DashboardSections.AddClass)}
+            className={styles.sidebarButton}
+          >
+            Add Class
+          </button>
+        </li>
       </ul>
 
       {/* Main Content */}
       <div className={styles.mainContent}>
-        {activeComponent === "addCourse" && <AddCourseForm />}
         {activeComponent === "myCourses" && <TeacherCourseDisplay />}
+        {activeComponent === "addCourse" && <AddCourseForm setActiveComponent={setActiveComponent} />}
         {activeComponent === "myClasses" && <TeacherClassDisplay />}
+        {activeComponent === "addClass" && <AddClassForm setActiveComponent={setActiveComponent} />}
       </div>
     </main>
   );
