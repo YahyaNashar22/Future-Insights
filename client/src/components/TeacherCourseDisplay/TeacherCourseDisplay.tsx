@@ -67,6 +67,9 @@ const TeacherCourseDisplay = () => {
                   Price: <strong>${course.price}</strong>
                 </p>
                 <p className={styles.courseMeta}>
+                 Final Price: <strong>${course.finalPrice?.toFixed(2)}</strong>
+                </p>
+                <p className={styles.courseMeta}>
                   Duration: {course.duration || "N/A"}
                 </p>
               </div>

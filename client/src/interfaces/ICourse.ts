@@ -5,6 +5,7 @@ interface ICourse {
   thumbnail: string;
   demo?: string;
   price: number;
+  finalPrice: number;
   duration: string;
   discount: number;
   content: {

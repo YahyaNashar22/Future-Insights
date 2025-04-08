@@ -67,7 +67,7 @@ const CourseCard: FC<{
         <h2 className={styles.courseTitle}>{course.title}</h2>
         <p className={styles.courseDescription}>{course.description}</p>
         <div className={styles.courseFooter}>
-          <span className={styles.coursePrice}>${course.price}</span>
+          <span className={styles.coursePrice}>${course.finalPrice?.toFixed(2)}</span>
           <span className={styles.demo} onClick={() => setDemoModal(true)}>
             Demo
           </span>
@@ -118,7 +118,7 @@ const CourseCard: FC<{
             <h3 className={styles.modalTitle}>Confirm Enrollment</h3>
             <p className={styles.modalText}>
               Are you sure you want to enroll in {course.title} for $
-              {course.price}?
+              {course.finalPrice?.toFixed(2)}?
             </p>
             <div className={styles.modalActions}>
               <button

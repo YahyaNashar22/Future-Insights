@@ -4,9 +4,11 @@ import TeacherCourseDisplay from "../../components/TeacherCourseDisplay/TeacherC
 import styles from "./Dashboard.module.css"; // Make sure your styles are correct
 
 const Dashboard = () => {
-  const [activeComponent, setActiveComponent] = useState("addCourse");
+  const [activeComponent, setActiveComponent] = useState<
+    "myCourses" | "addCourse"
+  >("myCourses");
 
-  const handleSidebarClick = (component: string) => {
+  const handleSidebarClick = (component: "myCourses" | "addCourse") => {
     setActiveComponent(component);
   };
 
@@ -17,18 +19,18 @@ const Dashboard = () => {
         <ul>
           <li>
             <button
-              onClick={() => handleSidebarClick("addCourse")}
-              className={styles.sidebarButton}
-            >
-              Add Course
-            </button>
-          </li>
-          <li>
-            <button
               onClick={() => handleSidebarClick("myCourses")}
               className={styles.sidebarButton}
             >
               My Courses
+            </button>
+          </li>
+          <li>
+            <button
+              onClick={() => handleSidebarClick("addCourse")}
+              className={styles.sidebarButton}
+            >
+              Add Course
             </button>
           </li>
         </ul>

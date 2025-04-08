@@ -5,6 +5,7 @@ interface IClass {
   thumbnail: string;
   demo?: string;
   price: number;
+  finalPrice: number;
   duration: string;
   discount: number;
   teacher: string;

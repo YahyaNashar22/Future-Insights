@@ -169,6 +169,24 @@
   background-color: var(--primary-beige);
 }
 
+.editButton {
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  padding: 8px 16px;
+  font-size: 1rem;
+  border-radius: 6px;
+  cursor: pointer;
+  float: right;
+  margin-bottom: 20px;
+  transition: background-color 0.2s ease;
+  font-weight: bold;
+}
+
+.editButton:hover {
+  background-color: var(--secondary-blue);
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .wrapper {

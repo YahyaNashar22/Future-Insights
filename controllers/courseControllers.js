@@ -151,3 +151,62 @@ export const getCoursesByTeacher = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+
+export const updateCourse = async (req, res) => {
+    try {
+        const slug = req.params.slug;
+
+        const course = await Course.findOne({ slug });
+
+        if (!course) {
+            return res.status(404).json({ success: false, message: "Course not found" });
+        }
+
+        const { title, description, price, discount } = req.body;
+
+
+
+        // Build videos array by pairing files and their titles
+        const content = [];
+
+        req.files.forEach((file) => {
+            const match = file.fieldname.match(/videos\[(\d+)\]\.file/);
+            if (match) {
+                const index = match[1];
+                const titleKey = `videos[${index}].title`;
+                const videoTitle = req.body[titleKey];
+
+                if (videoTitle) {
+                    content.push({
+                        title: videoTitle,
+                        url: `uploads/videos/${file.filename}`,
+                    });
+                }
+            }
+        });
+
+        // Look for thumbnail file
+        const thumbnailFile = req.files.find(f => f.fieldname === "thumbnail");
+        if (thumbnailFile) {
+            course.thumbnail = thumbnailFile.filename;
+        }
+
+
+        // Update fields
+        course.title = title ?? course.title;
+        course.description = description ?? course.description;
+        course.price = price ?? course.price;
+        course.discount = discount ?? course.discount;
+
+        course.content = [...course.content, ...content];
+
+        await course.save();
+
+        return res.json({ success: true, payload: course });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
