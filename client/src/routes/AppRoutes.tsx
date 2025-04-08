@@ -58,10 +58,6 @@ const CertificationPage = lazy(
 
 const CourseInfo = lazy(() => import("../pages/CourseInfo/CourseInfo.tsx"));
 
-const AddCourseForm = lazy(
-  () => import("../components/AddCourseForm/AddCourseForm.tsx")
-);
-
 const TeacherCourseDisplay = lazy(
   () => import("../components/TeacherCourseDisplay/TeacherCourseDisplay.tsx")
 );
@@ -147,7 +143,6 @@ const AppRoutes = () => {
         {user && (user.role === "admin" || user.role === "teacher") && (
           <Route path="/dashboard" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
-            <Route path="/dashboard/add-course" element={<AddCourseForm />} />
             <Route
               path="/dashboard/my-courses"
               element={<TeacherCourseDisplay />}
