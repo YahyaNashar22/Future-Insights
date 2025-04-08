@@ -3,7 +3,7 @@ import styles from "./AddClassForm.module.css";
 import { useUserStore } from "../../store";
 import ICategory from "../../interfaces/ICategory";
 import axios, { AxiosError } from "axios";
-import { DashboardSections } from "../../pages/Dashboard/Dashboard";
+import { DashboardSections } from "../../enums/dashboardSections";
 
 const AddClassForm = ({
   setActiveComponent,

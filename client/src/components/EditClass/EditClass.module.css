@@ -77,3 +77,45 @@
 .section {
   margin-top: 24px;
 }
+
+.addModuleButton {
+  background-color: var(--primary-beige);
+  color: var(--white);
+  padding: 10px 20px;
+  border-radius: 6px;
+  cursor: pointer;
+  margin-top: 20px;
+  margin-right: 10px;
+  font-size: 16px;
+}
+
+.addModuleButton:hover {
+  background-color: var(--secondary-beige);
+}
+
+.moduleFormContainer {
+  background-color: #f9f9f9;
+  padding: 20px;
+  border-radius: 5px;
+  margin-top: 20px;
+}
+
+.moduleFormContainer input {
+  padding: 8px;
+  margin-top: 5px;
+  width: 100%;
+}
+
+.moduleFormContainer button {
+  padding: 10px 20px;
+  margin-top: 10px;
+  margin-right: 10px;
+  background-color: var(--primary-beige);
+  color: var(--white);
+  border: none;
+  cursor: pointer;
+}
+
+.moduleFormContainer button:hover {
+  background-color: var(--secondary-beige);
+}

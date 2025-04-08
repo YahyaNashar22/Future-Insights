@@ -4,13 +4,8 @@ import TeacherCourseDisplay from "../../components/TeacherCourseDisplay/TeacherC
 import styles from "./Dashboard.module.css"; // Make sure your styles are correct
 import TeacherClassDisplay from "../../components/TeacherClassDisplay/TeacherClassDisplay";
 import AddClassForm from "../../components/AddClassForm/AddClassForm";
-
-export enum DashboardSections {
-  MyCourses = "myCourses",
-  AddCourse = "addCourse",
-  MyClasses = "myClasses",
-  AddClass = "addClass",
-}
+import { DashboardSections } from "../../enums/dashboardSections";
+import AddModuleForm from "../../components/AddModuleForm/AddModuleForm";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState<DashboardSections>(
@@ -82,15 +77,35 @@ const Dashboard = () => {
             Add Class
           </button>
         </li>
+
+        {/* <li
+          className={
+            activeComponent === DashboardSections.AddModule
+              ? styles.active
+              : undefined
+          }
+        >
+          <button
+            onClick={() => handleSidebarClick(DashboardSections.AddModule)}
+            className={styles.sidebarButton}
+          >
+            Add Module
+          </button>
+        </li> */}
       </ul>
 
       {/* Main Content */}
       <div className={styles.mainContent}>
         {activeComponent === "myCourses" && <TeacherCourseDisplay />}
-        {activeComponent === "addCourse" && <AddCourseForm setActiveComponent={setActiveComponent} />}
+        {activeComponent === "addCourse" && (
+          <AddCourseForm setActiveComponent={setActiveComponent} />
+        )}
         {activeComponent === "myClasses" && <TeacherClassDisplay />}
-        {activeComponent === "addClass" && <AddClassForm setActiveComponent={setActiveComponent} />}
+        {activeComponent === "addClass" && (
+          <AddClassForm setActiveComponent={setActiveComponent} />
+        )}
       </div>
+      {activeComponent === "addModule" && <AddModuleForm />}
     </main>
   );
 };

@@ -14,6 +14,9 @@ const EditClass = () => {
   const [course, setCourse] = useState<IClass | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
+  const [showModuleForm, setShowModuleForm] = useState<boolean>(false);
+  const [moduleName, setModuleName] = useState<string>("");
+
   // Fetch course data for editing
   useEffect(() => {
     const fetchCourse = async () => {
@@ -83,6 +86,27 @@ const EditClass = () => {
       }
     } catch (error) {
       console.error(error);
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleModuleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await axios.post(`${backend}/module/create`, {
+        name: moduleName,
+        classId: course?._id,
+      });
+
+      if (res.status === 201) {
+        alert("Module created successfully!");
+        setShowModuleForm(false);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to create module.");
     } finally {
       setLoading(false);
     }
@@ -162,9 +186,38 @@ const EditClass = () => {
               accept="image/*"
             />
 
+            <button
+              type="button"
+              className={styles.addModuleButton}
+              onClick={() => setShowModuleForm(true)}
+            >
+              Add Module
+            </button>
+
             <button className={styles.editFormBtn} type="submit">
               Update Class
             </button>
+          </form>
+        </div>
+      )}
+
+      {showModuleForm && (
+        <div className={styles.moduleFormContainer}>
+          <h2>Add New Module</h2>
+          <form onSubmit={handleModuleSubmit}>
+            <label>
+              Module Name:
+              <input
+                type="text"
+                value={moduleName}
+                onChange={(e) => setModuleName(e.target.value)}
+                required
+              />
+            </label>
+            <button type="submit" disabled={loading}>
+              {loading ? "Adding..." : "Add Module"}
+            </button>
+            <button type="button">Cancel</button>
           </form>
         </div>
       )}

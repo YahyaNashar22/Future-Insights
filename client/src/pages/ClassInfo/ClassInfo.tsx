@@ -77,7 +77,6 @@ const ClassInfo = () => {
     setVideoUrl(url); // Set the selected video's URL
   };
 
-  console.log(course);
 
   return (
     <main className={styles.wrapper}>
