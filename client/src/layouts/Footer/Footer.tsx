@@ -1,6 +1,6 @@
 import styles from "./Footer.module.css";
 
-import logo from "../../assets/icons/logo_mix.png";
+import logo from "../../assets/icons/logo_svg_white.svg";
 import phone from "../../assets/icons/phone.png";
 import mail from "../../assets/icons/mail.png";
 import location from "../../assets/icons/location.png";

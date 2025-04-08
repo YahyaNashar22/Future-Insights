@@ -1,6 +1,6 @@
 import styles from "./Header.module.css";
 
-import logo from "../../assets/icons/logo.png";
+import logo from "../../assets/icons/logo_svg.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";
@@ -23,7 +23,13 @@ const Header = () => {
 
   return (
     <header className={styles.wrapper}>
-      <img src={logo} alt="logo" loading="lazy" width={150} onClick={() => navigate("/")} />
+      <img
+        src={logo}
+        alt="logo"
+        loading="lazy"
+        width={150}
+        onClick={() => navigate("/")}
+      />
       <ul className={styles.navLinks}>
         <li>
           <Link to="/" className={styles.link}>

@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./MobileHeader.module.css";
-import logo from "../../assets/icons/logo.png";
+import logo from "../../assets/icons/logo_svg.svg";
 import { useUserStore } from "../../store";
 import SignoutModal from "../../components/SignoutModal/SignoutModal";
 
