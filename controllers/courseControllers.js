@@ -20,7 +20,6 @@ export const createCourse = async (req, res) => {
             return res.status(400).json({ message: "A course with this title already exists" });
         }
 
-        console.log("req files: ", req.files)
 
         // Handle file uploads (thumbnail)
         const thumbnail = req.files?.thumbnail ? req.files.thumbnail[0].filename : null;

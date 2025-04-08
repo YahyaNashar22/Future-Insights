@@ -44,8 +44,11 @@ const CourseDisplay = () => {
 
         if (
           !res.data.payload ||
-          // eslint-disable-next-line @typescript-eslint/no-explicit-any
-          !res.data.payload.enrolledUsers.some((u: any) => u._id === user?._id)
+          (!res.data.payload.enrolledUsers.some(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (u: any) => u._id === user?._id
+          ) &&
+            user?._id !== res.data.payload.teacher)
         )
           navigate("*");
 

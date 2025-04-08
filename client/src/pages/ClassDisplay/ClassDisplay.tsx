@@ -36,9 +36,16 @@ const ClassDisplay = () => {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
 
+        console.log(res);
+
         if (
           !res.data.payload ||
-          !res.data.payload.enrolledUsers.includes(user?._id)
+          (!res.data.payload.enrolledUsers.some(
+            // eslint-disable-next-line @typescript-eslint/no-explicit-any
+            (u: any) => u._id === user?._id
+          ) &&
+            user?._id !== res.data.payload.teacher &&
+            user?._id)
         )
           navigate("*");
 
