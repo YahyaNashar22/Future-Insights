@@ -15,26 +15,24 @@ const Dashboard = () => {
   return (
     <main className={styles.wrapper}>
       {/* Sidebar */}
-      <nav className={styles.sidebar}>
-        <ul>
-          <li>
-            <button
-              onClick={() => handleSidebarClick("myCourses")}
-              className={styles.sidebarButton}
-            >
-              My Courses
-            </button>
-          </li>
-          <li>
-            <button
-              onClick={() => handleSidebarClick("addCourse")}
-              className={styles.sidebarButton}
-            >
-              Add Course
-            </button>
-          </li>
-        </ul>
-      </nav>
+      <ul className={styles.sidebar}>
+        <li>
+          <button
+            onClick={() => handleSidebarClick("myCourses")}
+            className={styles.sidebarButton}
+          >
+            My Courses
+          </button>
+        </li>
+        <li>
+          <button
+            onClick={() => handleSidebarClick("addCourse")}
+            className={styles.sidebarButton}
+          >
+            Add Course
+          </button>
+        </li>
+      </ul>
 
       {/* Main Content */}
       <div className={styles.mainContent}>

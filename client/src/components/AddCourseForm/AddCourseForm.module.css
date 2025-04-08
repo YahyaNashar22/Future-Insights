@@ -116,9 +116,3 @@
   width: 200px;
   align-self: flex-end;
 }
-
-@media (max-width: 768px) {
-  .wrapper {
-    margin-top: 100px;
-  }
-}

@@ -47,45 +47,14 @@
 @media (max-width: 768px) {
   .wrapper {
     flex-direction: column;
+    margin-top: 100px;
   }
 
   .sidebar {
-    position: fixed;
-    top: 0;
-    left: -250px; /* Initially hidden */
-    height: 100%;
-    width: 250px;
-    background-color: var(--bg-white);
-    padding: 20px;
-    border-right: 1px solid var(--bg-white);
-    transition: transform 0.3s ease-in-out;
-  }
-
-  .sidebar.open {
-    left: 0; /* Sidebar is shown when this class is added */
-  }
-
-  .mainContent {
-    padding-left: 0;
-  }
-
-  /* Hamburger button */
-  .hamburger-btn {
-    display: block;
-    position: absolute;
-    top: 20px;
-    left: 20px;
-    font-size: 30px;
-    background-color: transparent;
-    border: none;
-    color: var(--primary-blue);
-    cursor: pointer;
-  }
-}
-
-/* On larger screens, hide the hamburger button */
-@media (min-width: 769px) {
-  .hamburger-btn {
-    display: none;
+    display: flex;
+    align-items: center;
+    flex-wrap: wrap;
+    width: 100%;
+    padding: 0;
   }
 }
