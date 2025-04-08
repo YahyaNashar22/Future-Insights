@@ -537,7 +537,7 @@ export const instructorRegisterRequestEmail = async (req, res) => {
 
         const mailOptions = {
             from: process.env.SENDER_EMAIL,
-            to: "yahyanashar22@gmail.com",
+            to: "rami@futureinsights.ae",
             subject: "New Instructor Application Request",
             html: `
               <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px;">
