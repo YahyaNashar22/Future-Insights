@@ -41,6 +41,11 @@ const Header = () => {
             Course Catalogue
           </Link>
         </li>
+        <li>
+          <Link to="/coaching-session" className={styles.link}>
+            Coaching Session
+          </Link>
+        </li>
         {user && (
           <li>
             <Link to="/my-courses" className={styles.link}>

@@ -69,6 +69,15 @@ const MobileHeader = () => {
               Course Catalogue
             </Link>
           </li>
+          <li>
+            <Link
+              to="/coaching-session"
+              className={styles.link}
+              onClick={() => setMenuOpen(false)}
+            >
+              Coaching Session
+            </Link>
+          </li>
           {user && (
             <li>
               <Link to="/my-courses" className={styles.link}>

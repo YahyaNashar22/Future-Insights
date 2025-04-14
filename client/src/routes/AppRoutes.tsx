@@ -64,6 +64,10 @@ const TeacherCourseDisplay = lazy(
 
 const ClassInfo = lazy(() => import("../pages/ClassInfo/ClassInfo.tsx"));
 
+const CoachingSessions = lazy(
+  () => import("../pages/CoachingSessions/CoachingSessions.tsx")
+);
+
 // const CourseCheckout = lazy(
 //   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
 // );
@@ -93,6 +97,8 @@ const AppRoutes = () => {
             path="/course-catalogue/category/:slug"
             element={<CategoryDisplay />}
           />
+
+          <Route path="/coaching-session" element={<CoachingSessions />} />
 
           {/* Redirect if user is not signed in  */}
           <Route element={<ProtectedRoute userId={user?._id} />}>
