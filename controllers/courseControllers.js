@@ -110,14 +110,14 @@ export const deleteCourse = async (req, res) => {
 
         const course = await Course.findById(id);
 
-        if (course.enrolledUsers.length > 0) {
-            return res.status(400).json({
-                message: "Cannot delete a course with active students!"
-            })
-        }
+        // if (course.enrolledUsers.length > 0) {
+        //     return res.status(400).json({
+        //         message: "Cannot delete a course with active students!"
+        //     })
+        // }
 
         if (course && course.thumbnail) {
-            removeFile(course.thumbnail);
+            removeFile(course?.thumbnail);
         }
 
         if (course && course.content.length > 0) {

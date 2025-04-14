@@ -26,7 +26,7 @@ const classSchema = new Schema(
         },
         price: {
             type: Number,
-            required: true,
+            required: false,
             min: 0,
         },
         finalPrice: {
