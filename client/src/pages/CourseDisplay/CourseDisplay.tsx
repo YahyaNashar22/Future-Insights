@@ -35,9 +35,9 @@ const CourseDisplay = () => {
   const [courseCompleted, setCourseCompleted] = useState<boolean>(false);
 
   // Handles video selection
-  const handleSelectVideo = (video: IVideo, index: number) => {
+  const handleSelectVideo = (video: IRecording, index: number) => {
     if (unlockedVideos.includes(index)) {
-      setSelectedVideo(video);
+      setSelectedItem(video);
     }
   };
 
@@ -115,7 +115,7 @@ const CourseDisplay = () => {
   };
 
   // Unlock certificate if all content are completed
-  // TODO: GET BACK TO THIS 
+  // TODO: GET BACK TO THIS
   // useEffect(() => {
   //   if (course && unlockedVideos.length === course.content.length) {
   //     setCourseCompleted(true);
@@ -202,6 +202,10 @@ const CourseDisplay = () => {
     setIsOpen((prev) => !prev);
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isRecording = (item: any): item is IRecording =>
+    item._id && item.name && item.link && !item.startsAt;
+
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
@@ -250,29 +254,33 @@ const CourseDisplay = () => {
           <div className={styles.lower}>
             {/* Course Information */}
             <div className={styles.course}>
-              <h2 className={styles.videoTitle}>
-                {removeFileExtension(selectedVideo?.title)}
-              </h2>
+              {isRecording(selectedItem) && (
+                <h2 className={styles.videoTitle}>
+                  {removeFileExtension(selectedItem?.name)}
+                </h2>
+              )}
 
               <div className={styles.videoContainer}>
-                <video
-                  key={selectedVideo?.url} // Force re-render when the video changes
-                  className={styles.videoPlayer}
-                  controls
-                  poster={course?.thumbnail}
-                  controlsList="nodownload"
-                  disablePictureInPicture
-                  onTimeUpdate={handleTimeUpdate}
-                  onEnded={handleVideoEnd}
-                >
-                  {selectedVideo?.url && (
-                    <source
-                      src={`${backend}/${selectedVideo.url}`}
-                      type="video/mp4"
-                    />
-                  )}
-                  Your browser does not support the video tag.
-                </video>
+                {isRecording(selectedItem) && (
+                  <video
+                    key={selectedItem?.link} // Force re-render when the video changes
+                    className={styles.videoPlayer}
+                    controls
+                    poster={course?.thumbnail}
+                    controlsList="nodownload"
+                    disablePictureInPicture
+                    onTimeUpdate={handleTimeUpdate}
+                    onEnded={handleVideoEnd}
+                  >
+                    {selectedItem?.link && (
+                      <source
+                        src={`${backend}/${selectedItem.link}`}
+                        type="video/mp4"
+                      />
+                    )}
+                    Your browser does not support the video tag.
+                  </video>
+                )}
               </div>
 
               <div className={styles.courseDescriptionContainer}>
@@ -283,12 +291,12 @@ const CourseDisplay = () => {
               </div>
             </div>
 
+            {/* TODO: GET BACK TO THIS  */}
             {/* Right Panel */}
-            <div className={styles.playlist}>
-              <p className={styles.playlistTitle}>Course Content</p>
+            {/* <div className={styles.playlist}>
+              <p className={styles.playlistTitle}>Course Content</p> */}
 
-              {/* TODO: GET BACK TO THIS  */}
-              {/* <ul className={styles.playlistList}>
+            {/* <ul className={styles.playlistList}>
                 {course?.content.map((c, index) => {
                   return (
                     <li
@@ -317,7 +325,7 @@ const CourseDisplay = () => {
                   );
                 })}
               </ul> */}
-            </div>
+            {/* </div> */}
           </div>
         </div>
       )}
