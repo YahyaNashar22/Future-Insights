@@ -91,7 +91,8 @@ const CourseInfo = () => {
                 </div>
                 <div className={styles.courseContent}>
                   <h2 className={styles.contentTitle}>Course Content:</h2>
-                  <ul>
+                  {/* //TODO: GET BACK TO THIS */}
+                  {/* <ul>
                     {course?.content.map((item, index) => (
                       <li key={index}>
                         <button
@@ -102,7 +103,7 @@ const CourseInfo = () => {
                         </button>
                       </li>
                     ))}
-                  </ul>
+                  </ul> */}
                 </div>
                 {/* Add any additional information such as demo or other fields here */}
                 {course?.demo && (

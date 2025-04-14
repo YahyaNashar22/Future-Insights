@@ -13,11 +13,15 @@ const EditCourse = () => {
 
   const [course, setCourse] = useState<ICourse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
-  const [newVideoTitle, setNewVideoTitle] = useState<string>("");
-  const [newVideoFile, setNewVideoFile] = useState<File | null>(null);
-  const [newVideos, setNewVideos] = useState<
-    { title: string; file: File | null }[]
-  >([]);
+
+  const [showModuleForm, setShowModuleForm] = useState<boolean>(false);
+  const [moduleName, setModuleName] = useState<string>("");
+
+  // const [newVideoTitle, setNewVideoTitle] = useState<string>("");
+  // const [newVideoFile, setNewVideoFile] = useState<File | null>(null);
+  // const [newVideos, setNewVideos] = useState<
+  //   { title: string; file: File | null }[]
+  // >([]);
 
   // Fetch course data for editing
   useEffect(() => {
@@ -72,14 +76,14 @@ const EditCourse = () => {
     }
 
     // Add video files
-    newVideos.forEach((video, index) => {
-      formData.append(`videos[${index}].title`, video.title);
-      // Only append the video file if it's not null
-      if (video.file) {
-        formData.append(`videos[${index}].file`, video.file);
-      }
-    });
-
+    // newVideos.forEach((video, index) => {
+    //   formData.append(`videos[${index}].title`, video.title);
+    //   // Only append the video file if it's not null
+    //   if (video.file) {
+    //     formData.append(`videos[${index}].file`, video.file);
+    //   }
+    // });
+    // TODO: ADD CHANGE DEMO
     try {
       setLoading(true);
       const res = await axios.put(
@@ -101,32 +105,53 @@ const EditCourse = () => {
       setLoading(false);
     }
   };
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files ? event.target.files[0] : null;
-    if (file) {
-      setNewVideoFile(file);
-    }
-  };
+  // const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  //   const file = event.target.files ? event.target.files[0] : null;
+  //   if (file) {
+  //     setNewVideoFile(file);
+  //   }
+  // };
 
   // Handle video URL add
-  const handleAddNewVideo = () => {
-    if (newVideoTitle && newVideoFile) {
-      setNewVideos([
-        ...newVideos,
-        { title: newVideoTitle, file: newVideoFile },
-      ]);
-      setNewVideoTitle(""); // Reset the title field
-      setNewVideoFile(null); // Reset the file field
-    } else {
-      alert("Please provide both title and a video file.");
-    }
-  };
+  // const handleAddNewVideo = () => {
+  //   if (newVideoTitle && newVideoFile) {
+  //     setNewVideos([
+  //       ...newVideos,
+  //       { title: newVideoTitle, file: newVideoFile },
+  //     ]);
+  //     setNewVideoTitle(""); // Reset the title field
+  //     setNewVideoFile(null); // Reset the file field
+  //   } else {
+  //     alert("Please provide both title and a video file.");
+  //   }
+  // };
 
   // Remove video
-  const handleRemoveVideo = (index: number) => {
-    if (course) {
-      const updatedContent = course.content.filter((_, i) => i !== index);
-      setCourse({ ...course, content: updatedContent });
+  // const handleRemoveVideo = (index: number) => {
+  //   if (course) {
+  //     const updatedContent = course.content.filter((_, i) => i !== index);
+  //     setCourse({ ...course, content: updatedContent });
+  //   }
+  // };
+
+  const handleModuleSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    try {
+      setLoading(true);
+      const res = await axios.post(`${backend}/module/create`, {
+        name: moduleName,
+        courseId: course?._id,
+      });
+
+      if (res.status === 201) {
+        alert("Module created successfully!");
+        setShowModuleForm(false);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to create module.");
+    } finally {
+      setLoading(false);
     }
   };
 
@@ -205,7 +230,7 @@ const EditCourse = () => {
             />
 
             {/* Add New Video */}
-            <div className={styles.section}>
+            {/* <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Add New Video</h2>
               <div>
                 <label className={styles.labelForm} htmlFor="newVideoTitle">
@@ -240,10 +265,10 @@ const EditCourse = () => {
               >
                 Add Video
               </button>
-            </div>
+            </div> */}
 
             {/* Display added videos */}
-            {newVideos.length > 0 && (
+            {/* {newVideos.length > 0 && (
               <div className={styles.section}>
                 <h2 className={styles.sectionTitle}>Added Videos</h2>
                 <ul>
@@ -252,9 +277,9 @@ const EditCourse = () => {
                   ))}
                 </ul>
               </div>
-            )}
+            )} */}
 
-            <div className={styles.section}>
+            {/* <div className={styles.section}>
               <h2 className={styles.sectionTitle}>Course Content</h2>
               <ul className={styles.editFormVideosList}>
                 {course?.content.map((item, index) => (
@@ -270,11 +295,40 @@ const EditCourse = () => {
                   </li>
                 ))}
               </ul>
-            </div>
+            </div> */}
+
+            <button
+              type="button"
+              className={styles.addModuleButton}
+              onClick={() => setShowModuleForm(true)}
+            >
+              Add Module
+            </button>
 
             <button className={styles.editFormBtn} type="submit">
               Update Course
             </button>
+          </form>
+        </div>
+      )}
+
+      {showModuleForm && (
+        <div className={styles.moduleFormContainer}>
+          <h2>Add New Module</h2>
+          <form onSubmit={handleModuleSubmit}>
+            <label>
+              Module Name:
+              <input
+                type="text"
+                value={moduleName}
+                onChange={(e) => setModuleName(e.target.value)}
+                required
+              />
+            </label>
+            <button type="submit" disabled={loading}>
+              {loading ? "Adding..." : "Add Module"}
+            </button>
+            <button type="button">Cancel</button>
           </form>
         </div>
       )}
