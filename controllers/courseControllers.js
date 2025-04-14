@@ -36,13 +36,13 @@ export const createCourse = async (req, res) => {
         //     }))
         //     : [];
 
-        const videoTitles = req.body.videoTitles;
-        const videoTitleArray = Array.isArray(videoTitles) ? videoTitles : [videoTitles];
+        // const videoTitles = req.body.videoTitles;
+        // const videoTitleArray = Array.isArray(videoTitles) ? videoTitles : [videoTitles];
 
-        const content = req.files?.videos?.map((file, i) => ({
-            title: videoTitleArray[i] || file.originalname,
-            url: file.filename,
-        })) || [];
+        // const content = req.files?.videos?.map((file, i) => ({
+        //     title: videoTitleArray[i] || file.originalname,
+        //     url: file.filename,
+        // })) || [];
 
         // Create course instance
         const newCourse = new Course({
@@ -53,7 +53,8 @@ export const createCourse = async (req, res) => {
             duration,
             price,
             discount,
-            content, // Array of video objects
+            // Array of video objects
+            // content,
             teacher,
             category,
         });

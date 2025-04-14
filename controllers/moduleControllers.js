@@ -2,9 +2,9 @@ import Module from "../models/moduleModel.js";
 
 export const createModule = async (req, res) => {
     try {
-        const { name, classId } = req.body;
+        const { name, classId, courseId } = req.body;
 
-        const newModule = new Module({ name, classId });
+        const newModule = new Module({ name, classId, courseId });
         await newModule.save();
 
         return res.status(201).json({
@@ -20,9 +20,19 @@ export const createModule = async (req, res) => {
 
 export const getModulesByClassId = async (req, res) => {
     try {
-        const { classId } = req.params;
+        const { classId, courseId } = req.params;
 
-        const classModules = await Module.find({ classId });
+        if (!classId && !courseId) {
+            return res.status(400).json({
+                message: "Please provide at least a classId or a courseId",
+            });
+        }
+
+        const filter = {};
+        if (classId) filter.classId = classId;
+        if (courseId) filter.courseId = courseId;
+
+        const modules = await Module.find(filter);
 
         return res.status(200).json({
             payload: classModules

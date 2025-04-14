@@ -43,12 +43,6 @@ const courseSchema = new Schema(
             min: 0,
             default: 0,
         },
-        content: [
-            {
-                title: { type: String, required: true },
-                url: { type: String, required: true },
-            }
-        ],
         teacher: {
             type: Schema.Types.ObjectId,
             ref: "User",
