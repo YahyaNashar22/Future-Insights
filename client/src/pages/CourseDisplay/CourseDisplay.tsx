@@ -6,7 +6,6 @@ import axios, { AxiosError } from "axios";
 import Loading from "../../components/Loading/Loading";
 import IVideo from "../../interfaces/IVideo";
 import icon from "../../assets/icons/course_title.png";
-import videoIc from "../../assets/icons/video.png";
 import { useUserStore } from "../../store";
 import ICertification from "../../interfaces/ICertification";
 import ModulePanel from "../../components/ModulePanel/ModulePanel";
