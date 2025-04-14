@@ -1,5 +1,5 @@
 import express from "express";
-import { enrollClass, enrollCourse, getEnrolledClasses, getEnrolledCourses, getUnlockedVideos, getUserById, instructorRegisterRequestEmail, resetPassword, sendForgotPasswordOTP, sendVerification, signin, signup, teacherSignup, unlockVideo, updateProfile, verifyEmail } from "../controllers/userControllers.js";
+import { enrollClass, enrollCourse, getEnrolledClasses, getEnrolledCourses, getUnlockedVideos, getUserById, instructorRegisterRequestEmail, reserveCoachingSession, resetPassword, sendForgotPasswordOTP, sendVerification, signin, signup, teacherSignup, unlockVideo, updateProfile, verifyEmail } from "../controllers/userControllers.js";
 
 const userRouter = new express.Router();
 
@@ -26,6 +26,9 @@ userRouter.get("/verify-email/:token", verifyEmail);
 userRouter.post("/new-instructor-request", instructorRegisterRequestEmail)
 
 userRouter.put("/update-profile", updateProfile)
+
+userRouter.post("/request-coaching-session", reserveCoachingSession)
+
 
 
 

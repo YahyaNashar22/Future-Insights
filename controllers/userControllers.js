@@ -416,15 +416,15 @@ export const resetPassword = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user || !user.passwordResetOTP || !user.passwordResetExpires) {
-          return  res.status(403).json({ message: "OTP not found or expired" });
+            return res.status(403).json({ message: "OTP not found or expired" });
         }
 
         if (user.passwordResetExpires < new Date()) {
-           return res.status(403).json({ message: "OTP has expired" });
+            return res.status(403).json({ message: "OTP has expired" });
         }
 
         if (user.passwordResetOTP !== otp) {
-          return  res.status(403).json({ message: "Invalid OTP" });
+            return res.status(403).json({ message: "Invalid OTP" });
         }
 
         // Hash the password
@@ -604,5 +604,66 @@ export const updateProfile = async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(400).json({ message: "Couldn't update profile, please try again later" });
+    }
+}
+
+
+
+export const reserveCoachingSession = async (req, res) => {
+    try {
+        const { name, email, phone, date } = req.body;
+
+
+        const mailOptions = {
+            from: process.env.SENDER_EMAIL,
+            to: "rami@futureinsights.ae",
+            subject: "New Coaching Session Request",
+            html: `
+              <div style="font-family: Arial, sans-serif; padding: 20px; max-width: 600px; margin: auto; border: 1px solid #ddd; border-radius: 10px;">
+                <h2 style="color: #2c3e50;">Coaching Session Request</h2>
+                <p style="font-size: 16px; color: #555;">
+                  A new request has been submitted for a coaching session. Below are the details:
+                </p>
+                <table style="width: 100%; margin-top: 20px; border-collapse: collapse;">
+                  <tr>
+                    <td style="padding: 8px; font-weight: bold; color: #333;">Name:</td>
+                    <td style="padding: 8px; color: #555;">${name}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; font-weight: bold; color: #333;">Email:</td>
+                    <td style="padding: 8px; color: #555;">${email}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; font-weight: bold; color: #333;">Phone:</td>
+                    <td style="padding: 8px; color: #555;">${phone}</td>
+                  </tr>
+                  <tr>
+                    <td style="padding: 8px; font-weight: bold; color: #333;">Date:</td>
+                    <td style="padding: 8px; color: #555; white-space: pre-line;">
+                     ${new Date(date).toLocaleString("en-US", {
+                        year: "numeric",
+                        month: "long",
+                        day: "numeric",
+                        hour: "numeric",
+                        minute: "2-digit",
+                        hour12: true,
+                    })}
+                    </td>
+                  </tr>
+                </table>
+                <p style="font-size: 14px; color: #777; margin-top: 30px;">
+                  Please review the request and follow up as necessary.
+                </p>
+                <p style="font-size: 14px; color: #777;">Regards,<br>Future Insights</p>
+              </div>
+            `,
+        };
+        const info = await transporter.sendMail(mailOptions);
+
+        return res.status(200).json({ message: "Email sent!", info });
+
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ message: "Couldn't send email, please try again later" });
     }
 }
