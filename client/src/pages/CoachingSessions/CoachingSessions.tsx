@@ -47,9 +47,13 @@ const CoachingSessions = () => {
   return (
     <main className={styles.wrapper}>
       <section className={styles.container}>
-        <h1 className={styles.heading}>Reserve Your Free 20-Minute Coaching Session</h1>
+        <h1 className={styles.heading}>
+          Reserve Your Free 20-Minute Coaching Session
+        </h1>
         <p className={styles.subtext}>
-          We're available daily from <strong>9 AM to 6 PM</strong>. Take the first step toward transformation with a complimentary one-on-one session.
+          We're available daily from <strong>9 AM to 6 PM</strong>. Take the
+          first step toward transformation with a complimentary one-on-one
+          session.
         </p>
 
         <form onSubmit={handleSubmit} className={styles.form}>
@@ -85,7 +89,9 @@ const CoachingSessions = () => {
           <button type="submit" disabled={loading}>
             {loading ? "Booking..." : "Reserve Session"}
           </button>
-          {success && <p className={styles.success}>✅ Session reserved successfully!</p>}
+          {success && (
+            <p className={styles.success}>✅ Session reserved successfully!</p>
+          )}
         </form>
       </section>
     </main>
