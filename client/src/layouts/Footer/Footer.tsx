@@ -48,7 +48,7 @@ const Footer = () => {
           <ul className={styles.contactInfo}>
             <li>
               <Icon image={phone} />
-              <span>+966 583433143 - +971 507505539 </span>
+              <span>+966 593340212 - +971 507505539 </span>
             </li>
 
             <li>

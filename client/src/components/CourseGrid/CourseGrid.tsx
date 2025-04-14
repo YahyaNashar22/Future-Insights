@@ -78,7 +78,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
                 }`}
                 onClick={() => setActiveTab("courses")}
               >
-                Courses
+                Online Courses
               </button>
               <button
                 className={`${styles.navButton} ${
@@ -86,14 +86,14 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
                 }`}
                 onClick={() => setActiveTab("classes")}
               >
-                Classes
+                Interactive Online Classes
               </button>
             </div>
 
             <div className={styles.container}>
               {activeTab === "courses" && (
                 <>
-                  <h2 className={styles.containerTitle}>Courses</h2>
+                  <h2 className={styles.containerTitle}>Online Courses</h2>
                   {courses.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {courses.map((course) => {
@@ -116,7 +116,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
 
               {activeTab === "classes" && (
                 <>
-                  <h2 className={styles.containerTitle}>Classes</h2>
+                  <h2 className={styles.containerTitle}>Interactive Online Classes</h2>
                   {classes.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {classes.map((cls) => {

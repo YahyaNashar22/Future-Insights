@@ -416,15 +416,15 @@ export const resetPassword = async (req, res) => {
         const user = await User.findOne({ email });
 
         if (!user || !user.passwordResetOTP || !user.passwordResetExpires) {
-            res.status(403).json({ message: "OTP not found or expired" });
+          return  res.status(403).json({ message: "OTP not found or expired" });
         }
 
         if (user.passwordResetExpires < new Date()) {
-            res.status(403).json({ message: "OTP has expired" });
+           return res.status(403).json({ message: "OTP has expired" });
         }
 
         if (user.passwordResetOTP !== otp) {
-            res.status(403).json({ message: "Invalid OTP" });
+          return  res.status(403).json({ message: "Invalid OTP" });
         }
 
         // Hash the password
