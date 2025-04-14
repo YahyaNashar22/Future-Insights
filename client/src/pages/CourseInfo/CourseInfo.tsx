@@ -34,6 +34,10 @@ const CourseInfo = () => {
     setOpenModuleIndex((prev) => (prev === index ? null : index));
   };
 
+  // eslint-disable-next-line @typescript-eslint/no-explicit-any
+  const isRecording = (item: any): item is IRecording =>
+    item?._id && item?.name && item?.link && !item?.startsAt;
+
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -75,6 +79,10 @@ const CourseInfo = () => {
       fetchClassModules();
     }
   }, [backend, course]);
+
+  useEffect(() => {
+    if (isRecording(selectedItem)) setVideoUrl(selectedItem.link);
+  }, [selectedItem, videoUrl]);
 
   // Handle video content click to show video player
   const handleContentClick = (url: string) => {
