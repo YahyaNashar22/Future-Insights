@@ -55,7 +55,12 @@ const ClassInfo = () => {
       const fetchClassModules = async () => {
         try {
           setLoading(true);
-          const res = await axios.get(`${backend}/module/${course!._id}`);
+          const res = await axios.get(`${backend}/module`, {
+            params: {
+              classId: course._id,
+              // You can also add courseId here if needed
+            },
+          });
           setClassModules(res.data.payload);
         } catch (error) {
           console.log(error);

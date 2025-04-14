@@ -20,7 +20,7 @@ export const createModule = async (req, res) => {
 
 export const getModulesByClassId = async (req, res) => {
     try {
-        const { classId, courseId } = req.params;
+        const { classId, courseId } = req.query;
 
         if (!classId && !courseId) {
             return res.status(400).json({
@@ -32,7 +32,7 @@ export const getModulesByClassId = async (req, res) => {
         if (classId) filter.classId = classId;
         if (courseId) filter.courseId = courseId;
 
-        const modules = await Module.find(filter);
+        const classModules = await Module.find(filter);
 
         return res.status(200).json({
             payload: classModules

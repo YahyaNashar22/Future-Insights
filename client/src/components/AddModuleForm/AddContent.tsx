@@ -46,7 +46,12 @@ const AddContentForm = () => {
       const fetchClassModules = async () => {
         try {
           setLoading(true);
-          const res = await axios.get(`${backend}/module/${selectedClass._id}`);
+          const res = await axios.get(`${backend}/module`, {
+            params: {
+              classId: selectedClass._id,
+              // You can also add courseId here if needed
+            },
+          });
           setModules(res.data.payload);
         } catch (error) {
           console.log(error);

@@ -5,7 +5,7 @@ const moduleRouter = new express.Router();
 
 
 moduleRouter.post("/create", createModule);
-moduleRouter.get("/:classId", getModulesByClassId);
+moduleRouter.get("/", getModulesByClassId);
 
 
 export default moduleRouter;
