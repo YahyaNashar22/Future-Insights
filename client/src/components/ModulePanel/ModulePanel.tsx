@@ -43,11 +43,16 @@ const ModulePanel = ({
       const fetchClassModules = async () => {
         try {
           setLoading(true);
+
+          const params: { [key: string]: string } = {};
+          if (cls.type === "class") {
+            params.classId = cls._id;
+          } else if (cls.type === "course") {
+            params.courseId = cls._id;
+          }
+
           const res = await axios.get(`${backend}/module`, {
-            params: {
-              classId: cls._id,
-              // You can also add courseId here if needed
-            },
+            params,
           });
           setClassModules(res.data.payload);
           hasFetchedModules.current = true; // Mark that modules have been fetched

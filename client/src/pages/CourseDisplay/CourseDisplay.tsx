@@ -9,6 +9,11 @@ import icon from "../../assets/icons/course_title.png";
 import videoIc from "../../assets/icons/video.png";
 import { useUserStore } from "../../store";
 import ICertification from "../../interfaces/ICertification";
+import ModulePanel from "../../components/ModulePanel/ModulePanel";
+import IAssessment from "../../interfaces/IAssessment";
+import IMaterial from "../../interfaces/IMaterial";
+import IRecording from "../../interfaces/IRecording";
+import ILiveLink from "../../interfaces/ILiveLink";
 
 const CourseDisplay = () => {
   const { slug } = useParams();
@@ -110,11 +115,12 @@ const CourseDisplay = () => {
   };
 
   // Unlock certificate if all content are completed
-  useEffect(() => {
-    if (course && unlockedVideos.length === course.content.length) {
-      setCourseCompleted(true);
-    }
-  }, [course, unlockedVideos]);
+  // TODO: GET BACK TO THIS 
+  // useEffect(() => {
+  //   if (course && unlockedVideos.length === course.content.length) {
+  //     setCourseCompleted(true);
+  //   }
+  // }, [course, unlockedVideos]);
 
   useEffect(() => {
     if (course && user?._id) {
@@ -186,12 +192,29 @@ const CourseDisplay = () => {
     getCertification();
   }, [backend, user, course, courseCompleted, navigate, certification]);
 
+  const [isOpen, setIsOpen] = useState<boolean>(true);
+
+  const [selectedItem, setSelectedItem] = useState<
+    ILiveLink | IRecording | IMaterial | IAssessment | null
+  >(null);
+
+  const togglePanel = () => {
+    setIsOpen((prev) => !prev);
+  };
+
   return (
     <main className={styles.wrapper}>
       {isLoading ? (
         <Loading />
       ) : (
         <div className={styles.courseContainer}>
+          <ModulePanel
+            isOpen={isOpen}
+            togglePanel={togglePanel}
+            cls={course}
+            setSelectedItem={setSelectedItem}
+            selectedItem={selectedItem}
+          />
           <div className={styles.titleBanner}>
             {/* Course Title  */}
             <h1 className={styles.title}>
@@ -263,7 +286,9 @@ const CourseDisplay = () => {
             {/* Right Panel */}
             <div className={styles.playlist}>
               <p className={styles.playlistTitle}>Course Content</p>
-              <ul className={styles.playlistList}>
+
+              {/* TODO: GET BACK TO THIS  */}
+              {/* <ul className={styles.playlistList}>
                 {course?.content.map((c, index) => {
                   return (
                     <li
@@ -291,7 +316,7 @@ const CourseDisplay = () => {
                     </li>
                   );
                 })}
-              </ul>
+              </ul> */}
             </div>
           </div>
         </div>
