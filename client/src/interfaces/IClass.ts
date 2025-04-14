@@ -11,6 +11,7 @@ interface IClass {
   teacher: string;
   enrolledUsers: ({ _id: string; fullname: string; email: string } | string)[];
   category: string;
+  type: string;
   slug: string;
 }
 

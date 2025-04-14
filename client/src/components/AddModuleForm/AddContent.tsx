@@ -75,6 +75,8 @@ const AddContentForm = () => {
           const res = await axios.get(`${backend}/module`, {
             params: {
               classId: selectedClass._id,
+              courseId: selectedClass._id,
+
               // You can also add courseId here if needed
             },
           });
@@ -91,13 +93,21 @@ const AddContentForm = () => {
   }, [backend, selectedClass]);
 
   const handleClassChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
-    const classId = e.target.value;
-    const selectedClass = classes.find((cls) => cls._id === classId);
-    setSelectedClass(selectedClass || null);
+    const selectedId = e.target.value;
+
+    const selectedClass = classes.find((cls) => cls._id === selectedId);
+    const selectedCourse = courses.find((course) => course._id === selectedId);
+
+    const selectedItem = selectedClass
+      ? { ...selectedClass, type: "class" }
+      : selectedCourse
+      ? { ...selectedCourse, type: "course" }
+      : null;
+
+    setSelectedClass(selectedItem);
     setSelectedModule(null);
     setSelectedForm(null); // Reset form selection
   };
-
   const handleModuleChange = (e: React.ChangeEvent<HTMLSelectElement>) => {
     const moduleId = e.target.value;
     const selectedModule = modules.find((mod) => mod._id === moduleId);
@@ -211,6 +221,10 @@ const AddContentForm = () => {
     alert("Added Successfully!");
   };
 
+  function isCourse(item: IClass | ICourse | null): item is IClass {
+    return item?.type === "course";
+  }
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Add Content</h1>
@@ -269,8 +283,18 @@ const AddContentForm = () => {
         </div>
       )}
 
-      {/* Buttons for Form Selection */}
-      {selectedModule && (
+      {/* Buttons for Form Selection if selected is course */}
+
+      {selectedModule && isCourse(selectedClass) && (
+        <div className={styles.buttonGroup}>
+          <button onClick={() => handleFormSelect("recording")}>
+            Add Recording
+          </button>
+        </div>
+      )}
+
+      {/* Buttons for Form Selection if selected is class */}
+      {selectedModule && !isCourse(selectedClass) && (
         <div className={styles.buttonGroup}>
           <button onClick={() => handleFormSelect("liveLink")}>
             Add Live Link

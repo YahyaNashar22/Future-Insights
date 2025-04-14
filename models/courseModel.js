@@ -58,6 +58,10 @@ const courseSchema = new Schema(
             ref: "Category",
             required: true,
         },
+        type: {
+            type: String,
+            default: "course"
+        }, 
         slug: {
             type: String,
             unique: true,
