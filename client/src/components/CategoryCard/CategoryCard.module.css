@@ -1,6 +1,6 @@
 .wrapper {
   width: 95%;
-  height: 400px;
+  height: 500px;
   display: flex;
   justify-content: space-around;
   align-items: center;
@@ -38,7 +38,16 @@
 
 .description {
   font-size: 1.2rem;
-  width: 40%;
+  width: 50%;
+  text-align: left;
+}
+
+.descriptionLine {
+  margin-bottom: 10px;
+}
+
+.descriptionList {
+  list-style: disc;
 }
 
 .bottomLeft {
@@ -69,8 +78,15 @@
     flex-direction: column;
     align-items: center;
     justify-content: center;
+    height: 100%;
   }
+
+  .title {
+    width: 100%;
+  }
+
   .description {
-    display: none;
+    margin-bottom: 50px;
+    width: 90%;
   }
 }
