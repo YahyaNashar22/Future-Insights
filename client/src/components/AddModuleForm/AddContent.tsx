@@ -4,15 +4,20 @@ import IClass from "../../interfaces/IClass";
 import IModule from "../../interfaces/IModule";
 import { useUserStore } from "../../store";
 import axios from "axios";
+import ICourse from "../../interfaces/ICourse";
 
 const AddContentForm = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
   const [loading, setLoading] = useState<boolean>(false);
   const [classes, setClasses] = useState<IClass[]>([]);
+  const [courses, setCourses] = useState<ICourse[]>([]);
+
   const [modules, setModules] = useState<IModule[]>([]);
 
-  const [selectedClass, setSelectedClass] = useState<IClass | null>(null);
+  const [selectedClass, setSelectedClass] = useState<IClass | ICourse | null>(
+    null
+  );
   const [selectedModule, setSelectedModule] = useState<IModule | null>(null);
 
   const [selectedForm, setSelectedForm] = useState<
@@ -38,6 +43,27 @@ const AddContentForm = () => {
     };
 
     fetchClasses();
+  }, [backend, user]);
+
+  // Fetch courses
+  useEffect(() => {
+    const fetchCourses = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.post(
+          `${backend}/course/get-by-teacher`,
+          { teacherId: user?._id },
+          { headers: { "Content-Type": "application/json" } }
+        );
+        setCourses(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCourses();
   }, [backend, user]);
 
   // Fetch modules based on selected class
@@ -194,7 +220,7 @@ const AddContentForm = () => {
       {/* Class Dropdown */}
       <div className={styles.formGroup}>
         <label htmlFor="class" className={styles.formLabel}>
-          Select Class
+          Select Class / Course
         </label>
         <select
           id="class"
@@ -202,12 +228,22 @@ const AddContentForm = () => {
           onChange={handleClassChange}
           value={selectedClass?._id || ""}
         >
-          <option value="">Select a Class</option>
-          {classes.map((cls) => (
-            <option key={cls._id} value={cls._id}>
-              {cls.title}
-            </option>
-          ))}
+          <option value="">Select a Class / Course</option>
+
+          <optgroup label="Classes">
+            {classes.map((cls) => (
+              <option key={cls._id} value={cls._id}>
+                {cls.title}
+              </option>
+            ))}
+          </optgroup>
+          <optgroup label="Courses">
+            {courses.map((cls) => (
+              <option key={cls._id} value={cls._id}>
+                {cls.title}
+              </option>
+            ))}
+          </optgroup>
         </select>
       </div>
 
