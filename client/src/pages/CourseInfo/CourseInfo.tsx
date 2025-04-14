@@ -6,6 +6,12 @@ import ICourse from "../../interfaces/ICourse";
 import axios from "axios";
 import Loading from "../../components/Loading/Loading";
 import EditCourse from "../../components/EditCourse/EditCourse";
+import IModule from "../../interfaces/IModule";
+import ModuleAccordion from "../../components/ModuleAccordion/ModuleAccordion";
+import IAssessment from "../../interfaces/IAssessment";
+import IMaterial from "../../interfaces/IMaterial";
+import IRecording from "../../interfaces/IRecording";
+import ILiveLink from "../../interfaces/ILiveLink";
 
 const CourseInfo = () => {
   const { slug } = useParams();
@@ -14,9 +20,19 @@ const CourseInfo = () => {
   const backend = import.meta.env.VITE_BACKEND;
 
   const [course, setCourse] = useState<ICourse | null>(null);
+  const [classModules, setClassModules] = useState<IModule[]>([]);
+  const [openModuleIndex, setOpenModuleIndex] = useState<number | null>(null);
+  const [selectedItem, setSelectedItem] = useState<
+    ILiveLink | IRecording | IMaterial | IAssessment | null
+  >(null);
+
   const [loading, setLoading] = useState<boolean>(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [editMode, setEditMode] = useState<boolean>(false);
+
+  const toggleModule = (index: number | null) => {
+    setOpenModuleIndex((prev) => (prev === index ? null : index));
+  };
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -37,6 +53,28 @@ const CourseInfo = () => {
     };
     fetchCourse();
   }, [user, slug, backend, navigate]);
+
+  useEffect(() => {
+    if (course) {
+      const fetchClassModules = async () => {
+        try {
+          setLoading(true);
+          const res = await axios.get(`${backend}/module`, {
+            params: {
+              courseId: course._id,
+            },
+          });
+          setClassModules(res.data.payload);
+        } catch (error) {
+          console.log(error);
+        } finally {
+          setLoading(false);
+        }
+      };
+
+      fetchClassModules();
+    }
+  }, [backend, course]);
 
   // Handle video content click to show video player
   const handleContentClick = (url: string) => {
@@ -80,9 +118,11 @@ const CourseInfo = () => {
                     </span>
                   )}
 
-                  {course?.discount && course.discount > 0 && <span className={styles.coursePrice}>
-                    ${course?.finalPrice?.toFixed(2)} ( After Discount )
-                  </span>}
+                  {course?.discount && course.discount > 0 && (
+                    <span className={styles.coursePrice}>
+                      ${course?.finalPrice?.toFixed(2)} ( After Discount )
+                    </span>
+                  )}
                   {course?.duration && (
                     <span className={styles.courseDuration}>
                       {course?.duration}
@@ -91,19 +131,19 @@ const CourseInfo = () => {
                 </div>
                 <div className={styles.courseContent}>
                   <h2 className={styles.contentTitle}>Course Content:</h2>
-                  {/* //TODO: GET BACK TO THIS */}
-                  {/* <ul>
-                    {course?.content.map((item, index) => (
-                      <li key={index}>
-                        <button
-                          className={styles.contentItem}
-                          onClick={() => handleContentClick(item.url)} // Click to play the video
-                        >
-                          {item.title}
-                        </button>
-                      </li>
+                  <ol>
+                    {classModules.map((module, index) => (
+                      <ModuleAccordion
+                        key={module._id}
+                        module={module}
+                        index={index}
+                        openModuleIndex={openModuleIndex}
+                        toggleModule={toggleModule}
+                        setSelectedItem={setSelectedItem}
+                        selectedItem={selectedItem}
+                      />
                     ))}
-                  </ul> */}
+                  </ol>
                 </div>
                 {/* Add any additional information such as demo or other fields here */}
                 {course?.demo && (
