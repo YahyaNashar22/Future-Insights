@@ -67,28 +67,38 @@ const CourseCard: FC<{
         <h2 className={styles.courseTitle}>{course.title}</h2>
         <p className={styles.courseDescription}>{course.description}</p>
         <div className={styles.courseFooter}>
-          <span className={styles.coursePrice}>${course.finalPrice?.toFixed(2)}</span>
+          <span className={styles.coursePrice}>
+            ${course.finalPrice?.toFixed(2)}
+          </span>
           <span className={styles.demo} onClick={() => setDemoModal(true)}>
             Demo
           </span>
-
-          {/* user not signed in */}
           {!user && (
-            <Link to={`/signin`} className={styles.viewCourse}>
-              {isCourse ? "View Course" : "View Class"}
+            <Link
+              to={
+                isCourse
+                  ? `/show-case/course/${course.slug}`
+                  : `/show-case/class/${course.slug}`
+              }
+              className={styles.viewCourse}
+            >
+              View More
             </Link>
           )}
           {/* user signed in and not enrolled */}
           {user &&
             !course.enrolledUsers.includes(user._id) &&
             user._id !== course.teacher && (
-              <button
-                type="button"
-                onClick={() => setPurchaseModal(true)}
+              <Link
+                to={
+                  isCourse
+                    ? `/show-case/course/${course.slug}`
+                    : `/show-case/class/${course.slug}`
+                }
                 className={styles.viewCourse}
               >
-                Enroll
-              </button>
+                View More
+              </Link>
             )}
           {/* user signed in and enrolled */}
           {user &&

@@ -84,6 +84,10 @@ const ForgotPassword = lazy(
 
 const VerifyEmail = lazy(() => import("../pages/VerifyEmail/VerifyEmail.tsx"));
 
+const ClassShowCase = lazy(
+  () => import("../pages/ClassShowCase/ClassShowCase.tsx")
+);
+
 const AppRoutes = () => {
   const { user } = useUserStore();
 
@@ -99,6 +103,8 @@ const AppRoutes = () => {
           />
 
           <Route path="/coaching-session" element={<CoachingSessions />} />
+
+          <Route path="/show-case/class/:slug" element={<ClassShowCase />} />
 
           {/* Redirect if user is not signed in  */}
           <Route element={<ProtectedRoute userId={user?._id} />}>
