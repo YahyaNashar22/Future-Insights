@@ -1,25 +1,25 @@
 import { useNavigate, useParams } from "react-router-dom";
-import styles from "./ClassShowCase.module.css";
+import styles from "./CourseShowCase.module.css";
 import { useUserStore } from "../../store";
 import { useEffect, useState } from "react";
-import IClass from "../../interfaces/IClass";
 import axios from "axios";
 import Loading from "../../components/Loading/Loading";
+import ICourse from "../../interfaces/ICourse";
 
-const ClassShowCase = () => {
+const CourseShowCase = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();
   const { user } = useUserStore();
   const navigate = useNavigate();
 
-  const [cls, setCls] = useState<IClass | null>(null);
+  const [cls, setCls] = useState<ICourse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
     const fetchClass = async () => {
       try {
         setLoading(true);
-        const res = await axios.get(`${backend}/class/get-class/${slug}`);
+        const res = await axios.get(`${backend}/course/get-course/${slug}`);
         if (!res.data.payload) return navigate("*");
         setCls(res.data.payload);
       } catch (error) {
@@ -33,7 +33,7 @@ const ClassShowCase = () => {
   }, [backend, slug, navigate]);
 
   const handlePurchase = () => {
-    navigate(`/checkout-class/${cls?.slug}`);
+    navigate(`/checkout-course/${cls?.slug}`);
   };
 
   const isEnrolled = cls?.enrolledUsers.some((u) => {
@@ -58,7 +58,7 @@ const ClassShowCase = () => {
               <p className={styles.teacher}>
                 Instructor: {cls.teacher.fullname}
               </p>
-              <p className={styles.duration}>Duration: {cls.duration}</p>
+              <p className={styles.duration}>Duration: {cls.duration}</p>[]
               <p className={styles.category}>Category: {cls.category.title}</p>
               <div className={styles.priceBox}>
                 {cls.discount > 0 && (
@@ -104,4 +104,4 @@ const ClassShowCase = () => {
   );
 };
 
-export default ClassShowCase;
+export default CourseShowCase;

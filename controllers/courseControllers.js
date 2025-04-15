@@ -91,7 +91,7 @@ export const getCourseBySlug = async (req, res) => {
     try {
         const slug = req.params.slug;
 
-        const course = await Course.findOne({ slug }).populate("enrolledUsers");
+        const course = await Course.findOne({ slug }).populate(["teacher", "category", "enrolledUsers"]);
 
         res.status(200).json({
             message: "fetched successfully",

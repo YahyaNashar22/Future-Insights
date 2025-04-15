@@ -58,35 +58,7 @@ const CourseCheckout = () => {
       }
     }
   };
-  return (
-    <main className={styles.wrapper}>
-      {loading ? (
-        <Loading />
-      ) : (
-        <section className={styles.courseCheckout}>
-          <div className={styles.left}>
-            <h1>{course?.title}</h1>
-            <img
-              src={`${backend}/${course?.thumbnail}`}
-              alt={course?.title}
-              loading="lazy"
-              className={styles.thumbnail}
-            />
-          </div>
-          <div className={styles.right}>
-            <button
-              type="button"
-              className={styles.enroll}
-              onClick={enrollInCourse}
-            >
-              Enroll
-            </button>
-            {error && <p className={styles.error}>{error}</p>}
-          </div>
-        </section>
-      )}
-    </main>
-  );
+  return <main className={styles.wrapper}></main>;
 };
 
 export default CourseCheckout;

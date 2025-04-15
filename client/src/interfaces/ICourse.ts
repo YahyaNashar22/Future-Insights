@@ -1,3 +1,6 @@
+import ICategory from "./ICategory";
+import IUser from "./IUser";
+
 interface ICourse {
   _id: string;
   title: string;
@@ -12,9 +15,9 @@ interface ICourse {
     title: string;
     url: string;
   }[];
-  teacher: string;
+  teacher: IUser;
   enrolledUsers: ({ _id: string; fullname: string; email: string } | string)[];
-  category: string;
+  category: ICategory;
   type: string;
   slug: string;
 }
