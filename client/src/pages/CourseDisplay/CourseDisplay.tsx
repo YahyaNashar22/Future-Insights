@@ -33,7 +33,7 @@ const CourseDisplay = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (u: any) => u._id === user?._id
           ) &&
-            user?._id !== res.data.payload.teacher)
+            user?._id !== res.data.payload.teacher._id)
         )
           navigate("*");
 

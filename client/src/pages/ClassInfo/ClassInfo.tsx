@@ -36,7 +36,7 @@ const ClassInfo = () => {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
 
-        if (!res.data.payload || res.data.payload.teacher !== user?._id) {
+        if (!res.data.payload || res.data.payload.teacher._id !== user?._id) {
           navigate("*");
         }
 
