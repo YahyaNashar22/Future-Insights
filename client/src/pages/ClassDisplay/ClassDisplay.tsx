@@ -36,8 +36,6 @@ const ClassDisplay = () => {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
 
-        console.log(res);
-
         if (
           !res.data.payload ||
           (!res.data.payload.enrolledUsers.some(

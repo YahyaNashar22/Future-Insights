@@ -110,7 +110,7 @@ const CourseShowCase = () => {
             </div>
           </div>
           <section className={styles.description}>
-            <h2>About this class</h2>
+            <h2>About this course</h2>
             <p className={styles.descriptionText}>{cls.description}</p>
             {cls.demo ? (
               <div className={styles.demo}>
@@ -159,7 +159,7 @@ const CourseShowCase = () => {
           )}
         </main>
       ) : (
-        <p>Class not found.</p>
+        <p>Course not found.</p>
       )}
     </>
   );
