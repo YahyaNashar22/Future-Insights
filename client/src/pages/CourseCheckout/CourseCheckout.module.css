@@ -1,0 +1,99 @@
+.wrapper {
+  padding: 2rem;
+  max-width: 900px;
+  margin: auto;
+  background-color: var(--bg-white);
+  border-radius: 12px;
+}
+
+.card {
+  display: flex;
+  flex-direction: column;
+  gap: 1.5rem;
+  background-color: var(--white);
+  padding: 2rem;
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.image {
+  width: 100%;
+  max-height: 300px;
+  object-fit: cover;
+  border-radius: 10px;
+}
+
+.details {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.title {
+  font-size: 1.8rem;
+  color: var(--primary-blue);
+}
+
+.description {
+  font-size: 1rem;
+  color: #333;
+}
+
+.duration,
+.teacher {
+  font-weight: 500;
+  color: var(--secondary-blue);
+}
+
+.priceSection {
+  margin-top: 1rem;
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: #777;
+  font-size: 1.1rem;
+}
+
+.finalPrice {
+  font-size: 1.4rem;
+  font-weight: bold;
+  color: var(--primary-beige);
+}
+
+.enrollBtn {
+  margin-top: 1.5rem;
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.enrollBtn:hover {
+  background-color: var(--secondary-blue);
+}
+
+.success {
+  background-color: var(--secondary-beige);
+  color: var(--primary-beige);
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}
+
+.error {
+  background-color: #ffdada;
+  color: #b20000;
+  padding: 1rem;
+  border-radius: 8px;
+  margin-bottom: 1rem;
+  text-align: center;
+}

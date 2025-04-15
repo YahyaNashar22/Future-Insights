@@ -92,13 +92,13 @@ const CourseShowCase = lazy(
   () => import("../pages/CourseShowCase/CourseShowCase.tsx")
 );
 
-const CheckoutClass = lazy(
-  () => import("../pages/CheckoutClass/CheckoutClass.tsx")
-);
+// const CheckoutClass = lazy(
+//   () => import("../pages/CheckoutClass/CheckoutClass.tsx")
+// );
 
-const CourseCheckout = lazy(
-  () => import("../pages/CourseCheckout/CourseCheckout.tsx")
-);
+// const CourseCheckout = lazy(
+//   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
+// );
 
 const AppRoutes = () => {
   const { user } = useUserStore();
@@ -119,8 +119,8 @@ const AppRoutes = () => {
           <Route path="/show-case/class/:slug" element={<ClassShowCase />} />
           <Route path="/show-case/course/:slug" element={<CourseShowCase />} />
 
-          <Route path="/checkout-class/:slug" element={<CheckoutClass />} />
-          <Route path="/checkout-course/:slug" element={<CourseCheckout />} />
+          {/* <Route path="/checkout-class/:slug" element={<CheckoutClass />} />
+          <Route path="/checkout-course/:slug" element={<CourseCheckout />} /> */}
 
           {/* Redirect if user is not signed in  */}
           <Route element={<ProtectedRoute userId={user?._id} />}>
