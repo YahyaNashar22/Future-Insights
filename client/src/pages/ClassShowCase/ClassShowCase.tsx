@@ -20,11 +20,7 @@ const ClassShowCase = () => {
       try {
         setLoading(true);
         const res = await axios.get(`${backend}/class/get-class/${slug}`);
-
-        console.log(res);
-
-        if (!res.data.payload) navigate("*");
-
+        if (!res.data.payload) return navigate("*");
         setCls(res.data.payload);
       } catch (error) {
         console.log(error);
@@ -36,8 +32,75 @@ const ClassShowCase = () => {
     fetchClass();
   }, [backend, slug, navigate]);
 
+  const handlePurchase = () => {
+    navigate(`/checkout/${cls?.slug}`);
+  };
+
+  const isEnrolled = cls?.enrolledUsers.some((u) => {
+    if (typeof u === "string") return u === user?._id;
+    return u._id === user?._id;
+  });
+
   return (
-    <>{loading ? <Loading /> : <main className={styles.wrapper}></main>}</>
+    <>
+      {loading ? (
+        <Loading />
+      ) : cls ? (
+        <main className={styles.wrapper}>
+          <div className={styles.header}>
+            <img
+              src={`${backend}/${cls.thumbnail}`}
+              alt={cls.title}
+              className={styles.thumbnail}
+            />
+            <div className={styles.info}>
+              <h1>{cls.title}</h1>
+              <p className={styles.teacher}>
+                Instructor: {cls.teacher.fullname}
+              </p>
+              <p className={styles.duration}>Duration: {cls.duration}</p>
+              <p className={styles.category}>Category: {cls.category.title}</p>
+              <div className={styles.priceBox}>
+                {cls.discount > 0 && (
+                  <span className={styles.originalPrice}>${cls.price}</span>
+                )}
+                <span className={styles.finalPrice}>${cls.finalPrice}</span>
+              </div>
+              {!isEnrolled ? (
+                <button className={styles.buyBtn} onClick={handlePurchase}>
+                  Enroll Now
+                </button>
+              ) : (
+                <p className={styles.enrolledText}>
+                  You are already enrolled 🎉
+                </p>
+              )}
+            </div>
+          </div>
+          <section className={styles.description}>
+            <h2>About this class</h2>
+            <p className={styles.descriptionText}>{cls.description}</p>
+            {cls.demo ? (
+              <div className={styles.demo}>
+                <h3>Demo Video</h3>
+                <video
+                  controls
+                  width="100%"
+                  height="auto"
+                  src={`${backend}/${cls.demo}`}
+                >
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            ) : (
+              <h3 className={styles.demoNotAvailable}>Demo not available.</h3>
+            )}
+          </section>
+        </main>
+      ) : (
+        <p>Class not found.</p>
+      )}
+    </>
   );
 };
 

@@ -1,3 +1,6 @@
+import ICategory from "./ICategory";
+import IUser from "./IUser";
+
 interface IClass {
   _id: string;
   title: string;
@@ -8,9 +11,9 @@ interface IClass {
   finalPrice: number;
   duration: string;
   discount: number;
-  teacher: string;
+  teacher: IUser;
   enrolledUsers: ({ _id: string; fullname: string; email: string } | string)[];
-  category: string;
+  category: ICategory;
   type: string;
   slug: string;
 }

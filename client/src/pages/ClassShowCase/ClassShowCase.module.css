@@ -1,0 +1,115 @@
+.wrapper {
+  padding: 2rem;
+  max-width: 1000px;
+  margin: 20px auto;
+  background-color: var(--bg-white);
+  color: var(--primary-blue);
+  border-radius: 16px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+.header {
+  display: flex;
+  gap: 2rem;
+  flex-wrap: wrap;
+}
+
+.thumbnail {
+  width: 300px;
+  height: 200px;
+  object-fit: cover;
+  border-radius: 12px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.info {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.teacher,
+.duration,
+.category {
+  font-weight: 500;
+  color: var(--secondary-blue);
+}
+
+.priceBox {
+  display: flex;
+  align-items: center;
+  gap: 1rem;
+  font-size: 1.2rem;
+}
+
+.originalPrice {
+  text-decoration: line-through;
+  color: grey;
+}
+
+.finalPrice {
+  font-weight: bold;
+  color: var(--primary-beige);
+  font-size: 1.5rem;
+}
+
+.buyBtn {
+  padding: 0.75rem 1.5rem;
+  font-size: 1rem;
+  background-color: var(--primary-blue);
+  color: var(--white);
+  border: none;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.3s;
+}
+
+.buyBtn:hover {
+  background-color: var(--secondary-blue);
+}
+
+.enrolledText {
+  font-weight: bold;
+  color: var(--primary-beige);
+  background-color: var(--secondary-beige);
+  padding: 0.5rem 1rem;
+  border-radius: 6px;
+  display: inline-block;
+}
+
+.description {
+  margin-top: 3rem;
+}
+
+.description h2 {
+  color: var(--primary-blue);
+}
+
+.descriptionText {
+  color: #333;
+  line-height: 1.6;
+  font-weight: bold;
+}
+
+.demoNotAvailable {
+  color: var(--primary-beige) !important;
+  line-height: 1.6;
+  font-weight: bold;
+  text-align: center;
+}
+
+.demo video {
+  width: 100%;
+  height: 400px;
+  margin-top: 1rem;
+  border-radius: 10px;
+  border: 2px solid var(--secondary-beige);
+  background-color: var(--white);
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 100px;
+  }
+}
