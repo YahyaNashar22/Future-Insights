@@ -1,4 +1,5 @@
 import IClass from "../../interfaces/IClass";
+import { parseBullets } from "../../utils/ParseList";
 import styles from "./DefaultClassView.module.css";
 
 const DefaultClassView = ({ cls }: { cls: IClass | null }) => {
@@ -6,7 +7,11 @@ const DefaultClassView = ({ cls }: { cls: IClass | null }) => {
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.classTitle}>{cls?.title}</h1>
-      <p className={styles.description}>{cls?.description}</p>
+      {cls?.description && (
+        <div className={styles.description}>
+          {parseBullets(cls.description)}
+        </div>
+      )}
 
       <img
         src={`${backend}/${cls?.thumbnail}`}

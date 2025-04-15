@@ -13,6 +13,7 @@ import IRecording from "../../interfaces/IRecording";
 import ILiveLink from "../../interfaces/ILiveLink";
 import ClassContent from "../../components/ClassContent/ClassContent";
 import EditClass from "../../components/EditClass/EditClass";
+import { parseBullets } from "../../utils/ParseList";
 
 const ClassInfo = () => {
   const { slug } = useParams();
@@ -105,9 +106,11 @@ const ClassInfo = () => {
               </div>
               <div className={styles.courseInfo}>
                 <h1 className={styles.courseTitle}>{course?.title}</h1>
-                <p className={styles.courseDescription}>
-                  {course?.description}
-                </p>
+                {course?.description && (
+                  <div className={styles.courseDescription}>
+                    {parseBullets(course.description)}
+                  </div>
+                )}
                 <div className={styles.courseDetails}>
                   <span className={styles.coursePrice}>
                     ${course?.price?.toFixed(2)}

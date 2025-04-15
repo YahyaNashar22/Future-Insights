@@ -1,0 +1,6 @@
+.descriptionItemsList {
+  list-style-type: disc;
+  margin: 20px auto;
+  color: var(--secondary-blue);
+  text-align: left;
+}
