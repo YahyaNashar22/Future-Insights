@@ -121,11 +121,6 @@ export const deleteCourse = async (req, res) => {
             removeFile(course?.thumbnail);
         }
 
-        if (course && course.content.length > 0) {
-            course.content.forEach(vid => {
-                removeFile(vid.url)
-            });
-        }
 
         await Course.findByIdAndDelete(id);
 

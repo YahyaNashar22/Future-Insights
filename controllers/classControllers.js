@@ -1,4 +1,5 @@
 import Class from "../models/classModel.js";
+import removeFile from "../utils/removeFile.js";
 
 export const createClass = async (req, res) => {
     try {
@@ -93,11 +94,11 @@ export const deleteClass = async (req, res) => {
 
         const fetchedClass = await Class.findById(id);
 
-        if (fetchedClass.enrolledUsers.length > 0) {
-            return res.status(400).json({
-                message: "Cannot delete a class with active students!"
-            })
-        }
+        // if (fetchedClass.enrolledUsers.length > 0) {
+        //     return res.status(400).json({
+        //         message: "Cannot delete a class with active students!"
+        //     })
+        // }
 
         if (fetchedClass && fetchedClass.thumbnail) {
             removeFile(fetchedClass.thumbnail);
