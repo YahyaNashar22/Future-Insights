@@ -4,9 +4,8 @@ import logo from "../../assets/icons/logo_svg_white.svg";
 import phone from "../../assets/icons/phone.png";
 import mail from "../../assets/icons/mail.png";
 import location from "../../assets/icons/location.png";
-import twitter from "../../assets/icons/twitter.png";
+import linkedin from "../../assets/icons/linkedin.png";
 import facebook from "../../assets/icons/facebook.png";
-import pinterest from "../../assets/icons/pinterest.png";
 import instagram from "../../assets/icons/instagram.png";
 import { Link } from "react-router-dom";
 
@@ -143,16 +142,28 @@ const Footer = () => {
         <p>&copy; 2025 Future Insights</p>
         <ul>
           <li>
-            <Icon image={twitter} />
+            <a
+              href="https://www.linkedin.com/company/future-insights-fmc/"
+              target="_blank"
+            >
+              <Icon image={linkedin} />
+            </a>
           </li>
           <li>
-            <Icon image={facebook} />
+            <a
+              href="https://www.facebook.com/profile.php?id=61573130005640"
+              target="_blank"
+            >
+              <Icon image={facebook} />
+            </a>
           </li>
           <li>
-            <Icon image={pinterest} />
-          </li>
-          <li>
-            <Icon image={instagram} />
+            <a
+              href="https://www.instagram.com/futureinsights.ae/"
+              target="_blank"
+            >
+              <Icon image={instagram} />
+            </a>
           </li>
         </ul>
       </div>
