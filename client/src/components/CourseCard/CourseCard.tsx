@@ -1,9 +1,11 @@
-import { FC, useState } from "react";
+import { FC, useEffect, useState } from "react";
 import ICourse from "../../interfaces/ICourse";
 import styles from "./CourseCard.module.css";
 import { useUserStore } from "../../store";
 import { Link } from "react-router-dom";
 import IClass from "../../interfaces/IClass";
+import IModule from "../../interfaces/IModule";
+import axios from "axios";
 
 const CourseCard: FC<{
   course: ICourse | IClass;
@@ -14,7 +16,30 @@ const CourseCard: FC<{
   const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
 
+  const [modules, setModules] = useState<IModule[]>([]);
+
   const [demoModal, setDemoModal] = useState<boolean>(false);
+
+  useEffect(() => {
+    const fetchModules = async () => {
+      try {
+        const params: { [key: string]: string } = {};
+        if (course.type === "class") {
+          params.classId = course._id;
+        } else if (course.type === "course") {
+          params.courseId = course._id;
+        }
+
+        const res = await axios.get(`${backend}/module`, {
+          params,
+        });
+        setModules(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchModules();
+  }, [backend, course]);
 
   return (
     <li className={styles.courseCard}>
@@ -30,54 +55,62 @@ const CourseCard: FC<{
         <h2 className={styles.courseTitle}>{course.title}</h2>
         <p className={styles.courseDescription}>{course.description}</p>
         <div className={styles.courseFooter}>
-          <span className={styles.coursePrice}>
-            ${course.finalPrice?.toFixed(2)}
-          </span>
+          {course.finalPrice > 0 && (
+            <span className={styles.coursePrice}>
+              ${course.finalPrice?.toFixed(2)}
+            </span>
+          )}
           <span className={styles.demo} onClick={() => setDemoModal(true)}>
             Demo
           </span>
-          {!user && (
-            <Link
-              to={
-                isCourse
-                  ? `/show-case/course/${course.slug}`
-                  : `/show-case/class/${course.slug}`
-              }
-              className={styles.viewCourse}
-            >
-              View More
-            </Link>
+          {modules.length === 0 ? (
+            <p className={styles.viewCourse}>Coming Soon</p>
+          ) : (
+            <>
+              {!user && (
+                <Link
+                  to={
+                    isCourse
+                      ? `/show-case/course/${course.slug}`
+                      : `/show-case/class/${course.slug}`
+                  }
+                  className={styles.viewCourse}
+                >
+                  View More
+                </Link>
+              )}
+              {/* user signed in and not enrolled */}
+              {user &&
+                !course.enrolledUsers.includes(user._id) &&
+                user._id !== course.teacher._id && (
+                  <Link
+                    to={
+                      isCourse
+                        ? `/show-case/course/${course.slug}`
+                        : `/show-case/class/${course.slug}`
+                    }
+                    className={styles.viewCourse}
+                  >
+                    View More
+                  </Link>
+                )}
+              {/* user signed in and enrolled */}
+              {user &&
+                (course.enrolledUsers.includes(user._id) ||
+                  user._id === course.teacher._id) && (
+                  <Link
+                    to={
+                      isCourse
+                        ? `/course-catalogue/course/${course.slug}`
+                        : `/course-catalogue/class/${course.slug}`
+                    }
+                    className={styles.viewCourse}
+                  >
+                    {isCourse ? "View Course" : "View Class"}
+                  </Link>
+                )}
+            </>
           )}
-          {/* user signed in and not enrolled */}
-          {user &&
-            !course.enrolledUsers.includes(user._id) &&
-            user._id !== course.teacher._id && (
-              <Link
-                to={
-                  isCourse
-                    ? `/show-case/course/${course.slug}`
-                    : `/show-case/class/${course.slug}`
-                }
-                className={styles.viewCourse}
-              >
-                View More
-              </Link>
-            )}
-          {/* user signed in and enrolled */}
-          {user &&
-            (course.enrolledUsers.includes(user._id) ||
-              user._id === course.teacher._id) && (
-              <Link
-                to={
-                  isCourse
-                    ? `/course-catalogue/course/${course.slug}`
-                    : `/course-catalogue/class/${course.slug}`
-                }
-                className={styles.viewCourse}
-              >
-                {isCourse ? "View Course" : "View Class"}
-              </Link>
-            )}
         </div>
       </div>
 

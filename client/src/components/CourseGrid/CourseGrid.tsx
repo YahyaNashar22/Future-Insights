@@ -116,7 +116,9 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
 
               {activeTab === "classes" && (
                 <>
-                  <h2 className={styles.containerTitle}>Interactive Online Classes</h2>
+                  <h2 className={styles.containerTitle}>
+                    Interactive Online Classes
+                  </h2>
                   {classes.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {classes.map((cls) => {
