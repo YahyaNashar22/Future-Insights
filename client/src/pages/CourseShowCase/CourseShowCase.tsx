@@ -5,6 +5,7 @@ import { useEffect, useState } from "react";
 import axios, { AxiosError } from "axios";
 import Loading from "../../components/Loading/Loading";
 import ICourse from "../../interfaces/ICourse";
+import IModule from "../../interfaces/IModule";
 
 const CourseShowCase = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -16,6 +17,7 @@ const CourseShowCase = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [purchaseModal, setPurchaseModal] = useState<boolean>(false);
+  const [modules, setModules] = useState<IModule[]>([]);
 
   useEffect(() => {
     const fetchClass = async () => {
@@ -33,6 +35,28 @@ const CourseShowCase = () => {
 
     fetchClass();
   }, [backend, slug, navigate]);
+
+  useEffect(() => {
+    if (!cls) return;
+    const fetchModules = async () => {
+      try {
+        const params: { [key: string]: string } = {};
+        if (cls.type === "class") {
+          params.classId = cls._id;
+        } else if (cls.type === "course") {
+          params.courseId = cls._id;
+        }
+
+        const res = await axios.get(`${backend}/module`, {
+          params,
+        });
+        setModules(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      }
+    };
+    fetchModules();
+  }, [backend, cls]);
 
   const enrollInCourse = async () => {
     if (!user) navigate("/signin");
@@ -93,26 +117,32 @@ const CourseShowCase = () => {
                 {cls.discount > 0 && (
                   <span className={styles.originalPrice}>${cls.price}</span>
                 )}
-                <span className={styles.finalPrice}>${cls.finalPrice}</span>
+                {cls.price !== 0 && (
+                  <span className={styles.finalPrice}>${cls.finalPrice}</span>
+                )}
               </div>
-              {!isEnrolled ? (
-                <button
-                  className={styles.buyBtn}
-                  onClick={() => setPurchaseModal(true)}
-                >
-                  Enroll Now
-                </button>
-              ) : (
-                <p className={styles.enrolledText}>
-                  You are already enrolled 🎉
-                </p>
+              {modules.length !== 0 && (
+                <>
+                  {!isEnrolled ? (
+                    <button
+                      className={styles.buyBtn}
+                      onClick={() => setPurchaseModal(true)}
+                    >
+                      Enroll Now
+                    </button>
+                  ) : (
+                    <p className={styles.enrolledText}>
+                      You are already enrolled 🎉
+                    </p>
+                  )}
+                </>
               )}
             </div>
           </div>
           <section className={styles.description}>
             <h2>About this course</h2>
             <p className={styles.descriptionText}>{cls.description}</p>
-            {cls.demo ? (
+            {cls.demo && (
               <div className={styles.demo}>
                 <h3>Demo Video</h3>
                 <video
@@ -124,8 +154,6 @@ const CourseShowCase = () => {
                   Your browser does not support the video tag.
                 </video>
               </div>
-            ) : (
-              <h3 className={styles.demoNotAvailable}>Demo not available.</h3>
             )}
           </section>
           {error && <p className={styles.error}>{error}</p>}
