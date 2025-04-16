@@ -20,7 +20,7 @@ const AddClassForm = ({
   const [formData, setFormData] = useState({
     title: "",
     description: "",
-    duration: "",
+    duration: "TBA",
     price: 0,
     discount: 0,
     teacher: user?._id,
@@ -139,6 +139,7 @@ const AddClassForm = ({
             type="text"
             name="duration"
             placeholder="Class Duration"
+            value={formData.duration}
             onChange={handleChange}
             required
           />
@@ -152,6 +153,7 @@ const AddClassForm = ({
             name="price"
             placeholder="Class Price"
             onChange={handleChange}
+            value={formData.price}
             required
           />
         </label>
@@ -164,6 +166,7 @@ const AddClassForm = ({
             name="discount"
             placeholder="Class Discount"
             onChange={handleChange}
+            value={formData.discount}
             required
           />
         </label>

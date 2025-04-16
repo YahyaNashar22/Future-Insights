@@ -50,7 +50,12 @@
   font-size: 18px;
   color: var(--grey-accent);
   margin-bottom: 20px;
-  text-align: center;
+  text-align: left;
+  padding: 20px;
+}
+
+.courseDescription li {
+  color: var(--grey-accent);
 }
 
 /* Course details */
