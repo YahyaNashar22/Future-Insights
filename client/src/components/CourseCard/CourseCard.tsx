@@ -60,9 +60,11 @@ const CourseCard: FC<{
               ${course.finalPrice?.toFixed(2)}
             </span>
           )}
-          <span className={styles.demo} onClick={() => setDemoModal(true)}>
-            Demo
-          </span>
+          {course.demo && (
+            <span className={styles.demo} onClick={() => setDemoModal(true)}>
+              Demo
+            </span>
+          )}
           {modules.length === 0 ? (
             <p className={styles.viewCourse}>Coming Soon</p>
           ) : (
