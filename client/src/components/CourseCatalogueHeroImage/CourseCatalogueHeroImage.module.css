@@ -1,6 +1,5 @@
 .wrapper {
   position: relative;
-  padding-top: 100px;
 }
 
 .woman {
@@ -17,6 +16,10 @@
 }
 
 @media (max-width: 768px) {
+  .wrapper {
+    padding-top: 100px;
+  }
+
   .woman {
     max-width: 480px;
   }

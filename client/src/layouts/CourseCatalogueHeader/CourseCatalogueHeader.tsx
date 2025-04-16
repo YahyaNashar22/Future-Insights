@@ -1,6 +1,6 @@
 import styles from "./CourseCatalogueHeader.module.css";
 
-import logo from "../../assets/icons/logo_mix.png";
+import logo from "../../assets/icons/logo_svg_white.svg";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";

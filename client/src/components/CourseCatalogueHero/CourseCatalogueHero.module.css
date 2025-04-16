@@ -39,16 +39,18 @@
   }
 }
 
-
 @media (max-width: 768px) {
   .title {
     font-size: 4rem;
   }
 }
 
-
 @media (max-width: 480px) {
   .title {
     font-size: 3rem;
+  }
+
+  .bubble {
+    top: -100px;
   }
 }
