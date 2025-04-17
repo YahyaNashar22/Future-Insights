@@ -36,6 +36,7 @@
   align-items: center;
   justify-content: center;
   color: var(--primary-blue);
+  gap:6px;
 }
 
 .signin {
