@@ -9,6 +9,7 @@ const CoachingSessions = () => {
   const [email, setEmail] = useState<string>("");
   const [phone, setPhone] = useState<string>("");
   const [date, setDate] = useState<string>("");
+  const [time, setTime] = useState<string>("");
 
   const [loading, setLoading] = useState<boolean>(false);
   const [success, setSuccess] = useState<boolean>(false);
@@ -17,13 +18,15 @@ const CoachingSessions = () => {
     e.preventDefault();
     try {
       setLoading(true);
+      const fullDateTime = `${date}T${time}`;
+
       const res = await axios.post(
         `${backend}/user/request-coaching-session`,
         {
           name,
           email,
           phone,
-          date,
+          date: fullDateTime, // send combined datetime string
         },
         {
           headers: {
@@ -31,12 +34,14 @@ const CoachingSessions = () => {
           },
         }
       );
+
       console.log(res);
       setSuccess(true);
       setName("");
       setEmail("");
       setPhone("");
       setDate("");
+      setTime("");
     } catch (error) {
       console.log(error);
     } finally {
@@ -79,11 +84,18 @@ const CoachingSessions = () => {
             required
           />
           <input
-            type="datetime-local"
+            type="date"
             value={date}
             onChange={(e) => setDate(e.target.value)}
-            min={`${new Date().toISOString().split("T")[0]}T09:00`}
-            max={`${new Date().toISOString().split("T")[0]}T18:00`}
+            min={new Date().toISOString().split("T")[0]}
+            required
+          />
+          <input
+            type="time"
+            value={time}
+            onChange={(e) => setTime(e.target.value)}
+            min="09:00"
+            max="18:00"
             required
           />
           <button type="submit" disabled={loading}>
