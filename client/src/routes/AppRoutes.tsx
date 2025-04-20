@@ -92,6 +92,8 @@ const CourseShowCase = lazy(
   () => import("../pages/CourseShowCase/CourseShowCase.tsx")
 );
 
+const PaymentPage = lazy(() => import("../pages/PaymentPage/PaymentPage.tsx"));
+
 // const CheckoutClass = lazy(
 //   () => import("../pages/CheckoutClass/CheckoutClass.tsx")
 // );
@@ -118,6 +120,8 @@ const AppRoutes = () => {
 
           <Route path="/show-case/class/:slug" element={<ClassShowCase />} />
           <Route path="/show-case/course/:slug" element={<CourseShowCase />} />
+
+          <Route path="/pay" element={<PaymentPage />} />
 
           {/* <Route path="/checkout-class/:slug" element={<CheckoutClass />} />
           <Route path="/checkout-course/:slug" element={<CourseCheckout />} /> */}
