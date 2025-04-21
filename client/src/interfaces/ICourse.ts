@@ -19,6 +19,7 @@ interface ICourse {
   enrolledUsers: ({ _id: string; fullname: string; email: string } | string)[];
   category: ICategory;
   type: string;
+  showCertificate: boolean;
   slug: string;
 }
 

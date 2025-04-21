@@ -16,7 +16,9 @@ const CertificationPage = () => {
   const navigate = useNavigate();
 
   const certificateRef = useRef<HTMLDivElement>(null);
-  const [certification, setCertification] = useState<ICertification | null>(null);
+  const [certification, setCertification] = useState<ICertification | null>(
+    null
+  );
   const [loading, setLoading] = useState<boolean>(false);
 
   useEffect(() => {
@@ -62,9 +64,7 @@ const CertificationPage = () => {
         <div className={styles.container}>
           {certification && (
             <div ref={certificateRef}>
-              <div className={styles.header}>
-                Certificate of Completion
-              </div>
+              <div className={styles.header}>Certificate of Completion</div>
 
               <div className={styles.details}>
                 <p>
@@ -91,6 +91,22 @@ const CertificationPage = () => {
                   <p className={styles.teacher}>
                     Instructor:{" "}
                     <strong>{certification.courseId.teacher.fullname}</strong>
+                  </p>
+                </div>
+              )}
+
+              {certification.classId && (
+                <div className={styles.courseInfo}>
+                  <h3>Completion of Course</h3>
+                  <p className={styles.certificationText}>
+                    This is to certify that{" "}
+                    <strong>{certification.userId.fullname}</strong> has
+                    successfully completed all the requirements for the course{" "}
+                    <strong>{certification.classId.title}</strong>.
+                  </p>
+                  <p className={styles.teacher}>
+                    Instructor:{" "}
+                    <strong>{certification.classId.teacher.fullname}</strong>
                   </p>
                 </div>
               )}

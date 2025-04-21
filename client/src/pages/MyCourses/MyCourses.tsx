@@ -20,7 +20,7 @@ const MyCourses = () => {
   const [certifications, setCertifications] = useState<ICertification[]>([]);
   const [activeTab, setActiveTab] = useState<
     "courses" | "classes" | "certifications" | "edit profile"
-  >("courses");
+  >("classes");
 
   const [isLoading, setIsLoading] = useState<boolean>(false);
 
@@ -108,20 +108,21 @@ const MyCourses = () => {
             <div className={styles.navbar}>
               <button
                 className={`${styles.navButton} ${
-                  activeTab === "courses" ? styles.active : ""
-                }`}
-                onClick={() => setActiveTab("courses")}
-              >
-                Courses
-              </button>
-              <button
-                className={`${styles.navButton} ${
                   activeTab === "classes" ? styles.active : ""
                 }`}
                 onClick={() => setActiveTab("classes")}
               >
                 Classes
               </button>
+              <button
+                className={`${styles.navButton} ${
+                  activeTab === "courses" ? styles.active : ""
+                }`}
+                onClick={() => setActiveTab("courses")}
+              >
+                Courses
+              </button>
+
               <button
                 className={`${styles.navButton} ${
                   activeTab === "certifications" ? styles.active : ""
@@ -200,6 +201,7 @@ const MyCourses = () => {
                           >
                             <h3 className={styles.certificationTitle}>
                               {certification.courseId?.title ||
+                                certification.classId?.title ||
                                 "Untitled Course"}
                             </h3>
                           </Link>

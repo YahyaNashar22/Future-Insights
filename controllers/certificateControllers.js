@@ -30,23 +30,56 @@ export const createCertification = async (req, res) => {
                 return res.status(404).json({ message: "User not found" });
             }
 
-            // Get the user's unlocked videos for this course
-            const userProgress = user.unlockedVideos.find(entry => entry.courseId.toString() === courseId);
-            const unlockedVideos = userProgress ? userProgress.videos : [];
 
-            // Ensure all videos in the course are unlocked
-            if (unlockedVideos.length !== course.content.length) {
-                return res.status(403).json({
-                    message: "You must complete all course videos before receiving a certification."
-                });
-            }
+            // Get the user's unlocked videos for this course
+            // const userProgress = user.unlockedVideos.find(entry => entry.courseId.toString() === courseId);
+            // const unlockedVideos = userProgress ? userProgress.videos : [];
+
+            // // Ensure all videos in the course are unlocked
+            // if (unlockedVideos.length !== course.content.length) {
+            //     return res.status(403).json({
+            //         message: "You must complete all course videos before receiving a certification."
+            //     });
+            // }
         }
 
-        const certification = new Certification({
-            userId,
-            classId,
-            courseId
-        });
+        let certification;
+
+        if (classId) {
+            const prevCert = await Certification.findOne({
+                courseId,
+                userId
+            })
+
+            if (prevCert) {
+                return res.status(401).json({
+                    message: "certification already acquired"
+                })
+            }
+
+            certification = new Certification({
+                userId,
+                classId
+            });
+        }
+
+        if (courseId) {
+            const prevCert = await Certification.findOne({
+                courseId,
+                userId
+            })
+
+            if (prevCert) {
+                return res.status(401).json({
+                    message: "certification already acquired"
+                })
+            }
+
+            certification = new Certification({
+                userId,
+                courseId
+            });
+        }
 
         await certification.save();
 
@@ -64,7 +97,7 @@ export const getAllCertificationsByUserId = async (req, res) => {
     try {
         const { userId } = req.body;
 
-        const certifications = await Certification.find({ userId }).populate("courseId classId")
+        const certifications = await Certification.find({ userId }).populate(["courseId", "classId"])
             .sort({ createdAt: -1 });
 
 
