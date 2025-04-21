@@ -12,7 +12,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [classes, setClasses] = useState<ICourse[]>([]);
   const [isLoading, setIsLoading] = useState<boolean>(false);
-  const [activeTab, setActiveTab] = useState<"courses" | "classes">("courses");
+  const [activeTab, setActiveTab] = useState<"courses" | "classes">("classes");
 
   const fetchClasses = async () => {
     try {
@@ -72,22 +72,26 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
           <div className={styles.coursesAndClasses}>
             {/* navbar filters  */}
             <div className={styles.navbar}>
-              <button
-                className={`${styles.navButton} ${
-                  activeTab === "courses" ? styles.active : ""
-                }`}
-                onClick={() => setActiveTab("courses")}
-              >
-                Online Courses
-              </button>
-              <button
-                className={`${styles.navButton} ${
-                  activeTab === "classes" ? styles.active : ""
-                }`}
-                onClick={() => setActiveTab("classes")}
-              >
-                Interactive Online Classes
-              </button>
+              {courses.length > 0 && (
+                <button
+                  className={`${styles.navButton} ${
+                    activeTab === "courses" ? styles.active : ""
+                  }`}
+                  onClick={() => setActiveTab("courses")}
+                >
+                  Online Courses
+                </button>
+              )}
+              {courses.length > 0 && (
+                <button
+                  className={`${styles.navButton} ${
+                    activeTab === "classes" ? styles.active : ""
+                  }`}
+                  onClick={() => setActiveTab("classes")}
+                >
+                  Interactive Online Classes
+                </button>
+              )}
             </div>
 
             <div className={styles.container}>
