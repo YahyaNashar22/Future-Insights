@@ -173,9 +173,11 @@ export const showCertificate = async (req, res) => {
     try {
         const id = req.params.id;
 
+        const fetchedCourse = await Class.findById(id);
+
         const course = await Class.findByIdAndUpdate(id, {
-            $et: {
-                showCertificate: true
+            $set: {
+                showCertificate: !(fetchedCourse?.showCertificate)
             }
         }, {
             new: true

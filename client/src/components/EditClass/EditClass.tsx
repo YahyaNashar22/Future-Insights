@@ -116,7 +116,13 @@ const EditClass = () => {
   const showCertificate = async () => {
     try {
       setSubmitting(true);
-      await axios.put(`${backend}/class/show-class-certificate/${course?._id}`);
+      const res = await axios.put(
+        `${backend}/class/show-class-certificate/${course?._id}`
+      );
+
+      if (res.data.payload) {
+        setCourse(res.data.payload);
+      }
     } catch (error) {
       console.log(error);
     } finally {
@@ -212,7 +218,9 @@ const EditClass = () => {
               onClick={showCertificate}
               disabled={submitting}
             >
-              Show Certificate
+              {course?.showCertificate
+                ? "Certificate Shown"
+                : "Show Certificate"}
             </button>
 
             <button className={styles.addModuleButton} type="submit">

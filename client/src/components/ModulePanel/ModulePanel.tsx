@@ -103,6 +103,11 @@ const ModulePanel = ({
                       );
                     })}
                   </ol>
+                  {cls?.showCertificate && (
+                    <button className={styles.getCertificate}>
+                      Get Certificate
+                    </button>
+                  )}
                 </div>
               )}
             </>
