@@ -89,8 +89,9 @@
 
 .descriptionText {
   color: #333;
-  line-height: 1.6;
+  line-height: 30px;
   font-weight: bold;
+
 }
 
 .demoNotAvailable {
@@ -179,6 +180,10 @@
 
 .cancelButton:hover {
   background: var(--secondary-beige);
+  color: var(--primary-beige);
+}
+
+.beige {
   color: var(--primary-beige);
 }
 

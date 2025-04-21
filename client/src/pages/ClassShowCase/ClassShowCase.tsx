@@ -156,6 +156,46 @@ const ClassShowCase = () => {
               </div>
             )}
           </section>
+          <section className={styles.description}>
+            <h2>🌍 International Accreditation & Recognition</h2>
+            <p className={styles.descriptionText}>
+              At <span className={styles.beige}> Future Insights </span>, we take
+              pride in offering high-impact training programs that are
+              thoughtfully designed to meet the needs of today's dynamic
+              business environment. Our courses are developed to empower
+              ambitious professionals with the practical skills and strategic
+              insights they need to grow and succeed in their careers. Upon
+              completing the course—through full attendance and successfully
+              passing the final assessment—participants will receive a
+              Certificate of Achievement accredited by Future Insights. This
+              certificate reflects our commitment to excellence and is
+              recognized for its value in professional development across
+              various industries and markets. Whether you're aiming for career
+              advancement, internal promotion, or seeking new opportunities,
+              this certificate serves as a mark of your dedication to continuous
+              growth and learning. It's more than a credential—it's a step
+              forward in your leadership journey.
+            </p>
+          </section>
+
+          <section className={styles.description} style={{ direction: "rtl" }}>
+            <h2 style={{ direction: "rtl" }}>🌍 الاعتماد والاعتراف الدولي</h2>
+            <p className={styles.descriptionText} style={{ direction: "rtl" }}>
+              تفخر <span className={styles.beige}> Future Insights </span> بتقديم
+              برامج تدريبية عالية التأثير، مصممة بعناية لتلبية متطلبات بيئة
+              الأعمال المتغيرة باستمرار. تهدف دوراتنا إلى تمكين المهنيين
+              الطموحين بالمهارات العملية والرؤى الاستراتيجية التي تساعدهم على
+              النمو وتحقيق النجاح في مسيرتهم المهنية. عند إتمام الدورة بنجاح، من
+              خلال الحضور الكامل واجتياز التقييم النهائي، يحصل المشاركون على
+              شهادة إنجاز معتمدة من{" "}
+              <span className={styles.beige}> Future Insights </span>. تعكس هذه
+              الشهادة التزامنا بالتميز، وتحظى بقيمة مهنية عالية في مختلف
+              القطاعات والأسواق. سواء كنت تسعى إلى الترقية، أو تطوير مسارك داخل
+              المؤسسة، أو تبحث عن فرص جديدة، فإن هذه الشهادة تمثل دليلاً على
+              التزامك بالنمو المستمر والتعلم القيادي. فهي ليست مجرد شهادة، بل
+              خطوة عملية نحو تطويرك التنفيذي
+            </p>
+          </section>
           {error && <p className={styles.error}>{error}</p>}
           {/* Modal For Purchase Form  */}
           {purchaseModal && (
