@@ -219,7 +219,7 @@ const EditClass = () => {
               disabled={submitting}
             >
               {course?.showCertificate
-                ? "Certificate Shown"
+                ? "Hide Certificate"
                 : "Show Certificate"}
             </button>
 
