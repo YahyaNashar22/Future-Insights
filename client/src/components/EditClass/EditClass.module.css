@@ -90,7 +90,7 @@
 }
 
 .addModuleButton:hover {
-  background-color: var(--secondary-beige);
+  background-color: var(--primary-blue);
 }
 
 .moduleFormContainer {

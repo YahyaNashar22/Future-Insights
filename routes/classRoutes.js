@@ -1,5 +1,5 @@
 import express from "express";
-import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher, updateClass } from "../controllers/classControllers.js";
+import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher, showCertificate, updateClass } from "../controllers/classControllers.js";
 import { upload } from "../middlewares/multer.js";
 
 
@@ -17,6 +17,9 @@ classRouter.delete('/delete/:id', deleteClass);
 classRouter.post('/get-by-teacher', getClassesByTeacher);
 
 classRouter.put("/update-class/:slug", upload.any(), updateClass)
+
+classRouter.put("/show-class-certificate/:id", showCertificate);
+
 
 
 export default classRouter;

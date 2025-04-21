@@ -168,3 +168,26 @@ export const updateClass = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+export const showCertificate = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const course = await Class.findByIdAndUpdate(id, {
+            $et: {
+                showCertificate: true
+            }
+        }, {
+            new: true
+        });
+
+        return res.status(200).json({
+            payload: course
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}

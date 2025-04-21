@@ -13,6 +13,7 @@ const EditClass = () => {
 
   const [course, setCourse] = useState<IClass | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
 
   const [showModuleForm, setShowModuleForm] = useState<boolean>(false);
   const [moduleName, setModuleName] = useState<string>("");
@@ -112,6 +113,17 @@ const EditClass = () => {
     }
   };
 
+  const showCertificate = async () => {
+    try {
+      setSubmitting(true);
+      await axios.put(`${backend}/class/show-class-certificate/${course?._id}`);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <main className={styles.wrapper}>
       {loading ? (
@@ -194,7 +206,16 @@ const EditClass = () => {
               Add Module
             </button>
 
-            <button className={styles.editFormBtn} type="submit">
+            <button
+              type="button"
+              className={styles.addModuleButton}
+              onClick={showCertificate}
+              disabled={submitting}
+            >
+              Show Certificate
+            </button>
+
+            <button className={styles.addModuleButton} type="submit">
               Update Class
             </button>
           </form>

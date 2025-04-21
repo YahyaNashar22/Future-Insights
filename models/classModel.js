@@ -63,6 +63,10 @@ const classSchema = new Schema(
             type: String,
             default: "class"
         },
+        showCertificate: {
+            type: Boolean,
+            default: false,
+        },
         slug: {
             type: String,
             unique: true,

@@ -9,7 +9,7 @@ import AddContentForm from "../../components/AddModuleForm/AddContent";
 
 const Dashboard = () => {
   const [activeComponent, setActiveComponent] = useState<DashboardSections>(
-    DashboardSections.MyCourses
+    DashboardSections.MyClasses
   );
 
   const handleSidebarClick = (component: DashboardSections) => {
@@ -20,6 +20,35 @@ const Dashboard = () => {
     <main className={styles.wrapper}>
       {/* Sidebar */}
       <ul className={styles.sidebar}>
+        <li
+          className={
+            activeComponent === DashboardSections.MyClasses
+              ? styles.active
+              : undefined
+          }
+        >
+          <button
+            onClick={() => handleSidebarClick(DashboardSections.MyClasses)}
+            className={styles.sidebarButton}
+          >
+            My Classes
+          </button>
+        </li>
+
+        <li
+          className={
+            activeComponent === DashboardSections.AddClass
+              ? styles.active
+              : undefined
+          }
+        >
+          <button
+            onClick={() => handleSidebarClick(DashboardSections.AddClass)}
+            className={styles.sidebarButton}
+          >
+            Add Class
+          </button>
+        </li>
         <li
           className={
             activeComponent === DashboardSections.MyCourses
@@ -46,35 +75,6 @@ const Dashboard = () => {
             className={styles.sidebarButton}
           >
             Add Course
-          </button>
-        </li>
-
-        <li
-          className={
-            activeComponent === DashboardSections.MyClasses
-              ? styles.active
-              : undefined
-          }
-        >
-          <button
-            onClick={() => handleSidebarClick(DashboardSections.MyClasses)}
-            className={styles.sidebarButton}
-          >
-            My Classes
-          </button>
-        </li>
-        <li
-          className={
-            activeComponent === DashboardSections.AddClass
-              ? styles.active
-              : undefined
-          }
-        >
-          <button
-            onClick={() => handleSidebarClick(DashboardSections.AddClass)}
-            className={styles.sidebarButton}
-          >
-            Add Class
           </button>
         </li>
 
