@@ -40,7 +40,8 @@ const app = express();
 
 // CORS Policies
 app.use(cors({
-  origin: ["http://localhost:5173", "https://future-insights.onrender.com", "http://futureinsights.ae/"],
+  origin: ["http://localhost:5173", "https://future-insights.onrender.com", "http://futureinsights.ae",
+    "https://futureinsights.ae"],
   credentials: true,
   optionsSuccessStatus: 200,
 }
