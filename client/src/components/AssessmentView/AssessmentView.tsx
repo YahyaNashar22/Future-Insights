@@ -82,7 +82,6 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
       );
     }
 
-    // TODO: CHECK IF THIS WORKS ON HTTPS
     // if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(ext)) {
     //   return (
     //     <iframe

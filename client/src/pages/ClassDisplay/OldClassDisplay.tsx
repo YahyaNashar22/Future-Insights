@@ -78,8 +78,6 @@ const ClassDisplay = () => {
     fetchSessions();
   }, [backend, cls]);
 
-  // TODO: IMPLEMENT CERTIFICATION LOGIC
-
   return (
     <main className={styles.wrapper}>
       {loading ? (
