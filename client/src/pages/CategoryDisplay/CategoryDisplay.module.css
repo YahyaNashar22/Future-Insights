@@ -4,3 +4,9 @@
   align-items: stretch;
   justify-content: flex-start;
 }
+
+@media (max-width: 768px) {
+  .wrapper {
+    margin-top: 100px;
+  }
+}

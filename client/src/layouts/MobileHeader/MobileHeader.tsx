@@ -80,21 +80,33 @@ const MobileHeader = () => {
           </li>
           {user && (
             <li>
-              <Link to="/my-courses" className={styles.link}>
+              <Link
+                to="/my-courses"
+                className={styles.link}
+                onClick={() => setMenuOpen(false)}
+              >
                 My Courses
               </Link>
             </li>
           )}
           {user && (user.role === "teacher" || user.role === "admin") && (
             <li>
-              <Link to="/dashboard" className={styles.link}>
+              <Link
+                to="/dashboard"
+                className={styles.link}
+                onClick={() => setMenuOpen(false)}
+              >
                 Dashboard
               </Link>
             </li>
           )}
           {!user && (
             <li>
-              <Link to="/instructor-request" className={styles.link}>
+              <Link
+                to="/instructor-request"
+                className={styles.link}
+                onClick={() => setMenuOpen(false)}
+              >
                 Become an Instructor
               </Link>
             </li>
