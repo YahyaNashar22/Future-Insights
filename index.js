@@ -40,9 +40,9 @@ const app = express();
 
 // CORS Policies
 app.use(cors({
-    origin: ["http://localhost:5173", "https://future-insights.onrender.com"],
-    credentials: true,
-    optionsSuccessStatus: 200,
+  origin: ["http://localhost:5173", "https://future-insights.onrender.com", "http://futureinsights.ae/"],
+  credentials: true,
+  optionsSuccessStatus: 200,
 }
 ));
 
@@ -70,20 +70,20 @@ app.use("/material", materialRouter);
 
 // test nodemailer
 app.post("/send-test-email", async (req, res) => {
-    try {
-        const mailOptions = {
-            from: process.env.SENDER_EMAIL,
-            to: "yahyanashar22@gmail.com",
-            subject: "How are you today?",
-            text: "This is a test email from your Nodemailer setup!",
-        };
+  try {
+    const mailOptions = {
+      from: process.env.SENDER_EMAIL,
+      to: "yahyanashar22@gmail.com",
+      subject: "How are you today?",
+      text: "This is a test email from your Nodemailer setup!",
+    };
 
-        const info = await transporter.sendMail(mailOptions);
-        res.status(200).json({ message: "Email sent!", info });
-    } catch (error) {
-        console.error("Email error:", error);
-        res.status(500).json({ error: "Failed to send email" });
-    }
+    const info = await transporter.sendMail(mailOptions);
+    res.status(200).json({ message: "Email sent!", info });
+  } catch (error) {
+    console.error("Email error:", error);
+    res.status(500).json({ error: "Failed to send email" });
+  }
 });
 
 
@@ -99,7 +99,7 @@ app.use('/ccavenue', express.static(path.join(__dirname, 'ccavenue')));
 // * ###############################################################
 // CCAvenue payment form route (optional: serve it as a static form)
 app.get('/ccavenue-payment', (req, res) => {
-    res.sendFile(path.join(__dirname, 'ccavenue', 'dataForm.html'));
+  res.sendFile(path.join(__dirname, 'ccavenue', 'dataForm.html'));
 });
 
 // Handle encryption and redirection to CCAvenue
@@ -109,49 +109,49 @@ app.post('/ccavRequestHandler', ccavRequestHandler);
 app.post('/ccavResponseHandler', ccavResponseHandler);
 
 app.post('/payment-response', express.urlencoded({ extended: true }), (req, res) => {
-    const encryptedResponse = req.body.encResp;
-    console.log("Encrypted Response from CCAvenue:", encryptedResponse);
-  
-    try {
-      const decrypted = decrypt(encryptedResponse);
-      const responseParams = Object.fromEntries(new URLSearchParams(decrypted));
-  
-      console.log("Decrypted Response:", responseParams);
-  
-      // Handle success, failure, etc.
-      if (responseParams.order_status === "Success") {
-        // ✅ Store to DB, show success page, etc.
-        res.send("<h2>Payment Successful!</h2>");
-      } else {
-        // ❌ Handle failure or aborted transaction
-        res.send(`<h2>Payment ${responseParams.order_status}</h2><p>${responseParams.status_message}</p>`);
-      }
-    } catch (error) {
-      console.error("Decryption Error:", error);
-      res.status(500).send("Error processing payment response.");
-    }
-  });
+  const encryptedResponse = req.body.encResp;
+  console.log("Encrypted Response from CCAvenue:", encryptedResponse);
 
-  app.post('/payment-cancel', (req, res) => {
-    res.send("<h2>Transaction Cancelled by User</h2>");
-  });
+  try {
+    const decrypted = decrypt(encryptedResponse);
+    const responseParams = Object.fromEntries(new URLSearchParams(decrypted));
+
+    console.log("Decrypted Response:", responseParams);
+
+    // Handle success, failure, etc.
+    if (responseParams.order_status === "Success") {
+      // ✅ Store to DB, show success page, etc.
+      res.send("<h2>Payment Successful!</h2>");
+    } else {
+      // ❌ Handle failure or aborted transaction
+      res.send(`<h2>Payment ${responseParams.order_status}</h2><p>${responseParams.status_message}</p>`);
+    }
+  } catch (error) {
+    console.error("Decryption Error:", error);
+    res.status(500).send("Error processing payment response.");
+  }
+});
+
+app.post('/payment-cancel', (req, res) => {
+  res.send("<h2>Transaction Cancelled by User</h2>");
+});
 // * ###############################################################
 // * CCAvenue Block ( END )
 
 
 // Handle React routing, return all requests to React app
 app.get('*', (req, res) => {
-    res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
+  res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
 
 
 // Connect to server
 app.listen(process.env.PORT, (error) => {
-    if (!error) {
-        console.log(`Server Running On Port: ${process.env.PORT}`);
-    } else {
-        console.log("Couldn't Connect To Server!");
-        console.error(`Error: ${error}`);
-    }
+  if (!error) {
+    console.log(`Server Running On Port: ${process.env.PORT}`);
+  } else {
+    console.log("Couldn't Connect To Server!");
+    console.error(`Error: ${error}`);
+  }
 });
 databaseConnection();
