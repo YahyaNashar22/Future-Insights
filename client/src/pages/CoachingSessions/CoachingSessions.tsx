@@ -49,6 +49,8 @@ const CoachingSessions = () => {
     }
   };
 
+  // TODO: ADD SELECT OK BUTTON and place holder for mobile view
+
   return (
     <main className={styles.wrapper}>
       <section className={styles.container}>
