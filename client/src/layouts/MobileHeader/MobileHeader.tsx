@@ -4,10 +4,13 @@ import styles from "./MobileHeader.module.css";
 import logo from "../../assets/icons/logo_svg.svg";
 import { useUserStore } from "../../store";
 import SignoutModal from "../../components/SignoutModal/SignoutModal";
+import { useLanguageStore } from "../../langStore";
 
 const MobileHeader = () => {
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
+
+  const { setLanguage } = useLanguageStore();
 
   const { user } = useUserStore();
 
@@ -138,6 +141,11 @@ const MobileHeader = () => {
             </Link>
           </div>
         )}
+
+        <div className="language-btn-container">
+          <button onClick={() => setLanguage("en")}>English</button>
+          <button onClick={() => setLanguage("ar")}>العربية</button>
+        </div>
       </nav>
       {showModal && <SignoutModal setShowModal={setShowModal} />}
     </header>
