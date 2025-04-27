@@ -156,6 +156,7 @@ const EditClass = () => {
                 name="description"
                 defaultValue={course?.description || ""}
                 required
+                rows={10}
               />
             </label>
 
