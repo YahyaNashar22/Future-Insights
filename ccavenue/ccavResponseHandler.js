@@ -3,7 +3,7 @@ import { decrypt } from './Crypto.js';
 export const ccavResponseHandler = (req, res) => {
     console.log("Received CCAvenue response:", req.body);
     const encryptedResponse = req.body.encResp;
-    const courseId = req.body.courseId;
+    const courseId = req.body.course_id;
 
     console.log('courseId: ', courseId)
 
