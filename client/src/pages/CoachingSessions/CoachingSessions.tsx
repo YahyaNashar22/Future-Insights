@@ -49,8 +49,6 @@ const CoachingSessions = () => {
     }
   };
 
-  // TODO: ADD SELECT OK BUTTON and place holder for mobile view
-
   return (
     <main className={styles.wrapper}>
       <section className={styles.container}>
@@ -85,21 +83,32 @@ const CoachingSessions = () => {
             onChange={(e) => setPhone(e.target.value)}
             required
           />
-          <input
-            type="date"
-            value={date}
-            onChange={(e) => setDate(e.target.value)}
-            min={new Date().toISOString().split("T")[0]}
-            required
-          />
-          <input
-            type="time"
-            value={time}
-            onChange={(e) => setTime(e.target.value)}
-            min="09:00"
-            max="18:00"
-            required
-          />
+          <label className={styles.datePickerLabel}>
+            Select Date
+            <input
+              type="date"
+              value={date}
+              onChange={(e) => setDate(e.target.value)}
+              min={new Date().toISOString().split("T")[0]}
+              required
+            />
+          </label>
+
+          <label className={styles.datePickerLabel}>
+            Select Time
+            <input
+              type="time"
+              value={time}
+              onChange={(e) => {
+                setTime(e.target.value);
+                setTimeout(() => e.target.blur(), 1);
+              }}
+              min="09:00"
+              max="18:00"
+              required
+            />
+          </label>
+
           <button type="submit" disabled={loading}>
             {loading ? "Booking..." : "Reserve Session"}
           </button>

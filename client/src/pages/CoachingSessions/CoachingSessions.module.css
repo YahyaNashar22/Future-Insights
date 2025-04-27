@@ -66,6 +66,22 @@ button:hover {
   font-weight: 500;
 }
 
+.datePickerLabel {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: flex-start;
+  gap: 10px;
+  width: 100%;
+}
+
+.datePickerLabel input {
+  width: 100%;
+}
+
+
+
+
 @media (max-width: 768px) {
   .wrapper {
     margin-top: 10px;
