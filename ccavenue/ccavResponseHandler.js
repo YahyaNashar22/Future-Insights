@@ -5,12 +5,17 @@ export const ccavResponseHandler = (req, res) => {
     const encryptedResponse = req.body.encResp;
 
     try {
-        console.log('reached here response');
+        console.log('Encrypted Response:', encryptedResponse);
+
         const decrypted = decrypt(encryptedResponse);
+        console.log("Decrypted Response:", decrypted);
+
         const params = Object.fromEntries(decrypted.split('&').map(pair => pair.split('=')));
+        console.log("Decrypted params:", params); 
 
         const orderStatus = params.order_status;
-
+        console.log("Order Status:", orderStatus);
+        
         // Optional: Save to DB
 
         // Redirect to your React frontend with result
