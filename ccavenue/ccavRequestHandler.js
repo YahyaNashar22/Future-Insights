@@ -13,7 +13,7 @@ export const ccavRequestHandler = (req, res) => {
 
     const mandatoryFields = [
         'merchant_id', 'order_id', 'currency', 'amount',
-        'redirect_url', 'cancel_url', 'language', 'merchant_param1'
+        'redirect_url', 'cancel_url', 'language', 'merchant_param1', 'merchant_param2'
     ];
 
     // Validate all mandatory fields

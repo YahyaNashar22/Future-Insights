@@ -98,12 +98,11 @@ const ClassShowCase = () => {
         billing_country: "UAE",
         redirect_url: `https://futureinsights.ae/ccavResponseHandler`,
         merchant_param1: cls?._id,
+        merchant_param2: user?._id,
+
       };
 
-      console.log(data.merchant_param1);
-
       const response = await axios.post(`${backend}/ccavRequestHandler`, data);
-      console.log("Response from Backend:", response.data);
 
       // If the response contains HTML (redirect form)
       if (response.data.includes('<form id="redirectForm"')) {
