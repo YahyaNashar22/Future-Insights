@@ -99,7 +99,7 @@ const ClassShowCase = () => {
         redirect_url: `https://futureinsights.ae/ccavResponseHandler`,
         merchant_param1: cls?._id,
         merchant_param2: user?._id,
-
+        merchant_param3: cls?.slug,
       };
 
       const response = await axios.post(`${backend}/ccavRequestHandler`, data);

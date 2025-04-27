@@ -2,18 +2,18 @@ import Class from '../models/classModel.js';
 import User from '../models/userModel.js';
 import { decrypt } from './Crypto.js';
 
-const enrollClass = async (courseId, userId, res) => {
+const enrollClass = async (courseId, userId) => {
     try {
         // Find the course by its ID
         const cls = await Class.findById(courseId);
         if (!cls) {
-            return res.status(404).json({ message: "Class not found" });
+            throw new Error("Class not found");
         }
 
         // Check if the user is already enrolled in the class
         const user = await User.findById(userId);
         if (!user) {
-            return res.status(404).json({ message: "User not found" });
+            throw new Error("User not found");
         }
 
         // Check if the user is already enrolled
@@ -21,7 +21,7 @@ const enrollClass = async (courseId, userId, res) => {
             (user) => user.toString() === userId
         );
         if (alreadyEnrolled) {
-            return res.status(400).json({ message: "User already enrolled" });
+            throw new Error("User already enrolled");
         }
 
         // Add the user to the course's enrolledUsers array
@@ -30,10 +30,10 @@ const enrollClass = async (courseId, userId, res) => {
 
         await user.save();
 
-        return res.status(200).json({ message: "Enrolled successfully", cls });
+        return { success: true, cls };
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Internal server error" });
+        return { success: false, message: error.message };
     }
 }
 
@@ -52,17 +52,22 @@ export const ccavResponseHandler = async (req, res) => {
         const userId = params.merchant_param2;
         console.log("userId: ", userId);
 
+        const courseSlug = params.merchant_param3;
+        console.log("courseSlug: ", courseSlug);
+
         const orderStatus = params.order_status;
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === "Failure") {
-            await enrollClass(courseId, userId, res);
-
-            const redirectUrl = `${process.env.CLIENT_URL}`;
-            // Redirect to your React frontend with result
+            // const redirectUrl = `${process.env.CLIENT_URL}`;
+            // res.redirect(redirectUrl);
+            await enrollClass(courseId, userId);
+            const redirectUrl = `${process.env.CLIENT_URL}/course-catalogue/class/${courseSlug}`;
             res.redirect(redirectUrl);
         } else {
-            await enrollClass(courseId, userId, res);
+            await enrollClass(courseId, userId);
+            const redirectUrl = `${process.env.CLIENT_URL}/course-catalogue/class/${courseSlug}`;
+            res.redirect(redirectUrl);
         }
 
     } catch (err) {
