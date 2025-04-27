@@ -4,6 +4,7 @@ import styles from "./CourseCard.module.css";
 import { useUserStore } from "../../store";
 import { Link } from "react-router-dom";
 import IClass from "../../interfaces/IClass";
+import { parseBullets } from "../../utils/ParseList";
 
 const CourseCard: FC<{
   course: ICourse | IClass;
@@ -13,7 +14,6 @@ const CourseCard: FC<{
 }> = ({ course, isCourse }) => {
   const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
-
 
   const [demoModal, setDemoModal] = useState<boolean>(false);
 
@@ -29,7 +29,9 @@ const CourseCard: FC<{
       </div>
       <div className={styles.courseInfo}>
         <h2 className={styles.courseTitle}>{course.title}</h2>
-        <p className={styles.courseDescription}>{course.description}</p>
+        <p className={styles.courseDescription}>
+          {parseBullets(course.description)}
+        </p>
         <div className={styles.courseFooter}>
           {course.finalPrice > 0 && (
             <span className={styles.coursePrice}>
