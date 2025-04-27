@@ -92,6 +92,31 @@ const ClassShowCase = () => {
         billing_email: user?.email,
       });
       console.log(response);
+
+      // If the response contains the payment details and redirect URL
+      if (response.data.redirect_url) {
+        // Create a form element dynamically
+        const form = document.createElement("form");
+        form.method = "POST";
+        form.action = response.data.redirect_url; // CCAvenue URL
+
+        // Add the encrypted data and other necessary fields as hidden inputs
+        const encryptedDataInput = document.createElement("input");
+        encryptedDataInput.type = "hidden";
+        encryptedDataInput.name = "encRequest";
+        encryptedDataInput.value = response.data.encrypted_data; // CCAvenue's encrypted data
+        form.appendChild(encryptedDataInput);
+
+        const accessCodeInput = document.createElement("input");
+        accessCodeInput.type = "hidden";
+        accessCodeInput.name = "access_code";
+        accessCodeInput.value = response.data.access_code; // CCAvenue's access code
+        form.appendChild(accessCodeInput);
+
+        // Append the form to the body and submit it
+        document.body.appendChild(form);
+        form.submit(); // Submit the form to initiate the payment
+      }
     } catch (error) {
       console.error("Error enrolling in the class:", error);
       if (error instanceof AxiosError) {
