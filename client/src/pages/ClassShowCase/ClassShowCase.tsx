@@ -90,32 +90,33 @@ const ClassShowCase = () => {
         amount: cls?.finalPrice.toFixed(2),
         billing_name: user?.fullname,
         billing_email: user?.email,
+        billing_tel: "9999999999",
+        billing_address: "123 Street",
+        billing_city: "Dubai",
+        billing_state: "Dubai",
+        billing_zip: "400001",
+        billing_country: "UAE",
       });
-      console.log(response);
+      console.log("Response from Backend:", response.data);
 
-      // If the response contains the payment details and redirect URL
-      if (response.data.redirect_url) {
-        // Create a form element dynamically
-        const form = document.createElement("form");
-        form.method = "POST";
-        form.action = response.data.redirect_url; // CCAvenue URL
+      // If the response contains HTML (redirect form)
+      if (response.data.includes('<form id="redirectForm"')) {
+        // Create a temporary div to append the response HTML to
+        const tempDiv = document.createElement("div");
+        tempDiv.innerHTML = response.data;
 
-        // Add the encrypted data and other necessary fields as hidden inputs
-        const encryptedDataInput = document.createElement("input");
-        encryptedDataInput.type = "hidden";
-        encryptedDataInput.name = "encRequest";
-        encryptedDataInput.value = response.data.encrypted_data; // CCAvenue's encrypted data
-        form.appendChild(encryptedDataInput);
+        // Find the form inside the HTML and append it to the body
+        const form = tempDiv.querySelector("form");
 
-        const accessCodeInput = document.createElement("input");
-        accessCodeInput.type = "hidden";
-        accessCodeInput.name = "access_code";
-        accessCodeInput.value = response.data.access_code; // CCAvenue's access code
-        form.appendChild(accessCodeInput);
-
-        // Append the form to the body and submit it
-        document.body.appendChild(form);
-        form.submit(); // Submit the form to initiate the payment
+        if (form) {
+          document.body.appendChild(form);
+          // Submit the form to initiate the payment
+          form.submit();
+        } else {
+          console.error("Form not found in the response.");
+        } // Submit the form to initiate the payment
+      } else {
+        console.error("Unexpected response format.");
       }
     } catch (error) {
       console.error("Error enrolling in the class:", error);
