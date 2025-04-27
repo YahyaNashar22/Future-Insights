@@ -165,7 +165,7 @@ const ClassShowCase = () => {
                   <span className={styles.finalPrice}>${cls.finalPrice}</span>
                 )}
               </div>
-              {modules.length !== 0 && (
+              {modules.length !== 0 && cls.price !== 0 && (
                 <>
                   {!isEnrolled ? (
                     <button
