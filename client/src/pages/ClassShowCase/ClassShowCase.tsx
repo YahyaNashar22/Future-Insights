@@ -96,6 +96,8 @@ const ClassShowCase = () => {
         billing_state: "Dubai",
         billing_zip: "400001",
         billing_country: "UAE",
+        redirect_url: `https://futureinsights.ae/ccavResponseHandler`,
+        course_id: cls?._id
       });
       console.log("Response from Backend:", response.data);
 

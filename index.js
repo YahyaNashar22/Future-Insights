@@ -140,11 +140,8 @@ app.post('/payment-cancel', (req, res) => {
 // * CCAvenue Block ( END )
 
 // Handle POST request to the home route and serve index.html
-app.post('/', (req, res) => {
+app.post('*', (req, res) => {
   console.log('Received POST request');
-  // You can log or process the POST data here if needed
-  console.log("POST Data:", req.body);
-
   // Send the React app's index.html in response to the POST request
   res.sendFile(path.join(__dirname, 'client', 'dist', 'index.html'));
 });
