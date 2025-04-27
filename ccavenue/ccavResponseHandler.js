@@ -2,7 +2,7 @@ import Class from '../models/classModel.js';
 import User from '../models/userModel.js';
 import { decrypt } from './Crypto.js';
 
-const enrollClass = async (courseId, userId) => {
+const enrollClass = async (courseId, userId, res) => {
     try {
         // Find the course by its ID
         const cls = await Class.findById(courseId);
@@ -56,13 +56,13 @@ export const ccavResponseHandler = async (req, res) => {
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === "Failure") {
-            await enrollClass(courseId, userId);
+            await enrollClass(courseId, userId, res);
 
             const redirectUrl = `${process.env.CLIENT_URL}`;
             // Redirect to your React frontend with result
             res.redirect(redirectUrl);
         } else {
-            await enrollClass(courseId, userId);
+            await enrollClass(courseId, userId, res);
         }
 
     } catch (err) {
