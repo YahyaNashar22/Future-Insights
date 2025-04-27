@@ -59,7 +59,7 @@ const ClassShowCase = () => {
   }, [backend, cls]);
 
   const generateOrderId = () => {
-    return `ORD${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+    return `ORD${Date.now()}${Math.floor(Math.random() * 1000)}`;
   };
 
   const enrollInCourse = async () => {
