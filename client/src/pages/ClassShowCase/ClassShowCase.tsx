@@ -58,27 +58,40 @@ const ClassShowCase = () => {
     fetchModules();
   }, [backend, cls]);
 
+  const generateOrderId = () => {
+    return `ORD${Date.now()}-${Math.floor(Math.random() * 1000)}`;
+  };
+
   const enrollInCourse = async () => {
     if (!user) navigate("/signin");
     try {
       setLoading(true);
-      const response = await axios.post(
-        `${backend}/user/enroll-class`,
-        {
-          userId: user?._id,
-          courseId: cls?._id,
-        },
-        {
-          headers: {
-            "Content-Type": "application/json",
-          },
-        }
-      );
+      // const response = await axios.post(
+      //   `${backend}/user/enroll-class`,
+      //   {
+      //     userId: user?._id,
+      //     courseId: cls?._id,
+      //   },
+      //   {
+      //     headers: {
+      //       "Content-Type": "application/json",
+      //     },
+      //   }
+      // );
 
-      if (response.data.message === "Enrolled successfully") {
-        setPurchaseModal(false);
-        navigate(`/course-catalogue/class/${cls?.slug}`);
-      }
+      // if (response.data.message === "Enrolled successfully") {
+      //   setPurchaseModal(false);
+      //   navigate(`/course-catalogue/class/${cls?.slug}`);
+      // }
+
+      const response = await axios.post(`${backend}/ccavRequestHandler`, {
+        order_id: generateOrderId(),
+        currency: "AED",
+        amount: cls?.finalPrice.toFixed(2),
+        billing_name: user?.fullname,
+        billing_email: user?.email,
+      });
+      console.log(response);
     } catch (error) {
       console.error("Error enrolling in the class:", error);
       if (error instanceof AxiosError) {
@@ -159,8 +172,8 @@ const ClassShowCase = () => {
           <section className={styles.description}>
             <h2>🌍 International Accreditation & Recognition</h2>
             <p className={styles.descriptionText}>
-              At <span className={styles.beige}> Future Insights </span>, we take
-              pride in offering high-impact training programs that are
+              At <span className={styles.beige}> Future Insights </span>, we
+              take pride in offering high-impact training programs that are
               thoughtfully designed to meet the needs of today's dynamic
               business environment. Our courses are developed to empower
               ambitious professionals with the practical skills and strategic
@@ -181,9 +194,9 @@ const ClassShowCase = () => {
           <section className={styles.description} style={{ direction: "rtl" }}>
             <h2 style={{ direction: "rtl" }}>🌍 الاعتماد والاعتراف الدولي</h2>
             <p className={styles.descriptionText} style={{ direction: "rtl" }}>
-              تفخر <span className={styles.beige}> Future Insights </span> بتقديم
-              برامج تدريبية عالية التأثير، مصممة بعناية لتلبية متطلبات بيئة
-              الأعمال المتغيرة باستمرار. تهدف دوراتنا إلى تمكين المهنيين
+              تفخر <span className={styles.beige}> Future Insights </span>{" "}
+              بتقديم برامج تدريبية عالية التأثير، مصممة بعناية لتلبية متطلبات
+              بيئة الأعمال المتغيرة باستمرار. تهدف دوراتنا إلى تمكين المهنيين
               الطموحين بالمهارات العملية والرؤى الاستراتيجية التي تساعدهم على
               النمو وتحقيق النجاح في مسيرتهم المهنية. عند إتمام الدورة بنجاح، من
               خلال الحضور الكامل واجتياز التقييم النهائي، يحصل المشاركون على
