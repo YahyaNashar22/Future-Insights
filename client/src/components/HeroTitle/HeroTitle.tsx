@@ -6,6 +6,7 @@ import { useUserStore } from "../../store";
 
 const HeroTitle = () => {
   const { user } = useUserStore();
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.container}>

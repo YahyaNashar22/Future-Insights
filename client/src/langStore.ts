@@ -6,6 +6,9 @@ type LanguageStore = {
 };
 
 export const useLanguageStore = create<LanguageStore>((set) => ({
-  language: "en", // default language
-  setLanguage: (lang) => set({ language: lang }), // set the language
+  language: (localStorage.getItem("language") as "en" | "ar") || "en",
+  setLanguage: (lang) => {
+    localStorage.setItem("language", lang);
+    set({ language: lang });
+  },
 }));

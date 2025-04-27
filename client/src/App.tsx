@@ -14,6 +14,11 @@ function App() {
     i18n.changeLanguage(language);
   }, [language]);
 
+  // TODO: MAYBE MAKE THI NOT CHANGE THE WHOLE LAYOUT
+  // useEffect(() => {
+  //   document.body.setAttribute("dir", language === "ar" ? "rtl" : "ltr");
+  // }, [language]);
+
   useEffect(() => {
     const handleActivity = () => {
       localStorage.setItem("future-insights-login-time", Date.now().toString());

@@ -86,4 +86,5 @@ button {
 
 .language-btn-container button {
   background-color: transparent;
+  color: var(--primary-blue);
 }
