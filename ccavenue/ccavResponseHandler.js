@@ -59,10 +59,7 @@ export const ccavResponseHandler = async (req, res) => {
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === "Failure") {
-            // const redirectUrl = `${process.env.CLIENT_URL}`;
-            // res.redirect(redirectUrl);
-            await enrollClass(courseId, userId);
-            const redirectUrl = `${process.env.CLIENT_URL}/course-catalogue/class/${courseSlug}`;
+            const redirectUrl = `${process.env.CLIENT_URL}/show-case/${courseSlug}`;
             res.redirect(redirectUrl);
         } else {
             await enrollClass(courseId, userId);
