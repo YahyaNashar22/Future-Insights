@@ -1,7 +1,6 @@
 import { encrypt } from './Crypto.js';
 
 export const ccavRequestHandler = (req, res) => {
-    console.log('reached here request');
     const data = {
         ...req.body,
         merchant_id: process.env.MERCHANT_ID,
@@ -10,7 +9,7 @@ export const ccavRequestHandler = (req, res) => {
         language: req.body.language || 'EN'
     };
 
-    console.log("data: ", data);
+    console.log("response handler data: ", data);
 
     const mandatoryFields = [
         'merchant_id', 'order_id', 'currency', 'amount',
