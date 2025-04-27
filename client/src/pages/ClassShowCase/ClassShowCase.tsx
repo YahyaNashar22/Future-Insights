@@ -97,7 +97,7 @@ const ClassShowCase = () => {
         billing_zip: "400001",
         billing_country: "UAE",
         redirect_url: `https://futureinsights.ae/ccavResponseHandler`,
-        merchant_param1: cls?._id
+        merchant_param1: String(cls?._id),
       });
       console.log("Response from Backend:", response.data);
 
