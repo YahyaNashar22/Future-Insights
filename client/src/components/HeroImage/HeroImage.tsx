@@ -6,11 +6,10 @@ import man from "../../assets/images/laptop_tablet1.png";
 const HeroImage = () => {
   return (
     <div className={styles.wrapper}>
-      <img src={man} alt="man" loading="lazy" className={styles.man} />
+      <img src={man} alt="man" className={styles.man} />
       <img
         src={graffiti}
         alt="graffiti"
-        loading="lazy"
         className={styles.graffiti}
       />
       <p className={styles.bubbleText}>

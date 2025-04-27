@@ -6,11 +6,10 @@ import woman from "../../assets/images/woman.png";
 const CourseCatalogueHeroImage = () => {
   return (
     <div className={styles.wrapper}>
-      <img src={woman} alt="woman" loading="lazy" className={styles.woman} />
+      <img src={woman} alt="woman" className={styles.woman} />
       <img
         src={graffiti}
         alt="graffiti"
-        loading="lazy"
         className={styles.graffiti}
       />
     </div>
