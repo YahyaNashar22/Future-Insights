@@ -1,17 +1,31 @@
 import { encrypt } from './Crypto.js';
-import path from 'path';
-import { fileURLToPath } from 'url';
-import dotenv from 'dotenv';
-
-dotenv.config();
-
-const __filename = fileURLToPath(import.meta.url);
-const __dirname = path.dirname(__filename);
 
 export const ccavRequestHandler = (req, res) => {
-    const data = req.body;
-    const merchantData = Object.keys(data)
-        .map(key => `${key}=${data[key]}`)
+    console.log('reached here request');
+    const data = {
+        ...req.body,
+        merchant_id: process.env.MERCHANT_ID,
+        redirect_url: req.body.redirect_url || process.env.REDIRECT_URL,
+        cancel_url: req.body.cancel_url || process.env.CANCEL_URL,
+        language: req.body.language || 'EN'
+    };
+
+    console.log("data: ", data);
+
+    const mandatoryFields = [
+        'merchant_id', 'order_id', 'currency', 'amount',
+        'redirect_url', 'cancel_url', 'language'
+    ];
+
+    // Validate all mandatory fields
+    for (const field of mandatoryFields) {
+        if (!data[field]) {
+            return res.status(400).send(`Missing mandatory field: ${field}`);
+        }
+    }
+
+    const merchantData = mandatoryFields
+        .map(key => `${key}=${encodeURIComponent(data[key])}`)
         .join('&');
 
     const encryptedData = encrypt(merchantData);
@@ -25,11 +39,11 @@ export const ccavRequestHandler = (req, res) => {
         <html>
         <head><title>CCAvenue Redirect</title></head>
         <body>
-            <form id="redirectForm" method="post" name="redirect" action="${process.env.CCAVENUE_URL}">
+            <form id="redirectForm" method="post" action="${process.env.CCAVENUE_URL}">
                 <input type="hidden" name="encRequest" value="${encryptedData}">
                 <input type="hidden" name="access_code" value="${process.env.ACCESS_CODE}">
             </form>
-            <script>document.redirectForm.submit();</script>
+            <script>document.getElementById('redirectForm').submit();</script>
         </body>
         </html>
     `);

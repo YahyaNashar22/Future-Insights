@@ -4,6 +4,7 @@ export const ccavResponseHandler = (req, res) => {
     const encryptedResponse = req.body.encResp;
 
     try {
+        console.log('reached here response');
         const decrypted = decrypt(encryptedResponse);
         const params = Object.fromEntries(decrypted.split('&').map(pair => pair.split('=')));
 
