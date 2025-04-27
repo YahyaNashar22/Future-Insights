@@ -3,9 +3,7 @@ import { decrypt } from './Crypto.js';
 export const ccavResponseHandler = (req, res) => {
     console.log("Received CCAvenue response:", req.body);
     const encryptedResponse = req.body.encResp;
-    const courseId = req.body.course_id;
 
-    console.log('courseId: ', courseId)
 
 
     try {
@@ -16,6 +14,9 @@ export const ccavResponseHandler = (req, res) => {
 
         const params = Object.fromEntries(decrypted.split('&').map(pair => pair.split('=')));
         console.log("Decrypted params:", params);
+
+        const courseId = params.merchant_param1;
+        console.log(courseId);
 
         const orderStatus = params.order_status;
         console.log("Order Status:", orderStatus);
