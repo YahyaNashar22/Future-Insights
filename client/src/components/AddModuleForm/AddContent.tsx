@@ -316,12 +316,25 @@ const AddContentForm = () => {
       )}
 
       {/* Conditional Form Rendering */}
-      {/* TODO: ADD OK BUTTON TO SELECT TIME  */}
       {selectedForm === "liveLink" && (
         <form className={styles.contentForm} onSubmit={handleSubmitLiveLink}>
           <input type="text" name="name" placeholder="Name" required />
-          <input type="datetime-local" name="startsAt" required />
-          <input type="datetime-local" name="endsAt" required />
+          <input
+            type="datetime-local"
+            name="startsAt"
+            onChange={(e) => {
+              setTimeout(() => e.target.blur(), 1);
+            }}
+            required
+          />
+          <input
+            type="datetime-local"
+            name="endsAt"
+            onChange={(e) => {
+              setTimeout(() => e.target.blur(), 1);
+            }}
+            required
+          />
           <input type="url" name="link" placeholder="Live Link URL" required />
           <button type="submit">Submit Live Link</button>
         </form>
