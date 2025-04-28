@@ -1,4 +1,11 @@
 {
-  "greeting": "Hello",
-  "reserve_session": "Reserve Session"
+  "home-hero-1": "Grow Your",
+  "home-hero-2": "Business",
+  "home-hero-3": "With us",
+
+  "home-image-1": "Accelerate",
+  "home-image-2": "Your Success",
+
+  "instructor": "I'm an Instructor",
+  "learner": "I am Learner"
 }

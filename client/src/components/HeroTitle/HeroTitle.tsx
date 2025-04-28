@@ -3,9 +3,11 @@ import styles from "./HeroTitle.module.css";
 import graffiti from "../../assets/icons/title_graffiti.png";
 import { Link } from "react-router-dom";
 import { useUserStore } from "../../store";
+import { useTranslation } from "react-i18next";
 
 const HeroTitle = () => {
   const { user } = useUserStore();
+  const { t } = useTranslation();
 
   return (
     <div className={styles.wrapper}>
@@ -17,18 +19,18 @@ const HeroTitle = () => {
           className={styles.graffiti}
         />
         <h1 className={styles.title}>
-          <span className={styles.beige}>Grow Your</span>
-          <span className={styles.blue}>Business</span>
-          <span className={styles.blue}>With us</span>
+          <span className={styles.beige}>{t("home-hero-1")}</span>
+          <span className={styles.blue}>{t("home-hero-2")}</span>
+          <span className={styles.blue}>{t("home-hero-3")}</span>
         </h1>
       </div>
       {!user && (
         <div className={styles.buttons}>
           <Link to="/instructor-request" className={styles.teacher}>
-            I'm an Instructor
+          {t("instructor")}
           </Link>
           <Link to="/iam-learner" className={styles.student}>
-            I am Learner
+          {t("learner")}
           </Link>
         </div>
       )}

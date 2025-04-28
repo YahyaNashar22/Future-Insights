@@ -1,4 +1,11 @@
 {
-  "greeting": "مرحباً",
-  "reserve_session": "احجز الجلسة"
+  "home-hero-1": "نَمِّ",
+  "home-hero-2": "عملك",
+  "home-hero-3": "معنا",
+
+  "home-image-1": "عجّل",
+  "home-image-2": "بنجاحك",
+
+  "instructor": "أنا مدرب",
+  "learner": "أنا متعلم"
 }

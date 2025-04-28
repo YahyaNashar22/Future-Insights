@@ -80,11 +80,16 @@ button {
 
 .language-btn-container {
   display: flex;
-  gap: 10px;
-  margin: 20px 10px;
+  column-gap: 10px;
+  height: 10px;
+  padding: 10px;
 }
 
 .language-btn-container button {
   background-color: transparent;
   color: var(--primary-blue);
+}
+
+.language-btn-container button:hover {
+  color: var(--primary-beige);
 }

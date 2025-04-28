@@ -25,6 +25,11 @@
   text-align: center;
 }
 
+.bubbleTextArabic {
+  font-size: 2rem;
+  top: 120px;
+}
+
 /* Responsive adjustments */
 @media (max-width: 1100px) {
   .bubbleText {
@@ -32,6 +37,13 @@
     left: 90px;
     font-size: 1rem;
     line-height: 1.8rem;
+  }
+
+  .bubbleTextArabic {
+    top: 140px;
+    left: 90px;
+    font-size: 2rem;
+    line-height: 2.2rem;
   }
 }
 
@@ -53,6 +65,13 @@
     font-size: 0.9rem;
     line-height: 1.3rem;
   }
+
+  .bubbleTextArabic {
+    font-size: 2rem;
+    line-height: 50px;
+    top: 80px;
+    left: 70px;
+  }
 }
 
 @media (max-width: 480px) {
@@ -72,5 +91,11 @@
     left: 50px;
     font-size: 0.6rem;
     line-height: 1rem;
+  }
+
+  .bubbleTextArabic {
+    font-size: 1rem;
+    top: 80px;
+    left: 60px;
   }
 }
