@@ -21,6 +21,10 @@
   column-gap: 20px;
 }
 
+.arabic {
+  font-size: 1.2rem;
+}
+
 .link {
   color: var(--primary-blue);
   text-decoration: none;
