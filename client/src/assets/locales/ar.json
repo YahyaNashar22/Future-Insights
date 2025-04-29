@@ -129,5 +129,18 @@
   "choose-file": "اختر ملف",
   "selected-file": "الملف المحدد",
   "assessment-submit": "أرسل",
-  "assessment-submitting": "...جار الارسال"
+  "assessment-submitting": "...جار الارسال",
+
+  "class-instructor": "المدرب",
+  "class-category": "الفئة",
+  "enroll-now": "التحق الان",
+  "already-enrolled": "لقد تم تسجيلك بالفعل",
+  "class-about": "حول هذه الدورة",
+  "demo-video": "فيديو تجريبي",
+  "confirm-enrollement": "تأكيد التسجيل",
+  "confirmation-enrollment-text": "هل أنت متأكد أنك تريد التسجيل في",
+  "cancel": "الغاء",
+  "confirm": "تأكيد",
+  "enrolling": "جار التسجيل",
+  "class-not-found": "لم يتم العثور على الدورة."
 }

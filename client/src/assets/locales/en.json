@@ -129,5 +129,19 @@
   "choose-file":" Choose File",
   "selected-file":"Selected file",
   "assessment-submit":"Submit",
-  "assessment-submitting":"Submitting..."
+  "assessment-submitting":"Submitting...",
+
+  "class-instructor":"Instructor",
+  "class-category":"Category",
+  "enroll-now":"Enroll Now",
+  "already-enrolled":"You are already enrolled",
+  "class-about":"About this class",
+  "demo-video":"Demo Video",
+  "confirm-enrollment": "Confirm Enrollment",
+  "confirmation-enrollment-text":"Are you sure you want to enroll in",
+  "cancel":"Cancel",
+  "confirm":"Confirm",
+  "enrolling":"Enrolling...",
+  "class-not-found":"Class not found."
+
 }

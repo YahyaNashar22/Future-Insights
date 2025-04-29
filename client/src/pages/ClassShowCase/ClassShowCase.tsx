@@ -6,8 +6,14 @@ import IClass from "../../interfaces/IClass";
 import axios, { AxiosError } from "axios";
 import Loading from "../../components/Loading/Loading";
 import IModule from "../../interfaces/IModule";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const ClassShowCase = () => {
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+  const isArabic = language === "ar";
+
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();
   const { user } = useUserStore();
@@ -153,16 +159,22 @@ const ClassShowCase = () => {
             <div className={styles.info}>
               <h1>{cls.title}</h1>
               <p className={styles.teacher}>
-                Instructor: {cls.teacher.fullname}
+                {t("class-instructor")}: {cls.teacher.fullname}
               </p>
-              <p className={styles.duration}>Duration: {cls.duration}</p>
-              <p className={styles.category}>Category: {cls.category.title}</p>
+              <p className={styles.duration}>
+                {t("duration")}: {cls.duration}
+              </p>
+              <p className={styles.category}>
+                {t("class-category")}: {cls.category.title}
+              </p>
               <div className={styles.priceBox}>
                 {cls.discount > 0 && (
                   <span className={styles.originalPrice}>AED {cls.price}</span>
                 )}
                 {cls.price !== 0 && (
-                  <span className={styles.finalPrice}>AED {cls.finalPrice}</span>
+                  <span className={styles.finalPrice}>
+                    AED {cls.finalPrice}
+                  </span>
                 )}
               </div>
               {modules.length !== 0 && cls.price !== 0 && (
@@ -172,11 +184,11 @@ const ClassShowCase = () => {
                       className={styles.buyBtn}
                       onClick={() => setPurchaseModal(true)}
                     >
-                      Enroll Now
+                      {t("enroll-now")}
                     </button>
                   ) : (
                     <p className={styles.enrolledText}>
-                      You are already enrolled 🎉
+                      {t("already-enrolled")} 🎉
                     </p>
                   )}
                 </>
@@ -184,11 +196,13 @@ const ClassShowCase = () => {
             </div>
           </div>
           <section className={styles.description}>
-            <h2>About this class</h2>
-            <p className={styles.descriptionText}>{cls.description}</p>
+            <h2>{t("class-about")}</h2>
+            <p className={styles.descriptionText}>
+              {isArabic ? cls.arabicDescription : cls.description}
+            </p>
             {cls.demo && (
               <div className={styles.demo}>
-                <h3>Demo Video</h3>
+                <h3>{t("demo-video")}</h3>
                 <video
                   controls
                   width="100%"
@@ -245,9 +259,10 @@ const ClassShowCase = () => {
           {purchaseModal && (
             <div className={styles.purchaseModalWrapper}>
               <div className={styles.purchaseModal}>
-                <h3 className={styles.modalTitle}>Confirm Enrollment</h3>
+                <h3 className={styles.modalTitle}>{t("confirm-enrollment")}</h3>
                 <p className={styles.modalText}>
-                  Are you sure you want to enroll in {cls?.title} for AED
+                  Are you sure you want to enroll in{" "}
+                  {isArabic ? cls.arabicTitle : cls?.title} AED
                   {cls?.finalPrice?.toFixed(2)}?
                 </p>
                 <div className={styles.modalActions}>
@@ -256,14 +271,14 @@ const ClassShowCase = () => {
                     onClick={() => setPurchaseModal(false)}
                     disabled={loading}
                   >
-                    Cancel
+                    {t("cancel")}
                   </button>
                   <button
                     className={styles.confirmButton}
                     onClick={enrollInCourse}
                     disabled={loading}
                   >
-                    {loading ? "Enrolling..." : "Confirm"}
+                    {loading ? t("enrolling") : t("confirm")}
                   </button>
                 </div>
               </div>
@@ -271,7 +286,7 @@ const ClassShowCase = () => {
           )}
         </main>
       ) : (
-        <p>Class not found.</p>
+        <p>{t("class-not-found")}</p>
       )}
     </>
   );
