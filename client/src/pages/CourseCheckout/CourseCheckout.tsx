@@ -91,12 +91,12 @@ const CourseCheckout = () => {
 
             {course.price !== course.finalPrice ? (
               <div className={styles.priceSection}>
-                <span className={styles.originalPrice}>${course.price}</span>
-                <span className={styles.finalPrice}>${course.finalPrice}</span>
+                <span className={styles.originalPrice}>AED {course.price}</span>
+                <span className={styles.finalPrice}>AED {course.finalPrice}</span>
               </div>
             ) : (
               <div className={styles.priceSection}>
-                <span className={styles.finalPrice}>${course.finalPrice}</span>
+                <span className={styles.finalPrice}>AED {course.finalPrice}</span>
               </div>
             )}
 

@@ -5,6 +5,8 @@ interface IClass {
   _id: string;
   title: string;
   description: string;
+  arabicTitle: string;
+  arabicDescription: string;
   thumbnail: string;
   demo?: string;
   price: number;

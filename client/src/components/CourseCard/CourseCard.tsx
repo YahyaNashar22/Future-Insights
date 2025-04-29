@@ -35,7 +35,7 @@ const CourseCard: FC<{
         <div className={styles.courseFooter}>
           {course.finalPrice > 0 && (
             <span className={styles.coursePrice}>
-              ${course.finalPrice?.toFixed(2)}
+              AED{course.finalPrice?.toFixed(2)}
             </span>
           )}
           {course.demo && (

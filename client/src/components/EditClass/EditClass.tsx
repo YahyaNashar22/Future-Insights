@@ -45,9 +45,17 @@ const EditClass = () => {
     // Get course info values
     const form = event.target as HTMLFormElement;
     const title = (form.elements.namedItem("title") as HTMLInputElement).value;
+    const arabicTitle = (
+      form.elements.namedItem("arabicTitle") as HTMLInputElement
+    ).value;
+
     const description = (
       form.elements.namedItem("description") as HTMLTextAreaElement
     ).value;
+    const arabicDescription = (
+      form.elements.namedItem("arabicDescription") as HTMLTextAreaElement
+    ).value;
+
     const duration = (form.elements.namedItem("duration") as HTMLInputElement)
       .value;
     const price = (form.elements.namedItem("price") as HTMLInputElement).value;
@@ -57,6 +65,8 @@ const EditClass = () => {
     const formData = new FormData();
     formData.append("title", title);
     formData.append("description", description);
+    formData.append("arabicTitle", arabicTitle);
+    formData.append("arabicDescription", arabicDescription);
     formData.append("duration", duration);
     formData.append("price", price);
     formData.append("discount", discount);
@@ -150,11 +160,33 @@ const EditClass = () => {
             </label>
 
             <label className={styles.labelForm}>
+              Arabic Title:
+              <input
+                className={styles.inputForm}
+                type="text"
+                name="arabicTitle"
+                defaultValue={course?.arabicTitle || ""}
+                required
+              />
+            </label>
+
+            <label className={styles.labelForm}>
               Description:
               <textarea
                 className={styles.textarea}
                 name="description"
                 defaultValue={course?.description || ""}
+                required
+                rows={10}
+              />
+            </label>
+
+            <label className={styles.labelForm}>
+              Arabic Description:
+              <textarea
+                className={styles.textarea}
+                name="arabicDescription"
+                defaultValue={course?.arabicDescription || ""}
                 required
                 rows={10}
               />

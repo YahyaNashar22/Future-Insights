@@ -115,10 +115,10 @@ const CourseShowCase = () => {
               <p className={styles.category}>Category: {cls.category.title}</p>
               <div className={styles.priceBox}>
                 {cls.discount > 0 && (
-                  <span className={styles.originalPrice}>${cls.price}</span>
+                  <span className={styles.originalPrice}>AED {cls.price}</span>
                 )}
                 {cls.price !== 0 && (
-                  <span className={styles.finalPrice}>${cls.finalPrice}</span>
+                  <span className={styles.finalPrice}>AED {cls.finalPrice}</span>
                 )}
               </div>
               {modules.length !== 0 && cls.price !== 0 && (
@@ -203,7 +203,7 @@ const CourseShowCase = () => {
               <div className={styles.purchaseModal}>
                 <h3 className={styles.modalTitle}>Confirm Enrollment</h3>
                 <p className={styles.modalText}>
-                  Are you sure you want to enroll in {cls?.title} for $
+                  Are you sure you want to enroll in {cls?.title} for AED
                   {cls?.finalPrice?.toFixed(2)}?
                 </p>
                 <div className={styles.modalActions}>
