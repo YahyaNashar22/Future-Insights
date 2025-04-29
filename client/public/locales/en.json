@@ -7,5 +7,15 @@
   "home-image-2": "Your Success",
 
   "instructor": "I'm an Instructor",
-  "learner": "I am Learner"
+  "learner": "I am Learner",
+
+  "nav-1": "Home",
+  "nav-2": "Course Catalogue",
+  "nav-3": "Coaching Session",
+  "nav-4": "My Courses",
+  "nav-5": "Dashboard",
+  "nav-6": "Become an Instructor",
+
+  "login": "Login",
+  "signup": "Sign up"
 }

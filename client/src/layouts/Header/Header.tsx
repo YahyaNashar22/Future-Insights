@@ -5,9 +5,15 @@ import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";
 import SignoutModal from "../../components/SignoutModal/SignoutModal";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const Header = () => {
   const navigate = useNavigate();
+  const { t } = useTranslation();
+  const language = useLanguageStore((state) => state.language);
+
+  const isArabic = language === "ar";
 
   const { user } = useUserStore();
 
@@ -30,40 +36,40 @@ const Header = () => {
         width={150}
         onClick={() => navigate("/")}
       />
-      <ul className={styles.navLinks}>
+      <ul className={`${styles.navLinks} ${isArabic ? styles.arabic : ""}`}>
         <li>
           <Link to="/" className={styles.link}>
-            Home
+            {t("nav-1")}
           </Link>
         </li>
         <li>
           <Link to="/course-catalogue" className={styles.link}>
-            Course Catalogue
+            {t("nav-2")}
           </Link>
         </li>
         <li>
           <Link to="/coaching-session" className={styles.link}>
-            Coaching Session
+            {t("nav-3")}
           </Link>
         </li>
         {user && (
           <li>
             <Link to="/my-courses" className={styles.link}>
-              My Courses
+              {t("nav-4")}
             </Link>
           </li>
         )}
         {user && (user.role === "teacher" || user.role === "admin") && (
           <li>
             <Link to="/dashboard" className={styles.link}>
-              Dashboard
+              {t("nav-5")}
             </Link>
           </li>
         )}
         {!user && (
           <li>
             <Link to="/instructor-request" className={styles.link}>
-              Become an Instructor
+              {t("nav-6")}
             </Link>
           </li>
         )}
@@ -75,10 +81,10 @@ const Header = () => {
       ) : (
         <div className={styles.signContainer}>
           <Link to="/signin" className={styles.signin}>
-            Login
+            {t("login")}
           </Link>
           <Link to="/signup" className={styles.signup}>
-            Sign up
+            {t("signup")}
           </Link>
         </div>
       )}
