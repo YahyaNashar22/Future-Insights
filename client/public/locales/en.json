@@ -1,5 +1,5 @@
 {
-  "loading":"loading...",
+  "loading": "loading...",
 
   "home-hero-1": "Grow Your",
   "home-hero-2": "Business",
@@ -80,5 +80,9 @@
   "signin-signup": "Sign up",
 
   "course-catalogue-hero-1": "Course",
-  "course-catalogue-hero-2": "Catalogue"
+  "course-catalogue-hero-2": "Catalogue",
+
+  "select-category": "Select a Category",
+  "select-category-desc": "Please select a category to read more about it and discover the courses within it",
+  "select-category-discover":"Discover Courses"
 }

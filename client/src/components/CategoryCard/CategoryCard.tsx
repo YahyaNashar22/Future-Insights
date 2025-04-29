@@ -5,9 +5,16 @@ import bottomLeft from "../../assets/icons/category_design.png";
 import categoryTitleLeading from "../../assets/icons/category_title_leading.png";
 import { Link } from "react-router-dom";
 import ICategoryCard from "../../interfaces/ICategoryCard";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const CategoryCard: FC<ICategoryCard> = ({ selectedCategory, showButton }) => {
   const backend = import.meta.env.VITE_BACKEND;
+
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+
+  const isArabic = language === "ar";
   return (
     <div
       id="cat-card"
@@ -23,19 +30,29 @@ const CategoryCard: FC<ICategoryCard> = ({ selectedCategory, showButton }) => {
         <span className={styles.leading}>
           <img src={categoryTitleLeading} alt="leading" loading="lazy" />
         </span>
-        {selectedCategory ? selectedCategory.title : "Select a Category"}
-      </h2>
-      <p className={styles.description}>
         {selectedCategory
-          ? selectedCategory?.description
-          : "Please select a category to read more about it and discover the courses within it"}
+          ? isArabic
+            ? selectedCategory.arabicTitle
+            : selectedCategory.title
+          : t("select-category")}
+      </h2>
+      <p
+        className={`${styles.description} ${
+          isArabic ? styles.arabicDescription : ""
+        }`}
+      >
+        {selectedCategory
+          ? isArabic
+            ? selectedCategory?.arabicDescription
+            : selectedCategory?.description
+          : t("select-category-desc")}
       </p>
       {selectedCategory && showButton && (
         <Link
           to={`/course-catalogue/category/${selectedCategory.slug}`}
           className={styles.readMore}
         >
-          Discover Courses
+          {t("select-category-discover")}
         </Link>
       )}
       <img

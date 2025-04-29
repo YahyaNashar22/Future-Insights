@@ -42,6 +42,10 @@
   text-align: left;
 }
 
+.arabicDescription {
+  text-align: right;
+}
+
 .descriptionLine {
   margin-bottom: 10px;
 }

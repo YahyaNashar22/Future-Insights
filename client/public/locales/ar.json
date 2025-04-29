@@ -80,5 +80,9 @@
   "signin-signup": "سجّل الآن",
 
   "course-catalogue-hero-1": "لائحة",
-  "course-catalogue-hero-2": "الدورات"
+  "course-catalogue-hero-2": "الدورات",
+
+  "select-category": "اختار الفئة",
+  "select-category-desc":"الرجاء اختيار فئة لقراءة المزيد عنها واكتشاف الدورات التدريبية الموجودة فيها",
+  "select-category-discover":"اكتشف الدورات"
 }
