@@ -93,4 +93,10 @@
     margin-bottom: 50px;
     width: 90%;
   }
+
+  .bottomLeft {
+    scale: 0.6;
+    bottom: -50px;
+    left: -50px;
+  }
 }
