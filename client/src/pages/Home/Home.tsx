@@ -5,6 +5,7 @@ import Team from "../../components/Team/Team";
 import styles from "./Home.module.css";
 
 const Home = () => {
+
   return (
     <main className={styles.wrapper}>
       <HomeHero />

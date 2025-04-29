@@ -4,6 +4,8 @@ import financial from "../../assets/icons/financial.png";
 import professional from "../../assets/icons/professional.png";
 import business from "../../assets/icons/business.png";
 import intelligence from "../../assets/icons/intelligence.png";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const data = [
   {
@@ -51,12 +53,16 @@ const Card = ({
 };
 
 const Team = () => {
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+
+  const isArabic = language === "ar";
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>
-        We bring together a team of seasoned experts, including{" "}
-        <span className={styles.beige}> Certified Master Trainers (CMTs)</span>,
-        executive coaches, and industry leaders, specializing in
+        {t('team-title-1')}{" "}
+        <span className={styles.beige}> {t('team-title-beige')}</span>
+        {t('team-title-2')}
       </h2>
       <ul className={styles.container}>
         {data.map((card, index) => {

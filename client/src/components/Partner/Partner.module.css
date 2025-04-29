@@ -23,14 +23,18 @@
   hyphens: auto;
 }
 
+.arabicText {
+  font-size: 2rem;
+}
+
 .beige {
   color: var(--primary-beige);
 }
 
 @media (max-width: 800px) {
-    .content {
-        flex-direction: column;
-        width: 100%;
-        row-gap: 10px;
-    }
+  .content {
+    flex-direction: column;
+    width: 100%;
+    row-gap: 10px;
+  }
 }
