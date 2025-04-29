@@ -66,5 +66,14 @@
 
   "Iam-learner-title": "What Would You Like To Do ?",
   "Iam-learner-opt-1": "Sign in and start learning!",
-  "Iam-learner-opt-2": "Have a look around and check our course catalogue"
+  "Iam-learner-opt-2": "Have a look around and check our course catalogue",
+
+  "signin-title": "Welcome Back!",
+  "signin-email": "Email",
+  "signin-password": "Password",
+  "signin-resend": "Resend Verification Email",
+  "signin-signin": "Sign In",
+  "signin-forgot": "Forgot Password?",
+  "signin-no-account": "Don't have an account?",
+  "signin-signup": "Sign up"
 }

@@ -3,10 +3,17 @@ import { Link, useNavigate } from "react-router-dom";
 import styles from "./Signin.module.css";
 import { useUserStore } from "../../store";
 import axios, { AxiosError } from "axios";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const Signin = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const navigate = useNavigate();
+
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+
+  const isArabic = language === "ar";
 
   const { setUser } = useUserStore();
 
@@ -84,10 +91,15 @@ const Signin = () => {
   return (
     <main className={styles.wrapper}>
       <div className={styles.signinContainer}>
-        <h1 className={styles.title}>Welcome Back!</h1>
+        <h1 className={styles.title}>{t("signin-title")}</h1>
         <form onSubmit={handleSubmit} className={styles.form}>
           <div className={styles.inputGroup}>
-            <label htmlFor="email">Email</label>
+            <label
+              className={isArabic ? styles.arabicLabel : ""}
+              htmlFor="email"
+            >
+              {t("signin-email")}
+            </label>
             <input
               type="email"
               id="email"
@@ -98,7 +110,12 @@ const Signin = () => {
             />
           </div>
           <div className={styles.inputGroup}>
-            <label htmlFor="password">Password</label>
+            <label
+              className={isArabic ? styles.arabicLabel : ""}
+              htmlFor="password"
+            >
+              {t("signin-password")}
+            </label>
             <input
               type="password"
               id="password"
@@ -116,7 +133,7 @@ const Signin = () => {
               onClick={handleResendVerification}
               disabled={loading}
             >
-              Resend Verification Email
+              {t("signin-resend")}
             </button>
           )}
           {resendSuccess && (
@@ -127,15 +144,16 @@ const Signin = () => {
             type="submit"
             className={styles.signinButton}
           >
-            Sign In
+            {t("signin-signin")}
           </button>
         </form>
 
         <Link to="/forgot-password" className={styles.forgotPassword}>
-          Forgot Password?{" "}
+          {t("signin-forgot")}{" "}
         </Link>
         <p className={styles.signupLink}>
-          Don't have an account? <Link to="/signup">Sign up</Link>
+          {t("signin-no-account")}{" "}
+          <Link to="/signup">{t("signin-signup")}</Link>
         </p>
       </div>
     </main>

@@ -66,5 +66,15 @@
 
   "Iam-learner-title": "ماذا ترغب أن تفعل؟",
   "Iam-learner-opt-1": "تسجيل الدخول وبدء التعلم",
-  "Iam-learner-opt-2": "تصفّح واطّلع على كتالوج الدورات لدينا."
+  "Iam-learner-opt-2": "تصفّح واطّلع على كتالوج الدورات لدينا.",
+
+  "signin-title":"مرحبًا بعودتك!",
+  "signin-email":"البريد الإلكتروني",
+  "signin-password":"كلمة المرور",
+  "signin-resend":"اعادة ارسال",
+  "signin-signin":"تسجيل الدخول",
+  "signin-forgot":"هل نسيت كلمة المرور؟",
+  "signin-no-account":"ليس لديك حساب؟",
+  "signin-signup":"سجّل الآن"
+
 }
