@@ -124,5 +124,10 @@
 
   "preview-not-available":"Preview not available for this file type.",
   "material-title":"Material",
-  "download":"Download File"
+  "download":"Download File",
+  "submit-answer":"Submit Your Answer",
+  "choose-file":" Choose File",
+  "selected-file":"Selected file",
+  "assessment-submit":"Submit",
+  "assessment-submitting":"Submitting..."
 }

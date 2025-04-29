@@ -124,5 +124,10 @@
 
   "preview-not-available": "المعاينة غير متاحة لهذا النوع من الملفات.",
   "material-title": "المحتوى",
-  "download": "تحميل الملف"
+  "download": "تحميل الملف",
+  "submit-answer": "أرسل إجابتك",
+  "choose-file": "اختر ملف",
+  "selected-file": "الملف المحدد",
+  "assessment-submit": "أرسل",
+  "assessment-submitting": "...جار الارسال"
 }

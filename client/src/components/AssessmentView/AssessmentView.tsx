@@ -3,8 +3,11 @@ import IAssessment from "../../interfaces/IAssessment";
 import styles from "./AssessmentView.module.css";
 import { useState } from "react";
 import { useUserStore } from "../../store";
+import { useTranslation } from "react-i18next";
 
 const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
+  const { t } = useTranslation();
+
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
 
@@ -94,11 +97,7 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
     //   );
     // }
 
-    return (
-      <p className={styles.noPreview}>
-        Preview not available for this file type.
-      </p>
-    );
+    return <p className={styles.noPreview}>{t("preview-not-available")}</p>;
   };
   return (
     <div className={styles.wrapper}>
@@ -111,13 +110,11 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
       <p className={styles.description}>{selectedItem.description}</p>
 
       <a href={selectedItem.scope} download className={styles.content}>
-        Download File
+        {t("download")}
       </a>
       <div className={styles.preview}>{renderPreview()}</div>
 
-      <p className={styles.submitText}>
-        Submit Your Answer
-      </p>
+      <p className={styles.submitText}>{t("submit-answer")}</p>
 
       <div className={styles.btns}>
         {/* File input */}
@@ -130,7 +127,7 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
 
         {/* Label styled as a button */}
         <label htmlFor="file-input" className={styles.fileInputLabel}>
-          Choose File
+          {t("choose-file")}
         </label>
 
         {file && (
@@ -140,14 +137,16 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
             onClick={handleUpload}
             disabled={uploading}
           >
-            {uploading ? "Submitting..." : "Submit"}
+            {uploading ? t("assessment-submitting") : t("assessment-submit")}
           </button>
         )}
       </div>
 
       {/* Show selected file */}
       {file && (
-        <p className={styles.uploadedFile}>Selected file: {file.name}</p>
+        <p className={styles.uploadedFile}>
+          {t("selected-file")}: {file.name}
+        </p>
       )}
     </div>
   );
