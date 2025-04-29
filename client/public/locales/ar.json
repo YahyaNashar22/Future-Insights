@@ -83,6 +83,18 @@
   "course-catalogue-hero-2": "الدورات",
 
   "select-category": "اختار الفئة",
-  "select-category-desc":"الرجاء اختيار فئة لقراءة المزيد عنها واكتشاف الدورات التدريبية الموجودة فيها",
-  "select-category-discover":"اكتشف الدورات"
+  "select-category-desc": "الرجاء اختيار فئة لقراءة المزيد عنها واكتشاف الدورات التدريبية الموجودة فيها",
+  "select-category-discover": "اكتشف الدورات",
+
+  "footer-welcome": "أهلاً وسهلاً في شركة الاستشارات الخاصة بنا.",
+  "footer-explore": "اكتشف",
+
+  "support": "المساعدة",
+  "terms": "شروط الاستخدام",
+  "privacy": "سياسة الخصوصية",
+  "refund": "سياسة استرداد الأموال",
+  "newsletter": "النشرة الإخبارية",
+  "newsletter-text": "اشترك للحصول على أحدث المقالات والموارد",
+  "newsletter-email": "البريد الالكتروني",
+  "newsletter-register": "تسجيل"
 }

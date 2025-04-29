@@ -9,6 +9,7 @@ import facebook from "../../assets/icons/facebook.png";
 import instagram from "../../assets/icons/instagram.png";
 import { Link } from "react-router-dom";
 import { useLanguageStore } from "../../langStore";
+import { useTranslation } from "react-i18next";
 
 const Icon = ({ image }: { image: string }) => {
   return (
@@ -25,6 +26,7 @@ const Icon = ({ image }: { image: string }) => {
 
 const Footer = () => {
   const { setLanguage } = useLanguageStore();
+  const { t } = useTranslation();
   return (
     <footer className={styles.wrapper}>
       {/* upper section */}
@@ -40,9 +42,7 @@ const Footer = () => {
               width={150}
               className={styles.logo}
             />
-            <p className={styles.logoText}>
-              Welcome to our consultancy agency.
-            </p>
+            <p className={styles.logoText}>{t("footer-welcome")}</p>
           </div>
 
           {/* lower left side */}
@@ -66,27 +66,27 @@ const Footer = () => {
 
         {/* middle  */}
         <div className={styles.middle}>
-          <p className={styles.sectionTitle}>Explore</p>
+          <p className={styles.sectionTitle}>{t("footer-explore")}</p>
           <div className={styles.columns}>
             <ul className={styles.first}>
               <li>
                 <Link to="/" className={styles.link}>
-                  Home
+                  {t("nav-1")}
                 </Link>
               </li>
               <li>
                 <Link to="/course-catalogue" className={styles.link}>
-                  Course Catalogue
+                  {t("nav-2")}
                 </Link>
               </li>
               <li>
                 <Link to="/instructor-request" className={styles.link}>
-                  Become an Instructor
+                  {t("nav-6")}
                 </Link>
               </li>
               <li>
                 <Link to="/my-courses" className={styles.link}>
-                  My Courses
+                  {t("nav-4")}
                 </Link>
               </li>
             </ul>
@@ -94,22 +94,22 @@ const Footer = () => {
             <ul className={styles.second}>
               <li>
                 <Link to="/support" className={styles.link}>
-                  Support
+                  {t("support")}
                 </Link>
               </li>
               <li>
                 <Link to="/terms-of-use" className={styles.link}>
-                  Terms of use
+                  {t("terms")}
                 </Link>
               </li>
               <li>
                 <Link to="/privacy-policy" className={styles.link}>
-                  Privacy policy
+                  {t("privacy")}
                 </Link>
               </li>
               <li>
                 <Link to="/refund-policies" className={styles.link}>
-                  Refund policy
+                  {t("refund")}
                 </Link>
               </li>
             </ul>
@@ -118,22 +118,22 @@ const Footer = () => {
 
         {/* right side */}
         <div className={styles.right}>
-          <p className={styles.sectionTitle}>Newsletter</p>
+          <p className={styles.sectionTitle}>{t("newsletter")}</p>
 
           <div className={styles.newsletterContainer}>
-            <p className={styles.newsLetterText}>
-              Subscribe for latest articles and resources
-            </p>
+            <p className={styles.newsLetterText}>{t("newsletter-text")}</p>
 
             <div className={styles.emailContainer}>
               <input
                 type="email"
-                placeholder="Email address"
+                placeholder={t("newsletter-email")}
                 className={styles.email}
                 required
               />
 
-              <button className={styles.subscribe}>Register</button>
+              <button className={styles.subscribe}>
+                {t("newsletter-register")}
+              </button>
             </div>
           </div>
         </div>

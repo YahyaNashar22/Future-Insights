@@ -84,5 +84,18 @@
 
   "select-category": "Select a Category",
   "select-category-desc": "Please select a category to read more about it and discover the courses within it",
-  "select-category-discover":"Discover Courses"
+  "select-category-discover":"Discover Courses",
+
+  "footer-welcome":"Welcome to our consultancy agency.",
+  "footer-explore": "Explore",
+
+  "support":"Support",
+  "terms":"Terms of use",
+  "privacy":"Privacy policy",
+  "refund":"Refund policy",
+  "newsletter":"Newsletter",
+  "newsletter-text":"Subscribe for latest articles and resources",
+  "newsletter-email":"Email address",
+  "newsletter-register":"Register"
+
 }
