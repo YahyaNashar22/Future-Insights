@@ -8,6 +8,7 @@ import Loading from "../../components/Loading/Loading";
 import IModule from "../../interfaces/IModule";
 import { useTranslation } from "react-i18next";
 import { useLanguageStore } from "../../langStore";
+import { parseBullets } from "../../utils/ParseList";
 
 const ClassShowCase = () => {
   const { t } = useTranslation();
@@ -157,7 +158,7 @@ const ClassShowCase = () => {
               className={styles.thumbnail}
             />
             <div className={styles.info}>
-              <h1>{cls.title}</h1>
+              <h1>{isArabic ? cls.arabicTitle : cls.title}</h1>
               <p className={styles.teacher}>
                 {t("class-instructor")}: {cls.teacher.fullname}
               </p>
@@ -198,7 +199,10 @@ const ClassShowCase = () => {
           <section className={styles.description}>
             <h2>{t("class-about")}</h2>
             <p className={styles.descriptionText}>
-              {isArabic ? cls.arabicDescription : cls.description}
+              {parseBullets(
+                isArabic ? cls.arabicDescription : cls.description,
+                isArabic
+              )}
             </p>
             {cls.demo && (
               <div className={styles.demo}>
