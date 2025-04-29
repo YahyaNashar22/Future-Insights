@@ -8,6 +8,7 @@ import linkedin from "../../assets/icons/linkedin.png";
 import facebook from "../../assets/icons/facebook.png";
 import instagram from "../../assets/icons/instagram.png";
 import { Link } from "react-router-dom";
+import { useLanguageStore } from "../../langStore";
 
 const Icon = ({ image }: { image: string }) => {
   return (
@@ -23,6 +24,7 @@ const Icon = ({ image }: { image: string }) => {
 };
 
 const Footer = () => {
+  const { setLanguage } = useLanguageStore();
   return (
     <footer className={styles.wrapper}>
       {/* upper section */}
@@ -166,6 +168,20 @@ const Footer = () => {
             </a>
           </li>
         </ul>
+      </div>
+      <div className="language-btn-container">
+        <button
+          style={{ color: "var(--white)" }}
+          onClick={() => setLanguage("en")}
+        >
+          English
+        </button>
+        <button
+          style={{ color: "var(--white)" }}
+          onClick={() => setLanguage("ar")}
+        >
+          العربية
+        </button>
       </div>
     </footer>
   );

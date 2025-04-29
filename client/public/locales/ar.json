@@ -53,7 +53,7 @@
 
   "coaching-session-header": "احجز استشارتك المجانية لمدة 20 دقيقة",
   "coaching-session-subheader-1": "نحن متاحون يوميًا من الساعة",
-  "coaching-session-subheader-bold": "9 صباحًا حتى 6 مساءً.",
+  "coaching-session-bold": "9 صباحًا حتى 6 مساءً.",
   "coaching-session-subheader-2": "خذ الخطوة الأولى نحو التغيير من خلال جلسة فردية مجانية.",
   "coaching-session-name": "اسمك",
   "coaching-session-email": "بريدك الإلكتروني",
@@ -62,5 +62,9 @@
   "coaching-session-time": "الوقت",
   "coaching-session-reserve": "احجز الجلسة",
   "coaching-session-reserving": "جار الحجز",
-  "coaching-session-success": "تم الحجز بنجاح"
+  "coaching-session-success": "تم الحجز بنجاح",
+
+  "Iam-learner-title": "ماذا ترغب أن تفعل؟",
+  "Iam-learner-opt-1": "تسجيل الدخول وبدء التعلم",
+  "Iam-learner-opt-2": "تصفّح واطّلع على كتالوج الدورات لدينا."
 }
