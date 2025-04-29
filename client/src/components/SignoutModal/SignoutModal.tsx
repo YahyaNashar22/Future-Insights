@@ -1,12 +1,15 @@
 import { useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import styles from "./SignoutModal.module.css";
+import { useTranslation } from "react-i18next";
 
 const SignoutModal = ({
   setShowModal,
 }: {
   setShowModal: (bool: boolean) => void;
 }) => {
+  const { t } = useTranslation();
+
   const { clearUser } = useUserStore();
   const navigate = useNavigate();
 
@@ -18,16 +21,16 @@ const SignoutModal = ({
   return (
     <div className={styles.modalOverlay}>
       <div className={styles.modal}>
-        <h2>Are you sure you want to sign out?</h2>
+        <h2>{t("logout-text")}</h2>
         <div className={styles.modalActions}>
           <button
             onClick={() => setShowModal(false)}
             className={styles.cancelButton}
           >
-            Cancel
+            {t("cancel")}
           </button>
           <button onClick={onConfirm} className={styles.confirmButton}>
-            Yes
+            {t("yes")}
           </button>
         </div>
       </div>

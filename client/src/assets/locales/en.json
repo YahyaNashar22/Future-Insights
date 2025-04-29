@@ -142,6 +142,9 @@
   "cancel":"Cancel",
   "confirm":"Confirm",
   "enrolling":"Enrolling...",
-  "class-not-found":"Class not found."
+  "class-not-found":"Class not found.",
+
+  "logout-text":"Are you sure you want to sign out?",
+  "yes":"yes"
 
 }
