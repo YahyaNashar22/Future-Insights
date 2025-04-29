@@ -1,4 +1,6 @@
 {
+  "loading":"loading...",
+
   "home-hero-1": "Grow Your",
   "home-hero-2": "Business",
   "home-hero-3": "With us",
@@ -75,5 +77,8 @@
   "signin-signin": "Sign In",
   "signin-forgot": "Forgot Password?",
   "signin-no-account": "Don't have an account?",
-  "signin-signup": "Sign up"
+  "signin-signup": "Sign up",
+
+  "course-catalogue-hero-1": "Course",
+  "course-catalogue-hero-2": "Catalogue"
 }
