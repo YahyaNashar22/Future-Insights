@@ -49,5 +49,19 @@
   "instructor-form-send": "Send Request",
   "instructor-form-thanks-1": "Thank your for your interest!",
   "instructor-form-confirmation": "We'll get back to you in no time",
-  "instructor-form-home": "Home"
+  "instructor-form-home": "Home",
+
+  "coaching-session-header":"Reserve Your Free 20-Minute Coaching Session",
+  "coaching-session-subheader-1":"We're available daily from",
+  "coaching-session-subheader-bold":"9 AM to 6 PM",
+  "coaching-session-subheader-2":"Take the first step toward transformation with a complimentary one-on-one session.",
+  "coaching-session-name":"Your Name",
+  "coaching-session-email":"Your Email",
+  "coaching-session-phone":"Your Phone Number",
+  "coaching-session-date":"Select Date",
+  "coaching-session-time":"Select Time",
+  "coaching-session-reserve":"Reserve Session",
+  "coaching-session-reserving":"Booking...",
+  "coaching-session-success":"Session reserved successfully!"
+
 }
