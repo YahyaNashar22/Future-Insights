@@ -6,6 +6,8 @@ export const createClass = async (req, res) => {
         const {
             title,
             description,
+            arabicTitle,
+            arabicDescription,
             price,
             duration,
             teacher,
@@ -28,6 +30,8 @@ export const createClass = async (req, res) => {
         const newClass = new Class({
             title,
             description,
+            arabicTitle,
+            arabicDescription,
             thumbnail,
             demo,
             duration,
@@ -142,7 +146,8 @@ export const updateClass = async (req, res) => {
             return res.status(404).json({ success: false, message: "Class not found" });
         }
 
-        const { title, description, duration, price, discount } = req.body;
+        const { title, description, arabicTitle,
+            arabicDescription, duration, price, discount } = req.body;
 
 
         // Look for thumbnail file
@@ -155,6 +160,8 @@ export const updateClass = async (req, res) => {
         // Update fields
         course.title = title ?? course.title;
         course.description = description ?? course.description;
+        course.arabicTitle = arabicTitle ?? course.arabicTitle;
+        course.arabicDescription = arabicDescription ?? course.arabicDescription;
         course.duration = duration ?? course.duration;
         course.price = price ?? course.price;
         course.discount = discount ?? course.discount;

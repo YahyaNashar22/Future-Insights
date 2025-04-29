@@ -14,6 +14,14 @@ const courseSchema = new Schema(
             type: String,
             required: true,
         },
+        arabicTitle: {
+            type: String,
+            required: true,
+        },
+        arabicDescription: {
+            type: String,
+            required: true,
+        },
         thumbnail: {
             type: String,
             required: true,
@@ -61,7 +69,7 @@ const courseSchema = new Schema(
         type: {
             type: String,
             default: "course"
-        }, 
+        },
         slug: {
             type: String,
             unique: true,
