@@ -2,8 +2,11 @@ import styles from "./EditProfile.module.css";
 import { useState } from "react";
 import axios, { AxiosError } from "axios";
 import { useUserStore } from "../../store";
+import { useTranslation } from "react-i18next";
 
 const EditProfile = () => {
+  const { t } = useTranslation();
+
   const backend = import.meta.env.VITE_BACKEND;
   const { user, setUser } = useUserStore();
 
@@ -64,10 +67,10 @@ const EditProfile = () => {
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>Edit Profile</h2>
+      <h2 className={styles.title}>{t("edit-profile")}</h2>
       <form onSubmit={handleSubmit} className={styles.form}>
         <label className={styles.formLabel}>
-          Full Name:
+          {t("instructor-form-name")}
           <input
             className={styles.formInput}
             type="text"
@@ -77,35 +80,35 @@ const EditProfile = () => {
         </label>
 
         <label className={styles.formLabel}>
-          Current Password:
+          {t("current-password")}
           <input
             className={styles.formInput}
             type="password"
             value={currentPassword}
             onChange={(e) => setCurrentPassword(e.target.value)}
-            placeholder="Enter current password"
+            placeholder={t("enter-current-password")}
           />
         </label>
 
         <label className={styles.formLabel}>
-          New Password:
+          {t("new-pass")}
           <input
             className={styles.formInput}
             type="password"
             value={newPassword}
             onChange={(e) => setNewPassword(e.target.value)}
-            placeholder="New password (optional)"
+            placeholder={t("new-pass")}
           />
         </label>
 
         <label className={styles.formLabel}>
-          Confirm New Password:
+          {t("confirm-pass")}
           <input
             className={styles.formInput}
             type="password"
             value={confirmNewPassword}
             onChange={(e) => setConfirmNewPassword(e.target.value)}
-            placeholder="Confirm new password"
+            placeholder={t("confirm-pass")}
           />
         </label>
 
@@ -113,7 +116,7 @@ const EditProfile = () => {
         {message && <p className={styles.success}>{message}</p>}
 
         <button className={styles.formButton} type="submit" disabled={loading}>
-          {loading ? "Updating..." : "Update Profile"}
+          {loading ? t("updating") : t("update-profile")}
         </button>
       </form>
     </div>

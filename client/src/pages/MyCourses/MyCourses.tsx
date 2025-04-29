@@ -10,10 +10,13 @@ import { useUserStore } from "../../store";
 import ICertification from "../../interfaces/ICertification";
 import { Link } from "react-router-dom";
 import EditProfile from "../../components/EditProfile/EditProfile";
+import { useTranslation } from "react-i18next";
 
 const MyCourses = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
+
+  const { t } = useTranslation();
 
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [classes, setClasses] = useState<ICourse[]>([]);
@@ -112,7 +115,7 @@ const MyCourses = () => {
                 }`}
                 onClick={() => setActiveTab("classes")}
               >
-                Classes
+                {t("classes")}
               </button>
               <button
                 className={`${styles.navButton} ${
@@ -120,7 +123,7 @@ const MyCourses = () => {
                 }`}
                 onClick={() => setActiveTab("courses")}
               >
-                Courses
+                {t("courses")}
               </button>
 
               <button
@@ -129,7 +132,7 @@ const MyCourses = () => {
                 }`}
                 onClick={() => setActiveTab("certifications")}
               >
-                Certifications
+                {t("certifications")}
               </button>
 
               <button
@@ -138,7 +141,7 @@ const MyCourses = () => {
                 }`}
                 onClick={() => setActiveTab("edit profile")}
               >
-                Edit Profile
+                {t("edit-profile")}
               </button>
             </div>
 

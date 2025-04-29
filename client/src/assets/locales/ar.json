@@ -145,5 +145,23 @@
   "class-not-found": "لم يتم العثور على الدورة.",
 
   "logout-text": "هل أنت متأكد أنك تريد تسجيل الخروج؟",
-  "yes": "نعم"
+  "yes": "نعم",
+
+  "classes": "الدورات",
+  "courses": "الكورسات",
+  "certifications": "الشهادات",
+  "edit-profile": "تعديل الملف",
+
+  "no-classes-available-1": "لا يوجد حاليا",
+  "no-classes-available-2": "في هذا القسم. يُرجى معاودة التحقق لاحقًا.",
+  "course-catalogue": "جدول الدورات",
+  "no": "لا",
+  "available": "متاحة",
+
+  "current-password": "كلمة المرور الحالية",
+  "enter-current-password": "أدخل كلمة المرور الحالية",
+  "new-pass": "كلمة المرور الجديدة",
+  "confirm-pass": "تأكيد كلمة المرور الجديدة",
+  "update-profile": "تحديث الملف الشخصي",
+  "updating": "جارٍ التحديث..."
 }

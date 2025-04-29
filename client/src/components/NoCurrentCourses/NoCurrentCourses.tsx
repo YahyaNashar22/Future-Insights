@@ -1,18 +1,20 @@
 import { Link } from "react-router-dom";
 import styles from "./NoCurrentCourses.module.css";
+import { useTranslation } from "react-i18next";
 
 const NoCurrentCourses = ({ course }: { course: boolean }) => {
+  const { t } = useTranslation();
   return (
     <div className={styles.noCoursesContainer}>
       <h1 className={styles.noCoursesTitle}>
-        No {course ? "Courses" : "Classes"} Available
+        {t("no")} {course ? t("courses") : t("classes")} {t("available")}
       </h1>
       <p className={styles.noCoursesMessage}>
-        There are currently no {course ? "courses" : "classes"} in this section.
-        Please check back later.
+        {t("no-classes-available-1")} {course ? t("courses") : t("classes")}{" "}
+        {t("no-classes-available-2")}
       </p>
       <Link to="/course-catalogue" className={styles.courseCatalogueLink}>
-        Course Catalogue
+        {t("course-catalogue")}
       </Link>
     </div>
   );
