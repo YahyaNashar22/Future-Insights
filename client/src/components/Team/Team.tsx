@@ -13,24 +13,35 @@ const data = [
     title: "Financial Management & Strategic Leadership",
     description:
       "Helping businesses navigate complex financial landscapes and drive long-term success.",
+    arabicTitle: "الإدارة المالية والقيادة الإستراتيجية",
+    arabicDescription:
+      "لمساعدة الشركات على التنقّل في البيئات الماليّة المعقّدة ودفعها نحو النجاح على المدى الطويل.",
   },
   {
     icon: professional,
     title: "Professional & Executive Development",
     description:
       "Equipping professionals with leadership, decision-making, and growth-oriented skills.",
+    arabicTitle: "التطوير المهني والتنفيذي",
+    arabicDescription:
+      "تزويد المهنيين بالمهارات القيادية ومهارات اتخاذ القرار والنمو المستدام.",
   },
   {
     icon: business,
     title: "Business Development & Innovation",
     description:
       "Crafting strategies that foster growth, sustainability, and market expansion.",
+    arabicTitle: "تطوير الأعمال والابتكار",
+    arabicDescription:
+      "وضع استراتيجيات تعزز النمو، والاستدامة، والتوسّع في الأسواق",
   },
   {
     icon: intelligence,
     title: "Solid Emotional Intelligence & Executive Coaching Foundation",
     description:
       "Enhancing leadership effectiveness, resilience, and team dynamics.",
+    arabicTitle: "الذكاء العاطفي الراسخ وأساسيات التدريب التنفيذي",
+    arabicDescription: "تعزيز فعالية القيادة، والمرونة، وديناميكيات الفريق.",
   },
 ];
 
@@ -38,16 +49,24 @@ const Card = ({
   icon,
   title,
   description,
+  arabicTitle,
+  arabicDescription,
+  isArabic,
 }: {
   icon: string;
   title: string;
   description: string;
+  arabicTitle: string;
+  arabicDescription: string;
+  isArabic: boolean;
 }) => {
   return (
     <div className={styles.card}>
       <img src={icon} alt={title} loading="lazy" className={styles.cardIcon} />
-      <h3 className={styles.cardTitle}>{title}</h3>
-      <p className={styles.cardDescription}>{description}</p>
+      <h3 className={styles.cardTitle}>{isArabic ? arabicTitle : title}</h3>
+      <p className={styles.cardDescription}>
+        {isArabic ? arabicDescription : description}
+      </p>
     </div>
   );
 };
@@ -60,9 +79,9 @@ const Team = () => {
   return (
     <section className={styles.wrapper}>
       <h2 className={styles.title}>
-        {t('team-title-1')}{" "}
-        <span className={styles.beige}> {t('team-title-beige')}</span>
-        {t('team-title-2')}
+        {t("team-title-1")}{" "}
+        <span className={styles.beige}> {t("team-title-beige")}</span>
+        {t("team-title-2")}
       </h2>
       <ul className={styles.container}>
         {data.map((card, index) => {
@@ -72,6 +91,9 @@ const Team = () => {
               icon={card.icon}
               title={card.title}
               description={card.description}
+              arabicTitle={card.arabicTitle}
+              arabicDescription={card.arabicDescription}
+              isArabic={isArabic}
             />
           );
         })}
