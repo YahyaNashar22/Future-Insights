@@ -105,6 +105,11 @@
   bottom: 10px;
 }
 
+.arabicSubscribe {
+  left: 10px;
+  right: initial;
+}
+
 .lower {
   display: flex;
   align-items: center;

@@ -25,8 +25,10 @@ const Icon = ({ image }: { image: string }) => {
 };
 
 const Footer = () => {
-  const { setLanguage } = useLanguageStore();
+  const { language, setLanguage } = useLanguageStore();
   const { t } = useTranslation();
+
+  const isArabic = language === "ar";
   return (
     <footer className={styles.wrapper}>
       {/* upper section */}
@@ -131,7 +133,11 @@ const Footer = () => {
                 required
               />
 
-              <button className={styles.subscribe}>
+              <button
+                className={`${styles.subscribe} ${
+                  isArabic ? styles.arabicSubscribe : ""
+                }`}
+              >
                 {t("newsletter-register")}
               </button>
             </div>
