@@ -35,5 +35,19 @@
 
   "team-title-1": "نحن نجمع فريقًا من الخبراء المتمرّسين، بما في ذلك",
   "team-title-beige": "مدرّبين معتمدين رئيسيين (CMTs)",
-  "team-title-2": "، ومدرّبين تنفيذيين، وقادة في مجال الصناعة، متخصصين في"
+  "team-title-2": "، ومدرّبين تنفيذيين، وقادة في مجال الصناعة، متخصصين في",
+
+  "instructor-form-title": "نموذج انتساب مدرب",
+  "instructor-form-name": "الاسم الكامل",
+  "instructor-form-name-holder":"اكتب اسمك",
+  "instructor-form-email": "البريد الإلكتروني",
+  "instructor-form-phone": "رقم الهاتف",
+  "instructor-form-phone-holder":"اكتب رقم هاتفك",
+  "instructor-form-tell": "حدثنا أكثر عن نفسك",
+  "instructor-form-tell-holder":"اكتب لنا المزيد عن نفسك",
+  "instructor-form-back": "الرجوع",
+  "instructor-form-send": "إرسال الطلب",
+  "instructor-form-thanks-1": "شكرا لاهتمامك",
+  "instructor-form-confirmation": "سنتواصل معك بأقرب وقت",
+  "instructor-form-home": "رجوع"
 }

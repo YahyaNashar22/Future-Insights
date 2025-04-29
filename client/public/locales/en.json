@@ -33,7 +33,21 @@
   "partner-text-2": "we partner with executives and organizations to build stronger leadership",
   "partner-text-3": ", maximize performance, and unlock future growth opportunities.",
 
-  "team-title-1":"We bring together a team of seasoned experts, including",
-  "team-title-beige":"Certified Master Trainers (CMTs)",
-  "team-title-2":", executive coaches, and industry leaders, specializing in"
+  "team-title-1": "We bring together a team of seasoned experts, including",
+  "team-title-beige": "Certified Master Trainers (CMTs)",
+  "team-title-2": ", executive coaches, and industry leaders, specializing in",
+
+  "instructor-form-title": "Instructor Request Form",
+  "instructor-form-name": "Full Name",
+  "instructor-form-name-holder": "your name",
+  "instructor-form-email": "Email Address",
+  "instructor-form-phone": "Phone Number",
+  "instructor-form-phone-holder": "Phone Number",
+  "instructor-form-tell": "Tell us more about yourself",
+  "instructor-form-tell-holder": "Tell us more about yourself",
+  "instructor-form-back": "Back",
+  "instructor-form-send": "Send Request",
+  "instructor-form-thanks-1": "Thank your for your interest!",
+  "instructor-form-confirmation": "We'll get back to you in no time",
+  "instructor-form-home": "Home"
 }

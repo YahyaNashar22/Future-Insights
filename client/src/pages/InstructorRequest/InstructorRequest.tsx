@@ -2,8 +2,11 @@ import { ChangeEvent, FormEvent, useState } from "react";
 import styles from "./InstructorRequest.module.css";
 import { Link } from "react-router-dom";
 import axios from "axios";
+import { useTranslation } from "react-i18next";
 
 const InstructorRequest = () => {
+  const { t } = useTranslation();
+
   const backend = import.meta.env.VITE_BACKEND;
   const [loading, setLoading] = useState<boolean>(false);
   const [submitted, setSubmitted] = useState<boolean>(false);
@@ -59,15 +62,17 @@ const InstructorRequest = () => {
   };
   return (
     <main className={styles.wrapper}>
-      {!submitted && <h1 className={styles.title}>Instructor Request Form</h1>}
+      {!submitted && (
+        <h1 className={styles.title}>{t("instructor-form-title")}</h1>
+      )}
       {!submitted && (
         <form className={styles.fromContainer} onSubmit={handleSubmit}>
           <label className={styles.formLabel}>
-            Full Name
+            {t("instructor-form-name")}
             <input
               type="text"
               name="name"
-              placeholder="your name"
+              placeholder={t("instructor-form-name-holder")}
               value={formData.name}
               onChange={handleChange}
               className={styles.Inp}
@@ -76,7 +81,7 @@ const InstructorRequest = () => {
           </label>
 
           <label className={styles.formLabel}>
-            Email Address
+            {t("instructor-form-email")}
             <input
               type="email"
               name="email"
@@ -89,11 +94,11 @@ const InstructorRequest = () => {
           </label>
 
           <label className={styles.formLabel}>
-            Phone Number
+            {t("instructor-form-phone")}
             <input
               type="text"
               name="phone"
-              placeholder="your phone number"
+              placeholder={t("instructor-form-phone-holder")}
               value={formData.phone}
               onChange={handleChange}
               className={styles.Inp}
@@ -102,10 +107,10 @@ const InstructorRequest = () => {
           </label>
 
           <label className={styles.formLabel}>
-            Tell us more about yourself
+            {t("instructor-form-tell")}
             <textarea
               name="message"
-              placeholder="tell us more about yourself"
+              placeholder={t("instructor-form-tell-holder")}
               onChange={handleChange}
               className={styles.textareaInp}
               aria-multiline
@@ -116,10 +121,10 @@ const InstructorRequest = () => {
 
           <div className={styles.formBtns}>
             <Link to="/" className={styles.homeBtn}>
-              Back
+              {t("instructor-form-back")}
             </Link>
             <button disabled={loading} type="submit" className={styles.submit}>
-              Send Request
+              {t("instructor-form-send")}
             </button>
           </div>
         </form>
@@ -127,9 +132,11 @@ const InstructorRequest = () => {
 
       {submitted && (
         <div className={styles.submittedCard}>
-          <h2 className={styles.thanksTitle}>Thank your for your interest!</h2>
-          <p className={styles.thanksText}>We'll get back to you in no time</p>
-          <Link to="/">Home</Link>
+          <h2 className={styles.thanksTitle}>{t("instructor-form-thanks")}</h2>
+          <p className={styles.thanksText}>
+            {t("instructor-form-confirmation")}
+          </p>
+          <Link to="/">{t("instructor-form-home")}</Link>
         </div>
       )}
     </main>
