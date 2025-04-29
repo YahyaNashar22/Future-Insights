@@ -118,5 +118,11 @@
   "session-starts-at": "Session started at",
   "session-ends-at": "Session starts at",
   "join-session": "Join Live Session",
-  "session-not-started": "Session hasn't started yet"
+  "session-not-started": "Session hasn't started yet",
+
+  "recording-title":"Session Recording",
+
+  "preview-not-available":"Preview not available for this file type.",
+  "material-title":"Material",
+  "download":"Download File"
 }

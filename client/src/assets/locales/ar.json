@@ -113,10 +113,16 @@
 
   "duration": "المدة",
 
-  "live-session-title":"رابط الجلسة المباشرة",
-  "session-ended":"انتهت الجلسة",
-  "session-starts-at":"تبدأ الجلسة في",
-  "session-ends-at":"تنتهي الجلسة في",
-  "join-session":"انضم إلى الجلسة المباشرة",
-  "session-not-started":"لم تبدأ الجلسة بعد"
+  "live-session-title": "رابط الجلسة المباشرة",
+  "session-ended": "انتهت الجلسة",
+  "session-starts-at": "تبدأ الجلسة في",
+  "session-ends-at": "تنتهي الجلسة في",
+  "join-session": "انضم إلى الجلسة المباشرة",
+  "session-not-started": "لم تبدأ الجلسة بعد",
+
+  "recording-title": "تسجيل الجلسة",
+
+  "preview-not-available": "المعاينة غير متاحة لهذا النوع من الملفات.",
+  "material-title": "المحتوى",
+  "download": "تحميل الملف"
 }

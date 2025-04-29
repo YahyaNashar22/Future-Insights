@@ -1,7 +1,10 @@
+import { useTranslation } from "react-i18next";
 import IMaterial from "../../interfaces/IMaterial";
 import styles from "./MaterialView.module.css";
 
 const MaterialView = ({ selectedItem }: { selectedItem: IMaterial }) => {
+  const { t } = useTranslation();
+
   const getFileExtension = (url: string) => {
     return url.split(".").pop()?.toLowerCase() || "";
   };
@@ -43,19 +46,15 @@ const MaterialView = ({ selectedItem }: { selectedItem: IMaterial }) => {
     //   );
     // }
 
-    return (
-      <p className={styles.noPreview}>
-        Preview not available for this file type.
-      </p>
-    );
+    return <p className={styles.noPreview}>{t("preview-not-available")}</p>;
   };
 
   return (
     <div className={styles.wrapper}>
-      <h2 className={styles.title}>📘 Material</h2>
+      <h2 className={styles.title}>📘 {t("material-title")}</h2>
       <p className={styles.name}>{selectedItem.name}</p>
       <a href={selectedItem.content} download className={styles.content}>
-        Download File
+        {t("download")}
       </a>
       <div className={styles.preview}>{renderPreview()}</div>
     </div>
