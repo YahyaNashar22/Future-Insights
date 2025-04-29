@@ -96,6 +96,9 @@
   "newsletter":"Newsletter",
   "newsletter-text":"Subscribe for latest articles and resources",
   "newsletter-email":"Email address",
-  "newsletter-register":"Register"
+  "newsletter-register":"Register",
+
+  "online-courses":"Online Courses",
+  "interactive-online-classes": "Interactive Online Classes"
 
 }

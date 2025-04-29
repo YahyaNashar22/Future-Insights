@@ -5,9 +5,12 @@ import axios from "axios";
 import Loading from "../Loading/Loading";
 import NoCurrentCourses from "../NoCurrentCourses/NoCurrentCourses";
 import CourseCard from "../CourseCard/CourseCard";
+import { useTranslation } from "react-i18next";
 
 const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
   const backend = import.meta.env.VITE_BACKEND;
+
+  const { t } = useTranslation();
 
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [classes, setClasses] = useState<ICourse[]>([]);
@@ -79,7 +82,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
                   }`}
                   onClick={() => setActiveTab("courses")}
                 >
-                  Online Courses
+                  {t("online-courses")}
                 </button>
               )}
               {courses.length > 0 && (
@@ -89,7 +92,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
                   }`}
                   onClick={() => setActiveTab("classes")}
                 >
-                  Interactive Online Classes
+                  {t("interactive-online-classes")}
                 </button>
               )}
             </div>
@@ -97,7 +100,9 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
             <div className={styles.container}>
               {activeTab === "courses" && (
                 <>
-                  <h2 className={styles.containerTitle}>Online Courses</h2>
+                  <h2 className={styles.containerTitle}>
+                    {t("online-courses")}
+                  </h2>
                   {courses.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {courses.map((course) => {
@@ -121,7 +126,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
               {activeTab === "classes" && (
                 <>
                   <h2 className={styles.containerTitle}>
-                    Interactive Online Classes
+                    {t("interactive-online-classes")}
                   </h2>
                   {classes.length > 0 ? (
                     <ul className={styles.courseGrid}>
