@@ -151,6 +151,8 @@
   "courses": "Courses",
   "certifications": "Certifications",
   "edit-profile": "Edit Profile",
+  "classes-no-ll":"Classes",
+  "courses-no-ll":"Courses",
 
   "no-classes-available-1": "There are currently no",
   "no-classes-available-2": "in this section. Please check back later.",

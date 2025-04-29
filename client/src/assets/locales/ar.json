@@ -151,6 +151,9 @@
   "courses": "الكورسات",
   "certifications": "الشهادات",
   "edit-profile": "تعديل الملف",
+  "classes-no-ll":"دورات",
+  "courses-no-ll":"كورسات",
+
 
   "no-classes-available-1": "لا يوجد حاليا",
   "no-classes-available-2": "في هذا القسم. يُرجى معاودة التحقق لاحقًا.",

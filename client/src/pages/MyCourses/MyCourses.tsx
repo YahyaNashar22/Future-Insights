@@ -148,7 +148,7 @@ const MyCourses = () => {
             <div className={styles.container}>
               {activeTab === "courses" && (
                 <>
-                  <h2 className={styles.containerTitle}>Courses</h2>
+                  <h2 className={styles.containerTitle}>{t('courses')}</h2>
                   {courses.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {courses.map((course) => (
@@ -169,7 +169,7 @@ const MyCourses = () => {
 
               {activeTab === "classes" && (
                 <>
-                  <h2 className={styles.containerTitle}>Classes</h2>
+                  <h2 className={styles.containerTitle}>{t('classes')}</h2>
                   {classes.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {classes.map((cls) => (
@@ -190,7 +190,7 @@ const MyCourses = () => {
 
               {activeTab === "certifications" && (
                 <>
-                  <h2 className={styles.containerTitle}>Certifications</h2>
+                  <h2 className={styles.containerTitle}>{t('certifications')}</h2>
                   {certifications.length > 0 ? (
                     <ul className={styles.courseGrid}>
                       {certifications.map((certification) => (
