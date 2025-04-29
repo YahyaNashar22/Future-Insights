@@ -1,15 +1,20 @@
 import styles from "./Vision.module.css";
 import vision from "../../assets/images/vision.png";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const Vision = () => {
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+
+  const isArabic = language === "ar";
   return (
     <div className={styles.wrapper}>
-      <div className={styles.content}>
-        <h2>Our Vision</h2>
-        <p>
-          To become the trusted partner for Leaders and executives in their
-          journey toward excellence and innovation.
-        </p>
+      <div
+        className={`${styles.content} ${isArabic ? styles.arabicContent : ""}`}
+      >
+        <h2> {t("our-vision")}</h2>
+        <p>{t("our-vision-text")}</p>
       </div>
 
       <div className={styles.imageContainer}>

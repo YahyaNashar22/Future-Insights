@@ -25,9 +25,21 @@
   font-size: 1.2rem;
 }
 
+.arabicContent h2 {
+  border-left: none;
+  border-right: 4px solid var(--secondary-blue);
+  padding-right: 10px;
+  padding-left: 0px;
+  font-size: 1.3rem;
+}
+
 .content p {
   padding: 0px 20px;
   font-weight: 500;
+}
+
+.arabicContent p {
+  font-size: 1.1rem;
 }
 
 /* Image Container */
