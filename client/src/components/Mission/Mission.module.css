@@ -59,6 +59,10 @@
   text-align: left;
 }
 
+.arabicTitle {
+  text-align: right;
+}
+
 .description {
   color: var(--white);
   width: 100%;

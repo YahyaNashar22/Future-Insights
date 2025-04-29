@@ -1,19 +1,20 @@
+import { useTranslation } from "react-i18next";
 import Vision from "../Vision/Vision";
 import styles from "./AboutRight.module.css";
+import { useLanguageStore } from "../../langStore";
 
 const AboutRight = () => {
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+
+  const isArabic = language === "ar";
   return (
     <div className={styles.wrapper}>
       <div className={styles.upper}>
-        <h2 className={styles.title}>We are Future Insights</h2>
-        <p className={styles.content}>
-          In a world full of challenges and rapid changes, Future Insights
-          Academy stands as the premier destination for executives and aspiring
-          leaders. We are a comprehensive platform dedicated to providing a
-          holistic learning experience and Management consultation that combines
-          theoretical knowledge with practical applications to develop strategic
-          leadership and management skills.
-        </p>
+        <h2 className={`${styles.title} ${isArabic ? styles.arabicTitle : ""}`}>
+          {t("we-are")}
+        </h2>
+        <p className={styles.content}>{t("we-are-text")}</p>
       </div>
       <Vision />
     </div>

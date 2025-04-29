@@ -28,6 +28,10 @@
   color: var(--primary-blue);
 }
 
+.arabicTitle {
+  text-align: right;
+}
+
 /* Responsive Content */
 .content {
   text-align: justify;
