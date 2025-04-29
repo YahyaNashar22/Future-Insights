@@ -5,12 +5,14 @@ import logo from "../../assets/icons/logo_svg.svg";
 import { useUserStore } from "../../store";
 import SignoutModal from "../../components/SignoutModal/SignoutModal";
 import { useLanguageStore } from "../../langStore";
+import { useTranslation } from "react-i18next";
 
 const MobileHeader = () => {
+  const { t } = useTranslation();
+  const { setLanguage } = useLanguageStore();
+
   const [menuOpen, setMenuOpen] = useState(false);
   const navigate = useNavigate();
-
-  const { setLanguage } = useLanguageStore();
 
   const { user } = useUserStore();
 
@@ -60,7 +62,7 @@ const MobileHeader = () => {
               className={styles.link}
               onClick={() => setMenuOpen(false)}
             >
-              Home
+              {t("nav-1")}
             </Link>
           </li>
           <li>
@@ -69,7 +71,7 @@ const MobileHeader = () => {
               className={styles.link}
               onClick={() => setMenuOpen(false)}
             >
-              Course Catalogue
+              {t("nav-2")}
             </Link>
           </li>
           <li>
@@ -78,7 +80,7 @@ const MobileHeader = () => {
               className={styles.link}
               onClick={() => setMenuOpen(false)}
             >
-              Coaching Session
+              {t("nav-3")}
             </Link>
           </li>
           {user && (
@@ -88,7 +90,7 @@ const MobileHeader = () => {
                 className={styles.link}
                 onClick={() => setMenuOpen(false)}
               >
-                My Courses
+                {t("nav-4")}
               </Link>
             </li>
           )}
@@ -99,7 +101,7 @@ const MobileHeader = () => {
                 className={styles.link}
                 onClick={() => setMenuOpen(false)}
               >
-                Dashboard
+                {t("nav-5")}
               </Link>
             </li>
           )}
@@ -110,7 +112,7 @@ const MobileHeader = () => {
                 className={styles.link}
                 onClick={() => setMenuOpen(false)}
               >
-                Become an Instructor
+                {t("nav-6")}
               </Link>
             </li>
           )}
@@ -130,14 +132,14 @@ const MobileHeader = () => {
               className={styles.signin}
               onClick={() => setMenuOpen(false)}
             >
-              Login
+              {t("login")}
             </Link>
             <Link
               to="/signup"
               className={styles.signup}
               onClick={() => setMenuOpen(false)}
             >
-              Sign up
+              {t("signup")}
             </Link>
           </div>
         )}
