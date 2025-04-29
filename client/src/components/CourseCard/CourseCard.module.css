@@ -193,3 +193,7 @@
   text-align: center;
   margin: 50px 0px;
 }
+
+.arabic {
+  text-align: right !important;
+}

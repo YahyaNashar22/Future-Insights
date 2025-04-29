@@ -84,21 +84,39 @@
 
   "select-category": "Select a Category",
   "select-category-desc": "Please select a category to read more about it and discover the courses within it",
-  "select-category-discover":"Discover Courses",
+  "select-category-discover": "Discover Courses",
 
-  "footer-welcome":"Welcome to our consultancy agency.",
+  "footer-welcome": "Welcome to our consultancy agency.",
   "footer-explore": "Explore",
 
-  "support":"Support",
-  "terms":"Terms of use",
-  "privacy":"Privacy policy",
-  "refund":"Refund policy",
-  "newsletter":"Newsletter",
-  "newsletter-text":"Subscribe for latest articles and resources",
-  "newsletter-email":"Email address",
-  "newsletter-register":"Register",
+  "support": "Support",
+  "terms": "Terms of use",
+  "privacy": "Privacy policy",
+  "refund": "Refund policy",
+  "newsletter": "Newsletter",
+  "newsletter-text": "Subscribe for latest articles and resources",
+  "newsletter-email": "Email address",
+  "newsletter-register": "Register",
 
-  "online-courses":"Online Courses",
-  "interactive-online-classes": "Interactive Online Classes"
+  "online-courses": "Online Courses",
+  "interactive-online-classes": "Interactive Online Classes",
 
+  "course-card-demo": "Demo",
+  "course-card-more": "View More",
+  "course-card-view-course": "View Course",
+  "course-card-view-class": "View Class",
+  "course-card-demo-no-demo": "unfortunately, no demo is available at the moment",
+  "course-card-cancel": "Cancel",
+  "course-card-continue": "Continue",
+
+  "get-certificate": "Get Certificate",
+
+  "duration": "Duration",
+
+  "live-session-title": "Live Session Link",
+  "session-ended": "Session Ended",
+  "session-starts-at": "Session started at",
+  "session-ends-at": "Session starts at",
+  "join-session": "Join Live Session",
+  "session-not-started": "Session hasn't started yet"
 }

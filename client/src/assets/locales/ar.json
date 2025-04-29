@@ -99,5 +99,24 @@
   "newsletter-register": "تسجيل",
 
   "online-courses": "الكورسات",
-  "interactive-online-classes":"الدورات التفاعلية"
+  "interactive-online-classes": "الدورات التفاعلية",
+
+  "course-card-demo": "تجريبي",
+  "course-card-more": "عرض المزيد",
+  "course-card-view-course": "عرض الدورة",
+  "course-card-view-class": "عرض الدورة",
+  "course-card-demo-no-demo": "لسوء الحظ، لا يوجد عرض تجريبي متاح في الوقت الحالي",
+  "course-card-cancel": "الغاء",
+  "course-card-continue": "استمر",
+
+  "get-certificate": "احصل على الشهادة",
+
+  "duration": "المدة",
+
+  "live-session-title":"رابط الجلسة المباشرة",
+  "session-ended":"انتهت الجلسة",
+  "session-starts-at":"تبدأ الجلسة في",
+  "session-ends-at":"تنتهي الجلسة في",
+  "join-session":"انضم إلى الجلسة المباشرة",
+  "session-not-started":"لم تبدأ الجلسة بعد"
 }

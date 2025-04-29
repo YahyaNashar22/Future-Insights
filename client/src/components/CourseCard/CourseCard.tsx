@@ -5,6 +5,8 @@ import { useUserStore } from "../../store";
 import { Link } from "react-router-dom";
 import IClass from "../../interfaces/IClass";
 import { parseBullets } from "../../utils/ParseList";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const CourseCard: FC<{
   course: ICourse | IClass;
@@ -15,10 +17,14 @@ const CourseCard: FC<{
   const { user } = useUserStore();
   const backend = import.meta.env.VITE_BACKEND;
 
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+  const isArabic = language === "ar";
+
   const [demoModal, setDemoModal] = useState<boolean>(false);
 
   return (
-    <li className={styles.courseCard}>
+    <li className={`${styles.courseCard} ${isArabic ? styles.arabic : ""}`}>
       <div className={styles.thumbnailWrapper}>
         <img
           src={`${backend}/${course.thumbnail}`}
@@ -28,9 +34,20 @@ const CourseCard: FC<{
         />
       </div>
       <div className={styles.courseInfo}>
-        <h2 className={styles.courseTitle}>{course.title}</h2>
-        <p className={styles.courseDescription}>
-          {parseBullets(course.description)}
+        <h2
+          className={`${styles.courseTitle} ${isArabic ? styles.arabic : ""}`}
+        >
+          {isArabic ? course.arabicTitle : course.title}
+        </h2>
+        <p
+          className={`${styles.courseDescription} ${
+            isArabic ? styles.arabic : ""
+          }`}
+        >
+          {parseBullets(
+            isArabic ? course.arabicDescription : course.description,
+            isArabic
+          )}
         </p>
         <div className={styles.courseFooter}>
           {course.finalPrice > 0 && (
@@ -40,7 +57,7 @@ const CourseCard: FC<{
           )}
           {course.demo && (
             <span className={styles.demo} onClick={() => setDemoModal(true)}>
-              Demo
+              {t("course-card-demo")}
             </span>
           )}
 
@@ -53,7 +70,7 @@ const CourseCard: FC<{
               }
               className={styles.viewCourse}
             >
-              View More
+              {t("course-card-more")}
             </Link>
           )}
           {/* user signed in and not enrolled */}
@@ -68,7 +85,7 @@ const CourseCard: FC<{
                 }
                 className={styles.viewCourse}
               >
-                View More
+                {t("course-card-more")}
               </Link>
             )}
           {/* user signed in and enrolled */}
@@ -83,7 +100,9 @@ const CourseCard: FC<{
                 }
                 className={styles.viewCourse}
               >
-                {isCourse ? "View Course" : "View Class"}
+                {isCourse
+                  ? t("course-card-view-course")
+                  : t("course-card-view-class")}
               </Link>
             )}
         </div>
@@ -94,7 +113,9 @@ const CourseCard: FC<{
       {demoModal && (
         <div className={styles.purchaseModalWrapper}>
           <div className={styles.purchaseModal}>
-            <h3 className={styles.modalTitle}>{course.title} Demo</h3>
+            <h3 className={styles.modalTitle}>
+              {course.title} {t("course-card-demo")}
+            </h3>
 
             {course.demo ? (
               <video
@@ -111,9 +132,7 @@ const CourseCard: FC<{
                 Your browser does not support the video tag.
               </video>
             ) : (
-              <h3 className={styles.noDemo}>
-                unfortunately, no demo is available at the moment
-              </h3>
+              <h3 className={styles.noDemo}>{t("course-card-demo-no-demo")}</h3>
             )}
 
             <div className={styles.modalActions}>
@@ -121,7 +140,7 @@ const CourseCard: FC<{
                 className={styles.cancelButton}
                 onClick={() => setDemoModal(false)}
               >
-                Cancel
+                {t("course-card-cancel")}
               </button>
 
               {user &&
@@ -135,7 +154,7 @@ const CourseCard: FC<{
                     }
                     className={styles.viewCourse}
                   >
-                    Continue
+                    {t("course-card-continue")}
                   </Link>
                 )}
 
@@ -150,7 +169,7 @@ const CourseCard: FC<{
                       }
                       className={styles.viewCourse}
                     >
-                      View More
+                      {t("course-card-more")}
                     </Link>
                   ))}
             </div>

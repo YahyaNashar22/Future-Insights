@@ -209,7 +209,7 @@ const EditClass = () => {
                 className={styles.inputForm}
                 type="number"
                 name="price"
-                defaultValue={course?.price || ""}
+                defaultValue={course?.price || "0"}
                 required
               />
             </label>
@@ -220,9 +220,10 @@ const EditClass = () => {
                 className={styles.inputForm}
                 type="number"
                 name="discount"
-                defaultValue={course?.discount || ""}
+                defaultValue={course?.discount || "0"}
                 min="0"
                 max="100"
+                required
               />
             </label>
 

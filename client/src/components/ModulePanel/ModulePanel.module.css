@@ -20,6 +20,8 @@
   left: 0;
 }
 
+
+
 .toggleBtn {
   position: absolute;
   top: 30%;
@@ -31,6 +33,11 @@
   color: var(--white);
   background-color: var(--primary-beige);
   z-index: 100;
+}
+
+.arabicToggle{
+  left: initial;
+  right: 0px;
 }
 
 .sidePanelContent {

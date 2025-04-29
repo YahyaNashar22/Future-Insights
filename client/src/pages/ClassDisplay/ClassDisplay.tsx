@@ -13,6 +13,8 @@ import IAssessment from "../../interfaces/IAssessment";
 import { useUserStore } from "../../store";
 
 const ClassDisplay = () => {
+
+
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();
   const { user } = useUserStore();

@@ -12,6 +12,8 @@ import IMaterial from "../../interfaces/IMaterial";
 import IAssessment from "../../interfaces/IAssessment";
 import ICourse from "../../interfaces/ICourse";
 import { useUserStore } from "../../store";
+import { useTranslation } from "react-i18next";
+import { useLanguageStore } from "../../langStore";
 
 const ModulePanel = ({
   isOpen,
@@ -28,6 +30,10 @@ const ModulePanel = ({
     item: ILiveLink | IRecording | IMaterial | IAssessment | null
   ) => void;
 }) => {
+  const { t } = useTranslation();
+  const { language } = useLanguageStore();
+  const isArabic = language === "ar";
+
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
 
@@ -100,7 +106,9 @@ const ModulePanel = ({
   return (
     <>
       <span
-        className={`${styles.toggleBtn} ${isOpen && styles.toggleBtnOpen}`}
+        className={`${styles.toggleBtn} ${isOpen && styles.toggleBtnOpen} ${
+          isArabic ? styles.arabicToggle : ""
+        }`}
         onClick={togglePanel}
       >
         {isOpen ? "<" : ">"}
@@ -116,7 +124,9 @@ const ModulePanel = ({
               {isOpen && (
                 <div className={styles.sidePanelContent}>
                   {/* class title  */}
-                  <h1 className={styles.title}>{cls?.title}</h1>
+                  <h1 className={styles.title}>
+                    {isArabic ? cls?.arabicTitle : cls?.title}
+                  </h1>
 
                   {/* modules list  */}
                   <ol className={styles.modulesList}>
@@ -140,7 +150,7 @@ const ModulePanel = ({
                       onClick={createCertificate}
                       disabled={submitting}
                     >
-                      Get Certificate
+                      {t("get-certificate")}
                     </button>
                   )}
                 </div>

@@ -4,3 +4,8 @@
   color: var(--secondary-blue);
   text-align: left;
 }
+
+.arabic {
+  text-align: right !important;
+}
+
