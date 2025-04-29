@@ -3,11 +3,11 @@ import removeFile from "../utils/removeFile.js";
 
 export const createCategory = async (req, res) => {
     try {
-        const { title, description } = req.body;
+        const { title, description, arabicTitle, arabicDescription } = req.body;
         const image = req.file?.filename;
 
         const category = new Category({
-            title, description, image
+            title, description, image, arabicTitle, arabicDescription
         });
         await category.save();
 
@@ -38,7 +38,7 @@ export const updateCategory = async (req, res) => {
     try {
         const id = req.params.id;
         const {
-            title, description
+            title, description, arabicTitle, arabicDescription
         } = req.body;
 
         const image = req.file?.filename;
@@ -55,6 +55,8 @@ export const updateCategory = async (req, res) => {
                 $set: {
                     title,
                     description,
+                    arabicTitle,
+                    arabicDescription,
                     image: image ? image : prevCategory.image
                 }
             },

@@ -11,7 +11,16 @@ const categorySchema = new Schema(
             required: true,
             unique: true,
         },
+        arabicTitle: {
+            type: String,
+            required: true,
+            unique: true,
+        },
         description: {
+            type: String,
+            required: false,
+        },
+        arabicDescription: {
             type: String,
             required: false,
         },

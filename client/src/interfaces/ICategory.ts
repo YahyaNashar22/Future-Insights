@@ -3,6 +3,8 @@ interface ICategory {
   slug: string;
   title: string;
   description?: string;
+  arabicTitle: string;
+  arabicDescription?: string;
   image?: string;
 }
 

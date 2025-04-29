@@ -4,11 +4,14 @@ import styles from "./CourseCategories.module.css";
 
 import category from "../../assets/icons/category.png";
 import ICategory from "../../interfaces/ICategory";
+import { useLanguageStore } from "../../langStore";
 
 const CourseCategories: FC<{
   categories: ICategory[] | null;
   setSelectedCategory: (category: ICategory) => void;
 }> = ({ categories, setSelectedCategory }) => {
+  const { language } = useLanguageStore();
+  const isArabic = language === "ar";
   return (
     <section className={styles.wrapper}>
       <img
@@ -31,7 +34,7 @@ const CourseCategories: FC<{
                   ?.scrollIntoView({ behavior: "smooth", block: "start" });
               }}
             >
-              {category.title}
+              {isArabic ? category.arabicTitle : category.title}
             </li>
           );
         })}
