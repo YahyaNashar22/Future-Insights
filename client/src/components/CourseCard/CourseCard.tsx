@@ -39,7 +39,7 @@ const CourseCard: FC<{
         >
           {isArabic ? course.arabicTitle : course.title}
         </h2>
-        <p
+        <div
           className={`${styles.courseDescription} ${
             isArabic ? styles.arabic : ""
           }`}
@@ -48,7 +48,7 @@ const CourseCard: FC<{
             isArabic ? course.arabicDescription : course.description,
             isArabic
           )}
-        </p>
+        </div>
         <div className={styles.courseFooter}>
           {course.finalPrice > 0 && (
             <span className={styles.coursePrice}>

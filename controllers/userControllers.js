@@ -681,3 +681,25 @@ export const getAllUsers = async (req, res) => {
         return res.status(400).json({ message: "Couldn't send email, please try again later" });
     }
 }
+
+
+export const changeRole = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { superId, role } = req.body;
+
+        const isSuper = await User.findById(superId);
+        if (!isSuper) return res.status(404).json({ message: "only super admins are allowed!" });
+
+        const user = await User.findByIdAndUpdate(id, {
+            $set: { role }
+        }, { new: true });
+
+        return res.status(200).json({
+            payload: user
+        })
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ message: "Couldn't send email, please try again later" });
+    }
+}

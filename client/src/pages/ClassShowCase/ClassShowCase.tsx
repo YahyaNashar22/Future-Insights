@@ -198,12 +198,12 @@ const ClassShowCase = () => {
           </div>
           <section className={styles.description}>
             <h2>{t("class-about")}</h2>
-            <p className={styles.descriptionText}>
+            <div className={styles.descriptionText}>
               {parseBullets(
                 isArabic ? cls.arabicDescription : cls.description,
                 isArabic
               )}
-            </p>
+            </div>
             {cls.demo && (
               <div className={styles.demo}>
                 <h3>{t("demo-video")}</h3>

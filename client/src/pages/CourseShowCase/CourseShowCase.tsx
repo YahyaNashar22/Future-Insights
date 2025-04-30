@@ -118,7 +118,9 @@ const CourseShowCase = () => {
                   <span className={styles.originalPrice}>AED {cls.price}</span>
                 )}
                 {cls.price !== 0 && (
-                  <span className={styles.finalPrice}>AED {cls.finalPrice}</span>
+                  <span className={styles.finalPrice}>
+                    AED {cls.finalPrice}
+                  </span>
                 )}
               </div>
               {modules.length !== 0 && cls.price !== 0 && (

@@ -131,6 +131,10 @@ const AppRoutes = () => {
 
           <Route path="/payment-failed/:slug" element={<PaymentFailed />} />
 
+          {user && user.role === "super" && (
+            <Route path="/user-management" element={<UserManagement />} />
+          )}
+
           {/* <Route path="/pay" element={<PaymentPage />} /> */}
 
           {/* <Route path="/checkout-class/:slug" element={<CheckoutClass />} />
@@ -195,10 +199,6 @@ const AppRoutes = () => {
             />
             <Route path="/dashboard/class-info/:slug" element={<ClassInfo />} />
           </Route>
-        )}
-
-        {user && user.role === "super" && (
-          <Route path="/user-management" element={<UserManagement />} />
         )}
 
         {/* Not Found Route */}
