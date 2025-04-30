@@ -66,6 +66,13 @@ const Header = () => {
             </Link>
           </li>
         )}
+        {user && user.role === "super" && (
+          <li>
+            <Link to="/user-management" className={styles.link}>
+              {t("nav-7")}
+            </Link>
+          </li>
+        )}
         {!user && (
           <li>
             <Link to="/instructor-request" className={styles.link}>

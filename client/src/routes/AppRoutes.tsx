@@ -68,6 +68,10 @@ const CoachingSessions = lazy(
   () => import("../pages/CoachingSessions/CoachingSessions.tsx")
 );
 
+const UserManagement = lazy(
+  () => import("../pages/UserManagement/UserManagement.tsx")
+);
+
 // const CourseCheckout = lazy(
 //   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
 // );
@@ -191,6 +195,10 @@ const AppRoutes = () => {
             />
             <Route path="/dashboard/class-info/:slug" element={<ClassInfo />} />
           </Route>
+        )}
+
+        {user && user.role === "super" && (
+          <Route path="/user-management" element={<UserManagement />} />
         )}
 
         {/* Not Found Route */}

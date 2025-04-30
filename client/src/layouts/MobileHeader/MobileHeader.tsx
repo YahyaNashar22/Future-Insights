@@ -116,6 +116,13 @@ const MobileHeader = () => {
               </Link>
             </li>
           )}
+          {user && user.role === "super" && (
+            <li>
+              <Link to="/user-management" className={styles.link}>
+                {t("nav-7")}
+              </Link>
+            </li>
+          )}
         </ul>
 
         {user ? (

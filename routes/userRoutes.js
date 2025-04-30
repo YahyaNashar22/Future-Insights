@@ -1,5 +1,5 @@
 import express from "express";
-import { enrollClass, enrollCourse, getEnrolledClasses, getEnrolledCourses, getUnlockedVideos, getUserById, instructorRegisterRequestEmail, reserveCoachingSession, resetPassword, sendForgotPasswordOTP, sendVerification, signin, signup, teacherSignup, unlockVideo, updateProfile, verifyEmail } from "../controllers/userControllers.js";
+import { enrollClass, enrollCourse, getAllUsers, getEnrolledClasses, getEnrolledCourses, getUnlockedVideos, getUserById, instructorRegisterRequestEmail, reserveCoachingSession, resetPassword, sendForgotPasswordOTP, sendVerification, signin, signup, teacherSignup, unlockVideo, updateProfile, verifyEmail } from "../controllers/userControllers.js";
 
 const userRouter = new express.Router();
 
@@ -8,6 +8,8 @@ userRouter.post("/signup", signup);
 userRouter.post("/signin", signin);
 userRouter.post("/teacher-signup", teacherSignup);
 userRouter.get("/get-user", getUserById);
+userRouter.get("/get-all", getAllUsers);
+
 
 userRouter.post("/unlock-video", unlockVideo);
 userRouter.get("/get-unlocked-videos", getUnlockedVideos);

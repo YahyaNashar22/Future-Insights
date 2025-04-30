@@ -641,13 +641,13 @@ export const reserveCoachingSession = async (req, res) => {
                     <td style="padding: 8px; font-weight: bold; color: #333;">Date:</td>
                     <td style="padding: 8px; color: #555; white-space: pre-line;">
                      ${new Date(date).toLocaleString("en-US", {
-                        year: "numeric",
-                        month: "long",
-                        day: "numeric",
-                        hour: "numeric",
-                        minute: "2-digit",
-                        hour12: true,
-                    })}
+                year: "numeric",
+                month: "long",
+                day: "numeric",
+                hour: "numeric",
+                minute: "2-digit",
+                hour12: true,
+            })}
                     </td>
                   </tr>
                 </table>
@@ -662,6 +662,20 @@ export const reserveCoachingSession = async (req, res) => {
 
         return res.status(200).json({ message: "Email sent!", info });
 
+    } catch (error) {
+        console.error(error);
+        return res.status(400).json({ message: "Couldn't send email, please try again later" });
+    }
+}
+
+
+export const getAllUsers = async (req, res) => {
+    try {
+        const users = await User.find();
+
+        return res.status(200).json({
+            payload: users
+        })
     } catch (error) {
         console.error(error);
         return res.status(400).json({ message: "Couldn't send email, please try again later" });
