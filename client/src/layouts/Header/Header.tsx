@@ -66,13 +66,16 @@ const Header = () => {
             </li>
           </>
         )}
-        {user && (user.role === "teacher" || user.role === "admin") && (
-          <li>
-            <Link to="/dashboard" className={styles.link}>
-              {t("nav-5")}
-            </Link>
-          </li>
-        )}
+        {user &&
+          (user.role === "teacher" ||
+            user.role === "admin" ||
+            user.role === "super") && (
+            <li>
+              <Link to="/dashboard" className={styles.link}>
+                {t("nav-5")}
+              </Link>
+            </li>
+          )}
         {user && user.role === "super" && (
           <li>
             <Link to="/user-management" className={styles.link}>

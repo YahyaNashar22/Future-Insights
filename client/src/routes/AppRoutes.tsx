@@ -192,7 +192,7 @@ const AppRoutes = () => {
         </Route>
 
         {/* protected routes */}
-        {user && (user.role === "admin" || user.role === "teacher") && (
+        {user && (user.role === "admin" || user.role === "teacher" || user.role === "super") && (
           <Route path="/dashboard" element={<MainLayout />}>
             <Route index element={<Dashboard />} />
             <Route
