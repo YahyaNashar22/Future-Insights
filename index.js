@@ -26,6 +26,7 @@ import liveLinkRouter from './routes/LiveLinkRoutes.js';
 import recordingRouter from './routes/recordingRoutes.js';
 import materialRouter from './routes/materialRoutes.js';
 import transactionRouter from './routes/transactionRoutes.js';
+import { certificationWebhook } from './controllers/certificateControllers.js';
 
 
 
@@ -47,6 +48,15 @@ app.use(cors({
   optionsSuccessStatus: 200,
 }
 ));
+
+// Middleware to get raw body
+const rawBodySaver = (req, res, buf) => {
+  if (buf && buf.length) {
+    req.rawBody = buf.toString('utf8');
+  }
+};
+
+app.post("/certification/webhook", bodyParser.json({ verify: rawBodySaver }), certificationWebhook);
 
 // Configuration Middlewares
 app.use(express.json());

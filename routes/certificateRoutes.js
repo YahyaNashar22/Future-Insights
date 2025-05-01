@@ -8,17 +8,17 @@ import { certificationWebhook, createCertification, getAllCertificationsByUserId
 const certificateRouter = new express.Router();
 
 // ✅ This collects raw body for signature verification
-const rawBodySaver = (req, res, buf) => {
-    if (buf && buf.length) {
-        req.rawBody = buf.toString('utf8');
-    }
-};
+// const rawBodySaver = (req, res, buf) => {
+//     if (buf && buf.length) {
+//         req.rawBody = buf.toString('utf8');
+//     }
+// };
 
 // ✅ Webhook needs raw body, apply middleware only here
-certificateRouter.post("/webhook", bodyParser.json({ verify: rawBodySaver }), certificationWebhook);
+// certificateRouter.post("/webhook", bodyParser.json({ verify: rawBodySaver }), certificationWebhook);
 
 // Regular routes can use standard JSON parsing
-certificateRouter.use(bodyParser.json());
+// certificateRouter.use(bodyParser.json());
 
 certificateRouter.post("/create", createCertification);
 certificateRouter.post("/get-user-certifications", getAllCertificationsByUserId);
