@@ -206,7 +206,7 @@ export const certificationWebhook = async (req, res) => {
             console.error('Missing Certifier webhook secret!');
             return res.status(500).send('Webhook secret not configured.');
         }
-        const receivedSignature = req.get['x-webhook-signature'];
+        const receivedSignature = req.get('x-webhook-signature');
         const rawBody = req.rawBody;
 
         if (!verifyWebhookSignature(rawBody, receivedSignature, secret)) {
