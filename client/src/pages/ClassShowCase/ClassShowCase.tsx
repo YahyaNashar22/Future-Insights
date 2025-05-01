@@ -178,7 +178,9 @@ const ClassShowCase = () => {
                   </span>
                 )}
               </div>
-              {modules.length !== 0 && cls.price !== 0 && (
+              {
+              // modules.length !== 0 && 
+              cls.price !== 0 && (
                 <>
                   {!isEnrolled ? (
                     <button
