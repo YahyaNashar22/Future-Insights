@@ -176,6 +176,7 @@ export const getClassCertification = async (req, res) => {
 
 
 export const certificationWebhook = async (req, res) => {
+    console.log('reached here');
     try {
         const { email, issued_on, name, custom_id, certificate_url } = req.body;
 
@@ -217,8 +218,13 @@ export const certificationWebhook = async (req, res) => {
             userId: user._id,
             classId,
             courseId,
+            url: certificate_url,
+            issued_on,
+            name,
             slug: `Certificate-${custom_id}`, // match custom_id from Certifier
         });
+
+        console.log("newCert: ", newCert);
 
         await newCert.save();
 

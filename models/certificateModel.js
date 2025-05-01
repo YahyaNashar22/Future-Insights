@@ -20,6 +20,17 @@ const certificateSchema = new Schema(
             ref: "Course",
             required: false,
         },
+        url: {
+            type: String,
+        },
+        issued_on: {
+            type: String,
+
+        },
+        name: {
+            type: String,
+
+        },
         slug: {
             type: String,
             unique: true,
