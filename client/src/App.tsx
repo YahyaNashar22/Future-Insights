@@ -7,7 +7,7 @@ import { I18nextProvider } from "react-i18next";
 import { useLanguageStore } from "./langStore";
 
 function App() {
-  const { language } = useLanguageStore();
+  const { language, setLanguage } = useLanguageStore();
 
   // Update i18n language when Zustand store language changes
   useEffect(() => {
@@ -34,6 +34,24 @@ function App() {
   return (
     <>
       <I18nextProvider i18n={i18n}>
+        <div className="language-btn-container">
+          <button
+            style={{
+              color: "var(--primary-blue)",
+            }}
+            onClick={() => setLanguage("en")}
+          >
+            English
+          </button>
+          <button
+            style={{
+              color: "var(--primary-blue)",
+            }}
+            onClick={() => setLanguage("ar")}
+          >
+            العربية
+          </button>
+        </div>
         <ScrollToTop />
         <AppRoutes />
       </I18nextProvider>
