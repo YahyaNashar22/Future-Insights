@@ -223,6 +223,7 @@ const EditClass = () => {
                 defaultValue={course?.discount || "0"}
                 min="0"
                 max="100"
+                step="0.01"
                 required
               />
             </label>
