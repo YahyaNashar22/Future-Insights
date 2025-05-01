@@ -25,6 +25,7 @@ import moduleRouter from './routes/moduleRoutes.js';
 import liveLinkRouter from './routes/LiveLinkRoutes.js';
 import recordingRouter from './routes/recordingRoutes.js';
 import materialRouter from './routes/materialRoutes.js';
+import transactionRouter from './routes/transactionRoutes.js';
 
 
 
@@ -66,6 +67,8 @@ app.use("/module", moduleRouter);
 app.use("/live-link", liveLinkRouter);
 app.use("/recording", recordingRouter);
 app.use("/material", materialRouter);
+app.use("/transaction", transactionRouter);
+
 
 
 
