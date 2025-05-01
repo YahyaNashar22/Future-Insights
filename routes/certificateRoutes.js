@@ -1,5 +1,5 @@
 import express from "express";
-import { createCertification, getAllCertificationsByUserId, getCertificationBySlug, getClassCertification, getCourseCertification } from "../controllers/certificateControllers.js";
+import { certificationWebhook, createCertification, getAllCertificationsByUserId, getCertificationBySlug, getClassCertification, getCourseCertification } from "../controllers/certificateControllers.js";
 
 
 const certificateRouter = new express.Router();
@@ -9,6 +9,8 @@ certificateRouter.post("/get-user-certifications", getAllCertificationsByUserId)
 certificateRouter.get("/get/:slug", getCertificationBySlug);
 certificateRouter.post("/get-course-certification", getCourseCertification);
 certificateRouter.post("/get-class-certification", getClassCertification);
+certificateRouter.post("/webhook", certificationWebhook);
+
 
 
 

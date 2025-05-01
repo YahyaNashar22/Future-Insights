@@ -172,3 +172,59 @@ export const getClassCertification = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+
+export const certificationWebhook = async (req, res) => {
+    try {
+        const { email, issued_on, name, custom_id, certificate_url } = req.body;
+
+        // Step 1: Find user by email
+        const user = await User.findOne({ email });
+        if (!user) {
+            return res.status(404).json({ message: "User not found" });
+        }
+
+        // Step 2: Check if this certificate already exists (prevent duplicates)
+        const existing = await Certification.findOne({
+            userId: user._id,
+            slug: `Certificate-${custom_id}`
+        });
+
+        if (existing) {
+            return res.status(200).json({ message: "Certificate already recorded" });
+        }
+
+        // Step 3: Optionally find associated class or course using `custom_id`
+        let classId = null;
+        let courseId = null;
+
+        if (custom_id?.startsWith("class-")) {
+            const id = custom_id.replace("class-", "");
+            const cls = await Class.findById(id);
+            if (cls) classId = cls._id;
+        }
+
+        if (custom_id?.startsWith("course-")) {
+            const id = custom_id.replace("course-", "");
+            const course = await Course.findById(id);
+            if (course) courseId = course._id;
+        }
+
+
+        // Step 4: Create certificate
+        const newCert = new Certification({
+            userId: user._id,
+            classId,
+            courseId,
+            slug: `Certificate-${custom_id}`, // match custom_id from Certifier
+        });
+
+        await newCert.save();
+
+        return res.status(201).json({ message: "Certificate recorded", payload: newCert });
+
+    } catch (error) {
+        console.log("Webhook error:", error);
+        res.status(500).json({ message: "Something went wrong" });
+    }
+}
