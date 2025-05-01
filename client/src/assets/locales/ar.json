@@ -19,7 +19,6 @@
   "nav-6": "كن مدرباً",
   "nav-7": "المستخدمين",
 
-
   "login": "تسجيل الدخول",
   "signup": "التسجيل",
 
@@ -153,9 +152,8 @@
   "courses": "الكورسات",
   "certifications": "الشهادات",
   "edit-profile": "تعديل الملف",
-  "classes-no-ll":"دورات",
-  "courses-no-ll":"كورسات",
-
+  "classes-no-ll": "دورات",
+  "courses-no-ll": "كورسات",
 
   "no-classes-available-1": "لا يوجد حاليا",
   "no-classes-available-2": "في هذا القسم. يُرجى معاودة التحقق لاحقًا.",
@@ -168,5 +166,42 @@
   "new-pass": "كلمة المرور الجديدة",
   "confirm-pass": "تأكيد كلمة المرور الجديدة",
   "update-profile": "تحديث الملف الشخصي",
-  "updating": "جارٍ التحديث..."
+  "updating": "جارٍ التحديث...",
+
+  "refund-policy-title": "سياسة استرداد الأموال - Future Insights",
+  "refund-policy-effective-1": "تاريخ النفاذ:",
+  "refund-policy-effective-2": "11/مارس/2025",
+  "refund-policy-description": "في Future Insights، نحن ملتزمون بتقديم تدريبات وورش عمل وجلسات تدريب عالية الجودة. نحن نفهم أن الظروف قد تتغير، ونسعى جاهدين للحفاظ على سياسة استرجاع عادلة وشفاف",
+  "refund-policy-1-title": "1. سياسة الاسترداد العامة",
+  "refund-policy-1-description": "تعتمد أهلية استرداد الأموال على نوع الخدمة التي تم شراؤها:",
+  "refund-policy-1.1-title": "1.1 ورش العمل وبرامج التدريب",
+  "refund-policy-1.1-strong-1": "استرداد كامل المبلغ:",
+  "refund-policy-1.1-desc-1": "الإلغاء قبل 10 أيام على الأقل من تاريخ البدء.",
+  "refund-policy-1.1-strong-2": "استرداد 50%:",
+  "refund-policy-1.1-desc-2": "الإلغاء خلال 7-10 أيام قبل تاريخ البدء.",
+  "refund-policy-1.1-strong-3": "لا استرداد:",
+  "refund-policy-1.1-desc-3": "إلغاء الحجز قبل أقل من 7 أيام من تاريخ البدء. نقل التسجيل متاح.",
+  "refund-policy-1.2-title": "1.2 الدورات التفاعلية عبر الإنترنت",
+  "refund-policy-1.2-strong-1": "استرداد كامل المبلغ:",
+  "refund-policy-1.2-desc-1": "الإلغاء قبل 7 أيام على الأقل من تاريخ البدء.",
+  "refund-policy-1.2-strong-2": "استرداد 50%",
+  "refund-policy-1.2-desc-2": "الإلغاء خلال 3-7 أيام قبل تاريخ البدء.",
+  "refund-policy-1.2-strong-3": "لا استرداد:",
+  "refund-policy-1.2-desc-3": "الإلغاء قبل أقل من 3 أيام من تاريخ البدء.",
+  "refund-policy-2-title": "2. إلغاء ورش العمل من قبل شركة Future Insights",
+  "refund-policy-2-description-1": "يمكن للمشاركين إعادة جدولة الموعد أو استرداد المبلغ بالكامل.",
+  "refund-policy-2-description-2": "في حالة التأجيل، يجوز للمشاركين نقل التسجيل أو استرداد المبلغ.",
+  "refund-policy-3-title": "3. معالجة استرداد الأموال",
+  "refund-policy-3-description-1-1": "يجب إرسال طلبات استرداد الأموال عبر البريد الإلكتروني إلى",
+  "refund-policy-3-description-1-2": "info@Futureinsights.ae",
+  "refund-policy-3-description-2": "سيتم معالجة عمليات استرداد الأموال المعتمدة خلال 7-10 أيام عمل.",
+  "refund-policy-4-title": "4. الحالات غير القابلة للاستردا",
+  "refund-policy-4-description-1": "عدم حضور الجلسات المباشرة دون إلغاء.",
+  "refund-policy-4-description-2": "الانسحاب بعد بدء ورشة العمل.",
+  "refund-policy-5-title": "5. اتصل بنا",
+  "refund-policy-5-description": "لأي استفسارات تتعلق بالاسترداد، يرجى الاتصال بـ:",
+  "refund-policy-5-strong-1": "بريد إلكتروني:",
+  "refund-policy-5-desc-1": "info@Futureinsights.ae",
+  "refund-policy-5-strong-2": "هاتف",
+  "refund-policy-5-desc-2": "+971 507 505 539 / +966 5933 40 212"
 }

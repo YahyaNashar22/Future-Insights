@@ -1,119 +1,144 @@
+import { useTranslation } from "react-i18next";
 import styles from "./RefundPolicies.module.css";
 
 const RefundPolicies = () => {
+  const { t } = useTranslation();
   return (
     <main className={styles.wrapper}>
       <section className={styles.policyContainer}>
-        <h1 className={styles.policyTitle}>Refund Policy - Future Insights</h1>
+        <h1 className={styles.policyTitle}>{t("refund-policy-title")}</h1>
         <p className={styles.effectiveDate}>
-          <strong className={styles.strong}>Effective Date:</strong> 11/Mar/2025
+          <strong className={styles.strong}>
+            {t("refund-policy-effective-1")}
+          </strong>{" "}
+          {t("refund-policy-effective-2")}
         </p>
         <p className={styles.policyDescription}>
-          At Future Insights, we are committed to providing high-quality
-          training, workshops, and coaching sessions. We understand that
-          circumstances may change, and we strive to maintain a fair and
-          transparent refund policy.
+          {t("refund-policy-description")}
         </p>
 
         <div className={styles.policySection}>
-          <h2 className={styles.policySubtitle}>1. General Refund Policy</h2>
+          <h2 className={styles.policySubtitle}>
+            {t("refund-policy-1-title")}
+          </h2>
           <p className={styles.policyText}>
-            Refund eligibility depends on the type of service purchased:
+            {t("refund-policy-1-description")}
           </p>
 
           <h3 className={styles.policySubSubtitle}>
-            1.1 Workshops & Training Programs
+            {t("refund-policy-1.1-title")}
           </h3>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>Full Refund:</strong>{" "}
-              Cancellation at least 10 days before the start date.
+              <strong className={styles.strong}>
+                {t("refund-policy-1.1-strong-1")}
+              </strong>{" "}
+              {t("refund-policy-1.1-desc-1")}
             </li>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>50% Refund:</strong>{" "}
-              Cancellation between 7-10 days before the start date.
+              <strong className={styles.strong}>
+                {t("refund-policy-1.1-strong-2")}
+              </strong>{" "}
+              {t("refund-policy-1.1-desc-2")}
             </li>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>No Refund:</strong> Cancellation
-              less than 7 days before the start date. Registration transfer is
-              available.
+              <strong className={styles.strong}>
+                {t("refund-policy-1.1-strong-3")}
+              </strong>{" "}
+              {t("refund-policy-1.1-desc-3")}
             </li>
           </ul>
 
           <h3 className={styles.policySubSubtitle}>
-            1.2 Online Interactive Courses
+            {t("refund-policy-1.2-title")}
           </h3>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>Full Refund:</strong>{" "}
-              Cancellation at least 7 days before the start date.
+              <strong className={styles.strong}>
+                {t("refund-policy-1.2-strong-1")}
+              </strong>{" "}
+              {t("refund-policy-1.2-desc-1")}
             </li>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>50% Refund:</strong>{" "}
-              Cancellation between 3-7 days before the start date.
+              <strong className={styles.strong}>
+                {t("refund-policy-1.2-strong-2")}
+              </strong>{" "}
+              {t("refund-policy-1.2-desc-2")}
             </li>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>No Refund:</strong> Cancellation
-              less than 3 days before the start date.
+              <strong className={styles.strong}>
+                {t("refund-policy-1.2-strong-3")}
+              </strong>{" "}
+              {t("refund-policy-1.2-desc-3")}
             </li>
           </ul>
         </div>
 
         <div className={styles.policySection}>
           <h2 className={styles.policySubtitle}>
-            2. Workshop Cancellations by Future Insights
+            {t("refund-policy-2-title")}
           </h2>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              Participants may reschedule or receive a full refund.
+              {t("refund-policy-2-description-1")}
             </li>
             <li className={styles.policyItem}>
-              If postponed, participants may transfer registration or receive a
-              refund.
-            </li>
-          </ul>
-        </div>
-
-        <div className={styles.policySection}>
-          <h2 className={styles.policySubtitle}>3. Refund Processing</h2>
-          <ul className={styles.policyList}>
-            <li className={styles.policyItem}>
-              Refund requests must be emailed to{" "}
-              <strong className={styles.strong}>info@Futureinsights.ae</strong>.
-            </li>
-            <li className={styles.policyItem}>
-              Approved refunds will be processed within 7-10 business days.
+              {t("refund-policy-2-description-2")}
             </li>
           </ul>
         </div>
 
         <div className={styles.policySection}>
           <h2 className={styles.policySubtitle}>
-            4. Non-Refundable Situations
+            {t("refund-policy-3-title")}
           </h2>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              Failure to attend live sessions without cancellation.
+              {t("refund-policy-3-description-1-1")}{" "}
+              <strong className={styles.strong}>
+                {t("refund-policy-3-description-1-2")}
+              </strong>
+              .
             </li>
             <li className={styles.policyItem}>
-              Dropping out after a workshop has started.
+              {t("refund-policy-3-description-2")}
             </li>
           </ul>
         </div>
 
         <div className={styles.policySection}>
-          <h2 className={styles.policySubtitle}>5. Contact Us</h2>
+          <h2 className={styles.policySubtitle}>
+            {t("refund-policy-4-title")}
+          </h2>
+          <ul className={styles.policyList}>
+            <li className={styles.policyItem}>
+              {t("refund-policy-4-description-1")}
+            </li>
+            <li className={styles.policyItem}>
+              {t("refund-policy-4-description-2")}
+            </li>
+          </ul>
+        </div>
+
+        <div className={styles.policySection}>
+          <h2 className={styles.policySubtitle}>
+            {t("refund-policy-5-title")}
+          </h2>
           <p className={styles.policyText}>
-            For any refund-related inquiries, please contact:
+            {t("refund-policy-5-description")}
           </p>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>Email:</strong>{" "}
-              info@Futureinsights.ae
+              <strong className={styles.strong}>
+                {t("refund-policy-5-strong-1")}
+              </strong>{" "}
+              {t("refund-policy-5-desc-1")}
             </li>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>Phone:</strong> +971 507 505 539
-              / +966 5933 40 212
+              <strong className={styles.strong}>
+                {t("refund-policy-5-strong-2")}
+              </strong>{" "}
+              {t("refund-policy-5-desc-2")}
             </li>
           </ul>
         </div>
