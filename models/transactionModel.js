@@ -21,7 +21,7 @@ const transactionSchema = new Schema(
             required: false,
         },
         amount: {
-            type: Number,
+            type: String,
             required: true,
         },
         referenceLink: {

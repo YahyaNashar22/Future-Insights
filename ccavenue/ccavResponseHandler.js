@@ -1,4 +1,5 @@
 import Class from '../models/classModel.js';
+import Transaction from '../models/transactionModel.js';
 import User from '../models/userModel.js';
 import { decrypt } from './Crypto.js';
 
@@ -59,10 +60,35 @@ export const ccavResponseHandler = async (req, res) => {
         console.log("Order Status:", orderStatus);
 
         if (orderStatus === "Failure") {
+
+            // TODO: REMOVE THIS
+            // Create transaction
+            const newTransaction = new Transaction({
+                userId,
+                classId: courseId,
+                amount: params.amount,
+                referenceLink: params.tracking_id
+            });
+
+            await newTransaction.save();
+
+
             const redirectUrl = `${process.env.CLIENT_URL}/payment-failed/${courseSlug}`;
             res.redirect(redirectUrl);
         } else {
             await enrollClass(courseId, userId);
+
+
+            // Create transaction
+            const newTransaction = new Transaction({
+                userId,
+                classId: courseId,
+                amount,
+                referenceLink: params.tracking_id
+            });
+
+            await newTransaction.save();
+
             const redirectUrl = `${process.env.CLIENT_URL}/course-catalogue/class/${courseSlug}`;
             res.redirect(redirectUrl);
         }
