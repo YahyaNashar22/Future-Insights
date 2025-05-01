@@ -80,6 +80,13 @@ const EditClass = () => {
       formData.append("thumbnail", thumbnailFile);
     }
 
+    const demoInput = form.elements.namedItem("demo") as HTMLInputElement;
+    const demoFile = demoInput?.files?.[0];
+
+    if (demoFile) {
+      formData.append("demo", demoFile);
+    }
+
     try {
       setLoading(true);
       const res = await axios.put(
@@ -238,6 +245,12 @@ const EditClass = () => {
               name="thumbnail"
               accept="image/*"
             />
+
+            {/* Demo  */}
+            <label className={styles.labelForm} htmlFor="demo">
+              Class Demo
+            </label>
+            <input className={styles.inputForm} type="file" name="demo" />
 
             <button
               type="button"

@@ -156,6 +156,14 @@ export const updateClass = async (req, res) => {
             course.thumbnail = thumbnailFile.filename;
         }
 
+        // Look for demo file
+        const demoFile = req.files.find(f => f.fieldname === "demo");
+        if (demoFile) {
+            course.demo = demoFile.filename;
+        }
+
+        console.log(demoFile);
+
 
         // Update fields
         course.title = title ?? course.title;
