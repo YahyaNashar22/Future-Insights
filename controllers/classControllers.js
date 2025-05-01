@@ -171,8 +171,8 @@ export const updateClass = async (req, res) => {
         course.arabicTitle = arabicTitle ?? course.arabicTitle;
         course.arabicDescription = arabicDescription ?? course.arabicDescription;
         course.duration = duration ?? course.duration;
-        course.price = price ?? course.price;
-        course.discount = discount ?? course.discount;
+        course.price = price !== undefined ? parseFloat(price) : course.price;
+        course.discount = discount !== undefined ? parseFloat(discount) : course.discount;
 
         await course.save();
 
