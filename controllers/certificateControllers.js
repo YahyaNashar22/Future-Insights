@@ -1,4 +1,5 @@
 import Certification from "../models/certificateModel.js";
+import Class from "../models/classModel.js";
 import Course from "../models/courseModel.js";
 import User from "../models/userModel.js";
 
