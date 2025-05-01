@@ -2,6 +2,7 @@ import Certification from "../models/certificateModel.js";
 import Class from "../models/classModel.js";
 import Course from "../models/courseModel.js";
 import User from "../models/userModel.js";
+import crypto from 'crypto';
 
 export const createCertification = async (req, res) => {
     try {
@@ -175,9 +176,44 @@ export const getClassCertification = async (req, res) => {
 }
 
 
+function verifyWebhookSignature(payload, receivedSignature, secret) {
+    if (!receivedSignature) {
+        console.error('Missing webhook signature');
+        return false;
+    }
+
+    try {
+        const hmac = crypto.createHmac('sha256', secret);
+        hmac.update(payload, 'utf8');
+        const expectedSignature = hmac.digest('hex');
+
+        return crypto.timingSafeEqual(
+            Buffer.from(receivedSignature, 'hex'),
+            Buffer.from(expectedSignature, 'hex')
+        );
+    } catch (error) {
+        console.error('Error verifying webhook signature:', error);
+        return false;
+    }
+}
+
+
 export const certificationWebhook = async (req, res) => {
     console.log('reached here');
     try {
+        const secret = process.env.CERTIFIER_SECRET;
+        if (!secret) {
+            console.error('Missing Certifier webhook secret!');
+            return res.status(500).send('Webhook secret not configured.');
+        }
+        const receivedSignature = req.get['x-webhook-signature'];
+        const rawBody = req.rawBody;
+
+        if (!verifyWebhookSignature(rawBody, receivedSignature, secret)) {
+            return res.status(401).send('Invalid webhook signature');
+        }
+
+
         const { email, issued_on, name, custom_id, certificate_url } = req.body;
 
         // Step 1: Find user by email
@@ -219,7 +255,7 @@ export const certificationWebhook = async (req, res) => {
             classId,
             courseId,
             url: certificate_url,
-            issued_on,
+            issued_on: new Date(issued_on),
             name,
             slug: `Certificate-${custom_id}`, // match custom_id from Certifier
         });
