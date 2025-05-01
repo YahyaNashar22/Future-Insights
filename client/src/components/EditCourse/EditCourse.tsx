@@ -75,6 +75,13 @@ const EditCourse = () => {
       formData.append("thumbnail", thumbnailFile);
     }
 
+    const demoInput = form.elements.namedItem("demo") as HTMLInputElement;
+    const demoFile = demoInput?.files?.[0];
+
+    if (demoFile) {
+      formData.append("demo", demoFile);
+    }
+
     // Add video files
     // newVideos.forEach((video, index) => {
     //   formData.append(`videos[${index}].title`, video.title);
@@ -230,6 +237,12 @@ const EditCourse = () => {
               name="thumbnail"
               accept="image/*"
             />
+
+            {/* Demo  */}
+            <label className={styles.labelForm} htmlFor="demo">
+              Course Demo
+            </label>
+            <input className={styles.inputForm} type="file" name="demo" />
 
             {/* Add New Video */}
             {/* <div className={styles.section}>
