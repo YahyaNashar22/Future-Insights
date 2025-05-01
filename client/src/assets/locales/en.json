@@ -203,5 +203,27 @@
   "refund-policy-5-strong-1": "Email:",
   "refund-policy-5-desc-1": "info@Futureinsights.ae",
   "refund-policy-5-strong-2": "Phone:",
-  "refund-policy-5-desc-2": "+971 507 505 539 / +966 5933 40 212"
+  "refund-policy-5-desc-2": "+971 507 505 539 / +966 5933 40 212",
+
+  "privacy-policy-title": "Privacy Policy",
+  "privacy-policy-1-title": "1. Information We Collect",
+  "privacy-policy-1-desc-1-1": "Personal Information:",
+  "privacy-policy-1-desc-1-2": "Name, email, contact details, and payment information.",
+  "privacy-policy-1-desc-2-1": "Usage Data:",
+  "privacy-policy-1-desc-2-2": "Pages visited, time spent on the platform, and interactions.",
+  "privacy-policy-1-desc-3-1": "Cookies & Tracking Technologies:",
+  "privacy-policy-1-desc-3-2": "Used to enhance user experience and track engagement.",
+  "privacy-policy-2-title": "2. How We Use Your Information",
+  "privacy-policy-2-desc-1": "To provide and improve our learning services.",
+  "privacy-policy-2-desc-2": "To process payments and manage subscriptions.",
+  "privacy-policy-2-desc-3": "To communicate updates, promotions, and essential service messages.",
+  "privacy-policy-3-title": "3. Data Security",
+  "privacy-policy-3-desc-1": "We implement strict security measures to protect user data.",
+  "privacy-policy-3-desc-2": "Payment transactions are encrypted and processed by third-party payment providers.",
+  "privacy-policy-4-title": "4. Data Sharing & Third-Party Services",
+  "privacy-policy-4-desc-1": "We do not sell user data to third parties.",
+  "privacy-policy-4-desc-2": "Data may be shared with educational partners and payment processors when necessary.",
+  "privacy-policy-5-title": "5. User Rights",
+  "privacy-policy-5-desc-1": "Users can request access, modification, or deletion of their personal data.",
+  "privacy-policy-5-desc-2": "Users may opt-out of marketing communications at any time."
 }

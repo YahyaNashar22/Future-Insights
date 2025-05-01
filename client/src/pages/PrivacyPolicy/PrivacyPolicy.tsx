@@ -1,84 +1,92 @@
+import { useTranslation } from "react-i18next";
 import styles from "./PrivacyPolicy.module.css";
 
 const PrivacyPolicy = () => {
+  const { t } = useTranslation();
   return (
     <main className={styles.wrapper}>
       <section className={styles.policyContainer}>
-        <h1 className={styles.policyTitle}>Privacy Policy</h1>
+        <h1 className={styles.policyTitle}>{t("privacy-policy-title")}</h1>
 
         <div className={styles.policySection}>
-          <h2 className={styles.policySubtitle}>1. Information We Collect</h2>
+          <h2 className={styles.policySubtitle}>
+            {t("privacy-policy-1-title")}
+          </h2>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>Personal Information:</strong> Name, email, contact
-              details, and payment information.
+              <strong className={styles.strong}>
+                {t("privacy-policy-1-desc-1-1")}
+              </strong>{" "}
+              {t("privacy-policy-1-desc-1-2")}
             </li>
             <li className={styles.policyItem}>
-              <strong>Usage Data:</strong> Pages visited, time spent on the
-              platform, and interactions.
+              <strong>{t("privacy-policy-1-desc-2-1")}</strong>{" "}
+              {t("privacy-policy-1-desc-2-2")}
             </li>
             <li className={styles.policyItem}>
-              <strong className={styles.strong}>Cookies & Tracking Technologies:</strong> Used to enhance
-              user experience and track engagement.
+              <strong className={styles.strong}>
+                {t("privacy-policy-1-desc-3-1")}
+              </strong>{" "}
+              {t("privacy-policy-1-desc-3-2")}
             </li>
           </ul>
         </div>
 
         <div className={styles.policySection}>
           <h2 className={styles.policySubtitle}>
-            2. How We Use Your Information
+            {t("privacy-policy-2-title")}
           </h2>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              To provide and improve our learning services.
+              {t("privacy-policy-2-desc-1")}
             </li>
             <li className={styles.policyItem}>
-              To process payments and manage subscriptions.
+              {t("privacy-policy-2-desc-2")}
             </li>
             <li className={styles.policyItem}>
-              To communicate updates, promotions, and essential service
-              messages.
-            </li>
-          </ul>
-        </div>
-
-        <div className={styles.policySection}>
-          <h2 className={styles.policySubtitle}>3. Data Security</h2>
-          <ul className={styles.policyList}>
-            <li className={styles.policyItem}>
-              We implement strict security measures to protect user data.
-            </li>
-            <li className={styles.policyItem}>
-              Payment transactions are encrypted and processed by third-party
-              payment providers.
+              {t("privacy-policy-2-desc-3")}
             </li>
           </ul>
         </div>
 
         <div className={styles.policySection}>
           <h2 className={styles.policySubtitle}>
-            4. Data Sharing & Third-Party Services
+            {t("privacy-policy-3-title")}
           </h2>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              We do not sell user data to third parties.
+              {t("privacy-policy-3-desc-1")}
             </li>
             <li className={styles.policyItem}>
-              Data may be shared with educational partners and payment
-              processors when necessary.
+              {t("privacy-policy-3-desc-2")}
             </li>
           </ul>
         </div>
 
         <div className={styles.policySection}>
-          <h2 className={styles.policySubtitle}>5. User Rights</h2>
+          <h2 className={styles.policySubtitle}>
+            {t("privacy-policy-4-title")}
+          </h2>
           <ul className={styles.policyList}>
             <li className={styles.policyItem}>
-              Users can request access, modification, or deletion of their
-              personal data.
+              {t("privacy-policy-4-desc-1")}
             </li>
             <li className={styles.policyItem}>
-              Users may opt-out of marketing communications at any time.
+              {t("privacy-policy-4-desc-2")}
+            </li>
+          </ul>
+        </div>
+
+        <div className={styles.policySection}>
+          <h2 className={styles.policySubtitle}>
+            {t("privacy-policy-5-title")}
+          </h2>
+          <ul className={styles.policyList}>
+            <li className={styles.policyItem}>
+              {t("privacy-policy-5-desc-1")}
+            </li>
+            <li className={styles.policyItem}>
+              {t("privacy-policy-5-desc-2")}
             </li>
           </ul>
         </div>
