@@ -244,5 +244,19 @@
   "terms-4-desc-2-2": "and are subject to review based on the service usage and delivery status.",
   "terms-5-title": "5. Termination",
   "terms-5-desc-1": "We reserve the right to suspend or terminate accounts that violate these Terms of Use.",
-  "terms-5-desc-2": "Users may request account deletion at any time. However, refunds will not be issued upon termination unless explicitly stated in the refund policy."
+  "terms-5-desc-2": "Users may request account deletion at any time. However, refunds will not be issued upon termination unless explicitly stated in the refund policy.",
+
+  "support-title": "Support",
+  "support-1-title": "1. Contacting Support",
+  "support-1-desc-1": "• For technical issues, account inquiries, or billing support, contact us at",
+  "support-1-desc-2": "info@futureinsights.ae",
+  "support-1-desc-3": "• Support is available",
+  "support-1-desc-4": "24/7",
+  "support-2-title": "2. FAQs & Help Center",
+  "support-2-desc-1": "• Users can find answers to common questions in our Help Center at",
+  "support-2-desc-2": "Help Center",
+  "support-3-title": "3. Response Time",
+  "support-3-desc-1": "• Our team strives to respond to inquiries within",
+  "support-3-desc-2": "5",
+  "support-3-desc-3": "business days."
 }
