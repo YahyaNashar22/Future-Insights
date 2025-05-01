@@ -225,5 +225,24 @@
   "privacy-policy-4-desc-2": "Data may be shared with educational partners and payment processors when necessary.",
   "privacy-policy-5-title": "5. User Rights",
   "privacy-policy-5-desc-1": "Users can request access, modification, or deletion of their personal data.",
-  "privacy-policy-5-desc-2": "Users may opt-out of marketing communications at any time."
+  "privacy-policy-5-desc-2": "Users may opt-out of marketing communications at any time.",
+
+  "terms-title": "Terms of Use",
+  "terms-1-title": "1. Introduction",
+  "terms-1-desc": "Welcome to Future Insights, an online Coaching, Training, Consultation Services, and Data-Driven Business Solutions. By accessing or using our services, you agree to be bound by these Terms of Use. If you do platform.",
+  "terms-2-title": "2. User Responsibilities",
+  "terms-2-desc-1": "Users must provide accurate and up-to-date information during registration.",
+  "terms-2-desc-2": "Unauthorized use, sharing, or transfer of accounts is strictly prohibited.",
+  "terms-2-desc-3": "Users must comply with all applicable laws and ethical guidelines when engaging in consulting, coaching, or learning activities.",
+  "terms-3-title": "3. Intellectual Property",
+  "terms-3-desc-1": "All content, including Courses, Consultation Materials, Workshops, and Proprietary Methodologies, is the property of Future Insights or its licensors and is protected by copyright and intellectual property laws.",
+  "terms-3-desc-2": "Users may not reproduce, distribute, or modify any content without prior written permission.",
+  "terms-4-title": "4. Payment and Refund Policy",
+  "terms-4-desc-1": "Fees for Consultation Services, Coaching Sessions, Online Courses, and Blended Learning Programs must be paid in full before access is granted",
+  "terms-4-desc-2-1": "Refund will be conducted according to the",
+  "terms-4-desc-2-link": "refund policy",
+  "terms-4-desc-2-2": "and are subject to review based on the service usage and delivery status.",
+  "terms-5-title": "5. Termination",
+  "terms-5-desc-1": "We reserve the right to suspend or terminate accounts that violate these Terms of Use.",
+  "terms-5-desc-2": "Users may request account deletion at any time. However, refunds will not be issued upon termination unless explicitly stated in the refund policy."
 }

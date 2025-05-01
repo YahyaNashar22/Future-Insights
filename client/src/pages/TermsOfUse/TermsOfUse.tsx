@@ -1,92 +1,59 @@
 import { useNavigate } from "react-router-dom";
 import styles from "./TermsOfUse.module.css";
+import { useTranslation } from "react-i18next";
 
 const TermsOfUse = () => {
+  const { t } = useTranslation();
   const navigate = useNavigate();
   return (
     <main className={styles.wrapper}>
       <section className={styles.termsContainer}>
-        <h1 className={styles.termsTitle}>Terms of Use</h1>
+        <h1 className={styles.termsTitle}>{t("terms-title")}</h1>
 
         <div className={styles.termsSection}>
-          <h2 className={styles.termsSubtitle}>1. Introduction</h2>
-          <p>
-            Welcome to Future Insights, an online Coaching, Training,
-            Consultation Services, and Data-Driven Business Solutions. By
-            accessing or using our services, you agree to be bound by these
-            Terms of Use. If you do not agree, please refrain from using our
-            platform.
-          </p>
+          <h2 className={styles.termsSubtitle}>{t("terms-1-title")}</h2>
+          <p>{t("terms-1-desc")}</p>
         </div>
 
         <div className={styles.termsSection}>
-          <h2 className={styles.termsSubtitle}>2. User Responsibilities</h2>
+          <h2 className={styles.termsSubtitle}>{t("terms-2-title")}</h2>
           <ul className={styles.termsList}>
-            <li className={styles.termsItem}>
-              Users must provide accurate and up-to-date information during
-              registration.
-            </li>
-            <li className={styles.termsItem}>
-              Unauthorized use, sharing, or transfer of accounts is strictly
-              prohibited.
-            </li>
-            <li className={styles.termsItem}>
-              Users must comply with all applicable laws and ethical guidelines
-              when engaging in consulting, coaching, or learning activities.
-            </li>
+            <li className={styles.termsItem}>{t("terms-2-dec-1")}</li>
+            <li className={styles.termsItem}>{t("terms-2-desc-2")}</li>
+            <li className={styles.termsItem}>{t("terms-2-desc-3")}</li>
           </ul>
         </div>
 
         <div className={styles.termsSection}>
-          <h2 className={styles.termsSubtitle}>3. Intellectual Property</h2>
+          <h2 className={styles.termsSubtitle}>{t("terms-3-title")}</h2>
           <ul className={styles.termsList}>
-            <li className={styles.termsItem}>
-              All content, including Courses, Consultation Materials, Workshops,
-              and Proprietary Methodologies, is the property of Future Insights
-              or its licensors and is protected by copyright and intellectual
-              property laws.
-            </li>
-            <li className={styles.termsItem}>
-              Users may not reproduce, distribute, or modify any content without
-              prior written permission.
-            </li>
+            <li className={styles.termsItem}>{t("terms-3-desc-1")}</li>
+            <li className={styles.termsItem}>{t("terms-3-desc-2")}</li>
           </ul>
         </div>
 
         <div className={styles.termsSection}>
-          <h2 className={styles.termsSubtitle}>4. Payment and Refund Policy</h2>
+          <h2 className={styles.termsSubtitle}>{t("terms-4-title")}</h2>
           <ul className={styles.termsList}>
+            <li className={styles.termsItem}>{t("terms-4-desc-1")}</li>
             <li className={styles.termsItem}>
-              Fees for Consultation Services, Coaching Sessions, Online Courses,
-              and Blended Learning Programs must be paid in full before access
-              is granted.
-            </li>
-            <li className={styles.termsItem}>
-              Refund will be conducted according to the{" "}
+              {t("terms-4-desc-2-1")}{" "}
               <span
                 className={styles.refundPolicyLink}
                 onClick={() => navigate("/refund-policies")}
               >
-                refund policy
+                {t("terms-4-desc-2-link")}
               </span>{" "}
-              and are subject to review based on the service usage and delivery
-              status.
+              {t("terms-4-desc-2-2")}
             </li>
           </ul>
         </div>
 
         <div className={styles.termsSection}>
-          <h2 className={styles.termsSubtitle}>5. Termination</h2>
+          <h2 className={styles.termsSubtitle}>{t("terms-5-title")}</h2>
           <ul className={styles.termsList}>
-            <li className={styles.termsItem}>
-              We reserve the right to suspend or terminate accounts that violate
-              these Terms of Use.
-            </li>
-            <li className={styles.termsItem}>
-              Users may request account deletion at any time. However, refunds
-              will not be issued upon termination unless explicitly stated in
-              the refund policy.
-            </li>
+            <li className={styles.termsItem}>{t("terms-5-desc-1")}</li>
+            <li className={styles.termsItem}>{t("terms-5-desc-2")}</li>
           </ul>
         </div>
       </section>
