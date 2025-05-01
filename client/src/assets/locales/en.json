@@ -18,6 +18,7 @@
   "nav-5": "Dashboard",
   "nav-6": "Become an Instructor",
   "nav-7": "Users",
+  "nav-8": "Transactions",
 
   "login": "Login",
   "signup": "Sign up",
@@ -258,5 +259,11 @@
   "support-3-title": "3. Response Time",
   "support-3-desc-1": "• Our team strives to respond to inquiries within",
   "support-3-desc-2": "5",
-  "support-3-desc-3": "business days."
+  "support-3-desc-3": "business days.",
+
+  "transactions-title": "My Transactions",
+  "transactions-not-found": "No transactions found.",
+  "course": "Course:",
+  "tracking_id": "Tracking_id:",
+  "date": "Date:"
 }

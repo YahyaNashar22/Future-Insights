@@ -52,11 +52,18 @@ const CourseCatalogueHeader = () => {
           </Link>
         </li>
         {user && (
-          <li>
-            <Link to="/my-courses" className={styles.link}>
-              {t("nav-4")}
-            </Link>
-          </li>
+          <>
+            <li>
+              <Link to="/my-courses" className={styles.link}>
+                {t("nav-4")}
+              </Link>
+            </li>
+            <li>
+              <Link to="/my-transactions" className={styles.link}>
+                {t("nav-8")}
+              </Link>
+            </li>
+          </>
         )}
         {user && (user.role === "teacher" || user.role === "admin") && (
           <li>

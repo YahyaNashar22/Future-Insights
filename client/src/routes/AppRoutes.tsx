@@ -102,6 +102,10 @@ const PaymentFailed = lazy(
   () => import("../pages/PaymentFailed/PaymentFailed.tsx")
 );
 
+const Transactions = lazy(
+  () => import("../pages/Transactions/Transactions.tsx")
+);
+
 // const CheckoutClass = lazy(
 //   () => import("../pages/CheckoutClass/CheckoutClass.tsx")
 // );
@@ -153,6 +157,8 @@ const AppRoutes = () => {
             <Route path="/assessment/:slug" element={<AssessmentPage />} />
             <Route path="/assignment/:slug" element={<AssessmentPage />} />
             <Route path="/my-courses" element={<MyCourses />} />
+            <Route path="/my-transactions" element={<Transactions />} />
+
             <Route
               path="/certification/:slug"
               element={<CertificationPage />}

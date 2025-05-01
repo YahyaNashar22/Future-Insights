@@ -24,11 +24,7 @@ const ClassShowCase = () => {
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
   const [purchaseModal, setPurchaseModal] = useState<boolean>(false);
-  const [
-    ,
-    // modules
-    setModules,
-  ] = useState<IModule[]>([]);
+  const [modules, setModules] = useState<IModule[]>([]);
 
   useEffect(() => {
     const fetchClass = async () => {
@@ -182,25 +178,22 @@ const ClassShowCase = () => {
                   </span>
                 )}
               </div>
-              {
-                // modules.length !== 0 &&
-                cls.price !== 0 && (
-                  <>
-                    {!isEnrolled ? (
-                      <button
-                        className={styles.buyBtn}
-                        onClick={() => setPurchaseModal(true)}
-                      >
-                        {t("enroll-now")}
-                      </button>
-                    ) : (
-                      <p className={styles.enrolledText}>
-                        {t("already-enrolled")} 🎉
-                      </p>
-                    )}
-                  </>
-                )
-              }
+              {modules.length !== 0 && cls.price !== 0 && (
+                <>
+                  {!isEnrolled ? (
+                    <button
+                      className={styles.buyBtn}
+                      onClick={() => setPurchaseModal(true)}
+                    >
+                      {t("enroll-now")}
+                    </button>
+                  ) : (
+                    <p className={styles.enrolledText}>
+                      {t("already-enrolled")} 🎉
+                    </p>
+                  )}
+                </>
+              )}
             </div>
           </div>
           <section className={styles.description}>

@@ -69,3 +69,17 @@ export const deleteTransaction = async (req, res) => {
         res.status(500).json({ message: err.message });
     }
 };
+
+
+export const getUserTransactions = async (req, res) => {
+    try {
+
+        const { userId } = req.body;
+
+        const transactions = await Transaction.find({ userId }).populate(["courseId", "classId"]);
+
+        return res.status(200).json({ payload: transactions })
+    } catch (error) {
+        res.status(500).json({ message: err.message });
+    }
+}
