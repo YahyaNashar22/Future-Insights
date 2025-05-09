@@ -147,7 +147,7 @@ export const updateClass = async (req, res) => {
         }
 
         const { title, description, arabicTitle,
-            arabicDescription, duration, price, discount } = req.body;
+            arabicDescription,category, duration, price, discount } = req.body;
 
 
         // Look for thumbnail file
@@ -170,6 +170,7 @@ export const updateClass = async (req, res) => {
         course.description = description ?? course.description;
         course.arabicTitle = arabicTitle ?? course.arabicTitle;
         course.arabicDescription = arabicDescription ?? course.arabicDescription;
+        course.category = category ?? course.category;
         course.duration = duration ?? course.duration;
         course.price = price !== undefined ? parseFloat(price) : course.price;
         course.discount = discount !== undefined ? parseFloat(discount) : course.discount;

@@ -4,6 +4,7 @@ import axios from "axios";
 // import { useUserStore } from "../../store";
 import styles from "./EditClass.module.css";
 import IClass from "../../interfaces/IClass";
+import ICategory from "../../interfaces/ICategory";
 
 const EditClass = () => {
   const { slug } = useParams();
@@ -14,6 +15,7 @@ const EditClass = () => {
   const [course, setCourse] = useState<IClass | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
+  const [categories, setCategories] = useState<ICategory[]>([]);
 
   const [showModuleForm, setShowModuleForm] = useState<boolean>(false);
   const [moduleName, setModuleName] = useState<string>("");
@@ -38,6 +40,22 @@ const EditClass = () => {
     fetchCourse();
   }, [slug, backend, navigate]);
 
+  useEffect(() => {
+    const fetchCategories = async () => {
+      try {
+        setLoading(true);
+        const res = await axios.get(`${backend}/category/get-all`);
+        setCategories(res.data.payload);
+      } catch (error) {
+        console.log(error);
+      } finally {
+        setLoading(false);
+      }
+    };
+
+    fetchCategories();
+  }, [backend]);
+
   // Handle form submit
   const handleSubmit = async (event: React.FormEvent) => {
     event.preventDefault();
@@ -56,6 +74,8 @@ const EditClass = () => {
       form.elements.namedItem("arabicDescription") as HTMLTextAreaElement
     ).value;
 
+    const category = (form.elements.namedItem("category") as HTMLInputElement)
+    .value;
     const duration = (form.elements.namedItem("duration") as HTMLInputElement)
       .value;
     const price = (form.elements.namedItem("price") as HTMLInputElement).value;
@@ -67,6 +87,7 @@ const EditClass = () => {
     formData.append("description", description);
     formData.append("arabicTitle", arabicTitle);
     formData.append("arabicDescription", arabicDescription);
+    formData.append("category", category);
     formData.append("duration", duration);
     formData.append("price", price);
     formData.append("discount", discount);
@@ -197,6 +218,26 @@ const EditClass = () => {
                 required
                 rows={10}
               />
+            </label>
+
+            <label className={styles.labelForm}>
+              Category
+              <select
+                name="category"
+                required
+                className={`${styles.inputForm} ${styles.select}`}
+              >
+                <option value={course?.category._id}>{course?.category.title}</option>
+                {categories.map((category) => (
+                  <option
+                    className={styles.selectOption}
+                    key={category._id}
+                    value={category._id}
+                  >
+                    {category.title}
+                  </option>
+                ))}
+              </select>
             </label>
 
             <label className={styles.labelForm}>
