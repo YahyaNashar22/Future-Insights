@@ -162,8 +162,6 @@ export const updateClass = async (req, res) => {
             course.demo = demoFile.filename;
         }
 
-        console.log(demoFile);
-
 
         // Update fields
         course.title = title ?? course.title;
