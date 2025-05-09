@@ -1,5 +1,9 @@
+import xlsx from "xlsx";
+import mongoose from "mongoose";
+
 import Class from "../models/classModel.js";
 import removeFile from "../utils/removeFile.js";
+import User from "../models/userModel.js";
 
 export const createClass = async (req, res) => {
     try {
@@ -147,7 +151,7 @@ export const updateClass = async (req, res) => {
         }
 
         const { title, description, arabicTitle,
-            arabicDescription,category, duration, price, discount } = req.body;
+            arabicDescription, category, duration, price, discount } = req.body;
 
 
         // Look for thumbnail file
@@ -160,6 +164,33 @@ export const updateClass = async (req, res) => {
         const demoFile = req.files.find(f => f.fieldname === "demo");
         if (demoFile) {
             course.demo = demoFile.filename;
+        }
+
+        const emailExcelFile = req.files.find(f => f.fieldname === "emailExcel");
+        if (emailExcelFile) {
+            // Step 1: Read Excel File
+            const workbook = xlsx.readFile(emailExcelFile.path);
+            const sheetName = workbook.SheetNames[0];
+            const sheet = workbook.Sheets[sheetName];
+            const data = xlsx.utils.sheet_to_json(sheet);
+
+            // Step 2: Extract emails
+            const emails = data.map(row => row.Email?.toLowerCase()).filter(Boolean);
+
+            // Step 3: Query users by email
+            const matchedUsers = await User.find({ email: { $in: emails } }, "_id");
+
+            // Step 4: Extract their IDs
+            const userIds = matchedUsers.map(user => user._id);
+
+            // Merge existing IDs and new ones, ensuring no duplicates
+            const existingIds = course.enrolledUsers.map(id => id.toString());
+            const newIds = userIds.map(id => id.toString());
+            const mergedIds = Array.from(new Set([...existingIds, ...newIds]));
+
+            console.log(mergedIds)
+
+            course.enrolledUsers = mergedIds.map(id => new mongoose.Types.ObjectId(id));
         }
 
 

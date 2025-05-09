@@ -75,12 +75,17 @@ const EditClass = () => {
     ).value;
 
     const category = (form.elements.namedItem("category") as HTMLInputElement)
-    .value;
+      .value;
     const duration = (form.elements.namedItem("duration") as HTMLInputElement)
       .value;
     const price = (form.elements.namedItem("price") as HTMLInputElement).value;
     const discount = (form.elements.namedItem("discount") as HTMLInputElement)
       .value;
+
+    const emailExcelInput = form.elements.namedItem(
+      "emailExcel"
+    ) as HTMLInputElement;
+    const emailExcelFile = emailExcelInput?.files?.[0];
 
     const formData = new FormData();
     formData.append("title", title);
@@ -106,6 +111,10 @@ const EditClass = () => {
 
     if (demoFile) {
       formData.append("demo", demoFile);
+    }
+
+    if (emailExcelFile) {
+      formData.append("emailExcel", emailExcelFile);
     }
 
     try {
@@ -227,16 +236,16 @@ const EditClass = () => {
                 required
                 className={`${styles.inputForm} ${styles.select}`}
               >
-                <option value={course?.category._id}>{course?.category.title}</option>
-                {categories.map((category) => (
-                  <option
-                    className={styles.selectOption}
-                    key={category._id}
-                    value={category._id}
-                  >
-                    {category.title}
-                  </option>
-                ))}
+                <option value={course?.category._id}>
+                  {course?.category.title}
+                </option>
+                {categories
+                  .filter((cat) => cat._id !== course?.category._id)
+                  .map((category) => (
+                    <option key={category._id} value={category._id}>
+                      {category.title}
+                    </option>
+                  ))}
               </select>
             </label>
 
@@ -292,6 +301,17 @@ const EditClass = () => {
               Class Demo
             </label>
             <input className={styles.inputForm} type="file" name="demo" />
+
+            {/* Excel File Input for Emails */}
+            <label className={styles.labelForm} htmlFor="emailExcel">
+              Upload Excel with Emails:
+            </label>
+            <input
+              className={styles.inputForm}
+              type="file"
+              name="emailExcel"
+              accept=".xlsx, .xls"
+            />
 
             <button
               type="button"
