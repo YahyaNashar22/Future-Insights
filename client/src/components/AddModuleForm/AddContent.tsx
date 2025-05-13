@@ -3,7 +3,7 @@ import styles from "./AddContent.module.css";
 import IClass from "../../interfaces/IClass";
 import IModule from "../../interfaces/IModule";
 import { useUserStore } from "../../store";
-import axios from "axios";
+import axios, { AxiosError } from "axios";
 import ICourse from "../../interfaces/ICourse";
 
 const AddContentForm = () => {
@@ -67,30 +67,30 @@ const AddContentForm = () => {
   }, [backend, user]);
 
   // Fetch modules based on selected class
+
+  const fetchClassModules = async () => {
+    try {
+      setLoading(true);
+
+      const params: { [key: string]: string } = {};
+      if (selectedClass?.type === "class") {
+        params.classId = selectedClass?._id;
+      } else if (selectedClass?.type === "course") {
+        params.courseId = selectedClass?._id;
+      }
+
+      const res = await axios.get(`${backend}/module`, {
+        params,
+      });
+      setModules(res.data.payload);
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setLoading(false);
+    }
+  };
   useEffect(() => {
     if (selectedClass) {
-      const fetchClassModules = async () => {
-        try {
-          setLoading(true);
-
-          const params: { [key: string]: string } = {};
-          if (selectedClass.type === "class") {
-            params.classId = selectedClass._id;
-          } else if (selectedClass.type === "course") {
-            params.courseId = selectedClass._id;
-          }
-
-          const res = await axios.get(`${backend}/module`, {
-            params,
-          });
-          setModules(res.data.payload);
-        } catch (error) {
-          console.log(error);
-        } finally {
-          setLoading(false);
-        }
-      };
-
       fetchClassModules();
     }
   }, [backend, selectedClass]);
@@ -228,6 +228,21 @@ const AddContentForm = () => {
     return item?.type === "course";
   }
 
+  const deleteModule = async (id: string) => {
+    try {
+      const res = await axios.delete(`${backend}/module/${id}`);
+
+      alert(res.data.message);
+      setSelectedModule(null);
+      if (selectedClass) fetchClassModules();
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      }
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Add Content</h1>
@@ -310,6 +325,12 @@ const AddContentForm = () => {
           </button>
           <button onClick={() => handleFormSelect("assessment")}>
             Add Assessment
+          </button>
+          <button
+            id={styles.deleteBtn}
+            onClick={() => deleteModule(selectedModule._id)}
+          >
+            Delete Module
           </button>
         </div>
       )}

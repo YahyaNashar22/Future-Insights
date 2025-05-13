@@ -42,3 +42,17 @@ export const getModulesByClassId = async (req, res) => {
         return res.status(500).json({ message: "Something went wrong, please try again later" });
     }
 }
+
+
+export const deleteModule = async (req, res) => {
+    const id = req.params.id;
+
+    try {
+        await Module.findByIdAndDelete(id);
+
+        return res.status(200).json({ message: "Module deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Something went wrong, please try again later" });
+    }
+}

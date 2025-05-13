@@ -100,3 +100,11 @@
 .contentForm button:hover {
   background-color: var(--secondary-blue);
 }
+
+#deleteBtn {
+  background-color: var(--primary-red);
+}
+
+#deleteBtn:hover {
+  background-color: var(--secondary-red);
+}
