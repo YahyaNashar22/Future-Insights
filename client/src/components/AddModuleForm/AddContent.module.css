@@ -108,3 +108,43 @@
 #deleteBtn:hover {
   background-color: var(--secondary-red);
 }
+
+.sectionContainer {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+}
+
+.previousContentHeader {
+  color: var(--white);
+  background-color: var(--primary-beige);
+  padding: 20px;
+}
+
+.recordingsList {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+}
+
+.recordingItem {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  background: #f7f7f7;
+  padding: 10px;
+  margin-bottom: 5px;
+  border-radius: 4px;
+}
+
+.deleteButton {
+  background: none;
+  border: none;
+  color: var(--primary-red);
+  cursor: pointer;
+  font-size: 16px;
+}
+
+.deleteButton:hover {
+  color: var(--secondary-red);
+}

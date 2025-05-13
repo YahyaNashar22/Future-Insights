@@ -5,6 +5,7 @@ import IModule from "../../interfaces/IModule";
 import { useUserStore } from "../../store";
 import axios, { AxiosError } from "axios";
 import ICourse from "../../interfaces/ICourse";
+import ModuleRecordings from "./ModuleRecordings";
 
 const AddContentForm = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -361,11 +362,7 @@ const AddContentForm = () => {
       )}
 
       {selectedForm === "recording" && (
-        <form className={styles.contentForm} onSubmit={handleSubmitRecording}>
-          <input type="text" name="name" placeholder="Name" required />
-          <input type="file" name="link" required />
-          <button type="submit">Submit Recording</button>
-        </form>
+        <ModuleRecordings handleSubmitRecording={handleSubmitRecording} moduleId={selectedModule?._id} />
       )}
 
       {selectedForm === "material" && (
