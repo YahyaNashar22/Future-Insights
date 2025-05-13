@@ -13,8 +13,6 @@ import IAssessment from "../../interfaces/IAssessment";
 import { useUserStore } from "../../store";
 
 const ClassDisplay = () => {
-
-
   const backend = import.meta.env.VITE_BACKEND;
   const { slug } = useParams();
   const { user } = useUserStore();
@@ -44,8 +42,7 @@ const ClassDisplay = () => {
             // eslint-disable-next-line @typescript-eslint/no-explicit-any
             (u: any) => u._id === user?._id
           ) &&
-            user?._id !== res.data.payload.teacher &&
-            user?._id)
+            user?._id !== res.data.payload.teacher._id)
         )
           navigate("*");
 

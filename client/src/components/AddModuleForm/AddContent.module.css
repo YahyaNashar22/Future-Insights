@@ -148,3 +148,16 @@
 .deleteButton:hover {
   color: var(--secondary-red);
 }
+
+.materialItem {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.materialsList {
+  display: flex;
+  flex-direction: column;
+  gap: 10px;
+  padding: 10px;
+}

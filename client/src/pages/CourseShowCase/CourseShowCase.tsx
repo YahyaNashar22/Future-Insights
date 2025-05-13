@@ -1,4 +1,4 @@
-import { useNavigate, useParams } from "react-router-dom";
+import { Link, useNavigate, useParams } from "react-router-dom";
 import styles from "./CourseShowCase.module.css";
 import { useUserStore } from "../../store";
 import { useEffect, useState } from "react";
@@ -123,21 +123,31 @@ const CourseShowCase = () => {
                   </span>
                 )}
               </div>
-              {modules.length !== 0 && cls.price !== 0 && (
-                <>
-                  {!isEnrolled ? (
-                    <button
-                      className={styles.buyBtn}
-                      onClick={() => setPurchaseModal(true)}
-                    >
-                      Enroll Now
-                    </button>
-                  ) : (
-                    <p className={styles.enrolledText}>
-                      You are already enrolled 🎉
-                    </p>
-                  )}
-                </>
+              {user?._id === cls.teacher._id ? (
+                <Link
+                  to={`/course-catalogue/class/${cls?.slug}`}
+                  className={styles.buyBtn}
+                >
+                  View
+                </Link>
+              ) : (
+                modules.length !== 0 &&
+                cls.price !== 0 && (
+                  <>
+                    {!isEnrolled ? (
+                      <button
+                        className={styles.buyBtn}
+                        onClick={() => setPurchaseModal(true)}
+                      >
+                        Enroll Now
+                      </button>
+                    ) : (
+                      <p className={styles.enrolledText}>
+                        You are already enrolled 🎉
+                      </p>
+                    )}
+                  </>
+                )
               )}
             </div>
           </div>

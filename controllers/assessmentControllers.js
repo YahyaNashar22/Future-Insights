@@ -1,6 +1,7 @@
 // * For simplicity, we will refer to both assessment or assignment as assessment
 
 import Assessment from "../models/assessmentModel.js";
+import removeFile from "../utils/removeFile.js";
 
 export const createAssessment = async (req, res) => {
     try {
@@ -90,3 +91,22 @@ export const getAssessmentBySlug = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+export const deleteAssessment = async (req, res) => {
+    try {
+        const { id } = req.params;
+
+        const deleted = await Assessment.findByIdAndDelete(id);
+
+        deleted.scope && removeFile(deleted.scope)
+
+        if (!deleted) {
+            return res.status(404).json({ message: "Assessment not found" });
+        }
+
+        return res.status(200).json({ message: "Assessment deleted successfully" });
+    } catch (error) {
+        console.error(error);
+        return res.status(500).json({ message: "Something went wrong" });
+    }
+};

@@ -178,21 +178,34 @@ const ClassShowCase = () => {
                   </span>
                 )}
               </div>
-              {modules.length !== 0 && cls.price !== 0 && (
-                <>
-                  {!isEnrolled ? (
-                    <button
-                      className={styles.buyBtn}
-                      onClick={() => setPurchaseModal(true)}
-                    >
-                      {t("enroll-now")}
-                    </button>
-                  ) : (
-                    <p className={styles.enrolledText}>
-                      {t("already-enrolled")} 🎉
-                    </p>
-                  )}
-                </>
+
+              {user?._id === cls.teacher._id ? (
+                <button
+                  onClick={() =>
+                    navigate(`/course-catalogue/class/${cls?.slug}`)
+                  }
+                  className={styles.buyBtn}
+                >
+                  View
+                </button>
+              ) : (
+                modules.length !== 0 &&
+                cls.price !== 0 && (
+                  <>
+                    {!isEnrolled ? (
+                      <button
+                        className={styles.buyBtn}
+                        onClick={() => setPurchaseModal(true)}
+                      >
+                        {t("enroll-now")}
+                      </button>
+                    ) : (
+                      <p className={styles.enrolledText}>
+                        {t("already-enrolled")} 🎉
+                      </p>
+                    )}
+                  </>
+                )
               )}
             </div>
           </div>

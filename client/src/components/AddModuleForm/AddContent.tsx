@@ -6,6 +6,8 @@ import { useUserStore } from "../../store";
 import axios, { AxiosError } from "axios";
 import ICourse from "../../interfaces/ICourse";
 import ModuleRecordings from "./ModuleRecordings";
+import ModuleMaterial from "./ModuleMaterial";
+import ModuleAssessment from "./ModuleAssessment";
 
 const AddContentForm = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -362,29 +364,24 @@ const AddContentForm = () => {
       )}
 
       {selectedForm === "recording" && (
-        <ModuleRecordings handleSubmitRecording={handleSubmitRecording} moduleId={selectedModule?._id} />
+        <ModuleRecordings
+          handleSubmitRecording={handleSubmitRecording}
+          moduleId={selectedModule?._id}
+        />
       )}
 
       {selectedForm === "material" && (
-        <form className={styles.contentForm} onSubmit={handleSubmitMaterial}>
-          <input type="text" name="name" placeholder="Name" required />
-          <input type="file" name="content" required />
-          <button type="submit">Submit Material</button>
-        </form>
+        <ModuleMaterial
+          handleSubmitMaterial={handleSubmitMaterial}
+          moduleId={selectedModule?._id}
+        />
       )}
 
       {selectedForm === "assessment" && (
-        <form className={styles.contentForm} onSubmit={handleSubmitAssessment}>
-          <input type="text" name="title" placeholder="Title" required />
-          <textarea name="description" placeholder="Description" required />
-          <select name="type" required className={styles.formInput}>
-            <option value="">Select Assessment Type</option>
-            <option value="assessment">Assessment</option>
-            <option value="assignment">Assignment</option>
-          </select>
-          <input type="file" name="scope" />
-          <button type="submit">Submit Assessment</button>
-        </form>
+        <ModuleAssessment
+          handleSubmitAssessment={handleSubmitAssessment}
+          moduleId={selectedModule?._id}
+        />
       )}
     </div>
   );
