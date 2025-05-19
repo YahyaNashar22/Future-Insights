@@ -12,9 +12,11 @@ interface Recording {
 const ModuleRecordings = ({
   handleSubmitRecording,
   moduleId,
+  submitting,
 }: {
   handleSubmitRecording: (event: React.FormEvent) => Promise<void>;
   moduleId: string | undefined;
+  submitting: boolean;
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -59,7 +61,9 @@ const ModuleRecordings = ({
       <form className={styles.contentForm} onSubmit={handleSubmitRecording}>
         <input type="text" name="name" placeholder="Name" required />
         <input type="file" name="link" required />
-        <button type="submit">Submit Recording</button>
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Submitting" : "Submit Recording"}
+        </button>
       </form>
 
       <div className={styles.previousContent}>

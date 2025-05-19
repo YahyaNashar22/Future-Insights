@@ -13,6 +13,8 @@ const AddContentForm = () => {
   const backend = import.meta.env.VITE_BACKEND;
   const { user } = useUserStore();
   const [loading, setLoading] = useState<boolean>(false);
+  const [submitting, setSubmitting] = useState<boolean>(false);
+
   const [classes, setClasses] = useState<IClass[]>([]);
   const [courses, setCourses] = useState<ICourse[]>([]);
 
@@ -127,6 +129,7 @@ const AddContentForm = () => {
   };
 
   const handleSubmitLiveLink = async (event: React.FormEvent) => {
+    setSubmitting(true);
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
@@ -145,9 +148,12 @@ const AddContentForm = () => {
     });
     console.log(res.data);
     alert("Added Successfully!");
+    setSubmitting(false);
   };
 
   const handleSubmitRecording = async (event: React.FormEvent) => {
+    setSubmitting(true);
+
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
@@ -171,9 +177,12 @@ const AddContentForm = () => {
     });
     console.log(res.data);
     alert("Added Successfully!");
+    setSubmitting(false);
   };
 
   const handleSubmitMaterial = async (event: React.FormEvent) => {
+    setSubmitting(true);
+
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
@@ -195,9 +204,12 @@ const AddContentForm = () => {
     });
     console.log(res.data);
     alert("Added Successfully!");
+    setSubmitting(false);
   };
 
   const handleSubmitAssessment = async (event: React.FormEvent) => {
+    setSubmitting(true);
+
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const title = (form.elements.namedItem("title") as HTMLInputElement).value;
@@ -225,6 +237,7 @@ const AddContentForm = () => {
     });
     console.log(res.data);
     alert("Added Successfully!");
+    setSubmitting(false);
   };
 
   function isCourse(item: IClass | ICourse | null): item is IClass {
@@ -359,7 +372,9 @@ const AddContentForm = () => {
             required
           />
           <input type="url" name="link" placeholder="Live Link URL" required />
-          <button type="submit">Submit Live Link</button>
+          <button type="submit" disabled={submitting}>
+            {submitting ? "Submitting" : `Submit Live Link`}
+          </button>
         </form>
       )}
 
@@ -367,6 +382,7 @@ const AddContentForm = () => {
         <ModuleRecordings
           handleSubmitRecording={handleSubmitRecording}
           moduleId={selectedModule?._id}
+          submitting={submitting}
         />
       )}
 
@@ -374,6 +390,7 @@ const AddContentForm = () => {
         <ModuleMaterial
           handleSubmitMaterial={handleSubmitMaterial}
           moduleId={selectedModule?._id}
+          submitting={submitting}
         />
       )}
 
@@ -381,6 +398,7 @@ const AddContentForm = () => {
         <ModuleAssessment
           handleSubmitAssessment={handleSubmitAssessment}
           moduleId={selectedModule?._id}
+          submitting={submitting}
         />
       )}
     </div>

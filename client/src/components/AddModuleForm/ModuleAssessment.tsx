@@ -11,9 +11,11 @@ interface Assessment {
 const ModuleAssessment = ({
   handleSubmitAssessment,
   moduleId,
+  submitting,
 }: {
   handleSubmitAssessment: (event: React.FormEvent) => Promise<void>;
   moduleId: string | undefined;
+  submitting: boolean;
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -72,7 +74,9 @@ const ModuleAssessment = ({
           <option value="assignment">Assignment</option>
         </select>
         <input type="file" name="scope" />
-        <button type="submit">Submit Assessment</button>
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Submitting" : "Submit Assessment"}
+        </button>
       </form>
 
       <div className={styles.previousContent}>

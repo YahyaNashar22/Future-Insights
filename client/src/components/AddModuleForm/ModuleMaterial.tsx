@@ -12,9 +12,11 @@ interface Material {
 const ModuleMaterial = ({
   handleSubmitMaterial,
   moduleId,
+  submitting,
 }: {
   handleSubmitMaterial: (event: React.FormEvent) => Promise<void>;
   moduleId: string | undefined;
+  submitting: boolean;
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
@@ -58,7 +60,9 @@ const ModuleMaterial = ({
       <form className={styles.contentForm} onSubmit={handleSubmitMaterial}>
         <input type="text" name="name" placeholder="Name" required />
         <input type="file" name="content" required />
-        <button type="submit">Submit Material</button>
+        <button type="submit" disabled={submitting}>
+          {submitting ? "Submitting" : "Submit Material"}
+        </button>
       </form>
 
       <div className={styles.previousContent}>
