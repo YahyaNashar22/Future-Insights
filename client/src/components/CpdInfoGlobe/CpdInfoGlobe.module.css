@@ -1,0 +1,44 @@
+.wrapper {
+  position: relative;
+  background: url("../../assets/images/globe.jpg");
+  background-position: center;
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  min-height: 400px;
+  padding: 72px 72px;
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  gap: 24px;
+  isolation: isolate; /* Ensures z-index stacking works correctly */
+}
+
+.wrapper::before {
+  content: "";
+  position: absolute;
+  inset: 0;
+  background: #25216188;
+  z-index: -1;
+}
+
+.slogan {
+  color: var(--white);
+  position: relative;
+  z-index: 1;
+  font-size: 2rem;
+  width: 80%;
+}
+
+@media (max-width: 768px) {
+  .wrapper {
+    padding: 72px 12px;
+    align-items: center;
+  }
+
+  .slogan {
+    font-size: 1.4rem;
+    text-align: center;
+  }
+}
