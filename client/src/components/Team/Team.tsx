@@ -6,6 +6,7 @@ import business from "../../assets/icons/business.png";
 import intelligence from "../../assets/icons/intelligence.png";
 import { useTranslation } from "react-i18next";
 import { useLanguageStore } from "../../langStore";
+import AccreditationBanner from "../AccreditationBanner/AccreditationBanner";
 
 const data = [
   {
@@ -83,6 +84,9 @@ const Team = () => {
         <span className={styles.beige}> {t("team-title-beige")}</span>
         {t("team-title-2")}
       </h2>
+
+      <AccreditationBanner />
+
       <ul className={styles.container}>
         {data.map((card, index) => {
           return (
