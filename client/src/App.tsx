@@ -1,10 +1,15 @@
-import { useEffect } from "react";
 import "./App.css";
-import AppRoutes from "./routes/AppRoutes";
-import ScrollToTop from "./routes/ScrollToTop";
+
+import { useEffect } from "react";
 import i18n from "./i18n";
 import { I18nextProvider } from "react-i18next";
 import { useLanguageStore } from "./langStore";
+
+import AppRoutes from "./routes/AppRoutes";
+import ScrollToTop from "./routes/ScrollToTop";
+
+import uae from "./assets/icons/uae.png";
+import uk from "./assets/icons/uk.png";
 
 function App() {
   const { language, setLanguage } = useLanguageStore();
@@ -38,18 +43,26 @@ function App() {
           <button
             style={{
               color: "var(--primary-blue)",
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
             }}
             onClick={() => setLanguage("en")}
           >
+            <img src={uk} alt="united kingdoms" width={24} />
             English
           </button>
           <button
             style={{
               color: "var(--primary-blue)",
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
             }}
             onClick={() => setLanguage("ar")}
           >
             العربية
+            <img src={uae} alt="united arabs emirates" width={24} />
           </button>
         </div>
         <ScrollToTop />

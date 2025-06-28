@@ -52,7 +52,7 @@ const Footer = () => {
             <li>
               <Icon image={phone} />
               <span style={{ unicodeBidi: "plaintext" }}>
-                +966 593340212 - +971 507505539{" "}
+                +966 58 343 3143 - +971 50 750 5539{" "}
               </span>
             </li>
 

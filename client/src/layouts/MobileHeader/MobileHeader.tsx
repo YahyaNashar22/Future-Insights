@@ -8,6 +8,9 @@ import SignoutModal from "../../components/SignoutModal/SignoutModal";
 import { useLanguageStore } from "../../langStore";
 import { useTranslation } from "react-i18next";
 
+import uk from "../../assets/icons/uk.png";
+import uae from "../../assets/icons/uae.png";
+
 const MobileHeader = () => {
   const { t } = useTranslation();
   const { setLanguage } = useLanguageStore();
@@ -177,8 +180,28 @@ const MobileHeader = () => {
         )}
 
         <div className="language-btn-container">
-          <button onClick={() => setLanguage("en")}>English</button>
-          <button onClick={() => setLanguage("ar")}>العربية</button>
+          <button
+            onClick={() => setLanguage("en")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            <img src={uk} alt="united kingdoms" width={24} />
+            English
+          </button>
+          <button
+            onClick={() => setLanguage("ar")}
+            style={{
+              display: "flex",
+              alignItems: "center",
+              gap: "12px",
+            }}
+          >
+            العربية
+            <img src={uae} alt="united kingdoms" width={24} />
+          </button>
         </div>
       </nav>
       {showModal && <SignoutModal setShowModal={setShowModal} />}
