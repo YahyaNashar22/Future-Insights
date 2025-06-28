@@ -1,3 +1,4 @@
+import CpdGains from "../../components/CpdGains/CpdGains";
 import CpdInfoAccreditation from "../../components/CpdInfoAccreditation/CpdInfoAccreditation";
 import CpdInfoGlobe from "../../components/CpdInfoGlobe/CpdInfoGlobe";
 import CpdInfoHero from "../../components/CpdInfoHeader/CpdInfoHero";
@@ -13,6 +14,7 @@ const CpdInfo = () => {
       <CpdInfoReferenceNumber />
       <CpdInfoAccreditation />
       <CpdInfoWhyMatters />
+      <CpdGains />
     </main>
   );
 };
