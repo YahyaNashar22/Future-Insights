@@ -2,6 +2,7 @@ import CpdInfoAccreditation from "../../components/CpdInfoAccreditation/CpdInfoA
 import CpdInfoGlobe from "../../components/CpdInfoGlobe/CpdInfoGlobe";
 import CpdInfoHero from "../../components/CpdInfoHeader/CpdInfoHero";
 import CpdInfoReferenceNumber from "../../components/CpdInfoReferenceNumber/CpdInfoReferenceNumber";
+import CpdInfoWhyMatters from "../../components/CpdInfoWhyMatters/CpdInfoWhyMatters";
 import styles from "./CpdInfo.module.css";
 
 const CpdInfo = () => {
@@ -11,6 +12,7 @@ const CpdInfo = () => {
       <CpdInfoGlobe />
       <CpdInfoReferenceNumber />
       <CpdInfoAccreditation />
+      <CpdInfoWhyMatters />
     </main>
   );
 };

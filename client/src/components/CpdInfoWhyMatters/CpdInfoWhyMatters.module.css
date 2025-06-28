@@ -1,0 +1,44 @@
+.wrapper {
+  background: url("../../assets/images/partner_bg.png");
+  background-size: cover;
+  background-repeat: no-repeat;
+  width: 100%;
+  padding: 40px;
+}
+
+.content {
+  display: flex;
+  align-items: flex-start;
+  justify-content: center;
+  column-gap: 32px;
+  width: 60%;
+  margin: auto;
+}
+
+.textContainer {
+  display: flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+}
+
+.text {
+  font-size: 2rem;
+  font-weight: bold;
+  color: var(--white);
+  hyphens: auto;
+}
+
+.text2 {
+  font-size: 1.2rem;
+  color: var(--white);
+  hyphens: auto;
+}
+
+@media (max-width: 800px) {
+  .content {
+    flex-direction: column;
+    width: 100%;
+    row-gap: 10px;
+  }
+}
