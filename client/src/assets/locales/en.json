@@ -268,5 +268,14 @@
   "date": "Date:",
 
   "accreditation-banner-title": "International Accreditation by the CPD standards office - UK",
-  "accreditation-banner-slogan": "At Future Insights, we are officially accredited by the CPD Standards Office - United Kingdom, a globally recognized body committed to setting the highest benchmarks in Continuing Professional Development"
+  "accreditation-banner-slogan": "At Future Insights, we are officially accredited by the CPD Standards Office - United Kingdom, a globally recognized body committed to setting the highest benchmarks in Continuing Professional Development",
+
+  "provider-reference-title": "Provider Reference Number: 22929",
+  "provider-reference-p1": "This accreditation reflects the quality, relevance, and global value of our training programmes. Whether you're attending an online masterclass or an in-person executive course, you can be assured that your learning experience meets internationally approved CPD standards.",
+  "provider-reference-p2": "We invite all our delegates, partners, and visitors to explore our official profile on the CPD Standards Office Directory. There, you can:",
+  "provider-reference-s1": "Explore our accreditation and reference number",
+  "provider-reference-s2": "Read a full description of our accredited courses",
+  "provider-reference-s3": "Read more about the recognition of CPD hours globally",
+  
+  "learn-more":"Learn More"
 }

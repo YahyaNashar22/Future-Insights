@@ -18,14 +18,14 @@
   content: "";
   position: absolute;
   inset: 0;
-  background: #25216188; /* Black overlay with 50% opacity */
-  z-index: -1; /* Put behind content */
+  background: #25216188;
+  z-index: -1;
 }
 
 .title,
 .slogan {
   color: var(--white);
-  position: relative; /* Ensures content stays above overlay */
+  position: relative;
   z-index: 1;
 }
 
@@ -39,8 +39,18 @@
   max-width: 800px;
 }
 
-@media (max-width: 460px) {
+@media (max-width: 480px) {
   .wrapper {
     padding: 48px 24px;
+  }
+
+  .title {
+    font-size: 2rem;
+    max-width: 400px;
+  }
+
+  .slogan {
+    font-size: 1.2rem;
+    max-width: 400px;
   }
 }

@@ -7,6 +7,7 @@ import intelligence from "../../assets/icons/intelligence.png";
 import { useTranslation } from "react-i18next";
 import { useLanguageStore } from "../../langStore";
 import AccreditationBanner from "../AccreditationBanner/AccreditationBanner";
+import ProviderReference from "../ProviderReference/ProviderReference";
 
 const data = [
   {
@@ -86,6 +87,7 @@ const Team = () => {
       </h2>
 
       <AccreditationBanner />
+      <ProviderReference />
 
       <ul className={styles.container}>
         {data.map((card, index) => {
