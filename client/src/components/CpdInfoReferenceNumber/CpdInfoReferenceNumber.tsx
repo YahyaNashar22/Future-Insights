@@ -1,16 +1,12 @@
-import styles from "./ProviderReference.module.css";
-
 import { useTranslation } from "react-i18next";
-import { Link } from "react-router-dom";
+import styles from "./CpdInfoReferenceNumber.module.css";
 
 import rami from "../../assets/images/rami6.jpg";
-import cpd from "../../assets/icons/cpd_logo_no_bg.png";
 
-const ProviderReference = () => {
+const CpdInfoReferenceNumber = () => {
   const { t } = useTranslation();
-
   return (
-    <div className={styles.wrapper}>
+    <section className={styles.wrapper}>
       <div className={styles.left}>
         <img src={rami} alt="rami" />
       </div>
@@ -22,12 +18,8 @@ const ProviderReference = () => {
         <strong>{t("provider-reference-s2")}</strong>
         <strong>{t("provider-reference-s3")}</strong>
       </div>
-      <div className={styles.right}>
-        <img src={cpd} alt="cpd logo" />
-        <Link to="/cpd">{t("learn-more")}</Link>
-      </div>
-    </div>
+    </section>
   );
 };
 
-export default ProviderReference;
+export default CpdInfoReferenceNumber;
