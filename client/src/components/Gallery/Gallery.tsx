@@ -5,16 +5,21 @@ import img3 from "../../assets/images/rami3.jpg";
 import img4 from "../../assets/images/rami4.jpg";
 import img5 from "../../assets/images/rami5.jpg";
 import img6 from "../../assets/images/rami6.jpg";
+import { useLanguageStore } from "../../langStore";
 
 const images = [img1, img2, img3, img4, img5, img6];
 
 const Gallery = () => {
   const loopedImages = [...images, ...images]; // Duplicate for seamless scroll
 
+  const { language } = useLanguageStore();
+
+  const isArabic = language === "ar";
+
   return (
     <div className={styles.wrapper}>
       <div className={styles.marquee}>
-        <div className={styles.track}>
+        <div className={isArabic ? styles.trackAr : styles.track}>
           {loopedImages.map((img, i) => (
             <div className={styles.imageCard} key={i}>
               <img src={img} alt={`gallery-${i}`} />

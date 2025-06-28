@@ -20,6 +20,12 @@
   animation: scroll 30s linear infinite;
 }
 
+.trackAr {
+  display: flex;
+  width: fit-content;
+  animation: scrollAr 30s linear infinite;
+}
+
 .imageCard {
   flex: 0 0 auto;
   width: 250px;
@@ -45,5 +51,14 @@
   }
   100% {
     transform: translateX(-50%);
+  }
+}
+
+@keyframes scrollAr {
+  0% {
+    transform: translateX(0);
+  }
+  100% {
+    transform: translateX(50%);
   }
 }
