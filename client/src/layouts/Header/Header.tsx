@@ -1,6 +1,7 @@
 import styles from "./Header.module.css";
 
 import logo from "../../assets/icons/logo_svg.svg";
+import cpd from "../../assets/icons/cpd_logo_no_bg.png";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";
@@ -29,13 +30,23 @@ const Header = () => {
 
   return (
     <header className={styles.wrapper}>
-      <img
-        src={logo}
-        alt="logo"
-        loading="lazy"
-        width={150}
-        onClick={() => navigate("/")}
-      />
+      <div className={styles.logoContainer}>
+        <img
+          src={logo}
+          alt="logo"
+          loading="lazy"
+          width={150}
+          onClick={() => navigate("/")}
+        />
+        <img
+          src={cpd}
+          alt="cpd logo"
+          loading="lazy"
+          width={100}
+          onClick={() => navigate("/cpd")}
+        />
+      </div>
+
       <ul className={`${styles.navLinks} ${isArabic ? styles.arabic : ""}`}>
         <li>
           <Link to="/" className={styles.link}>

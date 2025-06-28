@@ -14,9 +14,11 @@
   font-weight: bold;
 }
 
-.logo {
-  height: 40px;
-  cursor: pointer;
+
+.logoContainer {
+  display: flex;
+  align-items: center;
+  gap: 24px;
 }
 
 /* Burger Icon */

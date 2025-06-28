@@ -1,6 +1,8 @@
 import styles from "./CourseCatalogueHeader.module.css";
 
 import logo from "../../assets/icons/logo_svg_white.svg";
+// import cpd from "../../assets/icons/cpd_logo_no_bg.png";
+import cpd from "../../assets/icons/cpd_logo.jpg";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";
@@ -28,13 +30,23 @@ const CourseCatalogueHeader = () => {
   };
   return (
     <header className={styles.wrapper}>
-      <img
-        src={logo}
-        alt="logo"
-        loading="lazy"
-        width={150}
-        onClick={() => navigate("/")}
-      />
+      <div className={styles.logoContainer}>
+        <img
+          src={logo}
+          alt="logo"
+          loading="lazy"
+          width={150}
+          onClick={() => navigate("/")}
+        />
+        <img
+          src={cpd}
+          alt="cpd logo"
+          loading="lazy"
+          width={100}
+          onClick={() => navigate("/cpd")}
+          style={{ borderRadius: "50%" }}
+        />
+      </div>
       <ul className={`${styles.navLinks} ${isArabic ? styles.arabic : ""}`}>
         <li>
           <Link to="/" className={styles.link}>
@@ -65,13 +77,16 @@ const CourseCatalogueHeader = () => {
             </li>
           </>
         )}
-        {user && (user.role === "teacher" || user.role === "admin" || user.role === "super") && (
-          <li>
-            <Link to="/dashboard" className={styles.link}>
-              {t("nav-5")}
-            </Link>
-          </li>
-        )}
+        {user &&
+          (user.role === "teacher" ||
+            user.role === "admin" ||
+            user.role === "super") && (
+            <li>
+              <Link to="/dashboard" className={styles.link}>
+                {t("nav-5")}
+              </Link>
+            </li>
+          )}
         {!user && (
           <li>
             <Link to="/teacher-signup" className={styles.link}>

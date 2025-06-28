@@ -2,6 +2,7 @@ import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
 import styles from "./MobileHeader.module.css";
 import logo from "../../assets/icons/logo_svg.svg";
+import cpd from "../../assets/icons/cpd_logo_no_bg.png";
 import { useUserStore } from "../../store";
 import SignoutModal from "../../components/SignoutModal/SignoutModal";
 import { useLanguageStore } from "../../langStore";
@@ -29,12 +30,22 @@ const MobileHeader = () => {
   return (
     <header className={styles.mobileHeader}>
       {/* Logo */}
-      <img
-        src={logo}
-        alt="Logo"
-        className={styles.logo}
-        onClick={() => navigate("/")}
-      />
+      <div className={styles.logoContainer}>
+        <img
+          src={logo}
+          alt="logo"
+          loading="lazy"
+          height={40}
+          onClick={() => navigate("/")}
+        />
+        <img
+          src={cpd}
+          alt="cpd logo"
+          loading="lazy"
+          height={40}
+          onClick={() => navigate("/cpd")}
+        />
+      </div>
 
       {/* Burger Menu Icon */}
       <div className={styles.burgerIcon} onClick={() => setMenuOpen(!menuOpen)}>

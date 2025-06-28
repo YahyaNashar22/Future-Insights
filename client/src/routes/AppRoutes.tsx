@@ -72,14 +72,6 @@ const UserManagement = lazy(
   () => import("../pages/UserManagement/UserManagement.tsx")
 );
 
-// const CourseCheckout = lazy(
-//   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
-// );
-
-// const TeacherSignup = lazy(
-//   () => import("../pages/TeacherSignup/TeacherSignup.tsx")
-// );
-
 const Dashboard = lazy(() => import("../pages/Dashboard/Dashboard.tsx"));
 
 const ForgotPassword = lazy(
@@ -96,8 +88,6 @@ const CourseShowCase = lazy(
   () => import("../pages/CourseShowCase/CourseShowCase.tsx")
 );
 
-// const PaymentPage = lazy(() => import("../pages/PaymentPage/PaymentPage.tsx"));
-
 const PaymentFailed = lazy(
   () => import("../pages/PaymentFailed/PaymentFailed.tsx")
 );
@@ -106,13 +96,11 @@ const Transactions = lazy(
   () => import("../pages/Transactions/Transactions.tsx")
 );
 
-// const CheckoutClass = lazy(
-//   () => import("../pages/CheckoutClass/CheckoutClass.tsx")
-// );
+const CpdInfo = lazy(
+  () => import("../pages/CpdInfo/CpdInfo.tsx")
+);
 
-// const CourseCheckout = lazy(
-//   () => import("../pages/CourseCheckout/CourseCheckout.tsx")
-// );
+
 
 const AppRoutes = () => {
   const { user } = useUserStore();
@@ -132,6 +120,8 @@ const AppRoutes = () => {
 
           <Route path="/show-case/class/:slug" element={<ClassShowCase />} />
           <Route path="/show-case/course/:slug" element={<CourseShowCase />} />
+
+          <Route path="/cpd" element={<CpdInfo />} />
 
           <Route path="/payment-failed/:slug" element={<PaymentFailed />} />
 
