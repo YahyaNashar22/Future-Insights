@@ -63,6 +63,11 @@ const Header = () => {
             {t("nav-3")}
           </Link>
         </li>
+        <li>
+          <Link to="/cpd" className={styles.link}>
+            {t("nav-9")}
+          </Link>
+        </li>
         {user && (
           <>
             <li>

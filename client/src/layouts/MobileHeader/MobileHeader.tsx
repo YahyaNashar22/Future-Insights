@@ -94,6 +94,9 @@ const MobileHeader = () => {
               {t("nav-3")}
             </Link>
           </li>
+          <Link to="/cpd" className={styles.link}>
+            {t("nav-9")}
+          </Link>
           {user && (
             <>
               <li>
