@@ -28,7 +28,7 @@
 }
 
 .middle p {
-  font-size: 1rem;
+  font-size: 1.2rem;
   color: var(--grey-accent);
   margin-bottom: 1rem;
   line-height: 1.6;
@@ -38,6 +38,7 @@
   display: block;
   margin-top: 0.75rem;
   font-weight: 600;
+  font-size: 1.2rem;
   color: var(--grey-accent);
 }
 
