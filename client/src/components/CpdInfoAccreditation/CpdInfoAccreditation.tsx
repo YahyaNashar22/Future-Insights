@@ -14,6 +14,13 @@ const CpdInfoAccreditation = () => {
       </div>
       <div className={styles.left}>
         <img src={cpd} alt="cpd logo" />
+        <a
+          href="https://www.cpdinstitute.org/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t("visit")}
+        </a>
       </div>
     </section>
   );

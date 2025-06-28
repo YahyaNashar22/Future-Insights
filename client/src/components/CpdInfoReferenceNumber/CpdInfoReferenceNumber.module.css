@@ -43,9 +43,18 @@
 }
 
 .middle a {
-  color: var(--primary-blue);
+  color: var(--white);
   font-weight: 600;
   text-decoration: none;
+  margin-top: 24px;
+  font-size: 1.2rem;
+  background-color: var(--primary-blue);
+  padding: 12px 24px;
+  border-radius: 12px;
+  transition: 0.3s ease-in-out;
+}
+.middle a:hover {
+  background-color: var(--primary-beige);
 }
 
 .right {

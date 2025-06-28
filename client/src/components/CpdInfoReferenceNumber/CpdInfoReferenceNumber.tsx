@@ -1,5 +1,6 @@
-import { useTranslation } from "react-i18next";
 import styles from "./CpdInfoReferenceNumber.module.css";
+
+import { useTranslation } from "react-i18next";
 
 import rami from "../../assets/images/rami6.jpg";
 
@@ -17,6 +18,13 @@ const CpdInfoReferenceNumber = () => {
         <strong>{t("provider-reference-s1")}</strong>
         <strong>{t("provider-reference-s2")}</strong>
         <strong>{t("provider-reference-s3")}</strong>
+        <a
+          href="https://directory.cpdstandards.com/providers/future-insights-for-management-consultancies-co-l-l-c/"
+          target="_blank"
+          rel="noreferrer"
+        >
+          {t('visit')}
+        </a>
       </div>
     </section>
   );
