@@ -1,5 +1,5 @@
 import styles from "./Vision.module.css";
-import vision from "../../assets/images/vision.png";
+import rami from "../../assets/images/rami.jpg";
 import { useTranslation } from "react-i18next";
 import { useLanguageStore } from "../../langStore";
 
@@ -18,8 +18,8 @@ const Vision = () => {
       </div>
 
       <div className={styles.imageContainer}>
-        <img src={vision} alt="vision" loading="lazy" className={styles.img} />
-        <div className={styles.overlay}></div>
+        <img src={rami} alt="vision" loading="lazy" className={styles.img} />
+        {/* <div className={styles.overlay}></div> */}
       </div>
     </div>
   );
