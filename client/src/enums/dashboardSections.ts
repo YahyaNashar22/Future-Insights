@@ -4,4 +4,5 @@ export enum DashboardSections {
   MyClasses = "myClasses",
   AddClass = "addClass",
   AddContent = "addContent",
+  Categories = "categories",
 }

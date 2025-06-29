@@ -6,8 +6,12 @@ import TeacherClassDisplay from "../../components/TeacherClassDisplay/TeacherCla
 import AddClassForm from "../../components/AddClassForm/AddClassForm";
 import { DashboardSections } from "../../enums/dashboardSections";
 import AddContentForm from "../../components/AddModuleForm/AddContent";
+import CategoriesDashboard from "../../components/CategoriesDashboard/CategoriesDashboard";
+import { useUserStore } from "../../store";
 
 const Dashboard = () => {
+  const { user } = useUserStore();
+
   const [activeComponent, setActiveComponent] = useState<DashboardSections>(
     DashboardSections.MyClasses
   );
@@ -92,6 +96,22 @@ const Dashboard = () => {
             Add Content
           </button>
         </li>
+        {user?.role === "super" && (
+          <li
+            className={
+              activeComponent === DashboardSections.AddContent
+                ? styles.active
+                : undefined
+            }
+          >
+            <button
+              onClick={() => handleSidebarClick(DashboardSections.Categories)}
+              className={styles.sidebarButton}
+            >
+              Categories
+            </button>
+          </li>
+        )}
       </ul>
 
       {/* Main Content */}
@@ -105,6 +125,9 @@ const Dashboard = () => {
           <AddClassForm setActiveComponent={setActiveComponent} />
         )}
         {activeComponent === "addContent" && <AddContentForm />}
+        {user?.role === "super" && activeComponent === "categories" && (
+          <CategoriesDashboard />
+        )}
       </div>
     </main>
   );
