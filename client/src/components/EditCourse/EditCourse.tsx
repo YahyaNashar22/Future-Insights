@@ -208,7 +208,7 @@ const EditCourse = () => {
                 className={styles.inputForm}
                 type="number"
                 name="price"
-                defaultValue={course?.price || "0"}
+                defaultValue={course ? course.price : "0"}
                 required
               />
             </label>
@@ -219,7 +219,7 @@ const EditCourse = () => {
                 className={styles.inputForm}
                 type="number"
                 name="discount"
-                defaultValue={course?.discount || "0"}
+                defaultValue={course? course.discount : "0"}
                 min="0"
                 max="100"
                 step="0.01"
