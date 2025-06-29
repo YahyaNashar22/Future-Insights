@@ -11,13 +11,18 @@ const CategoryItem = ({
   onEdit: () => void;
 }) => {
   const backend = import.meta.env.VITE_BACKEND;
+
+  const handleEdit = () => {
+    onEdit();
+    window.scrollTo({ top: 0, behavior: "smooth" });
+  };
   return (
     <div className={styles.item}>
       <img src={`${backend}/${category.image}`} alt={category.title} />
       <h3>{category.title}</h3>
       <p>{category.description}</p>
       <div className={styles.actions}>
-        <button onClick={onEdit}>Edit</button>
+        <button onClick={handleEdit}>Edit</button>
         <button onClick={onDelete}>Delete</button>
       </div>
     </div>
