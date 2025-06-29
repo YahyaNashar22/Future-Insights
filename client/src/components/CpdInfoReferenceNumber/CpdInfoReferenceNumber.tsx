@@ -17,7 +17,7 @@ const CpdInfoReferenceNumber = () => {
         <p>{t("provider-reference-p2")}</p>
         <strong>{t("provider-reference-s1")}</strong>
         <strong>{t("provider-reference-s2")}</strong>
-        <strong>{t("provider-reference-s3")}</strong>
+        <strong className={styles.last}>{t("provider-reference-s3")}</strong>
         <a
           href="https://directory.cpdstandards.com/providers/future-insights-for-management-consultancies-co-l-l-c/"
           target="_blank"

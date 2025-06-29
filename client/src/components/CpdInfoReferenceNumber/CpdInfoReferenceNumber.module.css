@@ -42,7 +42,7 @@
   color: var(--grey-accent);
 }
 
-.middle strong:last-child {
+.last {
   margin-bottom: 48px;
 }
 
