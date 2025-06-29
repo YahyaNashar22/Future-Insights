@@ -42,6 +42,10 @@
   color: var(--grey-accent);
 }
 
+.middle strong:last-child {
+  margin-bottom: 48px;
+}
+
 .middle a {
   color: var(--white);
   font-weight: 600;
