@@ -89,10 +89,9 @@
 }
 
 .descriptionText {
-  color: #333;
+  color: var(--grey-accent);
   line-height: 30px;
-  font-weight: bold;
-
+  font-size: 1.1rem;
 }
 
 .demoNotAvailable {
