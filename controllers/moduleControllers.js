@@ -1,4 +1,5 @@
 import Module from "../models/moduleModel.js";
+import User from "../models/userModel.js";
 
 export const createModule = async (req, res) => {
     try {
@@ -20,7 +21,7 @@ export const createModule = async (req, res) => {
 
 export const getModulesByClassId = async (req, res) => {
     try {
-        const { classId, courseId } = req.query;
+        const { classId, courseId, userId } = req.query;
 
         if (!classId && !courseId) {
             return res.status(400).json({
@@ -28,9 +29,17 @@ export const getModulesByClassId = async (req, res) => {
             });
         }
 
+
+        const user = await User.findById(userId);
+
+
         const filter = {};
         if (classId) filter.classId = classId;
         if (courseId) filter.courseId = courseId;
+
+        if (!user || user.role === 'student') {
+            filter.visible = true
+        }
 
         const classModules = await Module.find(filter);
 
@@ -54,5 +63,30 @@ export const deleteModule = async (req, res) => {
     } catch (error) {
         console.error(error);
         return res.status(500).json({ message: "Something went wrong, please try again later" });
+    }
+}
+
+export const toggleVisibility = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const fetchedModule = await Module.findById(id);
+
+        const module = await Module.findByIdAndUpdate(id, {
+            $set: {
+                visible: !(fetchedModule?.visible)
+            }
+        }, {
+            new: true
+        });
+
+        return res.status(200).json({
+            payload: module
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
     }
 }

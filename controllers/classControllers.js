@@ -61,9 +61,18 @@ export const createClass = async (req, res) => {
 
 export const getClassesByCategory = async (req, res) => {
     try {
-        const { categoryId } = req.body;
+        const { categoryId, userId } = req.body;
 
-        const classes = await Class.find({ category: categoryId });
+        const user = await User.findById(userId);
+
+        let classes;
+
+        if (!user || user.role === 'student') {
+            classes = await Class.find({ category: categoryId, visible: true });
+        } else {
+            classes = await Class.find({ category: categoryId });
+        }
+
 
         res.status(200).json({
             message: "fetched successfully",
@@ -223,6 +232,31 @@ export const showCertificate = async (req, res) => {
         const course = await Class.findByIdAndUpdate(id, {
             $set: {
                 showCertificate: !(fetchedCourse?.showCertificate)
+            }
+        }, {
+            new: true
+        });
+
+        return res.status(200).json({
+            payload: course
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+export const toggleVisibility = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const fetchedCourse = await Class.findById(id);
+
+        const course = await Class.findByIdAndUpdate(id, {
+            $set: {
+                visible: !(fetchedCourse?.visible)
             }
         }, {
             new: true

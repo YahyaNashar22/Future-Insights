@@ -18,6 +18,7 @@ interface IClass {
   category: ICategory;
   type: string;
   showCertificate: boolean;
+  visible: boolean;
   slug: string;
 }
 

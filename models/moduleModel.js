@@ -17,6 +17,10 @@ const moduleSchema = new Schema(
             type: Schema.Types.ObjectId,
             ref: "Course",
         },
+        visible: {
+            type: Boolean,
+            default: true
+        },
     },
     {
         timestamps: true

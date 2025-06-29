@@ -177,6 +177,23 @@ const EditClass = () => {
     }
   };
 
+  const toggleVisibility = async () => {
+    try {
+      setSubmitting(true);
+      const res = await axios.put(
+        `${backend}/class/toggle-visibility/${course?._id}`
+      );
+
+      if (res.data.payload) {
+        setCourse(res.data.payload);
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
   return (
     <main className={styles.wrapper}>
       {loading ? (
@@ -330,6 +347,15 @@ const EditClass = () => {
               {course?.showCertificate
                 ? "Hide Certificate"
                 : "Show Certificate"}
+            </button>
+
+            <button
+              type="button"
+              className={styles.addModuleButton}
+              onClick={toggleVisibility}
+              disabled={submitting}
+            >
+              {course?.visible ? "Hide Class" : "Show Class"}
             </button>
 
             <button className={styles.addModuleButton} type="submit">

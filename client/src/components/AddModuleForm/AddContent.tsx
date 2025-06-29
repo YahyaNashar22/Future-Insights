@@ -78,6 +78,7 @@ const AddContentForm = () => {
       setLoading(true);
 
       const params: { [key: string]: string } = {};
+      params.userId = user?._id || "";
       if (selectedClass?.type === "class") {
         params.classId = selectedClass?._id;
       } else if (selectedClass?.type === "course") {
@@ -259,6 +260,25 @@ const AddContentForm = () => {
     }
   };
 
+  const toggleVisibility = async (id: string) => {
+    if (!selectedModule) {
+      alert("Please select a module first!");
+      return;
+    }
+    try {
+      const res = await axios.put(`${backend}/module/toggle-visibility/${id}`);
+      if (res.status === 200) {
+        fetchClassModules();
+        setSelectedModule(null);
+      }
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      }
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Add Content</h1>
@@ -341,6 +361,12 @@ const AddContentForm = () => {
           </button>
           <button onClick={() => handleFormSelect("assessment")}>
             Add Assessment
+          </button>
+          <button
+            id={styles.showHideBtn}
+            onClick={() => toggleVisibility(selectedModule._id)}
+          >
+            {selectedModule.visible ? "Hide Module" : "Show Module"}
           </button>
           <button
             id={styles.deleteBtn}

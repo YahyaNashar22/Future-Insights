@@ -41,6 +41,7 @@ const CourseShowCase = () => {
     const fetchModules = async () => {
       try {
         const params: { [key: string]: string } = {};
+        params.userId = user?._id || "";
         if (cls.type === "class") {
           params.classId = cls._id;
         } else if (cls.type === "course") {

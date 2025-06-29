@@ -72,6 +72,10 @@ const classSchema = new Schema(
             type: Boolean,
             default: false,
         },
+        visible: {
+            type: Boolean,
+            default: true
+        },
         slug: {
             type: String,
             unique: true,

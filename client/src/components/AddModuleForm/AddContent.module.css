@@ -137,6 +137,19 @@
   border-radius: 4px;
 }
 
+#showHideBtn {
+  background: none;
+  border: none;
+  background-color: var(--primary-beige);
+  cursor: pointer;
+  font-size: 16px;
+  opacity: 0.9;
+  transition: 0.3s ease-in-out;
+}
+#showHideBtn:hover {
+  opacity: 1;
+}
+
 .deleteButton {
   background: none;
   border: none;

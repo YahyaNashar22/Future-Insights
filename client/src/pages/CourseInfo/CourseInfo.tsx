@@ -66,6 +66,7 @@ const CourseInfo = () => {
           const res = await axios.get(`${backend}/module`, {
             params: {
               courseId: course._id,
+              userId: user?._id
             },
           });
           setClassModules(res.data.payload);

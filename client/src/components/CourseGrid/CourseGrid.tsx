@@ -6,11 +6,13 @@ import Loading from "../Loading/Loading";
 import NoCurrentCourses from "../NoCurrentCourses/NoCurrentCourses";
 import CourseCard from "../CourseCard/CourseCard";
 import { useTranslation } from "react-i18next";
+import { useUserStore } from "../../store";
 
 const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
   const backend = import.meta.env.VITE_BACKEND;
 
   const { t } = useTranslation();
+  const { user } = useUserStore();
 
   const [courses, setCourses] = useState<ICourse[]>([]);
   const [classes, setClasses] = useState<ICourse[]>([]);
@@ -24,6 +26,7 @@ const CourseGrid: FC<{ categoryId?: string }> = ({ categoryId }) => {
         `${backend}/class/get-classes-by-category`,
         {
           categoryId,
+          userId: user?._id,
         },
         {
           headers: {
