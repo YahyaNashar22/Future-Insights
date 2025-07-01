@@ -80,14 +80,14 @@ const Team = () => {
   const isArabic = language === "ar";
   return (
     <section className={styles.wrapper}>
+      <AccreditationBanner />
+      <ProviderReference />
+
       <h2 className={styles.title}>
         {t("team-title-1")}{" "}
         <span className={styles.beige}> {t("team-title-beige")}</span>
         {t("team-title-2")}
       </h2>
-
-      <AccreditationBanner />
-      <ProviderReference />
 
       <ul className={styles.container}>
         {data.map((card, index) => {
