@@ -4,7 +4,7 @@ import { useTranslation } from "react-i18next";
 import { Link } from "react-router-dom";
 
 import rami from "../../assets/images/rami6.jpg";
-import cpd from "../../assets/icons/cpd_logo_no_bg.png";
+import cpd from "../../assets/icons/cpd_logo.webp";
 
 const ProviderReference = () => {
   const { t } = useTranslation();

@@ -1,8 +1,7 @@
 import styles from "./CourseCatalogueHeader.module.css";
 
 import logo from "../../assets/icons/logo_svg_white.svg";
-// import cpd from "../../assets/icons/cpd_logo_no_bg.png";
-import cpd from "../../assets/icons/cpd_logo.jpg";
+import cpd from "../../assets/icons/cpd_logo.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
 import { useState } from "react";
@@ -42,9 +41,8 @@ const CourseCatalogueHeader = () => {
           src={cpd}
           alt="cpd logo"
           loading="lazy"
-          width={100}
+          width={70}
           onClick={() => navigate("/cpd")}
-          style={{ borderRadius: "50%" }}
         />
       </div>
       <ul className={`${styles.navLinks} ${isArabic ? styles.arabic : ""}`}>

@@ -1,12 +1,15 @@
+import styles from "./MobileHeader.module.css";
+
 import { useState } from "react";
 import { Link, useNavigate } from "react-router-dom";
-import styles from "./MobileHeader.module.css";
-import logo from "../../assets/icons/logo_svg.svg";
-import cpd from "../../assets/icons/cpd_logo_no_bg.png";
 import { useUserStore } from "../../store";
-import SignoutModal from "../../components/SignoutModal/SignoutModal";
 import { useLanguageStore } from "../../langStore";
 import { useTranslation } from "react-i18next";
+
+import SignoutModal from "../../components/SignoutModal/SignoutModal";
+
+import logo from "../../assets/icons/logo_svg.svg";
+import cpd from "../../assets/icons/cpd_logo.webp";
 
 import uk from "../../assets/icons/uk.png";
 import uae from "../../assets/icons/uae.png";
@@ -45,7 +48,7 @@ const MobileHeader = () => {
           src={cpd}
           alt="cpd logo"
           loading="lazy"
-          height={40}
+          height={60}
           onClick={() => navigate("/cpd")}
         />
       </div>
@@ -97,9 +100,11 @@ const MobileHeader = () => {
               {t("nav-3")}
             </Link>
           </li>
-          <Link to="/cpd" className={styles.link}>
-            {t("nav-9")}
-          </Link>
+          <li>
+            <Link to="/cpd" className={styles.link}>
+              {t("nav-9")}
+            </Link>
+          </li>
           {user && (
             <>
               <li>
