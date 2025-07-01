@@ -52,6 +52,11 @@ const CourseCatalogueHeader = () => {
           </Link>
         </li>
         <li>
+          <Link to="/cpd" className={styles.link}>
+            {t("nav-9")}
+          </Link>
+        </li>
+        <li>
           <Link to="/course-catalogue" className={styles.link}>
             {t("nav-2")}
           </Link>
@@ -61,9 +66,7 @@ const CourseCatalogueHeader = () => {
             {t("nav-3")}
           </Link>
         </li>
-        <Link to="/cpd" className={styles.link}>
-          {t("nav-9")}
-        </Link>
+
         {user && (
           <>
             <li>

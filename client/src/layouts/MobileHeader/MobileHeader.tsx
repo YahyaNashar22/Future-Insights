@@ -83,6 +83,11 @@ const MobileHeader = () => {
             </Link>
           </li>
           <li>
+            <Link to="/cpd" className={styles.link}>
+              {t("nav-9")}
+            </Link>
+          </li>
+          <li>
             <Link
               to="/course-catalogue"
               className={styles.link}
@@ -100,11 +105,7 @@ const MobileHeader = () => {
               {t("nav-3")}
             </Link>
           </li>
-          <li>
-            <Link to="/cpd" className={styles.link}>
-              {t("nav-9")}
-            </Link>
-          </li>
+
           {user && (
             <>
               <li>
