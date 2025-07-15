@@ -1,6 +1,7 @@
 import styles from "./CourseCatalogueHeader.module.css";
 
 import logo from "../../assets/icons/logo_svg_white.svg";
+import logoColor from "../../assets/icons/logo_svg.svg";
 import cpd from "../../assets/icons/cpd_logo.webp";
 import { Link, useNavigate } from "react-router-dom";
 import { useUserStore } from "../../store";
@@ -31,7 +32,7 @@ const CourseCatalogueHeader = () => {
     <header className={styles.wrapper}>
       <div className={styles.logoContainer}>
         <img
-          src={logo}
+          src={!isArabic ? logo : logoColor}
           alt="logo"
           loading="lazy"
           width={150}
