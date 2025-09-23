@@ -5,7 +5,7 @@ dotenv.config();
 
 
 const transporter = nodemailer.createTransport({
-    host: "aiden.h2m.me",
+    host: "Hendrik.h2mdns.net",
     port: 465,
     secure: true,
     auth: {
