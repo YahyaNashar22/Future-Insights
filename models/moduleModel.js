@@ -9,6 +9,11 @@ const moduleSchema = new Schema(
             type: String,
             required: true,
         },
+        index: {
+            type: Number,
+            required: false,
+            default: 0
+        },
         classId: {
             type: Schema.Types.ObjectId,
             ref: "Class",

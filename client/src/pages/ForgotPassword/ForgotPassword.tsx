@@ -103,7 +103,7 @@ const ForgotPassword = () => {
       setLoading(true);
       setError(null);
 
-      const res = await axios.post(
+      const res = await axios.patch(
         `${backend}/user/reset-password`,
         {
           email,
@@ -140,6 +140,7 @@ const ForgotPassword = () => {
               Email
               <input
                 type="email"
+                style={{ direction: "ltr" }}
                 className={styles.formInput}
                 value={email}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -179,6 +180,7 @@ const ForgotPassword = () => {
               New Password
               <input
                 type="password"
+                style={{ direction: "ltr" }}
                 className={styles.formInput}
                 value={password}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -192,6 +194,7 @@ const ForgotPassword = () => {
               Confirm Password
               <input
                 type="password"
+                style={{ direction: "ltr" }}
                 className={styles.formInput}
                 value={confirmPassword}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
@@ -212,6 +215,7 @@ const ForgotPassword = () => {
                     inputMode="numeric"
                     maxLength={1}
                     className={styles.otpInput}
+                    style={{ direction: "ltr" }}
                     value={digit}
                     onChange={(e) => handleOTPChange(e, index)}
                     onKeyDown={(e) => handleOTPKeyDown(e, index)}

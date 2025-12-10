@@ -20,7 +20,7 @@ userRouter.post("/get-enrolled-classes", getEnrolledClasses);
 userRouter.post("/get-enrolled-courses", getEnrolledCourses);
 
 userRouter.post("/forgot-password", sendForgotPasswordOTP);
-userRouter.post("/reset-password", resetPassword);
+userRouter.patch("/reset-password", resetPassword);
 userRouter.post("/send-verification", sendVerification);
 
 userRouter.get("/verify-email/:token", verifyEmail);

@@ -174,3 +174,15 @@
   gap: 10px;
   padding: 10px;
 }
+
+.progressContainer {
+  margin-top: 10px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+progress {
+  width: 150px;
+  height: 10px;
+}

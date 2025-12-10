@@ -1,13 +1,15 @@
-import { useState } from "react";
-import AddCourseForm from "../../components/AddCourseForm/AddCourseForm";
-import TeacherCourseDisplay from "../../components/TeacherCourseDisplay/TeacherCourseDisplay";
 import styles from "./Dashboard.module.css"; // Make sure your styles are correct
+
+import { useState } from "react";
+import { useUserStore } from "../../store";
+
 import TeacherClassDisplay from "../../components/TeacherClassDisplay/TeacherClassDisplay";
 import AddClassForm from "../../components/AddClassForm/AddClassForm";
-import { DashboardSections } from "../../enums/dashboardSections";
 import AddContentForm from "../../components/AddModuleForm/AddContent";
 import CategoriesDashboard from "../../components/CategoriesDashboard/CategoriesDashboard";
-import { useUserStore } from "../../store";
+import { DashboardSections } from "../../enums/dashboardSections";
+// import AddCourseForm from "../../components/AddCourseForm/AddCourseForm";
+// import TeacherCourseDisplay from "../../components/TeacherCourseDisplay/TeacherCourseDisplay";
 
 const Dashboard = () => {
   const { user } = useUserStore();
@@ -53,7 +55,7 @@ const Dashboard = () => {
             Add Class
           </button>
         </li>
-        <li
+        {/* <li
           className={
             activeComponent === DashboardSections.MyCourses
               ? styles.active
@@ -66,8 +68,8 @@ const Dashboard = () => {
           >
             My Courses
           </button>
-        </li>
-        <li
+        </li> */}
+        {/* <li
           className={
             activeComponent === DashboardSections.AddCourse
               ? styles.active
@@ -80,7 +82,7 @@ const Dashboard = () => {
           >
             Add Course
           </button>
-        </li>
+        </li> */}
 
         <li
           className={
@@ -116,10 +118,10 @@ const Dashboard = () => {
 
       {/* Main Content */}
       <div className={styles.mainContent}>
-        {activeComponent === "myCourses" && <TeacherCourseDisplay />}
-        {activeComponent === "addCourse" && (
+        {/* {activeComponent === "myCourses" && <TeacherCourseDisplay />} */}
+        {/* {activeComponent === "addCourse" && (
           <AddCourseForm setActiveComponent={setActiveComponent} />
-        )}
+        )} */}
         {activeComponent === "myClasses" && <TeacherClassDisplay />}
         {activeComponent === "addClass" && (
           <AddClassForm setActiveComponent={setActiveComponent} />

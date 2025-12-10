@@ -29,6 +29,16 @@ const AddContentForm = () => {
     "liveLink" | "recording" | "material" | "assessment" | null
   >(null);
 
+  const [moduleName, setModuleName] = useState<string | null>(null);
+  const [moduleIndex, setModuleIndex] = useState<number | null>(null);
+  const [isEditModalOpen, setIsEditModalOpen] = useState<boolean>(false);
+
+  const openEditModal = () => {
+    setModuleIndex(selectedModule?.index ?? null);
+    setModuleName(selectedModule?.name ?? null);
+    setIsEditModalOpen((prev) => !prev);
+  };
+
   // Fetch classes
   useEffect(() => {
     const fetchClasses = async () => {
@@ -152,34 +162,34 @@ const AddContentForm = () => {
     setSubmitting(false);
   };
 
-  const handleSubmitRecording = async (event: React.FormEvent) => {
-    setSubmitting(true);
+  // const handleSubmitRecording = async (event: React.FormEvent) => {
+  //   setSubmitting(true);
 
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+  //   event.preventDefault();
+  //   const form = event.target as HTMLFormElement;
+  //   const name = (form.elements.namedItem("name") as HTMLInputElement).value;
 
-    const file = (form.elements.namedItem("link") as HTMLInputElement)
-      .files?.[0];
-    const formData = new FormData();
-    formData.append("name", name);
+  //   const file = (form.elements.namedItem("link") as HTMLInputElement)
+  //     .files?.[0];
+  //   const formData = new FormData();
+  //   formData.append("name", name);
 
-    if (file) formData.append("link", file);
+  //   if (file) formData.append("link", file);
 
-    // Add moduleId to the formData
-    if (selectedModule) {
-      formData.append("moduleId", selectedModule._id);
-    }
+  //   // Add moduleId to the formData
+  //   if (selectedModule) {
+  //     formData.append("moduleId", selectedModule._id);
+  //   }
 
-    const res = await axios.post(`${backend}/recording/create`, formData, {
-      headers: {
-        "Content-Type": "multipart/form-data",
-      },
-    });
-    console.log(res.data);
-    alert("Added Successfully!");
-    setSubmitting(false);
-  };
+  //   const res = await axios.post(`${backend}/recording/create`, formData, {
+  //     headers: {
+  //       "Content-Type": "multipart/form-data",
+  //     },
+  //   });
+  //   console.log(res.data);
+  //   alert("Added Successfully!");
+  //   setSubmitting(false);
+  // };
 
   const handleSubmitMaterial = async (event: React.FormEvent) => {
     setSubmitting(true);
@@ -252,6 +262,31 @@ const AddContentForm = () => {
       alert(res.data.message);
       setSelectedModule(null);
       if (selectedClass) fetchClassModules();
+    } catch (error) {
+      console.log(error);
+      if (error instanceof AxiosError) {
+        alert(error.response?.data.message);
+      }
+    }
+  };
+
+  const editModule = async () => {
+    if (!selectedModule) {
+      alert("Please select a module first!");
+      return;
+    }
+    try {
+      const res = await axios.patch(
+        `${backend}/module/edit-module/${selectedModule._id}`,
+        {
+          name: moduleName,
+          index: moduleIndex,
+        }
+      );
+      if (res.status === 200) {
+        fetchClassModules();
+        setSelectedModule(null);
+      }
     } catch (error) {
       console.log(error);
       if (error instanceof AxiosError) {
@@ -362,6 +397,7 @@ const AddContentForm = () => {
           <button onClick={() => handleFormSelect("assessment")}>
             Add Assessment
           </button>
+          <button onClick={() => openEditModal()}>Edit Module</button>
           <button
             id={styles.showHideBtn}
             onClick={() => toggleVisibility(selectedModule._id)}
@@ -406,7 +442,7 @@ const AddContentForm = () => {
 
       {selectedForm === "recording" && (
         <ModuleRecordings
-          handleSubmitRecording={handleSubmitRecording}
+          // handleSubmitRecording={handleSubmitRecording}
           moduleId={selectedModule?._id}
           submitting={submitting}
         />
@@ -426,6 +462,75 @@ const AddContentForm = () => {
           moduleId={selectedModule?._id}
           submitting={submitting}
         />
+      )}
+
+      {isEditModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.45)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+          }}
+        >
+          <form
+            style={{
+              background: "#fff",
+              padding: "24px",
+              borderRadius: "8px",
+              width: "400px",
+              maxWidth: "90vw",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+            }}
+            onSubmit={(e) => {
+              e.preventDefault();
+              editModule();
+              setIsEditModalOpen(false);
+            }}
+          >
+            <label className={styles.formLabel}>
+              Name
+              <input
+                className={styles.formInput}
+                style={{ direction: "ltr" }}
+                type="text"
+                value={moduleName ?? selectedModule?.name}
+                onChange={(e) => setModuleName(e.target.value)}
+              />
+            </label>
+
+            <label className={styles.formLabel}>
+              Index
+              <input
+                type="number"
+                className={styles.formInput}
+                style={{ direction: "ltr" }}
+                value={moduleIndex ?? selectedModule?.index}
+                onChange={(e) => setModuleIndex(parseInt(e.target.value))}
+              />
+            </label>
+
+            <div className={styles.buttonGroup}>
+              <button
+                type="button"
+                style={{ backgroundColor: "var(--primary-beige)" }}
+                onClick={() => setIsEditModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button type="submit">Confirm</button>
+            </div>
+          </form>
+        </div>
       )}
     </div>
   );

@@ -10,11 +10,11 @@ interface Recording {
 }
 
 const ModuleRecordings = ({
-  handleSubmitRecording,
+  // handleSubmitRecording,
   moduleId,
   submitting,
 }: {
-  handleSubmitRecording: (event: React.FormEvent) => Promise<void>;
+  // handleSubmitRecording: (event: React.FormEvent) => Promise<void>;
   moduleId: string | undefined;
   submitting: boolean;
 }) => {
@@ -22,6 +22,9 @@ const ModuleRecordings = ({
 
   const [recordings, setRecordings] = useState<Recording[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+
+  const [uploading, setUploading] = useState<boolean>(false);
+  const [uploadProgress, setUploadProgress] = useState<number>(0);
 
   const fetchRecordings = async () => {
     try {
@@ -52,18 +55,69 @@ const ModuleRecordings = ({
     }
   };
 
+  const onSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+
+    const form = e.target as HTMLFormElement;
+    const formData = new FormData(form);
+
+    if (moduleId) {
+      formData.append("moduleId", moduleId);
+    }
+
+    try {
+      setUploading(true);
+      setUploadProgress(0);
+
+      await axios.post(`${backend}/recording/create`, formData, {
+        headers: { "Content-Type": "multipart/form-data" },
+        onUploadProgress: (progressEvent) => {
+          const percent = progressEvent.total
+            ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
+            : 0;
+          setUploadProgress(percent);
+        },
+      });
+
+      // Call your existing recording handler if needed
+      // await handleSubmitRecording(e);
+
+      await fetchRecordings();
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setUploading(false);
+      setUploadProgress(0);
+    }
+  };
+
   useEffect(() => {
     if (moduleId) fetchRecordings();
   }, [backend, moduleId]);
 
   return (
     <div className={styles.sectionContainer}>
-      <form className={styles.contentForm} onSubmit={handleSubmitRecording}>
-        <input type="text" name="name" placeholder="Name" required />
-        <input type="file" name="link" required />
-        <button type="submit" disabled={submitting}>
-          {submitting ? "Submitting" : "Submit Recording"}
+      <form className={styles.contentForm} onSubmit={onSubmit}>
+        <input
+          type="text"
+          name="name"
+          placeholder="Name"
+          required
+          disabled={uploading}
+        />
+        <input type="file" name="link" required disabled={uploading} />
+
+        <button type="submit" disabled={uploading || submitting}>
+          {uploading ? "Uploading..." : "Submit Recording"}
         </button>
+
+        {/* Progress Bar */}
+        {uploading && (
+          <div className={styles.progressContainer}>
+            <progress value={uploadProgress} max={100} />
+            <span>{uploadProgress}%</span>
+          </div>
+        )}
       </form>
 
       <div className={styles.previousContent}>

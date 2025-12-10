@@ -104,6 +104,7 @@ const Signin = () => {
               type="email"
               id="email"
               name="email"
+              style={{ direction: "ltr" }}
               value={formData.email}
               onChange={handleChange}
               required
@@ -120,6 +121,7 @@ const Signin = () => {
               type="password"
               id="password"
               name="password"
+              style={{ direction: "ltr" }}
               value={formData.password}
               onChange={handleChange}
               required

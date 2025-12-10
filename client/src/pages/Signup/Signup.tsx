@@ -76,6 +76,7 @@ const Signup = () => {
               type="text"
               id="fullname"
               name="fullname"
+              style={{ direction: "ltr" }}
               value={formData.fullname}
               onChange={handleChange}
               required
@@ -87,6 +88,7 @@ const Signup = () => {
               type="email"
               id="email"
               name="email"
+              style={{ direction: "ltr" }}
               value={formData.email}
               onChange={handleChange}
               required
@@ -98,6 +100,7 @@ const Signup = () => {
               type="password"
               id="password"
               name="password"
+              style={{ direction: "ltr" }}
               value={formData.password}
               onChange={handleChange}
               required
@@ -109,6 +112,7 @@ const Signup = () => {
               type="password"
               id="confirmPassword"
               name="confirmPassword"
+              style={{ direction: "ltr" }}
               value={formData.confirmPassword}
               onChange={handleChange}
               required

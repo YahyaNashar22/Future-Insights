@@ -1,3 +1,4 @@
+import mongoose from "mongoose";
 import Module from "../models/moduleModel.js";
 import User from "../models/userModel.js";
 
@@ -34,14 +35,38 @@ export const getModulesByClassId = async (req, res) => {
 
 
         const filter = {};
-        if (classId) filter.classId = classId;
-        if (courseId) filter.courseId = courseId;
+        if (classId) filter.classId = new mongoose.Types.ObjectId(classId);
+        if (courseId) filter.courseId = new mongoose.Types.ObjectId(courseId);
 
         if (!user || user.role === 'student') {
             filter.visible = true
         }
 
-        const classModules = await Module.find(filter);
+        const classModules = await Module.aggregate([
+            { $match: filter },
+
+            // Compute sorting helper
+            {
+                $addFields: {
+                    hasIndex: { $cond: [{ $ne: ["$index", null] }, 1, 0] }
+                }
+            },
+
+            // Sorting logic
+            {
+                $sort: {
+                    hasIndex: -1,
+                    index: 1,
+                    createdAt: 1
+                }
+            },
+
+            // Remove helper field from response
+            {
+                $project: { hasIndex: 0 }
+            }
+        ]);
+
 
         return res.status(200).json({
             payload: classModules
@@ -72,9 +97,43 @@ export const toggleVisibility = async (req, res) => {
 
         const fetchedModule = await Module.findById(id);
 
+        if (!fetchedModule) return res.status(404).json({ message: 'requested module not found' })
+
         const module = await Module.findByIdAndUpdate(id, {
             $set: {
                 visible: !(fetchedModule?.visible)
+            }
+        }, {
+            new: true
+        });
+
+        return res.status(200).json({
+            payload: module
+        })
+
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+
+export const editModule = async (req, res) => {
+    try {
+        const id = req.params.id;
+
+        const { name, index } = req.body;
+
+        const fetchedModule = await Module.findById(id);
+
+        console.log(fetchedModule)
+
+        if (!fetchedModule) return res.status(404).json({ message: 'requested module not found' })
+
+        const module = await Module.findByIdAndUpdate(id, {
+            $set: {
+                name, index
             }
         }, {
             new: true
