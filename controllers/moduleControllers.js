@@ -118,6 +118,53 @@ export const toggleVisibility = async (req, res) => {
     }
 }
 
+export const toggleCohortVisibility = async (req, res) => {
+    try {
+        const id = req.params.id;
+        const { cohortId } = req.body;
+
+        if (!cohortId) {
+            return res.status(400).json({ message: "A cohortId is required in the request body" });
+        }
+
+        const fetchedModule = await Module.findById(id);
+
+        if (!fetchedModule) return res.status(404).json({ message: 'requested module not found' });
+
+        let updateOperation;
+        let successMessage;
+
+        // Check if the cohortId is already in the cohortVisible array
+        if (fetchedModule.cohortVisible.includes(cohortId)) {
+            // If it exists, use $pull to remove it (toggle off visibility)
+            updateOperation = { $pull: { cohortVisible: cohortId } };
+            successMessage = "Cohort visibility toggled OFF (cohort removed)";
+        } else {
+            // If it doesn't exist, use $addToSet to add it (toggle on visibility)
+            updateOperation = { $addToSet: { cohortVisible: cohortId } };
+            successMessage = "Cohort visibility toggled ON (cohort added)";
+        }
+
+        // Perform the update atomically
+        const updatedModule = await Module.findByIdAndUpdate(
+            id,
+            updateOperation,
+            { new: true, runValidators: true }
+        )
+            .populate('cohortVisible', 'name');
+
+        return res.status(200).json({
+            message: successMessage,
+            payload: updatedModule
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
+
+
 
 export const editModule = async (req, res) => {
     try {
