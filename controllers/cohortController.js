@@ -4,6 +4,13 @@ export const createCohort = async (req, res) => {
     try {
         const { name, classId, isDefault } = req.body;
 
+        if (isDefault) {
+            await Cohort.updateMany(
+                { classId },
+                { $set: { isDefault: false } }
+            );
+        }
+
         const cohort = new Cohort({ name, classId, isDefault });
         await cohort.save();
         return res.status(201).json({
@@ -20,6 +27,19 @@ export const editCohort = async (req, res) => {
     try {
         const id = req.params.id;
         const { name, isDefault } = req.body;
+
+        const existing = await Cohort.findById(id);
+        if (!existing) {
+            return res.status(404).json({ message: "cohort not found" });
+        }
+
+        // If making this cohort the default → clear other defaults in same class
+        if (isDefault === true) {
+            await Cohort.updateMany(
+                { classId: existing.classId, _id: { $ne: id } },
+                { $set: { isDefault: false } }
+            );
+        }
 
         const cohort = await Cohort.findByIdAndUpdate(id, { $set: { name, isDefault } }, { new: true, runValidators: true });
         return res.status(200).json({
