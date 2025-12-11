@@ -27,6 +27,7 @@ import recordingRouter from './routes/recordingRoutes.js';
 import materialRouter from './routes/materialRoutes.js';
 import transactionRouter from './routes/transactionRoutes.js';
 import { certificationWebhook } from './controllers/certificateControllers.js';
+import cohortRouter from './routes/cohortRoutes.js';
 
 
 
@@ -78,6 +79,7 @@ app.use("/live-link", liveLinkRouter);
 app.use("/recording", recordingRouter);
 app.use("/material", materialRouter);
 app.use("/transaction", transactionRouter);
+app.use("/cohort", cohortRouter);
 
 
 

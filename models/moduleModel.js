@@ -26,6 +26,10 @@ const moduleSchema = new Schema(
             type: Boolean,
             default: true
         },
+        cohortVisible: [{
+            type: Schema.Types.ObjectId,
+            ref: "Cohort",
+        }],
     },
     {
         timestamps: true
