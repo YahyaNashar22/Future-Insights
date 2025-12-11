@@ -22,6 +22,11 @@ const liveLinkSchema = new Schema(
             type: String,
             required: true,
         },
+        timezone: {
+            type: String,
+            required: true,
+            default: "Asia/Riyadh"
+        },
         moduleId: {
             type: Schema.Types.ObjectId,
             ref: "Module",

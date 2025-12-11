@@ -186,3 +186,26 @@ progress {
   width: 150px;
   height: 10px;
 }
+
+.prevLinkRow {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  margin-bottom: 15px;
+}
+
+.deleteLiveLinkBtn {
+  border: none;
+  background-color: var(--primary-blue);
+  color: var(--primary-red);
+  cursor: pointer;
+  padding: 6px 10px;
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.deleteLiveLinkBtn:disabled {
+  opacity: 0.6;
+  cursor: not-allowed;
+}

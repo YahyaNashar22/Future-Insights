@@ -117,6 +117,8 @@ const MyCourses = () => {
               >
                 {t("classes")}
               </button>
+              {/* TODO: turn these back on when we want course functionality back */}
+
               {/* <button
                 className={`${styles.navButton} ${
                   activeTab === "courses" ? styles.active : ""

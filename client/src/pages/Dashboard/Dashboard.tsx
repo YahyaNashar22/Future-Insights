@@ -55,6 +55,7 @@ const Dashboard = () => {
             Add Class
           </button>
         </li>
+        {/* TODO: turn these back on when we want course functionality back */}
         {/* <li
           className={
             activeComponent === DashboardSections.MyCourses

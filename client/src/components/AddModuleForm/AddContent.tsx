@@ -8,6 +8,7 @@ import ICourse from "../../interfaces/ICourse";
 import ModuleRecordings from "./ModuleRecordings";
 import ModuleMaterial from "./ModuleMaterial";
 import ModuleAssessment from "./ModuleAssessment";
+import ModuleLiveLink from "./ModuleLiveLink";
 
 const AddContentForm = () => {
   const backend = import.meta.env.VITE_BACKEND;
@@ -139,29 +140,31 @@ const AddContentForm = () => {
     setSelectedForm(formType);
   };
 
-  const handleSubmitLiveLink = async (event: React.FormEvent) => {
-    setSubmitting(true);
-    event.preventDefault();
-    const form = event.target as HTMLFormElement;
-    const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-    const startsAt = (form.elements.namedItem("startsAt") as HTMLInputElement)
-      .value;
-    const endsAt = (form.elements.namedItem("endsAt") as HTMLInputElement)
-      .value;
-    const link = (form.elements.namedItem("link") as HTMLInputElement).value;
+  // const handleSubmitLiveLink = async (event: React.FormEvent) => {
+  //   setSubmitting(true);
+  //   event.preventDefault();
+  //   const form = event.target as HTMLFormElement;
+  //   const name = (form.elements.namedItem("name") as HTMLInputElement).value;
+  //   const startsAt = (form.elements.namedItem("startsAt") as HTMLInputElement)
+  //     .value;
+  //   const endsAt = (form.elements.namedItem("endsAt") as HTMLInputElement)
+  //     .value;
+  //   const link = (form.elements.namedItem("link") as HTMLInputElement).value;
+  //   const timeZone = (form.elements.namedItem("timeZone") as HTMLSelectElement)
+  //     .value;
 
-    const res = await axios.post(`${backend}/live-link/create`, {
-      name,
-      startsAt,
-      endsAt,
-      link,
-      moduleId: selectedModule?._id,
-    });
-    console.log(res.data);
-    alert("Added Successfully!");
-    setSubmitting(false);
-  };
-
+  //   await axios.post(`${backend}/live-link/create`, {
+  //     name,
+  //     startsAt,
+  //     endsAt,
+  //     link,
+  //     timeZone,
+  //     moduleId: selectedModule?._id,
+  //   });
+  //   alert("Added Successfully!");
+  //   setSubmitting(false);
+  // };
+  // TODO: Remove this function
   // const handleSubmitRecording = async (event: React.FormEvent) => {
   //   setSubmitting(true);
 
@@ -415,29 +418,7 @@ const AddContentForm = () => {
 
       {/* Conditional Form Rendering */}
       {selectedForm === "liveLink" && (
-        <form className={styles.contentForm} onSubmit={handleSubmitLiveLink}>
-          <input type="text" name="name" placeholder="Name" required />
-          <input
-            type="datetime-local"
-            name="startsAt"
-            onChange={(e) => {
-              setTimeout(() => e.target.blur(), 1);
-            }}
-            required
-          />
-          <input
-            type="datetime-local"
-            name="endsAt"
-            onChange={(e) => {
-              setTimeout(() => e.target.blur(), 1);
-            }}
-            required
-          />
-          <input type="url" name="link" placeholder="Live Link URL" required />
-          <button type="submit" disabled={submitting}>
-            {submitting ? "Submitting" : `Submit Live Link`}
-          </button>
-        </form>
+        <ModuleLiveLink selectedModule={selectedModule} />
       )}
 
       {selectedForm === "recording" && (
