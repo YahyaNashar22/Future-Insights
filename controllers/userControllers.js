@@ -8,6 +8,7 @@ import Class from "../models/classModel.js";
 import generateOTP from "../utils/generateOTP.js";
 import transporter from "../utils/nodemailerTransporter.js";
 import sendVerificationEmailHelper from "../utils/sendVerificationHelper.js";
+import Cohort from "../models/cohortModel.js";
 
 
 export const signup = async (req, res) => {
@@ -313,6 +314,14 @@ export const enrollClass = async (req, res) => {
         await cls.save();
 
         await user.save();
+
+        // check if there's a default cohort to add the student to it
+        const defaultCohort = Cohort.find({ classId: cls._id, isDefault: true });
+
+        if (defaultCohort) {
+
+            await Cohort.findByIdAndUpdate(defaultCohort._id, { $addToSet: { cohortUsers: user._id } }, { new: true, runValidators: true })
+        }
 
         return res.status(200).json({ message: "Enrolled successfully", cls });
     } catch (error) {
