@@ -128,3 +128,18 @@
 .moduleFormContainer button:hover {
   background-color: var(--secondary-beige);
 }
+
+.toggleLabel {
+  display: "flex";
+  align-items: "center";
+  gap: "10px";
+  font-weight: 500;
+  margin-top: 12px;
+}
+
+.toggleSpan {
+  position: "relative";
+  width: "46px";
+  height: "24px";
+  display: "inline-block";
+}

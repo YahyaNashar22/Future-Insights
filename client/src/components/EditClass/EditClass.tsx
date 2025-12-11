@@ -19,6 +19,9 @@ const EditClass = () => {
 
   const [showModuleForm, setShowModuleForm] = useState<boolean>(false);
   const [moduleName, setModuleName] = useState<string>("");
+  const [showCohortForm, setShowCohortForm] = useState<boolean>(false);
+  const [cohortName, setCohortName] = useState<string>("");
+  const [cohortDefault, setCohortDefault] = useState<boolean>(true);
 
   // Fetch course data for editing
   useEffect(() => {
@@ -341,6 +344,14 @@ const EditClass = () => {
             <button
               type="button"
               className={styles.addModuleButton}
+              onClick={() => setShowCohortForm(true)}
+            >
+              Add Cohort
+            </button>
+
+            <button
+              type="button"
+              className={styles.addModuleButton}
               onClick={showCertificate}
               disabled={submitting}
             >
@@ -381,7 +392,84 @@ const EditClass = () => {
             <button type="submit" disabled={loading}>
               {loading ? "Adding..." : "Add Module"}
             </button>
-            <button type="button">Cancel</button>
+            <button type="button" onClick={() => setShowModuleForm(false)}>
+              Cancel
+            </button>
+          </form>
+        </div>
+      )}
+
+      {showCohortForm && (
+        <div className={styles.moduleFormContainer}>
+          <h2>Add New Cohort</h2>
+          <form onSubmit={handleModuleSubmit}>
+            <label>
+              Cohort Name:
+              <input
+                type="text"
+                value={cohortName}
+                onChange={(e) => setCohortName(e.target.value)}
+                required
+              />
+            </label>
+            <label
+              style={{
+                display: "flex",
+                alignItems: "center",
+                gap: "10px",
+                fontWeight: 500,
+                marginTop: "12px",
+                marginBottom: "12px",
+              }}
+            >
+              Default:
+              <span
+                style={{
+                  position: "relative",
+                  width: "46px",
+                  height: "24px",
+                  display: "inline-block",
+                }}
+              >
+                <input
+                  type="checkbox"
+                  checked={cohortDefault}
+                  onChange={(e) => setCohortDefault(e.target.checked)}
+                  style={{
+                    opacity: 0,
+                    width: 0,
+                    height: 0,
+                  }}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    inset: 0,
+                    background: cohortDefault ? "var(--primary-blue)" : "#ccc",
+                    borderRadius: "24px",
+                    transition: "0.25s",
+                  }}
+                />
+                <span
+                  style={{
+                    position: "absolute",
+                    height: "18px",
+                    width: "18px",
+                    left: cohortDefault ? "25px" : "3px",
+                    bottom: "3px",
+                    background: "white",
+                    borderRadius: "50%",
+                    transition: "0.25s",
+                  }}
+                />
+              </span>
+            </label>
+            <button type="submit" disabled={loading}>
+              {loading ? "Adding..." : "Add Cohort"}
+            </button>
+            <button type="button" onClick={() => setShowCohortForm(false)}>
+              Cancel
+            </button>
           </form>
         </div>
       )}

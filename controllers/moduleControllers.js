@@ -1,6 +1,7 @@
 import mongoose from "mongoose";
 import Module from "../models/moduleModel.js";
 import User from "../models/userModel.js";
+import Cohort from "../models/cohortModel.js";
 
 export const createModule = async (req, res) => {
     try {
@@ -31,28 +32,58 @@ export const getModulesByClassId = async (req, res) => {
         }
 
 
-        const user = await User.findById(userId);
+        const user = await User.findById(userId).lean();
 
 
-        const filter = {};
-        if (classId) filter.classId = new mongoose.Types.ObjectId(classId);
-        if (courseId) filter.courseId = new mongoose.Types.ObjectId(courseId);
+        const baseMatchFilter = {};
+        if (classId) baseMatchFilter.classId = new mongoose.Types.ObjectId(classId);
+        if (courseId) baseMatchFilter.courseId = new mongoose.Types.ObjectId(courseId);
+
+        const pipeline = [
+            { $match: baseMatchFilter }
+        ];
 
         if (!user || user.role === 'student') {
-            filter.visible = true
+
+            // Find all cohorts the student is enrolled in for this specific classId
+            let studentCohortIds = [];
+
+            if (user && classId) {
+                // Query cohorts collection for matching user and class
+                const cohorts = await Cohort.find({
+                    classId: classId,
+                    cohortUsers: userId // Checks if userId is in the cohortUsers array
+                }).select('_id').lean(); // Only grab the IDs efficiently
+
+                studentCohortIds = cohorts.map(c => c._id);
+            }
+
+            if (studentCohortIds.length > 0) {
+                // Student is in one or more cohorts: filter modules that are visible to any of these cohorts
+                pipeline.push({
+                    $match: {
+                        $expr: {
+                            $gt: [{ $size: { $setIntersection: ["$cohortVisible", studentCohortIds] } }, 0]
+                        }
+                    }
+                });
+            } else {
+                // Student is not in any specific cohort (or viewing a course, not a class): apply default 'visible: true' filter
+                pipeline.push({
+                    $match: { visible: true }
+                });
+            }
         }
 
-        const classModules = await Module.aggregate([
-            { $match: filter },
+        // If user is an instructor/admin, they see everything by default
 
-            // Compute sorting helper
+        // 2. Add sorting stages to the pipeline
+        pipeline.push(
             {
                 $addFields: {
                     hasIndex: { $cond: [{ $ne: ["$index", null] }, 1, 0] }
                 }
             },
-
-            // Sorting logic
             {
                 $sort: {
                     hasIndex: -1,
@@ -60,12 +91,42 @@ export const getModulesByClassId = async (req, res) => {
                     createdAt: 1
                 }
             },
-
-            // Remove helper field from response
             {
                 $project: { hasIndex: 0 }
             }
-        ]);
+        );
+
+        const classModules = await Module.aggregate(pipeline);
+
+
+        // if (!user || user.role === 'student') {
+        //     filter.visible = true
+        // }
+
+        // const classModules = await Module.aggregate([
+        //     { $match: filter },
+
+        //     // Compute sorting helper
+        //     {
+        //         $addFields: {
+        //             hasIndex: { $cond: [{ $ne: ["$index", null] }, 1, 0] }
+        //         }
+        //     },
+
+        //     // Sorting logic
+        //     {
+        //         $sort: {
+        //             hasIndex: -1,
+        //             index: 1,
+        //             createdAt: 1
+        //         }
+        //     },
+
+        //     // Remove helper field from response
+        //     {
+        //         $project: { hasIndex: 0 }
+        //     }
+        // ]);
 
 
         return res.status(200).json({
