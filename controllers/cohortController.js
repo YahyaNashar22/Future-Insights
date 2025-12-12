@@ -17,7 +17,7 @@ export const createCohort = async (req, res) => {
             message: "cohort created successfully",
             payload: cohort
         })
-    } catch {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })
     }
@@ -46,7 +46,7 @@ export const editCohort = async (req, res) => {
             message: "cohort updated successfully",
             payload: cohort
         })
-    } catch {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })
     }
@@ -61,7 +61,7 @@ export const deleteCohort = async (req, res) => {
             message: "cohort deleted successfully",
             payload: cohort
         })
-    } catch {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })
     }
@@ -106,7 +106,7 @@ export const assignUsersToCohort = async (req, res) => {
             message: "Users assigned/de-assigned successfully",
             payload: cohort
         });
-    } catch {
+    } catch (error) {
         console.error(error);
 
         if (error.name === 'CastError' && error.path === 'cohortUsers') {
@@ -124,12 +124,12 @@ export const getCohorts = async (req, res) => {
     try {
         const classId = req.params.classId;
 
-        const cohorts = await Cohort.find(classId);
+        const cohorts = await Cohort.find({ classId: classId });
         return res.status(200).json({
             message: "cohorts found successfully",
             payload: cohorts
         })
-    } catch {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })
     }
@@ -143,7 +143,7 @@ export const getCohortById = async (req, res) => {
             message: "cohort found successfully",
             payload: cohort
         })
-    } catch {
+    } catch (error) {
         console.log(error);
         res.status(500).json({ message: "something went wrong" })
     }

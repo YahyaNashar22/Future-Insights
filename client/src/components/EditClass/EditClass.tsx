@@ -144,6 +144,10 @@ const EditClass = () => {
 
   const handleModuleSubmit = async (e: React.FormEvent) => {
     e.preventDefault();
+    if (moduleName === "") {
+      alert("please provide a valid module name");
+      return;
+    }
     try {
       setLoading(true);
       const res = await axios.post(`${backend}/module/create`, {
@@ -153,11 +157,39 @@ const EditClass = () => {
 
       if (res.status === 201) {
         alert("Module created successfully!");
+        setModuleName("");
         setShowModuleForm(false);
       }
     } catch (error) {
       console.error(error);
       alert("Failed to create module.");
+    } finally {
+      setLoading(false);
+    }
+  };
+
+  const handleCohortSubmit = async (e: React.FormEvent) => {
+    e.preventDefault();
+    if (cohortName === "") {
+      alert("please provide a valid cohort name");
+      return;
+    }
+    try {
+      setLoading(true);
+      const res = await axios.post(`${backend}/cohort/create`, {
+        name: cohortName,
+        classId: course?._id,
+        isDefault: cohortDefault,
+      });
+
+      if (res.status === 201) {
+        alert("Cohort created successfully!");
+        setCohortName("");
+        setShowCohortForm(false);
+      }
+    } catch (error) {
+      console.error(error);
+      alert("Failed to create cohort.");
     } finally {
       setLoading(false);
     }
@@ -402,7 +434,7 @@ const EditClass = () => {
       {showCohortForm && (
         <div className={styles.moduleFormContainer}>
           <h2>Add New Cohort</h2>
-          <form onSubmit={handleModuleSubmit}>
+          <form onSubmit={handleCohortSubmit}>
             <label>
               Cohort Name:
               <input

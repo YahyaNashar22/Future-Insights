@@ -6,7 +6,7 @@ const moduleRouter = new express.Router();
 
 moduleRouter.post("/create", createModule);
 moduleRouter.put("/toggle-visibility/:id", toggleVisibility);
-moduleRouter.put("/toggle-cohort-visibility/:id", toggleCohortVisibility);
+moduleRouter.patch("/toggle-cohort-visibility/:id", toggleCohortVisibility);
 moduleRouter.patch("/edit-module/:id", editModule);
 moduleRouter.get("/", getModulesByClassId);
 moduleRouter.delete("/:id", deleteModule);

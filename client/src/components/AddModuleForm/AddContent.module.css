@@ -57,6 +57,7 @@
   cursor: pointer;
   font-size: 1rem;
   transition: background-color 0.3s ease;
+  width: 180px;
 }
 
 .buttonGroup button:hover {
@@ -208,4 +209,10 @@ progress {
 .deleteLiveLinkBtn:disabled {
   opacity: 0.6;
   cursor: not-allowed;
+}
+
+@media (max-width: 600px) {
+  .buttonGroup {
+    justify-content: center;
+  }
 }

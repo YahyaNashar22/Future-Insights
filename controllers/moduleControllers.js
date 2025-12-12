@@ -128,9 +128,14 @@ export const getModulesByClassId = async (req, res) => {
         //     }
         // ]);
 
+        const populatedModules = await Module.populate(classModules, {
+            path: 'cohortVisible',
+            select: 'name isDefault'
+        });
+
 
         return res.status(200).json({
-            payload: classModules
+            payload: populatedModules
         })
     } catch (error) {
         console.error(error);
