@@ -19,6 +19,8 @@ const AddContentForm = () => {
   const [loadingCohorts, setLoadingCohorts] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [submittingCohort, setSubmittingCohort] = useState<boolean>(false);
+  const [submittingAssignStudents, setSubmittingAssignStudents] =
+    useState<boolean>(false);
 
   const [classes, setClasses] = useState<IClass[]>([]);
   const [courses, setCourses] = useState<ICourse[]>([]);
@@ -50,6 +52,32 @@ const AddContentForm = () => {
     useState<boolean>(false);
 
   const [viewCohortModules, setViewCohortModules] = useState<boolean>(false);
+
+  const [selectedIdsFromClass, setSelectedIdsFromClass] = useState<string[]>(
+    []
+  );
+  const [selectedIdsFromCohort, setSelectedIdsFromCohort] = useState<string[]>(
+    []
+  );
+
+  const handleToggleClassIdsSelector = (id: string) => {
+    if (selectedIdsFromCohort.length !== 0) {
+      alert("Please remove any selection from cohort before you proceed");
+      return;
+    }
+    setSelectedIdsFromClass((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  };
+  const handleToggleCohortIdsSelector = (id: string) => {
+    if (selectedIdsFromClass.length !== 0) {
+      alert("Please remove any selection from class before you proceed");
+      return;
+    }
+    setSelectedIdsFromCohort((prev) =>
+      prev.includes(id) ? prev.filter((i) => i !== id) : [...prev, id]
+    );
+  };
 
   const openEditModal = () => {
     setModuleIndex(selectedModule?.index ?? null);
@@ -422,6 +450,36 @@ const AddContentForm = () => {
     }
   };
 
+  const handleToggleStudentsIntoCohort = async () => {
+    if (!selectedCohort) {
+      alert("please select a cohort first");
+      return;
+    }
+    try {
+      setSubmittingAssignStudents(true);
+      const res = await axios.patch(
+        `${backend}/cohort/assign-users/${selectedCohort._id}`,
+        {
+          usersToAdd: selectedIdsFromClass,
+          usersToRemove: selectedIdsFromCohort,
+        }
+      );
+
+      if (res.status === 200) {
+        alert("cohort modified successfully!");
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setSubmittingAssignStudents(false);
+      setSelectedIdsFromClass([]);
+      setSelectedIdsFromCohort([]);
+      setIsEditCohortStudentsModalOpen(false);
+      setSelectedCohort(null);
+      fetchClassCohorts();
+    }
+  };
+
   return (
     <div className={styles.wrapper}>
       <h1 className={styles.title}>Add Content</h1>
@@ -510,7 +568,7 @@ const AddContentForm = () => {
               background: "#fff",
               padding: "24px",
               borderRadius: "8px",
-              width: "400px",
+              width: "480px",
               maxWidth: "90vw",
               boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
               display: "flex",
@@ -623,7 +681,7 @@ const AddContentForm = () => {
               background: "#fff",
               padding: "24px",
               borderRadius: "8px",
-              width: "400px",
+              width: "480px",
               maxWidth: "90vw",
               boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
               display: "flex",
@@ -631,12 +689,61 @@ const AddContentForm = () => {
               gap: "16px",
             }}
           >
+            <h2 style={{ color: "var(--primary-blue)" }}>Class Students</h2>
+            {selectedClass?.enrolledUsers.length === 0 ? (
+              <p>No students have enrolled in this class.</p>
+            ) : (
+              <ul style={{ maxHeight: "200px", overflow: "auto" }}>
+                {selectedClass?.enrolledUsers.map((u) => {
+                  if (typeof u === "string") return null;
+                  const checked = selectedIdsFromClass.includes(u._id);
+
+                  return (
+                    <li key={u._id}>
+                      <label
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => handleToggleClassIdsSelector(u._id)}
+                        />
+                        {u.email}
+                      </label>
+                    </li>
+                  );
+                })}
+              </ul>
+            )}
+            <h2 style={{ color: "var(--primary-blue)" }}>Cohort Students</h2>
             {selectedCohort?.cohortUsers.length === 0 ? (
               <p>No students have enrolled in this cohort.</p>
             ) : (
-              <ul>
+              <ul style={{ maxHeight: "200px", overflow: "auto" }}>
                 {selectedCohort?.cohortUsers.map((u) => {
-                  return <li key={u._id}>{u.email}</li>;
+                  const checked = selectedIdsFromCohort.includes(u._id);
+                  return (
+                    <li key={u._id}>
+                      <label
+                        style={{
+                          display: "flex",
+                          alignItems: "center",
+                          gap: "8px",
+                        }}
+                      >
+                        <input
+                          type="checkbox"
+                          checked={checked}
+                          onChange={() => handleToggleCohortIdsSelector(u._id)}
+                        />
+                        {u.email}
+                      </label>
+                    </li>
+                  );
                 })}
               </ul>
             )}
@@ -648,7 +755,16 @@ const AddContentForm = () => {
               >
                 Cancel
               </button>
-              <button>Confirm</button>
+              <button
+                onClick={handleToggleStudentsIntoCohort}
+                disabled={
+                  (selectedIdsFromClass.length === 0 &&
+                    selectedIdsFromCohort.length === 0) ||
+                  submittingAssignStudents
+                }
+              >
+                Confirm
+              </button>
             </div>
           </div>
         </div>
@@ -786,7 +902,7 @@ const AddContentForm = () => {
               background: "#fff",
               padding: "24px",
               borderRadius: "8px",
-              width: "400px",
+              width: "480px",
               maxWidth: "90vw",
               boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
               display: "flex",
@@ -855,7 +971,7 @@ const AddContentForm = () => {
               background: "#fff",
               padding: "24px",
               borderRadius: "8px",
-              width: "400px",
+              width: "480px",
               maxWidth: "90vw",
               boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
               display: "flex",

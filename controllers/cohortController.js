@@ -124,7 +124,7 @@ export const getCohorts = async (req, res) => {
     try {
         const classId = req.params.classId;
 
-        const cohorts = await Cohort.find({ classId: classId });
+        const cohorts = await Cohort.find({ classId: classId }).populate("cohortUsers");
         return res.status(200).json({
             message: "cohorts found successfully",
             payload: cohorts
@@ -138,7 +138,7 @@ export const getCohortById = async (req, res) => {
     try {
         const id = req.params.id;
 
-        const cohort = await Cohort.findById(id);
+        const cohort = await Cohort.findById(id).populate("cohortUsers");
         return res.status(200).json({
             message: "cohort found successfully",
             payload: cohort

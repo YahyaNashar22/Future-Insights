@@ -139,7 +139,9 @@ export const getClassesByTeacher = async (req, res) => {
     try {
         const { teacherId } = req.body;
 
-        const classes = await Class.find({ teacher: teacherId }).sort({ createdAt: -1 });
+        const classes = await Class.find({ teacher: teacherId })
+            .populate("enrolledUsers", "_id fullname email")
+            .sort({ createdAt: -1 });
 
         return res.status(200).json({ payload: classes })
     } catch (error) {
@@ -194,7 +196,7 @@ export const updateClass = async (req, res) => {
             const matchedUsers = await User.find({ email: { $in: emails } }, "_id email");
 
             const matchedEmails = matchedUsers.map(u => u.email);
-             missingEmails = emails.filter(e => !matchedEmails.includes(e));
+            missingEmails = emails.filter(e => !matchedEmails.includes(e));
 
             console.log("Emails not found in DB:", missingEmails);
 
