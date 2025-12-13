@@ -46,6 +46,8 @@ const AddContentForm = () => {
   );
   const [isEditCohortModalOpen, setIsEditCohortModalOpen] =
     useState<boolean>(false);
+  const [isEditCohortStudentsModalOpen, setIsEditCohortStudentsModalOpen] =
+    useState<boolean>(false);
 
   const [viewCohortModules, setViewCohortModules] = useState<boolean>(false);
 
@@ -59,6 +61,10 @@ const AddContentForm = () => {
     setCohortName(selectedCohort?.name ?? null);
     setCohortDefault(selectedCohort?.isDefault ?? undefined);
     setIsEditCohortModalOpen((prev) => !prev);
+  };
+
+  const openCohortStudents = () => {
+    setIsEditCohortStudentsModalOpen((prev) => !prev);
   };
 
   // Fetch classes
@@ -455,6 +461,7 @@ const AddContentForm = () => {
       )}
 
       {/* Cohort Dropdown */}
+      {loadingCohorts && <p>loading cohorts . . .</p>}
       {!loadingCohorts && selectedClass && (
         <div className={styles.formGroup}>
           <label htmlFor="cohort" className={styles.formLabel}>
@@ -479,6 +486,7 @@ const AddContentForm = () => {
       {selectedCohort && (
         <div className={styles.buttonGroup}>
           <button onClick={openEditCohort}>Edit Cohort</button>
+          <button onClick={openCohortStudents}>Students</button>
         </div>
       )}
 
@@ -595,7 +603,59 @@ const AddContentForm = () => {
         </div>
       )}
 
+      {isEditCohortStudentsModalOpen && (
+        <div
+          style={{
+            position: "fixed",
+            top: 0,
+            left: 0,
+            width: "100vw",
+            height: "100vh",
+            background: "rgba(0,0,0,0.45)",
+            display: "flex",
+            alignItems: "center",
+            justifyContent: "center",
+            zIndex: 9999,
+          }}
+        >
+          <div
+            style={{
+              background: "#fff",
+              padding: "24px",
+              borderRadius: "8px",
+              width: "400px",
+              maxWidth: "90vw",
+              boxShadow: "0 8px 24px rgba(0,0,0,0.2)",
+              display: "flex",
+              flexDirection: "column",
+              gap: "16px",
+            }}
+          >
+            {selectedCohort?.cohortUsers.length === 0 ? (
+              <p>No students have enrolled in this cohort.</p>
+            ) : (
+              <ul>
+                {selectedCohort?.cohortUsers.map((u) => {
+                  return <li key={u._id}>{u.email}</li>;
+                })}
+              </ul>
+            )}
+            <div className={styles.buttonGroup}>
+              <button
+                type="button"
+                style={{ backgroundColor: "var(--primary-beige)" }}
+                onClick={() => setIsEditCohortStudentsModalOpen(false)}
+              >
+                Cancel
+              </button>
+              <button>Confirm</button>
+            </div>
+          </div>
+        </div>
+      )}
+
       {/* Module Dropdown */}
+      {loadingModules && <p>loading modules . . .</p>}
       {!loadingModules && selectedClass && (
         <div className={styles.formGroup}>
           <label htmlFor="module" className={styles.formLabel}>
