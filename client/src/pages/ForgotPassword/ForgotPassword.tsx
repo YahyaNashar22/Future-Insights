@@ -208,7 +208,7 @@ const ForgotPassword = () => {
 
             <label className={styles.formLabel}>
               OTP
-              <div className={styles.otpContainer}>
+              <div className={styles.otpContainer} style={{direction: 'ltr'}}>
                 {otpArray.map((digit, index) => (
                   <input
                     key={index}
