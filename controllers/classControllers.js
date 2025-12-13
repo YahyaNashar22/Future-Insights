@@ -4,6 +4,7 @@ import mongoose from "mongoose";
 import Class from "../models/classModel.js";
 import removeFile from "../utils/removeFile.js";
 import User from "../models/userModel.js";
+import Cohort from "../models/cohortModel.js";
 
 export const createClass = async (req, res) => {
     try {
@@ -208,9 +209,21 @@ export const updateClass = async (req, res) => {
             const newIds = userIds.map(id => id.toString());
             const mergedIds = Array.from(new Set([...existingIds, ...newIds]));
 
-            console.log(mergedIds)
-
             course.enrolledUsers = mergedIds.map(id => new mongoose.Types.ObjectId(id));
+
+            // check if there's a default cohort to add the student to it
+            const defaultCohort = await Cohort.findOne({ classId: course._id, isDefault: true });
+            if (defaultCohort) {
+                await Promise.all(
+                    userIds.map(userId =>
+                        Cohort.findByIdAndUpdate(
+                            defaultCohort._id,
+                            { $addToSet: { cohortUsers: userId } },
+                            { new: true, runValidators: true }
+                        )
+                    )
+                );
+            }
         }
 
 

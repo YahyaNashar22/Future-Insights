@@ -316,7 +316,7 @@ export const enrollClass = async (req, res) => {
         await user.save();
 
         // check if there's a default cohort to add the student to it
-        const defaultCohort = Cohort.find({ classId: cls._id, isDefault: true });
+        const defaultCohort = Cohort.findOne({ classId: cls._id, isDefault: true });
 
         if (defaultCohort) {
 
