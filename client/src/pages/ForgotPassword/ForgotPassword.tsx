@@ -144,7 +144,7 @@ const ForgotPassword = () => {
                 className={styles.formInput}
                 value={email}
                 onChange={(e: ChangeEvent<HTMLInputElement>) =>
-                  setEmail(e.target.value)
+                  setEmail(e.target.value.toLowerCase().trim())
                 }
                 required
               />
@@ -173,7 +173,9 @@ const ForgotPassword = () => {
         <div className={styles.phase1}>
           <h1 className={styles.title}>Reset Password</h1>
           <p className={styles.subTitle}>
-          We've sent an email with the otp!<br/> If you don't see it in your inbox, please check your spam folder.
+            We've sent an email with the otp!
+            <br /> If you don't see it in your inbox, please check your spam
+            folder.
           </p>
           <form className={styles.emailForm}>
             <label className={styles.formLabel}>

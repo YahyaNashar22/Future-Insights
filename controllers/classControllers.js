@@ -175,6 +175,8 @@ export const updateClass = async (req, res) => {
             course.demo = demoFile.filename;
         }
 
+        let missingEmails;
+
         const emailExcelFile = req.files.find(f => f.fieldname === "emailExcel");
         if (emailExcelFile) {
             // Step 1: Read Excel File
@@ -184,10 +186,17 @@ export const updateClass = async (req, res) => {
             const data = xlsx.utils.sheet_to_json(sheet);
 
             // Step 2: Extract emails
-            const emails = data.map(row => row.Email?.toLowerCase()).filter(Boolean);
+            const emails = data.map(row => row.Email?.toLowerCase().trim().replace(/\u00A0/g, "")).filter(Boolean);
+
+            console.log("emails extracted: ", emails)
 
             // Step 3: Query users by email
-            const matchedUsers = await User.find({ email: { $in: emails } }, "_id");
+            const matchedUsers = await User.find({ email: { $in: emails } }, "_id email");
+
+            const matchedEmails = matchedUsers.map(u => u.email);
+             missingEmails = emails.filter(e => !matchedEmails.includes(e));
+
+            console.log("Emails not found in DB:", missingEmails);
 
             // Step 4: Extract their IDs
             const userIds = matchedUsers.map(user => user._id);
@@ -215,7 +224,7 @@ export const updateClass = async (req, res) => {
 
         await course.save();
 
-        return res.status(200).json({ success: true, payload: course });
+        return res.status(200).json({ success: true, payload: course, skippedEmails: missingEmails });
 
     } catch (error) {
         console.log(error);

@@ -28,9 +28,15 @@ const Signin = () => {
   });
 
   const handleChange = (e: React.ChangeEvent<HTMLInputElement>) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-  };
+    const { name, value } = e.target;
 
+    setFormData({
+      ...formData,
+      [name]: name === "email" ? value.toLowerCase().trim() : value,
+    });
+
+    setError("");
+  };
   const handleSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     setLoading(true);

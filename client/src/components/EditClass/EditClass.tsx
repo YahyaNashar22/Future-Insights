@@ -122,7 +122,7 @@ const EditClass = () => {
 
     try {
       setLoading(true);
-      const res = await axios.put(
+      const res = await axios.patch(
         `${backend}/class/update-class/${slug}`,
         formData,
         {

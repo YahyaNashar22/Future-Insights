@@ -5,7 +5,6 @@ import cookieParser from "cookie-parser";
 import bodyParser from 'body-parser';
 import path from "path";
 import { fileURLToPath } from 'url';
-import fs from 'fs';
 
 import { decrypt } from './ccavenue/Crypto.js';
 import { ccavRequestHandler } from './ccavenue/ccavRequestHandler.js';

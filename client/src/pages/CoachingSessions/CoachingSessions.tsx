@@ -74,7 +74,7 @@ const CoachingSessions = () => {
             type="email"
             placeholder={t("coaching-session-email")}
             value={email}
-            onChange={(e) => setEmail(e.target.value)}
+            onChange={(e) => setEmail(e.target.value.toLowerCase().trim())}
             required
           />
           <input className={styles.input}

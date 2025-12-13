@@ -16,7 +16,7 @@ classRouter.delete('/delete/:id', deleteClass);
 
 classRouter.post('/get-by-teacher', getClassesByTeacher);
 
-classRouter.put("/update-class/:slug", upload.any(), updateClass)
+classRouter.patch("/update-class/:slug", upload.any(), updateClass)
 
 classRouter.put("/show-class-certificate/:id", showCertificate);
 classRouter.put("/toggle-visibility/:id", toggleVisibility);
