@@ -164,14 +164,27 @@ const ClassInfo = () => {
                 )}
                 <h2 className={styles.enrolledTitle}>Enrolled Students</h2>
                 <ul className={styles.enrolledList}>
-                  {course && course?.enrolledUsers.length > 0 ? (
-                    course.enrolledUsers.map((student, index) => (
-                      <li key={index} className={styles.enrolledStudent}>
-                        <span className={styles.studentEmail}>
-                          {typeof student !== "string" && student.email}
-                        </span>
-                      </li>
-                    ))
+                  {course && course.enrolledUsers.length > 0 ? (
+                    [...course.enrolledUsers]
+                      .sort((a, b) => {
+                        const emailA =
+                          typeof a === "string"
+                            ? ""
+                            : a.email?.toLowerCase() ?? "";
+                        const emailB =
+                          typeof b === "string"
+                            ? ""
+                            : b.email?.toLowerCase() ?? "";
+
+                        return emailA.localeCompare(emailB);
+                      })
+                      .map((student, index) => (
+                        <li key={index} className={styles.enrolledStudent}>
+                          <span className={styles.studentEmail}>
+                            {typeof student !== "string" && student.email}
+                          </span>
+                        </li>
+                      ))
                   ) : (
                     <p>No students enrolled yet.</p>
                   )}
