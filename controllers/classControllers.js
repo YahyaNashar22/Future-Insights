@@ -1,6 +1,9 @@
 import xlsx from "xlsx";
 import mongoose from "mongoose";
 
+import fs from "fs";
+import path from "path";
+
 import Class from "../models/classModel.js";
 import removeFile from "../utils/removeFile.js";
 import User from "../models/userModel.js";
@@ -182,6 +185,8 @@ export const updateClass = async (req, res) => {
 
         const emailExcelFile = req.files.find(f => f.fieldname === "emailExcel");
         if (emailExcelFile) {
+            const filePath = emailExcelFile.path;
+
             // Step 1: Read Excel File
             const workbook = xlsx.readFile(emailExcelFile.path);
             const sheetName = workbook.SheetNames[0];
@@ -224,6 +229,12 @@ export const updateClass = async (req, res) => {
                     )
                 );
             }
+
+            // --- DELETE EXCEL FILE AFTER PROCESSING ---
+            fs.unlink(filePath, err => {
+                if (err) console.error("Failed to delete uploaded Excel file:", err);
+                else console.log("Uploaded Excel file deleted:", filePath);
+            });
         }
 
 
