@@ -62,6 +62,10 @@ const Signin = () => {
       console.error(error);
       setError("Invalid email or password");
       if (error instanceof AxiosError) {
+        if (error.status === 400) {
+          setError(error.response?.data.message);
+          setShowResend(false);
+        }
         if (error.status === 403) {
           setError(error.response?.data.message);
           setShowResend(true);
