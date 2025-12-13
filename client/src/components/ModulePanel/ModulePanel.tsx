@@ -60,6 +60,7 @@ const ModulePanel = ({
           } else if (cls.type === "course") {
             params.courseId = cls._id;
           }
+          params.userId = user!._id!;
 
           const res = await axios.get(`${backend}/module`, {
             params,

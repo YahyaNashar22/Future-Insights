@@ -837,11 +837,11 @@ const AddContentForm = () => {
               style={{ backgroundColor: "var(--primary-beige)" }}
               onClick={addModuleToCohort}
             >
-              {selectedModule.cohortVisible.some(
+              {(selectedModule.cohortVisible || []).some(
                 (c) => c._id === selectedCohort?._id
               )
-                ? "Remove Cohort"
-                : "Add Cohort"}
+                ? `Remove ${selectedCohort.name}`
+                : `Add ${selectedCohort.name}`}
             </button>
           )}
           <button

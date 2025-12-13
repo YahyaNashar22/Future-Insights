@@ -86,7 +86,6 @@ const MyCourses = () => {
         }
       );
       setCertifications(res.data.payload);
-      console.log(res.data.payload);
     } catch (error) {
       console.log(error);
     } finally {
