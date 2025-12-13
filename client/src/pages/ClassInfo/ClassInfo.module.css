@@ -199,6 +199,14 @@
   background-color: var(--secondary-blue);
 }
 
+.searchInput {
+  width: 300px;
+  padding: 12px 8px;
+  margin-bottom: 16px;
+  border-radius: 8px;
+  font-size: 1rem;
+}
+
 /* Mobile responsiveness */
 @media (max-width: 768px) {
   .wrapper {

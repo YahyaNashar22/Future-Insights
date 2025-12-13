@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useMemo, useState } from "react";
 import styles from "./UserManagement.module.css";
 import IUser from "../../interfaces/IUser";
 import axios from "axios";
@@ -9,6 +9,7 @@ const UserManagement = () => {
   const { user } = useUserStore();
   const [users, setUsers] = useState<IUser[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [search, setSearch] = useState("");
 
   useEffect(() => {
     const fetchUsers = async () => {
@@ -39,15 +40,38 @@ const UserManagement = () => {
       console.error("Failed to update role:", error);
     }
   };
+
+  const filteredUsers = useMemo(() => {
+    const q = search.toLowerCase().trim();
+    if (!q) return users;
+
+    return users.filter(
+      (u) =>
+        u.fullname?.toLowerCase().includes(q) ||
+        u.email?.toLowerCase().includes(q) ||
+        u._id.toLowerCase().includes(q)
+    );
+  }, [users, search]);
+
   return (
     <main className={styles.wrapper}>
       <h1 className={styles.title}>User Management</h1>
+
+      <input
+        type="text"
+        placeholder="Search by name, email or ID..."
+        className={styles.searchInput}
+        value={search}
+        onChange={(e) => setSearch(e.target.value)}
+      />
+
       {loading ? (
         <p>Loading...</p>
       ) : (
         <table className={styles.table}>
           <thead>
             <tr>
+              <th>ID</th>
               <th>Name</th>
               <th>Email</th>
               <th>Role</th>
@@ -55,8 +79,9 @@ const UserManagement = () => {
             </tr>
           </thead>
           <tbody>
-            {users.map((user) => (
+            {filteredUsers.map((user) => (
               <tr key={user._id}>
+                <td>{user._id}</td>
                 <td>{user.fullname}</td>
                 <td>{user.email || "N/A"}</td>
                 <td>{user.role}</td>
@@ -70,7 +95,6 @@ const UserManagement = () => {
                     <option value="teacher">Teacher</option>
                     <option value="student">Student</option>
                     <option value="super">Super</option>
-
                   </select>
                 </td>
               </tr>

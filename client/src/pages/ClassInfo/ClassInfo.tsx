@@ -31,6 +31,9 @@ const ClassInfo = () => {
     ILiveLink | IRecording | IMaterial | IAssessment | null
   >(null);
 
+  const [studentSearch, setStudentSearch] = useState("");
+
+
   useEffect(() => {
     const fetchCourse = async () => {
       try {
@@ -163,9 +166,24 @@ const ClassInfo = () => {
                   </div>
                 )}
                 <h2 className={styles.enrolledTitle}>Enrolled Students</h2>
+                <input
+                  type="text"
+                  placeholder="Search by email..."
+                  className={styles.searchInput}
+                  value={studentSearch}
+                  onChange={(e) => setStudentSearch(e.target.value)}
+                />
+
                 <ul className={styles.enrolledList}>
                   {course && course.enrolledUsers.length > 0 ? (
                     [...course.enrolledUsers]
+                      .filter((student) => {
+                        if (typeof student === "string") return false;
+                        if (!studentSearch.trim()) return true;
+                        return student.email
+                          ?.toLowerCase()
+                          .includes(studentSearch.toLowerCase().trim());
+                      })
                       .sort((a, b) => {
                         const emailA =
                           typeof a === "string"
@@ -175,7 +193,6 @@ const ClassInfo = () => {
                           typeof b === "string"
                             ? ""
                             : b.email?.toLowerCase() ?? "";
-
                         return emailA.localeCompare(emailB);
                       })
                       .map((student, index) => (
