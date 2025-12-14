@@ -46,6 +46,8 @@ const AddContentForm = () => {
   const [cohortDefault, setCohortDefault] = useState<boolean | undefined>(
     undefined
   );
+  const [autoCloseDays, setAutoCloseDays] = useState<number | "">("");
+
   const [isEditCohortModalOpen, setIsEditCohortModalOpen] =
     useState<boolean>(false);
   const [isEditCohortStudentsModalOpen, setIsEditCohortStudentsModalOpen] =
@@ -88,6 +90,7 @@ const AddContentForm = () => {
   const openEditCohort = () => {
     setCohortName(selectedCohort?.name ?? null);
     setCohortDefault(selectedCohort?.isDefault ?? undefined);
+    setAutoCloseDays(selectedCohort?.autoCloseDays ?? "");
     setIsEditCohortModalOpen((prev) => !prev);
   };
 
@@ -409,6 +412,7 @@ const AddContentForm = () => {
         {
           name: cohortName,
           isDefault: cohortDefault,
+          autoCloseDays: autoCloseDays,
         }
       );
       if (res.status === 200) {
@@ -643,6 +647,22 @@ const AddContentForm = () => {
                   }}
                 />
               </span>
+            </label>
+
+            <label className={styles.formLabel}>
+              Auto close after (days)
+              <input
+                className={styles.formInput}
+                type="number"
+                min={1}
+                placeholder="e.g. 30"
+                value={autoCloseDays}
+                onChange={(e) =>
+                  setAutoCloseDays(
+                    e.target.value === "" ? "" : Number(e.target.value)
+                  )
+                }
+              />
             </label>
 
             <div className={styles.buttonGroup}>

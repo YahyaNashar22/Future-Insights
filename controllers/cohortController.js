@@ -26,7 +26,17 @@ export const createCohort = async (req, res) => {
 export const editCohort = async (req, res) => {
     try {
         const id = req.params.id;
-        const { name, isDefault } = req.body;
+        const { name, isDefault, autoCloseDays } = req.body;
+
+        const updateData = { name, isDefault };
+
+        if (autoCloseDays) {
+            updateData.autoCloseDays = autoCloseDays;
+            updateData.closeAt = new Date(
+                Date.now() + autoCloseDays * 24 * 60 * 60 * 1000
+            );
+        }
+
 
         const existing = await Cohort.findById(id);
         if (!existing) {
@@ -41,7 +51,7 @@ export const editCohort = async (req, res) => {
             );
         }
 
-        const cohort = await Cohort.findByIdAndUpdate(id, { $set: { name, isDefault } }, { new: true, runValidators: true });
+        const cohort = await Cohort.findByIdAndUpdate(id, { $set: updateData }, { new: true, runValidators: true });
         return res.status(200).json({
             message: "cohort updated successfully",
             payload: cohort

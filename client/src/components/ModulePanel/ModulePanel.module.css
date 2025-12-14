@@ -20,8 +20,6 @@
   left: 0;
 }
 
-
-
 .toggleBtn {
   position: absolute;
   top: 30%;
@@ -35,7 +33,7 @@
   z-index: 100;
 }
 
-.arabicToggle{
+.arabicToggle {
   left: initial;
   right: 0px;
 }
@@ -79,4 +77,10 @@
 
 .getCertificate:hover {
   background-color: var(--secondary-blue);
+}
+
+.cohortClosedMessage {
+  margin: auto auto;
+  color: var(--primary-beige);
+  text-align: center;
 }

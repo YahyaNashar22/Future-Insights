@@ -41,6 +41,9 @@ const ModulePanel = ({
   const [loading, setLoading] = useState<boolean>(false);
   const [submitting, setSubmitting] = useState<boolean>(false);
   const [openModuleIndex, setOpenModuleIndex] = useState<number | null>(null);
+  const [cohortClosedMessage, setCohortClosedMessage] = useState<string | null>(
+    null
+  );
 
   const hasFetchedModules = useRef(false);
 
@@ -65,10 +68,18 @@ const ModulePanel = ({
           const res = await axios.get(`${backend}/module`, {
             params,
           });
+
           setClassModules(res.data.payload);
           hasFetchedModules.current = true; // Mark that modules have been fetched
         } catch (error) {
           console.log(error);
+          if (error instanceof AxiosError) {
+            if (error.status === 403)
+              setCohortClosedMessage(
+                error.response?.data.message ??
+                  "Your cohort is closed. Modules are no longer accessible."
+              );
+          }
         } finally {
           setLoading(false);
         }
@@ -130,21 +141,25 @@ const ModulePanel = ({
                   </h1>
 
                   {/* modules list  */}
-                  <ol className={styles.modulesList}>
-                    {classModules.map((module, index) => {
-                      return (
-                        <ModuleAccordion
-                          key={module._id}
-                          module={module}
-                          index={index}
-                          openModuleIndex={openModuleIndex}
-                          toggleModule={toggleModule}
-                          setSelectedItem={setSelectedItem}
-                          selectedItem={selectedItem}
-                        />
-                      );
-                    })}
-                  </ol>
+                  {cohortClosedMessage ? (
+                    <h2 className={styles.cohortClosedMessage}>{cohortClosedMessage}</h2>
+                  ) : (
+                    <ol className={styles.modulesList}>
+                      {classModules.map((module, index) => {
+                        return (
+                          <ModuleAccordion
+                            key={module._id}
+                            module={module}
+                            index={index}
+                            openModuleIndex={openModuleIndex}
+                            toggleModule={toggleModule}
+                            setSelectedItem={setSelectedItem}
+                            selectedItem={selectedItem}
+                          />
+                        );
+                      })}
+                    </ol>
+                  )}
                   {cls?.showCertificate && (
                     <button
                       className={styles.getCertificate}

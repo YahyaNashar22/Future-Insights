@@ -56,6 +56,16 @@ export const getModulesByClassId = async (req, res) => {
                 cohortUsers: user._id
             }).lean();
 
+            // Check if all cohorts the student belongs to are closed
+            const closedCohorts = cohorts.filter(c => c.isClosed);
+            if (closedCohorts.length > 0) {
+                return res.status(403).json({
+                    payload: [],
+                    message: "Your cohort is closed. Modules are no longer accessible."
+                });
+            }
+
+
             let filter = { ...baseFilter, visible: true };
 
             if (cohorts.length > 0) {

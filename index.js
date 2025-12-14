@@ -27,6 +27,7 @@ import materialRouter from './routes/materialRoutes.js';
 import transactionRouter from './routes/transactionRoutes.js';
 import { certificationWebhook } from './controllers/certificateControllers.js';
 import cohortRouter from './routes/cohortRoutes.js';
+import { startCohortAutoCloseJob } from './cronjobs/auto-close-cohort.js';
 
 
 
@@ -101,7 +102,7 @@ app.post("/send-test-email", async (req, res) => {
   }
 });
 
-
+startCohortAutoCloseJob();
 
 
 // Serve static files from the React app
