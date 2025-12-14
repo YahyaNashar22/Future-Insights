@@ -18,6 +18,8 @@ const ModuleRecordings = ({
   moduleId: string | undefined;
   submitting: boolean;
 }) => {
+  const CHUNK_SIZE = 5 * 1024 * 1024; // 5MB
+
   const backend = import.meta.env.VITE_BACKEND;
 
   const [recordings, setRecordings] = useState<Recording[]>([]);
@@ -55,45 +57,151 @@ const ModuleRecordings = ({
     }
   };
 
-  const onSubmit = async (e: React.FormEvent) => {
+  // const onSubmit = async (e: React.FormEvent) => {
+  //   e.preventDefault();
+
+  //   const form = e.target as HTMLFormElement;
+  //   const formData = new FormData(form);
+
+  //   if (moduleId) {
+  //     formData.append("moduleId", moduleId);
+  //   }
+
+  //   try {
+  //     setUploading(true);
+  //     setUploadProgress(0);
+
+  //     await axios.post(`${backend}/recording/create`, formData, {
+  //       headers: { "Content-Type": "multipart/form-data" },
+  //       onUploadProgress: (progressEvent) => {
+  //         const percent = progressEvent.total
+  //           ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
+  //           : 0;
+  //         setUploadProgress(percent);
+  //       },
+  //     });
+
+  //     await fetchRecordings();
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setUploading(false);
+  //     setUploadProgress(0);
+  //   }
+  // };
+
+  useEffect(() => {
+    if (moduleId) fetchRecordings();
+  }, [backend, moduleId]);
+
+  // const uploadFile = async (file: File) => {
+  //   setUploading(true);
+  //   try {
+  //     const initRes = await axios.post(`${backend}/recording/init-upload`, {
+  //       fileName: file.name,
+  //       fileSize: file.size,
+  //       chunkSize: CHUNK_SIZE,
+  //     });
+
+  //     const { uploadId } = initRes.data;
+
+  //     const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+
+  //     for (let i = 0; i < totalChunks; i++) {
+  //       const start = i * CHUNK_SIZE;
+  //       const end = Math.min(file.size, start + CHUNK_SIZE);
+  //       const chunk = file.slice(start, end);
+
+  //       const formData = new FormData();
+  //       formData.append("chunk", chunk);
+  //       formData.append("uploadId", uploadId);
+  //       formData.append("chunkIndex", i.toString());
+
+  //       await axios.post(`${backend}/recording/upload-chunk`, formData, {
+  //         headers: { "Content-Type": "multipart/form-data" },
+  //       });
+
+  //       setUploadProgress(Math.round(((i + 1) / totalChunks) * 100));
+  //     }
+
+  //     await axios.post(`${backend}/recording/complete-upload`, {
+  //       uploadId,
+  //       name,
+  //       moduleId,
+  //     });
+
+  //     await fetchRecordings();
+  //   } catch (error) {
+  //     console.log(error);
+  //   } finally {
+  //     setUploading(false);
+  //     setUploadProgress(0);
+  //   }
+  // };
+
+  const onSubmit = async (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
 
-    const form = e.target as HTMLFormElement;
-    const formData = new FormData(form);
+    if (!moduleId) return;
 
-    if (moduleId) {
-      formData.append("moduleId", moduleId);
-    }
+    const form = e.currentTarget;
+    const nameInput = form.elements.namedItem("name") as HTMLInputElement;
+    const fileInput = form.elements.namedItem("link") as HTMLInputElement;
+
+    const file = fileInput.files?.[0];
+    const name = nameInput.value;
+
+    if (!file) return;
 
     try {
       setUploading(true);
       setUploadProgress(0);
 
-      await axios.post(`${backend}/recording/create`, formData, {
-        headers: { "Content-Type": "multipart/form-data" },
-        onUploadProgress: (progressEvent) => {
-          const percent = progressEvent.total
-            ? Math.round((progressEvent.loaded * 100) / progressEvent.total)
-            : 0;
-          setUploadProgress(percent);
-        },
+      // 1️⃣ INIT UPLOAD
+      const initRes = await axios.post(`${backend}/recording/init-upload`, {
+        fileName: file.name,
+        fileSize: file.size,
+        chunkSize: CHUNK_SIZE,
       });
 
-      // Call your existing recording handler if needed
-      // await handleSubmitRecording(e);
+      const { uploadId, uploadedChunks } = initRes.data;
+
+      const totalChunks = Math.ceil(file.size / CHUNK_SIZE);
+
+      // 2️⃣ UPLOAD CHUNKS
+      for (let i = 0; i < totalChunks; i++) {
+        if (uploadedChunks.includes(i)) continue;
+
+        const start = i * CHUNK_SIZE;
+        const end = Math.min(file.size, start + CHUNK_SIZE);
+        const chunk = file.slice(start, end);
+
+        const chunkForm = new FormData();
+        chunkForm.append("chunk", chunk);
+        chunkForm.append("uploadId", uploadId);
+        chunkForm.append("chunkIndex", i.toString());
+
+        await axios.post(`${backend}/recording/upload-chunk`, chunkForm);
+
+        setUploadProgress(Math.round(((i + 1) / totalChunks) * 100));
+      }
+
+      // 3️⃣ COMPLETE UPLOAD
+      await axios.post(`${backend}/recording/complete-upload`, {
+        uploadId,
+        name,
+        moduleId,
+      });
 
       await fetchRecordings();
-    } catch (error) {
-      console.log(error);
+      form.reset();
+    } catch (err) {
+      console.error(err);
     } finally {
       setUploading(false);
       setUploadProgress(0);
     }
   };
-
-  useEffect(() => {
-    if (moduleId) fetchRecordings();
-  }, [backend, moduleId]);
 
   return (
     <div className={styles.sectionContainer}>
