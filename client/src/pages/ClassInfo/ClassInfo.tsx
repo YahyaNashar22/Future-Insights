@@ -24,6 +24,7 @@ const ClassInfo = () => {
   const [course, setCourse] = useState<IClass | null>(null);
   const [classModules, setClassModules] = useState<IModule[]>([]);
   const [loading, setLoading] = useState<boolean>(false);
+  const [removingUser, setRemovingUser] = useState<boolean>(false);
   const [videoUrl, setVideoUrl] = useState<string | null>(null);
   const [editMode, setEditMode] = useState<boolean>(false);
   const [openModuleIndex, setOpenModuleIndex] = useState<number | null>(null);
@@ -32,7 +33,6 @@ const ClassInfo = () => {
   >(null);
 
   const [studentSearch, setStudentSearch] = useState("");
-
 
   useEffect(() => {
     const fetchCourse = async () => {
@@ -84,6 +84,36 @@ const ClassInfo = () => {
   // Handle video content click to show video player
   const handleContentClick = (url: string) => {
     setVideoUrl(url); // Set the selected video's URL
+  };
+
+  const removeStudentFromClass = async (userId: string) => {
+    try {
+      setRemovingUser(true);
+      const res = await axios.patch(
+        `${backend}/class/remove-student-from-class`,
+        {
+          userId: userId,
+          classId: course?._id,
+        }
+      );
+
+      if (res.status === 200) {
+        // UPDATE UI IMMEDIATELY
+        setCourse((prev) => {
+          if (!prev) return prev;
+          return {
+            ...prev,
+            enrolledUsers: prev.enrolledUsers.filter(
+              (u) => typeof u === "string" || u._id !== userId
+            ),
+          };
+        });
+      }
+    } catch (error) {
+      console.log(error);
+    } finally {
+      setRemovingUser(false);
+    }
   };
 
   return (
@@ -200,6 +230,18 @@ const ClassInfo = () => {
                           <span className={styles.studentEmail}>
                             {typeof student !== "string" && student.email}
                           </span>
+                          {!removingUser && (
+                            <span
+                              className={styles.removeUserBtn}
+                              onClick={() => {
+                                if (removingUser) return;
+                                if (typeof student !== "string")
+                                  removeStudentFromClass(student._id);
+                              }}
+                            >
+                              X
+                            </span>
+                          )}
                         </li>
                       ))
                   ) : (

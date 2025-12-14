@@ -1,5 +1,5 @@
 import express from "express";
-import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher, showCertificate, toggleVisibility, updateClass } from "../controllers/classControllers.js";
+import { createClass, deleteClass, getClassBySlug, getClassesByCategory, getClassesByTeacher, removeStudentFromClass, showCertificate, toggleVisibility, updateClass } from "../controllers/classControllers.js";
 import { upload } from "../middlewares/multer.js";
 
 
@@ -20,6 +20,8 @@ classRouter.patch("/update-class/:slug", upload.any(), updateClass)
 
 classRouter.put("/show-class-certificate/:id", showCertificate);
 classRouter.put("/toggle-visibility/:id", toggleVisibility);
+
+classRouter.patch("/remove-student-from-class", removeStudentFromClass)
 
 
 

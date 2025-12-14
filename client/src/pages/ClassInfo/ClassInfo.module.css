@@ -136,6 +136,9 @@
   text-align: center;
   box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
   text-overflow: ellipsis;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
 }
 
 .studentEmail {
@@ -205,6 +208,11 @@
   margin-bottom: 16px;
   border-radius: 8px;
   font-size: 1rem;
+}
+
+.removeUserBtn {
+  font-weight: bold;
+  cursor: pointer;
 }
 
 /* Mobile responsiveness */

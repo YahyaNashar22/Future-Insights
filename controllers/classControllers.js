@@ -307,3 +307,43 @@ export const toggleVisibility = async (req, res) => {
         res.status(500).json({ message: "something went wrong" })
     }
 }
+
+export const removeStudentFromClass = async (req, res) => {
+    try {
+        const { userId, classId } = req.body;
+
+        if (!userId || !classId) {
+            return res.status(400).json({ message: "userId and classId are required" });
+        }
+
+        const user = await User.findById(userId);
+        if (!user) return res.status(404).json({ message: 'user does not exist' });
+
+        const cls = await Class.findById(classId);
+        if (!cls) return res.status(404).json({ message: 'cls does not exist' });
+
+        if (user.role !== "student") {
+            return res.status(400).json({ message: "Only students can be removed from classes" });
+        }
+
+        await Class.findByIdAndUpdate(
+            classId,
+            { $pull: { enrolledUsers: userId } },
+            { new: true }
+        );
+
+        await Cohort.updateMany(
+            { classId: classId, cohortUsers: userId },
+            { $pull: { cohortUsers: userId } }
+        );
+
+        return res.status(200).json({
+            success: true,
+            message: "User removed from class and all cohorts successfully"
+        });
+
+    } catch (error) {
+        console.log(error);
+        res.status(500).json({ message: "something went wrong" })
+    }
+}
