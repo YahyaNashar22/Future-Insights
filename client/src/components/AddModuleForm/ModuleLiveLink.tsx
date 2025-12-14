@@ -2,6 +2,7 @@ import axios from "axios";
 import styles from "./AddContent.module.css";
 import { useEffect, useState } from "react";
 import IModule from "../../interfaces/IModule";
+import { DateTime } from "luxon";
 
 const ModuleLiveLink = ({
   selectedModule,
@@ -51,13 +52,22 @@ const ModuleLiveLink = ({
     event.preventDefault();
     const form = event.target as HTMLFormElement;
     const name = (form.elements.namedItem("name") as HTMLInputElement).value;
-    const startsAt = (form.elements.namedItem("startsAt") as HTMLInputElement)
-      .value;
-    const endsAt = (form.elements.namedItem("endsAt") as HTMLInputElement)
+    const startsAtRaw = (
+      form.elements.namedItem("startsAt") as HTMLInputElement
+    ).value;
+    const endsAtRaw = (form.elements.namedItem("endsAt") as HTMLInputElement)
       .value;
     const link = (form.elements.namedItem("link") as HTMLInputElement).value;
     const timeZone = (form.elements.namedItem("timeZone") as HTMLSelectElement)
       .value;
+
+    // Convert local datetime string to UTC according to selected timezone
+    const startsAt = DateTime.fromISO(startsAtRaw, { zone: timeZone })
+      .toUTC()
+      .toISO();
+    const endsAt = DateTime.fromISO(endsAtRaw, { zone: timeZone })
+      .toUTC()
+      .toISO();
 
     await axios.post(`${backend}/live-link/create`, {
       name,

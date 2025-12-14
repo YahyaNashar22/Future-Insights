@@ -1,13 +1,16 @@
+import { format } from "date-fns";
+import { toZonedTime } from "date-fns-tz";
 import { useTranslation } from "react-i18next";
 import ILiveLink from "../../interfaces/ILiveLink";
 import styles from "./LiveLinkView.module.css";
-import { format } from "date-fns";
 
 const LiveLinkView = ({ selectedItem }: { selectedItem: ILiveLink }) => {
   const { t } = useTranslation();
 
-  const start = new Date(selectedItem.startsAt);
-  const end = new Date(selectedItem.endsAt);
+  console.log(selectedItem);
+
+  const start = toZonedTime(selectedItem.startsAt, selectedItem.timezone);
+  const end = toZonedTime(selectedItem.endsAt, selectedItem.timezone);
 
   const hasSessionStarted = start <= new Date();
   const hasSessionEnded = end < new Date();
@@ -31,7 +34,7 @@ const LiveLinkView = ({ selectedItem }: { selectedItem: ILiveLink }) => {
           <span className={styles.timeRange}>
             {format(start, "hh:mm a")} - {format(end, "hh:mm a")}
           </span>
-          <span className={styles.timezone}>Asia/Riyadh</span>
+          <span className={styles.timezone}>{selectedItem.timezone}</span>
         </div>
       </div>
 
@@ -51,12 +54,12 @@ const LiveLinkView = ({ selectedItem }: { selectedItem: ILiveLink }) => {
 
       {hasSessionStarted && !hasSessionEnded && (
         <a href={selectedItem.link} target="_blank" rel="noopener noreferrer">
-          <button className={styles.joinButton}>${t("join-session")}</button>
+          <button className={styles.joinButton}>{t("join-session")}</button>
         </a>
       )}
 
       {!hasSessionStarted && !hasSessionEnded && (
-        <p className={styles.sessionNotStarted}>${t("session-not-started")}</p>
+        <p className={styles.sessionNotStarted}>{t("session-not-started")}</p>
       )}
     </div>
   );

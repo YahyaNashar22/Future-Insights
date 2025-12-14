@@ -5,6 +5,7 @@ interface ILiveLink {
   endsAt: Date;
   link: string;
   moduleId: string;
+  timezone: string;
 }
 
 export default ILiveLink;
