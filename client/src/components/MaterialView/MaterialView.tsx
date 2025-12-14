@@ -9,6 +9,8 @@ const MaterialView = ({ selectedItem }: { selectedItem: IMaterial }) => {
     return url.split(".").pop()?.toLowerCase() || "";
   };
 
+  const isPdf = getFileExtension(selectedItem.content) === "pdf";
+
   const renderPreview = () => {
     const backend = import.meta.env.VITE_BACKEND;
 
@@ -34,18 +36,6 @@ const MaterialView = ({ selectedItem }: { selectedItem: IMaterial }) => {
       );
     }
 
-    // if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(ext)) {
-    //   return (
-    //     <iframe
-    //       src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
-    //         selectedItem.content
-    //       )}`}
-    //       title="Office Preview"
-    //       className={styles.previewFrame}
-    //     />
-    //   );
-    // }
-
     return <p className={styles.noPreview}>{t("preview-not-available")}</p>;
   };
 
@@ -53,9 +43,16 @@ const MaterialView = ({ selectedItem }: { selectedItem: IMaterial }) => {
     <div className={styles.wrapper}>
       <h2 className={styles.title}>📘 {t("material-title")}</h2>
       <p className={styles.name}>{selectedItem.name}</p>
-      <a href={selectedItem.content} download className={styles.content}>
-        {t("download")}
-      </a>
+      {!isPdf && (
+        <a
+          href={`${import.meta.env.VITE_BACKEND}/${selectedItem.content}`}
+          download
+          className={styles.content}
+        >
+          {t("download")}
+        </a>
+      )}
+
       <div className={styles.preview}>{renderPreview()}</div>
     </div>
   );

@@ -60,6 +60,8 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
     return url?.split(".").pop()?.toLowerCase() || "";
   };
 
+  const isPdf = getFileExtension(selectedItem.scope) === "pdf";
+
   const renderPreview = () => {
     const backend = import.meta.env.VITE_BACKEND;
 
@@ -84,19 +86,6 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
         />
       );
     }
-
-    // if (["doc", "docx", "ppt", "pptx", "xls", "xlsx"].includes(ext)) {
-    //   return (
-    //     <iframe
-    //       src={`https://view.officeapps.live.com/op/embed.aspx?src=${encodeURIComponent(
-    //         selectedItem.scope
-    //       )}`}
-    //       title="Office Preview"
-    //       className={styles.previewFrame}
-    //     />
-    //   );
-    // }
-
     return <p className={styles.noPreview}>{t("preview-not-available")}</p>;
   };
   return (
@@ -109,9 +98,15 @@ const AssessmentView = ({ selectedItem }: { selectedItem: IAssessment }) => {
       </p>
       <p className={styles.description}>{selectedItem.description}</p>
 
-      <a href={selectedItem.scope} download className={styles.content}>
-        {t("download")}
-      </a>
+      {!isPdf && (
+        <a
+          href={`${backend}/${selectedItem.scope}`}
+          download
+          className={styles.content}
+        >
+          {t("download")}
+        </a>
+      )}
       <div className={styles.preview}>{renderPreview()}</div>
 
       <p className={styles.submitText}>{t("submit-answer")}</p>
