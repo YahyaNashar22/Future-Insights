@@ -7,18 +7,36 @@ export const createModule = async (req, res) => {
     try {
         const { name, classId, courseId } = req.body;
 
-        const newModule = new Module({ name, classId, courseId });
+        // Find existing modules for the same class or course
+        const filter = {};
+        if (classId) filter.classId = classId;
+        if (courseId) filter.courseId = courseId;
+
+        const existingModules = await Module.find(filter).sort({ index: 1 });
+
+        // Determine the new module's index
+        const newIndex = existingModules.length; // append at the end
+
+        const newModule = new Module({
+            name,
+            classId,
+            courseId,
+            index: newIndex,
+        });
+
         await newModule.save();
 
         return res.status(201).json({
             message: "module created successfully",
-            payload: newModule
+            payload: newModule,
         });
     } catch (error) {
         console.error(error);
-        return res.status(500).json({ message: "Something went wrong, please try again later" });
+        return res
+            .status(500)
+            .json({ message: "Something went wrong, please try again later" });
     }
-}
+};
 
 
 export const getModulesByClassId = async (req, res) => {
@@ -201,7 +219,6 @@ export const editModule = async (req, res) => {
 
         const fetchedModule = await Module.findById(id);
 
-        console.log(fetchedModule)
 
         if (!fetchedModule) return res.status(404).json({ message: 'requested module not found' })
 
