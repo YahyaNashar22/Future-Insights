@@ -217,7 +217,7 @@ const CourseShowCase = () => {
                 <h3 className={styles.modalTitle}>Confirm Enrollment</h3>
                 <p className={styles.modalText}>
                   Are you sure you want to enroll in {cls?.title} for AED
-                  {cls?.finalPrice?.toFixed(2)}?
+                  {cls?.finalPrice}?
                 </p>
                 <div className={styles.modalActions}>
                   <button

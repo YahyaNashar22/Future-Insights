@@ -51,9 +51,7 @@ const CourseCard: FC<{
         </div>
         <div className={styles.courseFooter}>
           {course.finalPrice > 0 && (
-            <span className={styles.coursePrice}>
-              AED{course.finalPrice?.toFixed(2)}
-            </span>
+            <span className={styles.coursePrice}>AED{course.finalPrice}</span>
           )}
           {course.demo && (
             <span className={styles.demo} onClick={() => setDemoModal(true)}>

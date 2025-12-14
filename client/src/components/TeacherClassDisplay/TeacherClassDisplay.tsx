@@ -63,10 +63,10 @@ const TeacherClassDisplay = () => {
               <div className={styles.courseInfo}>
                 <h2 className={styles.courseTitle}>{course.title}</h2>
                 <p className={styles.courseMeta}>
-                  Price: <strong>AED {course.price?.toFixed(2)}</strong>
+                  Price: <strong>AED {course.price}</strong>
                 </p>
                 <p className={styles.courseMeta}>
-                  Final Price: <strong>AED {course.finalPrice?.toFixed(2)}</strong>
+                  Final Price: <strong>AED {course.finalPrice}</strong>
                 </p>
                 <p className={styles.courseMeta}>
                   Duration: {course.duration || "N/A"}

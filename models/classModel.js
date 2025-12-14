@@ -93,7 +93,8 @@ classSchema.pre("save", function (next) {
     }
 
     // Recalculate final price
-    this.finalPrice = this.price - (this.price * this.discount) / 100;
+    const final = this.price - (this.price * this.discount) / 100;
+    this.finalPrice = Math.ceil(final);
     next();
 });
 

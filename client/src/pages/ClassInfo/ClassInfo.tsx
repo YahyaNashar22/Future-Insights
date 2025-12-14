@@ -147,7 +147,7 @@ const ClassInfo = () => {
                 )}
                 <div className={styles.courseDetails}>
                   <span className={styles.coursePrice}>
-                    AED {course?.price?.toFixed(2)}
+                    AED {course?.price}
                   </span>
                   {course && course.discount > 0 && (
                     <span className={styles.courseDiscount}>
@@ -157,7 +157,7 @@ const ClassInfo = () => {
 
                   {course && course.discount > 0 && (
                     <span className={styles.coursePrice}>
-                      AED {course?.finalPrice?.toFixed(2)} ( After Discount )
+                      AED {course?.finalPrice} ( After Discount )
                     </span>
                   )}
                   {course?.duration && (

@@ -94,7 +94,7 @@ const ClassShowCase = () => {
       const data = {
         order_id: generateOrderId(),
         currency: "AED",
-        amount: cls?.finalPrice.toFixed(2),
+        amount: cls?.finalPrice,
         billing_name: user?.fullname,
         billing_email: user?.email,
         billing_tel: "9999999999",
@@ -256,7 +256,7 @@ const ClassShowCase = () => {
                 <p className={styles.modalText}>
                   {t("enroll-confirmation")}{" "}
                   {isArabic ? cls.arabicTitle : cls?.title} AED
-                  {cls?.finalPrice?.toFixed(2)}?
+                  {cls?.finalPrice}?
                 </p>
                 <div className={styles.modalActions}>
                   <button
