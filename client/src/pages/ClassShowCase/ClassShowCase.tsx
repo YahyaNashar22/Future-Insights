@@ -48,6 +48,9 @@ const ClassShowCase = () => {
     const fetchModules = async () => {
       try {
         const params: { [key: string]: string } = {};
+        if (user) {
+          params.userId = user._id;
+        }
         if (cls.type === "class") {
           params.classId = cls._id;
         } else if (cls.type === "course") {
@@ -63,7 +66,7 @@ const ClassShowCase = () => {
       }
     };
     fetchModules();
-  }, [backend, cls]);
+  }, [backend, cls, user]);
 
   const generateOrderId = () => {
     return `ORD${Date.now()}${Math.floor(Math.random() * 1000)}`;
@@ -214,7 +217,7 @@ const ClassShowCase = () => {
             <div className={styles.descriptionText}>
               {parseBullets(
                 isArabic ? cls.arabicDescription : cls.description,
-                isArabic
+                isArabic,
               )}
             </div>
             {cls.demo && (
